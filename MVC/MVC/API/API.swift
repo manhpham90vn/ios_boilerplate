@@ -9,9 +9,20 @@ import Foundation
 import Alamofire
 import RxSwift
 
-class API {
+protocol Service {
+    func createAccessToken(clientId: String,
+                                clientSecret: String,
+                                code: String,
+                                redirectUri: String?,
+                                state: String?) -> Single<Token>
+}
+
+class API: Service {
     
-    static func createAccessToken(clientId: String,
+    static let shared = API()
+    private init() {}
+    
+    func createAccessToken(clientId: String,
                                   clientSecret: String,
                                   code: String,
                                   redirectUri: String?,

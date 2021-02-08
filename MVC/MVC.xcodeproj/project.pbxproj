@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		BBC85A4825D113AA00F87653 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC85A4725D113AA00F87653 /* AppDelegate.swift */; };
 		BBC85A4A25D113AA00F87653 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC85A4925D113AA00F87653 /* SceneDelegate.swift */; };
-		BBC85A4C25D113AA00F87653 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC85A4B25D113AA00F87653 /* ViewController.swift */; };
+		BBC85A4C25D113AA00F87653 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC85A4B25D113AA00F87653 /* MainViewController.swift */; };
 		BBC85A4F25D113AA00F87653 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBC85A4D25D113AA00F87653 /* Main.storyboard */; };
 		BBC85A5125D113AB00F87653 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBC85A5025D113AB00F87653 /* Assets.xcassets */; };
 		BBC85A5425D113AB00F87653 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBC85A5225D113AB00F87653 /* LaunchScreen.storyboard */; };
@@ -22,6 +22,14 @@
 		BBC85A9125D1226500F87653 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BBC85A9025D1226500F87653 /* RxSwift */; };
 		BBC85A9325D1226500F87653 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = BBC85A9225D1226500F87653 /* RxRelay */; };
 		BBC85A9825D122AA00F87653 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC85A9725D122AA00F87653 /* Token.swift */; };
+		BBC85AA325D17E9A00F87653 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC85AA225D17E9A00F87653 /* Event.swift */; };
+		BBC85AA825D17EC300F87653 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC85AA725D17EC300F87653 /* User.swift */; };
+		BBC85AAD25D17EF800F87653 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC85AAC25D17EF800F87653 /* Repository.swift */; };
+		BBC85ABD25D1809500F87653 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBC85ABC25D1809500F87653 /* Login.storyboard */; };
+		BBC85AC225D180B400F87653 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC85AC125D180B400F87653 /* LoginViewController.swift */; };
+		BBC85ACF25D1842100F87653 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBC85ACE25D1842100F87653 /* Detail.storyboard */; };
+		BBC85AD425D1842E00F87653 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC85AD325D1842E00F87653 /* DetailViewController.swift */; };
+		BBC85AE125D186B700F87653 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC85AE025D186B700F87653 /* URL+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +53,7 @@
 		BBC85A4425D113AA00F87653 /* MVC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MVC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBC85A4725D113AA00F87653 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBC85A4925D113AA00F87653 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BBC85A4B25D113AA00F87653 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BBC85A4B25D113AA00F87653 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		BBC85A4E25D113AA00F87653 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BBC85A5025D113AB00F87653 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBC85A5325D113AB00F87653 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -59,6 +67,14 @@
 		BBC85A7D25D11F9900F87653 /* Configs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configs.swift; sourceTree = "<group>"; };
 		BBC85A8225D121D600F87653 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		BBC85A9725D122AA00F87653 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		BBC85AA225D17E9A00F87653 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		BBC85AA725D17EC300F87653 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		BBC85AAC25D17EF800F87653 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		BBC85ABC25D1809500F87653 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		BBC85AC125D180B400F87653 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		BBC85ACE25D1842100F87653 /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
+		BBC85AD325D1842E00F87653 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		BBC85AE025D186B700F87653 /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,16 +129,15 @@
 		BBC85A4625D113AA00F87653 /* MVC */ = {
 			isa = PBXGroup;
 			children = (
-				BBC85A4725D113AA00F87653 /* AppDelegate.swift */,
-				BBC85A4925D113AA00F87653 /* SceneDelegate.swift */,
-				BBC85A4B25D113AA00F87653 /* ViewController.swift */,
-				BBC85A4D25D113AA00F87653 /* Main.storyboard */,
+				BBC85ADE25D1869D00F87653 /* Common */,
+				BBC85AB325D17F5200F87653 /* Application */,
+				BBC85AB125D17F1200F87653 /* Models */,
+				BBC85AB725D1803D00F87653 /* ViewControllers */,
+				BBC85AB225D17F3A00F87653 /* API */,
 				BBC85A5025D113AB00F87653 /* Assets.xcassets */,
 				BBC85A5225D113AB00F87653 /* LaunchScreen.storyboard */,
 				BBC85A5525D113AB00F87653 /* Info.plist */,
 				BBC85A7D25D11F9900F87653 /* Configs.swift */,
-				BBC85A8225D121D600F87653 /* API.swift */,
-				BBC85A9725D122AA00F87653 /* Token.swift */,
 			);
 			path = MVC;
 			sourceTree = "<group>";
@@ -143,6 +158,87 @@
 				BBC85A6B25D113AB00F87653 /* Info.plist */,
 			);
 			path = MVCUITests;
+			sourceTree = "<group>";
+		};
+		BBC85AB125D17F1200F87653 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BBC85A9725D122AA00F87653 /* Token.swift */,
+				BBC85AA225D17E9A00F87653 /* Event.swift */,
+				BBC85AA725D17EC300F87653 /* User.swift */,
+				BBC85AAC25D17EF800F87653 /* Repository.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BBC85AB225D17F3A00F87653 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				BBC85A8225D121D600F87653 /* API.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		BBC85AB325D17F5200F87653 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				BBC85A4725D113AA00F87653 /* AppDelegate.swift */,
+				BBC85A4925D113AA00F87653 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		BBC85AB725D1803D00F87653 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				BBC85ACD25D1841500F87653 /* Detail */,
+				BBC85AC625D180C600F87653 /* Main */,
+				BBC85ABB25D1808200F87653 /* Login */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		BBC85ABB25D1808200F87653 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				BBC85ABC25D1809500F87653 /* Login.storyboard */,
+				BBC85AC125D180B400F87653 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		BBC85AC625D180C600F87653 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				BBC85A4D25D113AA00F87653 /* Main.storyboard */,
+				BBC85A4B25D113AA00F87653 /* MainViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		BBC85ACD25D1841500F87653 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				BBC85ACE25D1842100F87653 /* Detail.storyboard */,
+				BBC85AD325D1842E00F87653 /* DetailViewController.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		BBC85ADE25D1869D00F87653 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				BBC85ADF25D186A800F87653 /* Extensions */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		BBC85ADF25D186A800F87653 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BBC85AE025D186B700F87653 /* URL+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,8 +354,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBC85ABD25D1809500F87653 /* Login.storyboard in Resources */,
 				BBC85A5425D113AB00F87653 /* LaunchScreen.storyboard in Resources */,
 				BBC85A5125D113AB00F87653 /* Assets.xcassets in Resources */,
+				BBC85ACF25D1842100F87653 /* Detail.storyboard in Resources */,
 				BBC85A4F25D113AA00F87653 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,12 +383,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBC85A4C25D113AA00F87653 /* ViewController.swift in Sources */,
+				BBC85AD425D1842E00F87653 /* DetailViewController.swift in Sources */,
+				BBC85AE125D186B700F87653 /* URL+Extensions.swift in Sources */,
+				BBC85A4C25D113AA00F87653 /* MainViewController.swift in Sources */,
 				BBC85A7E25D11F9900F87653 /* Configs.swift in Sources */,
 				BBC85A4825D113AA00F87653 /* AppDelegate.swift in Sources */,
 				BBC85A9825D122AA00F87653 /* Token.swift in Sources */,
+				BBC85AA825D17EC300F87653 /* User.swift in Sources */,
 				BBC85A4A25D113AA00F87653 /* SceneDelegate.swift in Sources */,
+				BBC85AA325D17E9A00F87653 /* Event.swift in Sources */,
 				BBC85A8325D121D600F87653 /* API.swift in Sources */,
+				BBC85AC225D180B400F87653 /* LoginViewController.swift in Sources */,
+				BBC85AAD25D17EF800F87653 /* Repository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
