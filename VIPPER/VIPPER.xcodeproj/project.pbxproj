@@ -3,18 +3,36 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BBE2657D25EE8F7900E33C25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2657C25EE8F7900E33C25 /* AppDelegate.swift */; };
-		BBE2657F25EE8F7900E33C25 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2657E25EE8F7900E33C25 /* SceneDelegate.swift */; };
-		BBE2658125EE8F7900E33C25 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2658025EE8F7900E33C25 /* ViewController.swift */; };
-		BBE2658425EE8F7900E33C25 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBE2658225EE8F7900E33C25 /* Main.storyboard */; };
-		BBE2658625EE8F7900E33C25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBE2658525EE8F7900E33C25 /* Assets.xcassets */; };
-		BBE2658925EE8F7900E33C25 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBE2658725EE8F7900E33C25 /* LaunchScreen.storyboard */; };
+		2F5DC364E7DA7FFF1F20AFFE /* Pods_VIPPER_VIPPERUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E9D82A2387047D1741B8231 /* Pods_VIPPER_VIPPERUITests.framework */; };
+		7511C4EB43D36DF0FE13A188 /* Pods_VIPPERTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE39FADE078668B72C668A7C /* Pods_VIPPERTests.framework */; };
 		BBE2659425EE8F7900E33C25 /* VIPPERTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2659325EE8F7900E33C25 /* VIPPERTests.swift */; };
 		BBE2659F25EE8F7900E33C25 /* VIPPERUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2659E25EE8F7900E33C25 /* VIPPERUITests.swift */; };
+		BBE2663D25EE94EE00E33C25 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2661C25EE94EE00E33C25 /* AuthManager.swift */; };
+		BBE2663E25EE94EE00E33C25 /* AuthenticationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2661D25EE94EE00E33C25 /* AuthenticationServices.swift */; };
+		BBE2663F25EE94EE00E33C25 /* UIWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2661F25EE94EE00E33C25 /* UIWindow+Extensions.swift */; };
+		BBE2664025EE94EE00E33C25 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2662025EE94EE00E33C25 /* URL+Extensions.swift */; };
+		BBE2664125EE94EE00E33C25 /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2662225EE94EE00E33C25 /* AppHelper.swift */; };
+		BBE2664225EE94EE00E33C25 /* Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2662425EE94EE00E33C25 /* Configs.swift */; };
+		BBE2664425EE94EE00E33C25 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2662725EE94EE00E33C25 /* API.swift */; };
+		BBE2664625EE94EE00E33C25 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2662A25EE94EE00E33C25 /* Event.swift */; };
+		BBE2664725EE94EE00E33C25 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2662B25EE94EE00E33C25 /* User.swift */; };
+		BBE2664825EE94EE00E33C25 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2662C25EE94EE00E33C25 /* Repository.swift */; };
+		BBE2664925EE94EE00E33C25 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2662D25EE94EE00E33C25 /* Token.swift */; };
+		BBE2664A25EE94EE00E33C25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2662F25EE94EE00E33C25 /* AppDelegate.swift */; };
+		BBE2664B25EE94EE00E33C25 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2663025EE94EE00E33C25 /* SceneDelegate.swift */; };
+		BBE2664C25EE94EE00E33C25 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBE2663325EE94EE00E33C25 /* Detail.storyboard */; };
+		BBE2664D25EE94EE00E33C25 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2663425EE94EE00E33C25 /* DetailViewController.swift */; };
+		BBE2664E25EE94EE00E33C25 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2663625EE94EE00E33C25 /* MainViewController.swift */; };
+		BBE2665025EE94EE00E33C25 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBE2663A25EE94EE00E33C25 /* Login.storyboard */; };
+		BBE2665125EE94EE00E33C25 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2663B25EE94EE00E33C25 /* LoginViewController.swift */; };
+		BBE2665F25EE953700E33C25 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBE2665E25EE953700E33C25 /* LaunchScreen.storyboard */; };
+		BBE2666425EE954E00E33C25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBE2666325EE954E00E33C25 /* Assets.xcassets */; };
+		BBE2668B25EE96AB00E33C25 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBE2663725EE94EE00E33C25 /* Home.storyboard */; };
+		E9E5CA00AAB0D30DC4D976EB /* Pods_VIPPER.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC37449BE8FE7CAB7BDCA8C8 /* Pods_VIPPER.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,20 +53,44 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		291D2E93D62405E6D5825C78 /* Pods-VIPPER-VIPPERUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VIPPER-VIPPERUITests.release.xcconfig"; path = "Target Support Files/Pods-VIPPER-VIPPERUITests/Pods-VIPPER-VIPPERUITests.release.xcconfig"; sourceTree = "<group>"; };
+		414B8C37B7A4D5A3633113D9 /* Pods-VIPPER.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VIPPER.debug.xcconfig"; path = "Target Support Files/Pods-VIPPER/Pods-VIPPER.debug.xcconfig"; sourceTree = "<group>"; };
+		4E9D82A2387047D1741B8231 /* Pods_VIPPER_VIPPERUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VIPPER_VIPPERUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		659AE24FC5ACB020A175C5EE /* Pods-VIPPERTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VIPPERTests.release.xcconfig"; path = "Target Support Files/Pods-VIPPERTests/Pods-VIPPERTests.release.xcconfig"; sourceTree = "<group>"; };
+		78ED0AD4CD0D762DB36EF81A /* Pods-VIPPERTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VIPPERTests.debug.xcconfig"; path = "Target Support Files/Pods-VIPPERTests/Pods-VIPPERTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AC37449BE8FE7CAB7BDCA8C8 /* Pods_VIPPER.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VIPPER.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE39FADE078668B72C668A7C /* Pods_VIPPERTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VIPPERTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B75B845224BEFF00F1A8061E /* Pods-VIPPER.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VIPPER.release.xcconfig"; path = "Target Support Files/Pods-VIPPER/Pods-VIPPER.release.xcconfig"; sourceTree = "<group>"; };
 		BBE2657925EE8F7900E33C25 /* VIPPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VIPPER.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		BBE2657C25EE8F7900E33C25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BBE2657E25EE8F7900E33C25 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BBE2658025EE8F7900E33C25 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		BBE2658325EE8F7900E33C25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		BBE2658525EE8F7900E33C25 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		BBE2658825EE8F7900E33C25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		BBE2658A25EE8F7900E33C25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BBE2658F25EE8F7900E33C25 /* VIPPERTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VIPPERTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBE2659325EE8F7900E33C25 /* VIPPERTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VIPPERTests.swift; sourceTree = "<group>"; };
 		BBE2659525EE8F7900E33C25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BBE2659A25EE8F7900E33C25 /* VIPPERUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VIPPERUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBE2659E25EE8F7900E33C25 /* VIPPERUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VIPPERUITests.swift; sourceTree = "<group>"; };
 		BBE265A025EE8F7900E33C25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BBE2661C25EE94EE00E33C25 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		BBE2661D25EE94EE00E33C25 /* AuthenticationServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationServices.swift; sourceTree = "<group>"; };
+		BBE2661F25EE94EE00E33C25 /* UIWindow+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extensions.swift"; sourceTree = "<group>"; };
+		BBE2662025EE94EE00E33C25 /* URL+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
+		BBE2662225EE94EE00E33C25 /* AppHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppHelper.swift; sourceTree = "<group>"; };
+		BBE2662425EE94EE00E33C25 /* Configs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configs.swift; sourceTree = "<group>"; };
+		BBE2662525EE94EE00E33C25 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BBE2662725EE94EE00E33C25 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		BBE2662A25EE94EE00E33C25 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		BBE2662B25EE94EE00E33C25 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		BBE2662C25EE94EE00E33C25 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		BBE2662D25EE94EE00E33C25 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		BBE2662F25EE94EE00E33C25 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BBE2663025EE94EE00E33C25 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		BBE2663325EE94EE00E33C25 /* Detail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
+		BBE2663425EE94EE00E33C25 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		BBE2663625EE94EE00E33C25 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		BBE2663825EE94EE00E33C25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
+		BBE2663A25EE94EE00E33C25 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		BBE2663B25EE94EE00E33C25 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		BBE2665E25EE953700E33C25 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BBE2666325EE954E00E33C25 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FBD7F59278F50CA8A9991693 /* Pods-VIPPER-VIPPERUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VIPPER-VIPPERUITests.debug.xcconfig"; path = "Target Support Files/Pods-VIPPER-VIPPERUITests/Pods-VIPPER-VIPPERUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9E5CA00AAB0D30DC4D976EB /* Pods_VIPPER.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7511C4EB43D36DF0FE13A188 /* Pods_VIPPERTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,12 +114,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F5DC364E7DA7FFF1F20AFFE /* Pods_VIPPER_VIPPERUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		16531B6C2F64C0A52A084177 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AC37449BE8FE7CAB7BDCA8C8 /* Pods_VIPPER.framework */,
+				4E9D82A2387047D1741B8231 /* Pods_VIPPER_VIPPERUITests.framework */,
+				AE39FADE078668B72C668A7C /* Pods_VIPPERTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A9488238A41B0949877D72F1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				414B8C37B7A4D5A3633113D9 /* Pods-VIPPER.debug.xcconfig */,
+				B75B845224BEFF00F1A8061E /* Pods-VIPPER.release.xcconfig */,
+				FBD7F59278F50CA8A9991693 /* Pods-VIPPER-VIPPERUITests.debug.xcconfig */,
+				291D2E93D62405E6D5825C78 /* Pods-VIPPER-VIPPERUITests.release.xcconfig */,
+				78ED0AD4CD0D762DB36EF81A /* Pods-VIPPERTests.debug.xcconfig */,
+				659AE24FC5ACB020A175C5EE /* Pods-VIPPERTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		BBE2657025EE8F7900E33C25 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +151,8 @@
 				BBE2659225EE8F7900E33C25 /* VIPPERTests */,
 				BBE2659D25EE8F7900E33C25 /* VIPPERUITests */,
 				BBE2657A25EE8F7900E33C25 /* Products */,
+				A9488238A41B0949877D72F1 /* Pods */,
+				16531B6C2F64C0A52A084177 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,13 +169,14 @@
 		BBE2657B25EE8F7900E33C25 /* VIPPER */ = {
 			isa = PBXGroup;
 			children = (
-				BBE2657C25EE8F7900E33C25 /* AppDelegate.swift */,
-				BBE2657E25EE8F7900E33C25 /* SceneDelegate.swift */,
-				BBE2658025EE8F7900E33C25 /* ViewController.swift */,
-				BBE2658225EE8F7900E33C25 /* Main.storyboard */,
-				BBE2658525EE8F7900E33C25 /* Assets.xcassets */,
-				BBE2658725EE8F7900E33C25 /* LaunchScreen.storyboard */,
-				BBE2658A25EE8F7900E33C25 /* Info.plist */,
+				BBE2662E25EE94EE00E33C25 /* Application */,
+				BBE2662625EE94EE00E33C25 /* API */,
+				BBE2661A25EE94EE00E33C25 /* Common */,
+				BBE2662925EE94EE00E33C25 /* Models */,
+				BBE2663125EE94EE00E33C25 /* ViewControllers */,
+				BBE2662525EE94EE00E33C25 /* Info.plist */,
+				BBE2666325EE954E00E33C25 /* Assets.xcassets */,
+				BBE2665E25EE953700E33C25 /* LaunchScreen.storyboard */,
 			);
 			path = VIPPER;
 			sourceTree = "<group>";
@@ -128,6 +199,116 @@
 			path = VIPPERUITests;
 			sourceTree = "<group>";
 		};
+		BBE2661A25EE94EE00E33C25 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				BBE2661B25EE94EE00E33C25 /* Managers */,
+				BBE2661E25EE94EE00E33C25 /* Extensions */,
+				BBE2662125EE94EE00E33C25 /* Utilities */,
+				BBE2662325EE94EE00E33C25 /* Configs */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		BBE2661B25EE94EE00E33C25 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				BBE2661C25EE94EE00E33C25 /* AuthManager.swift */,
+				BBE2661D25EE94EE00E33C25 /* AuthenticationServices.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		BBE2661E25EE94EE00E33C25 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BBE2661F25EE94EE00E33C25 /* UIWindow+Extensions.swift */,
+				BBE2662025EE94EE00E33C25 /* URL+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		BBE2662125EE94EE00E33C25 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				BBE2662225EE94EE00E33C25 /* AppHelper.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		BBE2662325EE94EE00E33C25 /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				BBE2662425EE94EE00E33C25 /* Configs.swift */,
+			);
+			path = Configs;
+			sourceTree = "<group>";
+		};
+		BBE2662625EE94EE00E33C25 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				BBE2662725EE94EE00E33C25 /* API.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		BBE2662925EE94EE00E33C25 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BBE2662A25EE94EE00E33C25 /* Event.swift */,
+				BBE2662B25EE94EE00E33C25 /* User.swift */,
+				BBE2662C25EE94EE00E33C25 /* Repository.swift */,
+				BBE2662D25EE94EE00E33C25 /* Token.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BBE2662E25EE94EE00E33C25 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				BBE2662F25EE94EE00E33C25 /* AppDelegate.swift */,
+				BBE2663025EE94EE00E33C25 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		BBE2663125EE94EE00E33C25 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				BBE2663225EE94EE00E33C25 /* Detail */,
+				BBE2663525EE94EE00E33C25 /* Main */,
+				BBE2663925EE94EE00E33C25 /* Login */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		BBE2663225EE94EE00E33C25 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				BBE2663325EE94EE00E33C25 /* Detail.storyboard */,
+				BBE2663425EE94EE00E33C25 /* DetailViewController.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		BBE2663525EE94EE00E33C25 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				BBE2663625EE94EE00E33C25 /* MainViewController.swift */,
+				BBE2663725EE94EE00E33C25 /* Home.storyboard */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		BBE2663925EE94EE00E33C25 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				BBE2663A25EE94EE00E33C25 /* Login.storyboard */,
+				BBE2663B25EE94EE00E33C25 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +316,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BBE265A325EE8F7900E33C25 /* Build configuration list for PBXNativeTarget "VIPPER" */;
 			buildPhases = (
+				525C3276E0315CF66D8E47B5 /* [CP] Check Pods Manifest.lock */,
 				BBE2657525EE8F7900E33C25 /* Sources */,
 				BBE2657625EE8F7900E33C25 /* Frameworks */,
 				BBE2657725EE8F7900E33C25 /* Resources */,
+				7EAF0144D0E48262BE144449 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -152,6 +335,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BBE265A625EE8F7900E33C25 /* Build configuration list for PBXNativeTarget "VIPPERTests" */;
 			buildPhases = (
+				7C0436FBDA55CD98BA74FCBA /* [CP] Check Pods Manifest.lock */,
 				BBE2658B25EE8F7900E33C25 /* Sources */,
 				BBE2658C25EE8F7900E33C25 /* Frameworks */,
 				BBE2658D25EE8F7900E33C25 /* Resources */,
@@ -170,9 +354,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BBE265A925EE8F7900E33C25 /* Build configuration list for PBXNativeTarget "VIPPERUITests" */;
 			buildPhases = (
+				3480C1665C5066BCA6C6B881 /* [CP] Check Pods Manifest.lock */,
 				BBE2659625EE8F7900E33C25 /* Sources */,
 				BBE2659725EE8F7900E33C25 /* Frameworks */,
 				BBE2659825EE8F7900E33C25 /* Resources */,
+				A7FA09A1019E760994B1565E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -231,9 +417,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBE2658925EE8F7900E33C25 /* LaunchScreen.storyboard in Resources */,
-				BBE2658625EE8F7900E33C25 /* Assets.xcassets in Resources */,
-				BBE2658425EE8F7900E33C25 /* Main.storyboard in Resources */,
+				BBE2665025EE94EE00E33C25 /* Login.storyboard in Resources */,
+				BBE2668B25EE96AB00E33C25 /* Home.storyboard in Resources */,
+				BBE2665F25EE953700E33C25 /* LaunchScreen.storyboard in Resources */,
+				BBE2666425EE954E00E33C25 /* Assets.xcassets in Resources */,
+				BBE2664C25EE94EE00E33C25 /* Detail.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,14 +441,130 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3480C1665C5066BCA6C6B881 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VIPPER-VIPPERUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		525C3276E0315CF66D8E47B5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VIPPER-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7C0436FBDA55CD98BA74FCBA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VIPPERTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7EAF0144D0E48262BE144449 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VIPPER/Pods-VIPPER-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VIPPER/Pods-VIPPER-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VIPPER/Pods-VIPPER-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A7FA09A1019E760994B1565E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VIPPER-VIPPERUITests/Pods-VIPPER-VIPPERUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VIPPER-VIPPERUITests/Pods-VIPPER-VIPPERUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VIPPER-VIPPERUITests/Pods-VIPPER-VIPPERUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BBE2657525EE8F7900E33C25 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBE2658125EE8F7900E33C25 /* ViewController.swift in Sources */,
-				BBE2657D25EE8F7900E33C25 /* AppDelegate.swift in Sources */,
-				BBE2657F25EE8F7900E33C25 /* SceneDelegate.swift in Sources */,
+				BBE2664A25EE94EE00E33C25 /* AppDelegate.swift in Sources */,
+				BBE2664625EE94EE00E33C25 /* Event.swift in Sources */,
+				BBE2664125EE94EE00E33C25 /* AppHelper.swift in Sources */,
+				BBE2663F25EE94EE00E33C25 /* UIWindow+Extensions.swift in Sources */,
+				BBE2664025EE94EE00E33C25 /* URL+Extensions.swift in Sources */,
+				BBE2663D25EE94EE00E33C25 /* AuthManager.swift in Sources */,
+				BBE2664725EE94EE00E33C25 /* User.swift in Sources */,
+				BBE2663E25EE94EE00E33C25 /* AuthenticationServices.swift in Sources */,
+				BBE2664B25EE94EE00E33C25 /* SceneDelegate.swift in Sources */,
+				BBE2664E25EE94EE00E33C25 /* MainViewController.swift in Sources */,
+				BBE2664925EE94EE00E33C25 /* Token.swift in Sources */,
+				BBE2664825EE94EE00E33C25 /* Repository.swift in Sources */,
+				BBE2665125EE94EE00E33C25 /* LoginViewController.swift in Sources */,
+				BBE2664225EE94EE00E33C25 /* Configs.swift in Sources */,
+				BBE2664425EE94EE00E33C25 /* API.swift in Sources */,
+				BBE2664D25EE94EE00E33C25 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,20 +600,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		BBE2658225EE8F7900E33C25 /* Main.storyboard */ = {
+		BBE2663725EE94EE00E33C25 /* Home.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				BBE2658325EE8F7900E33C25 /* Base */,
+				BBE2663825EE94EE00E33C25 /* Base */,
 			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		BBE2658725EE8F7900E33C25 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BBE2658825EE8F7900E33C25 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
+			name = Home.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -433,12 +729,14 @@
 		};
 		BBE265A425EE8F7900E33C25 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 414B8C37B7A4D5A3633113D9 /* Pods-VIPPER.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UPJRMYQ38F;
 				INFOPLIST_FILE = VIPPER/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -452,12 +750,14 @@
 		};
 		BBE265A525EE8F7900E33C25 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B75B845224BEFF00F1A8061E /* Pods-VIPPER.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UPJRMYQ38F;
 				INFOPLIST_FILE = VIPPER/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -471,6 +771,7 @@
 		};
 		BBE265A725EE8F7900E33C25 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 78ED0AD4CD0D762DB36EF81A /* Pods-VIPPERTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -493,6 +794,7 @@
 		};
 		BBE265A825EE8F7900E33C25 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 659AE24FC5ACB020A175C5EE /* Pods-VIPPERTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -515,6 +817,7 @@
 		};
 		BBE265AA25EE8F7900E33C25 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FBD7F59278F50CA8A9991693 /* Pods-VIPPER-VIPPERUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -535,6 +838,7 @@
 		};
 		BBE265AB25EE8F7900E33C25 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 291D2E93D62405E6D5825C78 /* Pods-VIPPER-VIPPERUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
