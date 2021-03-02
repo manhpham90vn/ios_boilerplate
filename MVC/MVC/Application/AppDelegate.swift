@@ -12,14 +12,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    static var keyWindow: UIWindow? {
+        return UIApplication.shared.windows.filter { $0.isKeyWindow }.first
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         if #available(iOS 13, *) {
             
         } else {
             window = UIWindow(frame: UIScreen.main.bounds)
-            let loginViewController = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController")
-            window?.rootViewController = UINavigationController(rootViewController: loginViewController)
+            let vc = AuthManager.shared.isLogin ? MainViewController.instantiate : LoginViewController.instantiate
+            window?.rootViewController = UINavigationController(rootViewController: vc)
             window?.makeKeyAndVisible()
         }
         

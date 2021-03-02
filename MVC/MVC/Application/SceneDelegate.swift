@@ -10,14 +10,28 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
+    @available(iOS 13.0, *)
+    static var keyWindow: UIWindow? {
+        return UIApplication
+            .shared
+            .connectedScenes
+            .filter { $0.activationState == .foregroundActive }
+            .map { $0 as? UIWindowScene }
+            .compactMap { $0 }
+            .first?
+            .windows
+            .filter { $0.isKeyWindow }
+            .first
+    }
 
     @available(iOS 13.0, *)
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: scene)
-        let loginViewController = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController")
-        window?.rootViewController = UINavigationController(rootViewController: loginViewController)
+        let vc = AuthManager.shared.isLogin ? MainViewController.instantiate : LoginViewController.instantiate
+        window?.rootViewController = UINavigationController(rootViewController: vc)
         window?.makeKeyAndVisible()
         
     }

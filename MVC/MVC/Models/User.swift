@@ -26,3 +26,11 @@ struct User: Codable {
     }
     
 }
+
+extension User: CustomStringConvertible {
+    
+    var description: String {
+        return "\(name ?? "") \(email ?? "")"
+    }
+    
+}

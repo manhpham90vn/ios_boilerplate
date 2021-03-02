@@ -8,11 +8,19 @@
 import UIKit
 import SafariServices
 import RxSwift
+import RxCocoa
+import AuthenticationServices
 
 class LoginViewController: UIViewController {
 
     private let bag = DisposeBag()
-    private var authSession: SFAuthenticationSession?
+    private var authSession: AuthenticationServices?
+    
+    static var instantiate: LoginViewController {
+        let st = UIStoryboard(name: "Login", bundle: nil)
+        let vc = st.instantiateInitialViewController() as! LoginViewController
+        return vc
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,25 +29,42 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonTapped(_ sender: Any) {
-        authSession = SFAuthenticationSession(url: Configs.loginURL, callbackURLScheme: Configs.callbackURLScheme) { (url, error) in
+        authSession = SafariExtensionFactory.provideAuthenticationService()
+        authSession?.initiateSession(url: URL(string: Configs.loginURL)!, callBackURL: Configs.callbackURLScheme, completionHandler: { (url, error) in
             if let error = error {
-                print(error.localizedDescription)
+                AppHelper.shared.showAlert(title: "Error", message: error.localizedDescription)
                 return
             }
-            guard let code = url?.queryParameters?["code"] else { return }
-            let token = API.shared.createAccessToken(clientId: Configs.clientID,
+            guard let code = url?.queryParameters?["code"] else {
+                AppHelper.shared.showAlert(title: "Error", message: "Can not get code")
+                return
+            }
+            API.shared.createAccessToken(clientId: Configs.clientID,
                                               clientSecret: Configs.ClientSecrets,
                                               code: code,
                                               redirectUri: nil,
                                               state: nil)
-            token.subscribe(onSuccess: { token in
-                print(token)
-            }, onFailure: { error in
-                print(error.localizedDescription)
-            })
-            .disposed(by: self.bag)
-        }
-        authSession?.start()
+                .do(onError: { error in
+                    AppHelper.shared.showAlert(title: "Error", message: error.localizedDescription)
+                })
+                .asDriver(onErrorDriveWith: .empty())
+                .do(onNext: { token in
+                    AuthManager.shared.token = token.accessToken
+                })
+                .flatMap { _ -> Driver<User> in
+                    return API.shared.getInfo()
+                        .do(onError: { error in
+                            AppHelper.shared.showAlert(title: "Error", message: error.localizedDescription)
+                        })
+                        .asDriver(onErrorDriveWith: .empty())
+                }
+                .drive(onNext: { user in
+                    AuthManager.shared.user = user
+                    UIWindow.shared?.rootViewController = UINavigationController(rootViewController: MainViewController.instantiate)
+                })
+                .disposed(by: self.bag)
+        })
+        authSession?.startSession()
     }
     
 }

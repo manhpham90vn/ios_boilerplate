@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB2E66D925EDEE8900786271 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E66D825EDEE8900786271 /* AuthManager.swift */; };
 		BBC85A4825D113AA00F87653 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC85A4725D113AA00F87653 /* AppDelegate.swift */; };
 		BBC85A4A25D113AA00F87653 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC85A4925D113AA00F87653 /* SceneDelegate.swift */; };
 		BBC85A4C25D113AA00F87653 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC85A4B25D113AA00F87653 /* MainViewController.swift */; };
@@ -30,6 +31,9 @@
 		BBC85ACF25D1842100F87653 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBC85ACE25D1842100F87653 /* Detail.storyboard */; };
 		BBC85AD425D1842E00F87653 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC85AD325D1842E00F87653 /* DetailViewController.swift */; };
 		BBC85AE125D186B700F87653 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC85AE025D186B700F87653 /* URL+Extensions.swift */; };
+		BBF0E45B25EDF482007A5E4A /* UIWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF0E45A25EDF482007A5E4A /* UIWindow+Extensions.swift */; };
+		BBF0E46125EDF7CE007A5E4A /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF0E46025EDF7CE007A5E4A /* AppHelper.swift */; };
+		BBF0E47025EE2405007A5E4A /* AuthenticationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF0E46F25EE2405007A5E4A /* AuthenticationServices.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BB2E66D825EDEE8900786271 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		BBC85A4425D113AA00F87653 /* MVC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MVC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBC85A4725D113AA00F87653 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBC85A4925D113AA00F87653 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +80,9 @@
 		BBC85ACE25D1842100F87653 /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
 		BBC85AD325D1842E00F87653 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		BBC85AE025D186B700F87653 /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
+		BBF0E45A25EDF482007A5E4A /* UIWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extensions.swift"; sourceTree = "<group>"; };
+		BBF0E46025EDF7CE007A5E4A /* AppHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHelper.swift; sourceTree = "<group>"; };
+		BBF0E46F25EE2405007A5E4A /* AuthenticationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServices.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +114,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB2E66D725EDEE6400786271 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				BB2E66D825EDEE8900786271 /* AuthManager.swift */,
+				BBF0E46F25EE2405007A5E4A /* AuthenticationServices.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		BBC85A3B25D113AA00F87653 = {
 			isa = PBXGroup;
 			children = (
@@ -137,7 +154,6 @@
 				BBC85A5025D113AB00F87653 /* Assets.xcassets */,
 				BBC85A5225D113AB00F87653 /* LaunchScreen.storyboard */,
 				BBC85A5525D113AB00F87653 /* Info.plist */,
-				BBC85A7D25D11F9900F87653 /* Configs.swift */,
 			);
 			path = MVC;
 			sourceTree = "<group>";
@@ -228,6 +244,9 @@
 		BBC85ADE25D1869D00F87653 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BBF0E46825EE188F007A5E4A /* Configs */,
+				BBF0E45F25EDF7C4007A5E4A /* Utilities */,
+				BB2E66D725EDEE6400786271 /* Managers */,
 				BBC85ADF25D186A800F87653 /* Extensions */,
 			);
 			path = Common;
@@ -237,8 +256,25 @@
 			isa = PBXGroup;
 			children = (
 				BBC85AE025D186B700F87653 /* URL+Extensions.swift */,
+				BBF0E45A25EDF482007A5E4A /* UIWindow+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		BBF0E45F25EDF7C4007A5E4A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				BBF0E46025EDF7CE007A5E4A /* AppHelper.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		BBF0E46825EE188F007A5E4A /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				BBC85A7D25D11F9900F87653 /* Configs.swift */,
+			);
+			path = Configs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -386,11 +422,15 @@
 				BBC85AD425D1842E00F87653 /* DetailViewController.swift in Sources */,
 				BBC85AE125D186B700F87653 /* URL+Extensions.swift in Sources */,
 				BBC85A4C25D113AA00F87653 /* MainViewController.swift in Sources */,
+				BB2E66D925EDEE8900786271 /* AuthManager.swift in Sources */,
 				BBC85A7E25D11F9900F87653 /* Configs.swift in Sources */,
+				BBF0E45B25EDF482007A5E4A /* UIWindow+Extensions.swift in Sources */,
 				BBC85A4825D113AA00F87653 /* AppDelegate.swift in Sources */,
 				BBC85A9825D122AA00F87653 /* Token.swift in Sources */,
 				BBC85AA825D17EC300F87653 /* User.swift in Sources */,
 				BBC85A4A25D113AA00F87653 /* SceneDelegate.swift in Sources */,
+				BBF0E46125EDF7CE007A5E4A /* AppHelper.swift in Sources */,
+				BBF0E47025EE2405007A5E4A /* AuthenticationServices.swift in Sources */,
 				BBC85AA325D17E9A00F87653 /* Event.swift in Sources */,
 				BBC85A8325D121D600F87653 /* API.swift in Sources */,
 				BBC85AC225D180B400F87653 /* LoginViewController.swift in Sources */,
