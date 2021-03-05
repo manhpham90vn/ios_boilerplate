@@ -17,10 +17,14 @@ class OAuthServiceComponent: OAuthService {
         
     private var authSession: AuthenticationServices?
     
+    deinit {
+        print("\(type(of: self)) Deinit")
+    }
+    
     func getURLAuthen() -> Single<URL> {
-        return Single<URL>.create { (single) in
-            self.authSession = SafariExtensionFactory.provideAuthenticationService()
-            self.authSession?.initiateSession(url: URL(string: Configs.loginURL)!,
+        return Single<URL>.create { [weak self] (single) in
+            self?.authSession = SafariExtensionFactory.provideAuthenticationService()
+            self?.authSession?.initiateSession(url: URL(string: Configs.loginURL)!,
                                               callBackURL: Configs.callbackURLScheme,
                                               completionHandler: { (url, error) in
                                                 if let error = error {
@@ -33,9 +37,9 @@ class OAuthServiceComponent: OAuthService {
                                                     single(.error(CommonError.emptyData))
                                                 }
             })
-            self.authSession?.startSession()
+            self?.authSession?.startSession()
             return Disposables.create {
-                self.authSession?.cancelSession()
+                self?.authSession?.cancelSession()
             }
         }
     }

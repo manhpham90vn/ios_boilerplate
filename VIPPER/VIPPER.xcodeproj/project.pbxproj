@@ -15,6 +15,9 @@
 		BBBEACA825F1464B00A85924 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBEACA725F1464B00A85924 /* LoginInteractor.swift */; };
 		BBBEACB625F14C2B00A85924 /* OAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBEACB525F14C2B00A85924 /* OAuthService.swift */; };
 		BBBEACBB25F14E3700A85924 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBEACBA25F14E3700A85924 /* CommonError.swift */; };
+		BBBF8C0725F1EF7200A37D63 /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF8C0625F1EF7200A37D63 /* BasePresenter.swift */; };
+		BBBF8C0F25F1EF9B00A37D63 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF8C0E25F1EF9B00A37D63 /* BaseRouter.swift */; };
+		BBBF8C1425F1EFBD00A37D63 /* BaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF8C1325F1EFBD00A37D63 /* BaseInteractor.swift */; };
 		BBE2659425EE8F7900E33C25 /* VIPPERTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2659325EE8F7900E33C25 /* VIPPERTests.swift */; };
 		BBE2659F25EE8F7900E33C25 /* VIPPERUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2659E25EE8F7900E33C25 /* VIPPERUITests.swift */; };
 		BBE2663D25EE94EE00E33C25 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2661C25EE94EE00E33C25 /* AuthManager.swift */; };
@@ -73,6 +76,9 @@
 		BBBEACA725F1464B00A85924 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 		BBBEACB525F14C2B00A85924 /* OAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthService.swift; sourceTree = "<group>"; };
 		BBBEACBA25F14E3700A85924 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
+		BBBF8C0625F1EF7200A37D63 /* BasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePresenter.swift; sourceTree = "<group>"; };
+		BBBF8C0E25F1EF9B00A37D63 /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
+		BBBF8C1325F1EFBD00A37D63 /* BaseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInteractor.swift; sourceTree = "<group>"; };
 		BBE2657925EE8F7900E33C25 /* VIPPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VIPPER.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBE2658F25EE8F7900E33C25 /* VIPPERTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VIPPERTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBE2659325EE8F7900E33C25 /* VIPPERTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VIPPERTests.swift; sourceTree = "<group>"; };
@@ -177,6 +183,16 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		BBBF8C0525F1EF6800A37D63 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				BBBF8C0625F1EF7200A37D63 /* BasePresenter.swift */,
+				BBBF8C0E25F1EF9B00A37D63 /* BaseRouter.swift */,
+				BBBF8C1325F1EFBD00A37D63 /* BaseInteractor.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		BBE2657025EE8F7900E33C25 = {
 			isa = PBXGroup;
 			children = (
@@ -236,6 +252,7 @@
 		BBE2661A25EE94EE00E33C25 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BBBF8C0525F1EF6800A37D63 /* Base */,
 				BBE2661B25EE94EE00E33C25 /* Managers */,
 				BBE2661E25EE94EE00E33C25 /* Extensions */,
 				BBE2662125EE94EE00E33C25 /* Utilities */,
@@ -582,13 +599,16 @@
 				BBE2664025EE94EE00E33C25 /* URL+Extensions.swift in Sources */,
 				BBE2663D25EE94EE00E33C25 /* AuthManager.swift in Sources */,
 				BBE2664725EE94EE00E33C25 /* User.swift in Sources */,
+				BBBF8C0F25F1EF9B00A37D63 /* BaseRouter.swift in Sources */,
 				BBE2663E25EE94EE00E33C25 /* AuthenticationServices.swift in Sources */,
 				BBBEACA825F1464B00A85924 /* LoginInteractor.swift in Sources */,
 				BBE2664B25EE94EE00E33C25 /* SceneDelegate.swift in Sources */,
 				BBE2664E25EE94EE00E33C25 /* MainViewController.swift in Sources */,
+				BBBF8C0725F1EF7200A37D63 /* BasePresenter.swift in Sources */,
 				BBBEAC9625F145F600A85924 /* LoginView.swift in Sources */,
 				BBBEACB625F14C2B00A85924 /* OAuthService.swift in Sources */,
 				BBBEACBB25F14E3700A85924 /* CommonError.swift in Sources */,
+				BBBF8C1425F1EFBD00A37D63 /* BaseInteractor.swift in Sources */,
 				BBE2664925EE94EE00E33C25 /* Token.swift in Sources */,
 				BBBEAC9E25F1463000A85924 /* LoginPresenter.swift in Sources */,
 				BBE2664825EE94EE00E33C25 /* Repository.swift in Sources */,

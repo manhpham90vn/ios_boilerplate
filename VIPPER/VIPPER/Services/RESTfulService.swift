@@ -22,6 +22,10 @@ protocol RESTfulService {
 
 class RESTfulServiceComponent: RESTfulService {
     
+    deinit {
+        print("\(type(of: self)) Deinit")
+    }
+    
     func createAccessToken(clientId: String,
                                   clientSecret: String,
                                   code: String,

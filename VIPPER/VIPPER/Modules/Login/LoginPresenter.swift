@@ -16,7 +16,7 @@ protocol LoginPresenterInterface {
     func didTapLoginButton()
 }
 
-class LoginPresenter: LoginPresenterInterface {
+class LoginPresenter: BasePresenter, LoginPresenterInterface {
     
     init(view: LoginViewInterface,
          router: LoginRouterInterface,
@@ -25,11 +25,7 @@ class LoginPresenter: LoginPresenterInterface {
         self.router = router
         self.interactor = interactor
     }
-    
-    deinit {
-        print("\(type(of: self)) Deinit")
-    }
-    
+        
     unowned var view: LoginViewInterface
     var router: LoginRouterInterface
     var interactor: LoginInteractorInterface
@@ -40,7 +36,7 @@ class LoginPresenter: LoginPresenterInterface {
         interactor
             .getURLAuthen()
             .asObservable()
-            .flatMapLatest({ [weak self] url -> Driver<Token> in
+            .flatMapLatest({ [weak self] url -> Driver<Token> in // need weak self here becase interactor have strong reference to AuthenticationServices
                 guard let self = self else { return .empty() }
                 guard let code = url.queryParameters?["code"] else {
                     self.view.showAlert(title: "Error", message: "Can not get code")
@@ -53,8 +49,7 @@ class LoginPresenter: LoginPresenterInterface {
                     .asDriver(onErrorDriveWith: .empty())
             })
             .asDriver(onErrorDriveWith: .empty())
-            .do(onNext: { [weak self] token in
-                guard let self = self else { return }
+            .do(onNext: { token in
                 if let token = token.accessToken {
                     self.interactor.saveToken(token: token)
                 } else {
@@ -62,16 +57,14 @@ class LoginPresenter: LoginPresenterInterface {
                 }
             })
             .asDriver(onErrorDriveWith: .empty())
-            .flatMap({ [weak self] token -> Driver<User> in
-                guard let self = self else { return .never() }
+            .flatMap({ token -> Driver<User> in
                 return self.interactor.getInfo()
                     .do(onError: { error in
                         self.view.showAlert(title: "Error", message: error.localizedDescription)
                     })
                     .asDriver(onErrorDriveWith: .empty())
             })
-            .drive(onNext: { [weak self] user in
-                guard let self = self else { return }
+            .drive(onNext: { user in
                 self.interactor.saveUserInfo(user: user)
                 self.router.navigationToHomeScreen()
             })

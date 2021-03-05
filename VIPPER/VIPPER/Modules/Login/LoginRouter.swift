@@ -12,7 +12,7 @@ protocol LoginRouterInterface {
     func navigationToHomeScreen()
 }
 
-class LoginRouter: LoginRouterInterface {
+class LoginRouter: BaseROuter, LoginRouterInterface {
     
     func createLoginScreen(view: LoginViewInterface) {
         let pr = LoginPresenter(view: view,
@@ -25,9 +25,5 @@ class LoginRouter: LoginRouterInterface {
     func navigationToHomeScreen() {
         UIWindow.shared?.rootViewController = UINavigationController(rootViewController: MainViewController.instantiate)
     }
-    
-    deinit {
-        print("\(type(of: self)) Deinit")
-    }
-    
+        
 }

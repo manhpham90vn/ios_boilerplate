@@ -17,7 +17,7 @@ protocol LoginInteractorInterface {
     func saveUserInfo(user: User)
 }
 
-class LoginInteractor: LoginInteractorInterface {
+class LoginInteractor: BaseInteractor, LoginInteractorInterface {
     
     let restfulService: RESTfulService
     let oauthService: OAuthService
@@ -26,11 +26,7 @@ class LoginInteractor: LoginInteractorInterface {
         self.restfulService = service
         self.oauthService = oauthService
     }
-        
-    deinit {
-        print("\(type(of: self)) Deinit")
-    }
-    
+            
     func getURLAuthen() -> Single<URL> {
         return oauthService.getURLAuthen()
     }
