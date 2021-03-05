@@ -18,6 +18,11 @@
 		BBBF8C0725F1EF7200A37D63 /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF8C0625F1EF7200A37D63 /* BasePresenter.swift */; };
 		BBBF8C0F25F1EF9B00A37D63 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF8C0E25F1EF9B00A37D63 /* BaseRouter.swift */; };
 		BBBF8C1425F1EFBD00A37D63 /* BaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF8C1325F1EFBD00A37D63 /* BaseInteractor.swift */; };
+		BBBF8C1F25F20BBC00A37D63 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF8C1E25F20BBC00A37D63 /* BaseViewController.swift */; };
+		BBBF8C2625F20E9B00A37D63 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF8C2525F20E9B00A37D63 /* MainView.swift */; };
+		BBBF8C2E25F20EA800A37D63 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF8C2D25F20EA800A37D63 /* MainPresenter.swift */; };
+		BBBF8C3325F20EB500A37D63 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF8C3225F20EB500A37D63 /* MainRouter.swift */; };
+		BBBF8C3825F20EC200A37D63 /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF8C3725F20EC200A37D63 /* MainInteractor.swift */; };
 		BBE2659425EE8F7900E33C25 /* VIPPERTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2659325EE8F7900E33C25 /* VIPPERTests.swift */; };
 		BBE2659F25EE8F7900E33C25 /* VIPPERUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2659E25EE8F7900E33C25 /* VIPPERUITests.swift */; };
 		BBE2663D25EE94EE00E33C25 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2661C25EE94EE00E33C25 /* AuthManager.swift */; };
@@ -79,6 +84,11 @@
 		BBBF8C0625F1EF7200A37D63 /* BasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePresenter.swift; sourceTree = "<group>"; };
 		BBBF8C0E25F1EF9B00A37D63 /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
 		BBBF8C1325F1EFBD00A37D63 /* BaseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInteractor.swift; sourceTree = "<group>"; };
+		BBBF8C1E25F20BBC00A37D63 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		BBBF8C2525F20E9B00A37D63 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		BBBF8C2D25F20EA800A37D63 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
+		BBBF8C3225F20EB500A37D63 /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
+		BBBF8C3725F20EC200A37D63 /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
 		BBE2657925EE8F7900E33C25 /* VIPPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VIPPER.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBE2658F25EE8F7900E33C25 /* VIPPERTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VIPPERTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBE2659325EE8F7900E33C25 /* VIPPERTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VIPPERTests.swift; sourceTree = "<group>"; };
@@ -165,6 +175,8 @@
 		BBBEAC8F25F1449B00A85924 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				BBE2663525EE94EE00E33C25 /* Main */,
+				BBBF8C2425F20DD600A37D63 /* Detail */,
 				BBBEAC9325F144B900A85924 /* Login */,
 			);
 			path = Modules;
@@ -189,8 +201,18 @@
 				BBBF8C0625F1EF7200A37D63 /* BasePresenter.swift */,
 				BBBF8C0E25F1EF9B00A37D63 /* BaseRouter.swift */,
 				BBBF8C1325F1EFBD00A37D63 /* BaseInteractor.swift */,
+				BBBF8C1E25F20BBC00A37D63 /* BaseViewController.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		BBBF8C2425F20DD600A37D63 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				BBE2663325EE94EE00E33C25 /* Detail.storyboard */,
+				BBE2663425EE94EE00E33C25 /* DetailViewController.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		BBE2657025EE8F7900E33C25 = {
@@ -223,7 +245,6 @@
 				BBE2662625EE94EE00E33C25 /* Services */,
 				BBE2661A25EE94EE00E33C25 /* Common */,
 				BBE2662925EE94EE00E33C25 /* Models */,
-				BBE2663125EE94EE00E33C25 /* ViewControllers */,
 				BBE2662525EE94EE00E33C25 /* Info.plist */,
 				BBE2666325EE954E00E33C25 /* Assets.xcassets */,
 				BBE2665E25EE953700E33C25 /* LaunchScreen.storyboard */,
@@ -325,29 +346,15 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
-		BBE2663125EE94EE00E33C25 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				BBE2663225EE94EE00E33C25 /* Detail */,
-				BBE2663525EE94EE00E33C25 /* Main */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		BBE2663225EE94EE00E33C25 /* Detail */ = {
-			isa = PBXGroup;
-			children = (
-				BBE2663325EE94EE00E33C25 /* Detail.storyboard */,
-				BBE2663425EE94EE00E33C25 /* DetailViewController.swift */,
-			);
-			path = Detail;
-			sourceTree = "<group>";
-		};
 		BBE2663525EE94EE00E33C25 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				BBE2663625EE94EE00E33C25 /* MainViewController.swift */,
 				BBE2663725EE94EE00E33C25 /* Home.storyboard */,
+				BBBF8C2525F20E9B00A37D63 /* MainView.swift */,
+				BBBF8C2D25F20EA800A37D63 /* MainPresenter.swift */,
+				BBBF8C3225F20EB500A37D63 /* MainRouter.swift */,
+				BBBF8C3725F20EC200A37D63 /* MainInteractor.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -593,6 +600,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBE2664A25EE94EE00E33C25 /* AppDelegate.swift in Sources */,
+				BBBF8C3325F20EB500A37D63 /* MainRouter.swift in Sources */,
 				BBE2664625EE94EE00E33C25 /* Event.swift in Sources */,
 				BBE2664125EE94EE00E33C25 /* AppHelper.swift in Sources */,
 				BBE2663F25EE94EE00E33C25 /* UIWindow+Extensions.swift in Sources */,
@@ -605,12 +613,16 @@
 				BBE2664B25EE94EE00E33C25 /* SceneDelegate.swift in Sources */,
 				BBE2664E25EE94EE00E33C25 /* MainViewController.swift in Sources */,
 				BBBF8C0725F1EF7200A37D63 /* BasePresenter.swift in Sources */,
+				BBBF8C1F25F20BBC00A37D63 /* BaseViewController.swift in Sources */,
 				BBBEAC9625F145F600A85924 /* LoginView.swift in Sources */,
 				BBBEACB625F14C2B00A85924 /* OAuthService.swift in Sources */,
 				BBBEACBB25F14E3700A85924 /* CommonError.swift in Sources */,
 				BBBF8C1425F1EFBD00A37D63 /* BaseInteractor.swift in Sources */,
 				BBE2664925EE94EE00E33C25 /* Token.swift in Sources */,
+				BBBF8C2E25F20EA800A37D63 /* MainPresenter.swift in Sources */,
+				BBBF8C2625F20E9B00A37D63 /* MainView.swift in Sources */,
 				BBBEAC9E25F1463000A85924 /* LoginPresenter.swift in Sources */,
+				BBBF8C3825F20EC200A37D63 /* MainInteractor.swift in Sources */,
 				BBE2664825EE94EE00E33C25 /* Repository.swift in Sources */,
 				BBBEACA325F1463B00A85924 /* LoginRouter.swift in Sources */,
 				BBE2665125EE94EE00E33C25 /* LoginViewController.swift in Sources */,

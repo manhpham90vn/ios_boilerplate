@@ -6,19 +6,18 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
+import PKHUD
 
-class MainViewController: UIViewController {
+class MainViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    
-    private var elements = [Event]()
-    private let bag = DisposeBag()
+        
+    var presenter: MainPresenterInterface!
     
     static var instantiate: MainViewController {
         let st = UIStoryboard(name: "Home", bundle: nil)
         let vc = st.instantiateInitialViewController() as! MainViewController
+        MainRouter().createMainScreen(view: vc)
         return vc
     }
     
@@ -28,28 +27,16 @@ class MainViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
         navigationItem.title = "Events"
         let logOut = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         navigationItem.rightBarButtonItem = logOut
         
-//        if let userName = AuthManager.shared.user?.login {
-//            RESTfulServiceComponent.shared.userReceivedEvents(username: userName, page: 1)
-//                .do(onError: { error in
-//                    AppHelper.shared.showAlert(title: "Error", message: error.localizedDescription)
-//                })
-//                .asDriver(onErrorDriveWith: .empty())
-//                .drive(onNext: { result in
-//                    self.elements = result
-//                    self.tableView.reloadData()
-//                })
-//                .disposed(by: bag)
-//        }
-        
+        presenter.viewDidLoad()
     }
     
     @objc func handleLogout() {
-        AuthManager.shared.logOut()
-        UIWindow.shared?.rootViewController = UINavigationController(rootViewController: LoginViewController.instantiate)
+        presenter.didTapLogout()
     }
     
 }
@@ -57,12 +44,12 @@ class MainViewController: UIViewController {
 extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        elements.count
+        presenter.elements.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = elements[indexPath.row].repo?.name
+        cell.textLabel?.text = presenter.elements[indexPath.row].repo?.name
         return cell
     }
     
@@ -71,7 +58,27 @@ extension MainViewController: UITableViewDataSource {
 extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(elements[indexPath.row])
+        presenter.navigationToDetailScreen(nav: navigationController!, item: presenter.elements[indexPath.row])
     }
     
+}
+
+extension MainViewController: MainViewInterface {
+    
+    func showAlert(title: String, message: String) {
+        AppHelper.shared.showAlert(title: title, message: message)
+    }
+    
+    func didLoadData() {
+        tableView.reloadData()
+    }
+    
+    func showLoading() {
+        HUD.show(.progress)
+    }
+    
+    func hideLoading() {
+        PKHUD.sharedHUD.hide()
+    }
+        
 }

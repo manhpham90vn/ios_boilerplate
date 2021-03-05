@@ -63,7 +63,7 @@ class ASWebAuthenticationWrapper: NSObject, AuthenticationServices, ASWebAuthent
         self.safariSession = ASWebAuthenticationSession(url: url, callbackURLScheme: callBackURL , completionHandler: completionHandler)
         if #available(iOS 13.0, *) {
             (self.safariSession as! ASWebAuthenticationSession).presentationContextProvider = self
-            (self.safariSession as! ASWebAuthenticationSession).prefersEphemeralWebBrowserSession = false
+            (self.safariSession as! ASWebAuthenticationSession).prefersEphemeralWebBrowserSession = true
         }
     }
     

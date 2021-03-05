@@ -12,7 +12,7 @@ protocol LoginRouterInterface {
     func navigationToHomeScreen()
 }
 
-class LoginRouter: BaseROuter, LoginRouterInterface {
+class LoginRouter: BaseRouter, LoginRouterInterface {
     
     func createLoginScreen(view: LoginViewInterface) {
         let pr = LoginPresenter(view: view,

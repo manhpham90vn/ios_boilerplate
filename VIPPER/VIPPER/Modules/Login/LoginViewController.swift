@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: BaseViewController {
     
     var presenter: LoginPresenterInterface!
     
@@ -27,11 +27,7 @@ class LoginViewController: UIViewController {
     @IBAction func loginButtonTapped(_ sender: Any) {
         presenter.didTapLoginButton()
     }
-    
-    deinit {
-        print("\(type(of: self)) Deinit")
-    }
-    
+        
 }
 
 extension LoginViewController: LoginViewInterface {
