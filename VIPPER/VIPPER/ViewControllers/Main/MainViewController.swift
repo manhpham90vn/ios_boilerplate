@@ -32,18 +32,18 @@ class MainViewController: UIViewController {
         let logOut = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         navigationItem.rightBarButtonItem = logOut
         
-        if let userName = AuthManager.shared.user?.login {
-            API.shared.userReceivedEvents(username: userName, page: 1)
-                .do(onError: { error in
-                    AppHelper.shared.showAlert(title: "Error", message: error.localizedDescription)
-                })
-                .asDriver(onErrorDriveWith: .empty())
-                .drive(onNext: { result in
-                    self.elements = result
-                    self.tableView.reloadData()
-                })
-                .disposed(by: bag)
-        }
+//        if let userName = AuthManager.shared.user?.login {
+//            RESTfulServiceComponent.shared.userReceivedEvents(username: userName, page: 1)
+//                .do(onError: { error in
+//                    AppHelper.shared.showAlert(title: "Error", message: error.localizedDescription)
+//                })
+//                .asDriver(onErrorDriveWith: .empty())
+//                .drive(onNext: { result in
+//                    self.elements = result
+//                    self.tableView.reloadData()
+//                })
+//                .disposed(by: bag)
+//        }
         
     }
     

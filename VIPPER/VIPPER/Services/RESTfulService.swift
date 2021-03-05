@@ -1,5 +1,5 @@
 //
-//  API.swift
+//  RESTfulServiceComponent.swift
 //  VIPER
 //
 //  Created by Manh Pham on 2/8/21.
@@ -10,7 +10,7 @@ import Alamofire
 import RxSwift
 import Moya
 
-protocol Service {
+protocol RESTfulService {
     func createAccessToken(clientId: String,
                                 clientSecret: String,
                                 code: String,
@@ -20,10 +20,7 @@ protocol Service {
     func getInfo() -> Single<User>
 }
 
-class API: Service {
-    
-    static let shared = API()
-    private init() {}
+class RESTfulServiceComponent: RESTfulService {
     
     func createAccessToken(clientId: String,
                                   clientSecret: String,

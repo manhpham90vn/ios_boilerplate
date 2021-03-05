@@ -48,7 +48,7 @@ class SFWebAuthenticationWrapper: NSObject, AuthenticationServices {
     func cancelSession() {
         (self.safariSession as! SFAuthenticationSession).cancel()
     }
-        
+    
 }
 
 
@@ -56,11 +56,11 @@ class SFWebAuthenticationWrapper: NSObject, AuthenticationServices {
 class ASWebAuthenticationWrapper: NSObject, AuthenticationServices, ASWebAuthenticationPresentationContextProviding {
     
     var safariSession: Any?
-    var userCancelError:NSError!
+    var userCancelError: NSError!
     
     func initiateSession(url: URL, callBackURL: String, completionHandler: @escaping ((URL?, Error?) -> ())) {
         self.userCancelError = NSError(domain: "com.apple.AuthenticationServices.WebAuthenticationSession", code: 1, userInfo: nil)
-        self.safariSession = ASWebAuthenticationSession(url: url, callbackURLScheme:callBackURL , completionHandler: completionHandler)
+        self.safariSession = ASWebAuthenticationSession(url: url, callbackURLScheme: callBackURL , completionHandler: completionHandler)
         if #available(iOS 13.0, *) {
             (self.safariSession as! ASWebAuthenticationSession).presentationContextProvider = self
             (self.safariSession as! ASWebAuthenticationSession).prefersEphemeralWebBrowserSession = false

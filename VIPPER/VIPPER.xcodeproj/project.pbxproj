@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		2F5DC364E7DA7FFF1F20AFFE /* Pods_VIPPER_VIPPERUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E9D82A2387047D1741B8231 /* Pods_VIPPER_VIPPERUITests.framework */; };
 		7511C4EB43D36DF0FE13A188 /* Pods_VIPPERTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE39FADE078668B72C668A7C /* Pods_VIPPERTests.framework */; };
+		BBBEAC9625F145F600A85924 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBEAC9525F145F600A85924 /* LoginView.swift */; };
+		BBBEAC9E25F1463000A85924 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBEAC9D25F1463000A85924 /* LoginPresenter.swift */; };
+		BBBEACA325F1463B00A85924 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBEACA225F1463B00A85924 /* LoginRouter.swift */; };
+		BBBEACA825F1464B00A85924 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBEACA725F1464B00A85924 /* LoginInteractor.swift */; };
+		BBBEACB625F14C2B00A85924 /* OAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBEACB525F14C2B00A85924 /* OAuthService.swift */; };
+		BBBEACBB25F14E3700A85924 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBEACBA25F14E3700A85924 /* CommonError.swift */; };
 		BBE2659425EE8F7900E33C25 /* VIPPERTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2659325EE8F7900E33C25 /* VIPPERTests.swift */; };
 		BBE2659F25EE8F7900E33C25 /* VIPPERUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2659E25EE8F7900E33C25 /* VIPPERUITests.swift */; };
 		BBE2663D25EE94EE00E33C25 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2661C25EE94EE00E33C25 /* AuthManager.swift */; };
@@ -17,7 +23,7 @@
 		BBE2664025EE94EE00E33C25 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2662025EE94EE00E33C25 /* URL+Extensions.swift */; };
 		BBE2664125EE94EE00E33C25 /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2662225EE94EE00E33C25 /* AppHelper.swift */; };
 		BBE2664225EE94EE00E33C25 /* Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2662425EE94EE00E33C25 /* Configs.swift */; };
-		BBE2664425EE94EE00E33C25 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2662725EE94EE00E33C25 /* API.swift */; };
+		BBE2664425EE94EE00E33C25 /* RESTfulService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2662725EE94EE00E33C25 /* RESTfulService.swift */; };
 		BBE2664625EE94EE00E33C25 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2662A25EE94EE00E33C25 /* Event.swift */; };
 		BBE2664725EE94EE00E33C25 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2662B25EE94EE00E33C25 /* User.swift */; };
 		BBE2664825EE94EE00E33C25 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2662C25EE94EE00E33C25 /* Repository.swift */; };
@@ -61,6 +67,12 @@
 		AC37449BE8FE7CAB7BDCA8C8 /* Pods_VIPPER.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VIPPER.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE39FADE078668B72C668A7C /* Pods_VIPPERTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VIPPERTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B75B845224BEFF00F1A8061E /* Pods-VIPPER.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VIPPER.release.xcconfig"; path = "Target Support Files/Pods-VIPPER/Pods-VIPPER.release.xcconfig"; sourceTree = "<group>"; };
+		BBBEAC9525F145F600A85924 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		BBBEAC9D25F1463000A85924 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		BBBEACA225F1463B00A85924 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
+		BBBEACA725F1464B00A85924 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
+		BBBEACB525F14C2B00A85924 /* OAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthService.swift; sourceTree = "<group>"; };
+		BBBEACBA25F14E3700A85924 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
 		BBE2657925EE8F7900E33C25 /* VIPPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VIPPER.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBE2658F25EE8F7900E33C25 /* VIPPERTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VIPPERTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBE2659325EE8F7900E33C25 /* VIPPERTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VIPPERTests.swift; sourceTree = "<group>"; };
@@ -75,7 +87,7 @@
 		BBE2662225EE94EE00E33C25 /* AppHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppHelper.swift; sourceTree = "<group>"; };
 		BBE2662425EE94EE00E33C25 /* Configs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configs.swift; sourceTree = "<group>"; };
 		BBE2662525EE94EE00E33C25 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BBE2662725EE94EE00E33C25 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		BBE2662725EE94EE00E33C25 /* RESTfulService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTfulService.swift; sourceTree = "<group>"; };
 		BBE2662A25EE94EE00E33C25 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		BBE2662B25EE94EE00E33C25 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BBE2662C25EE94EE00E33C25 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
@@ -144,6 +156,27 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		BBBEAC8F25F1449B00A85924 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				BBBEAC9325F144B900A85924 /* Login */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		BBBEAC9325F144B900A85924 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				BBE2663A25EE94EE00E33C25 /* Login.storyboard */,
+				BBE2663B25EE94EE00E33C25 /* LoginViewController.swift */,
+				BBBEAC9525F145F600A85924 /* LoginView.swift */,
+				BBBEAC9D25F1463000A85924 /* LoginPresenter.swift */,
+				BBBEACA225F1463B00A85924 /* LoginRouter.swift */,
+				BBBEACA725F1464B00A85924 /* LoginInteractor.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		BBE2657025EE8F7900E33C25 = {
 			isa = PBXGroup;
 			children = (
@@ -169,8 +202,9 @@
 		BBE2657B25EE8F7900E33C25 /* VIPPER */ = {
 			isa = PBXGroup;
 			children = (
+				BBBEAC8F25F1449B00A85924 /* Modules */,
 				BBE2662E25EE94EE00E33C25 /* Application */,
-				BBE2662625EE94EE00E33C25 /* API */,
+				BBE2662625EE94EE00E33C25 /* Services */,
 				BBE2661A25EE94EE00E33C25 /* Common */,
 				BBE2662925EE94EE00E33C25 /* Models */,
 				BBE2663125EE94EE00E33C25 /* ViewControllers */,
@@ -244,12 +278,14 @@
 			path = Configs;
 			sourceTree = "<group>";
 		};
-		BBE2662625EE94EE00E33C25 /* API */ = {
+		BBE2662625EE94EE00E33C25 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				BBE2662725EE94EE00E33C25 /* API.swift */,
+				BBE2662725EE94EE00E33C25 /* RESTfulService.swift */,
+				BBBEACB525F14C2B00A85924 /* OAuthService.swift */,
+				BBBEACBA25F14E3700A85924 /* CommonError.swift */,
 			);
-			path = API;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		BBE2662925EE94EE00E33C25 /* Models */ = {
@@ -277,7 +313,6 @@
 			children = (
 				BBE2663225EE94EE00E33C25 /* Detail */,
 				BBE2663525EE94EE00E33C25 /* Main */,
-				BBE2663925EE94EE00E33C25 /* Login */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -298,15 +333,6 @@
 				BBE2663725EE94EE00E33C25 /* Home.storyboard */,
 			);
 			path = Main;
-			sourceTree = "<group>";
-		};
-		BBE2663925EE94EE00E33C25 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				BBE2663A25EE94EE00E33C25 /* Login.storyboard */,
-				BBE2663B25EE94EE00E33C25 /* LoginViewController.swift */,
-			);
-			path = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -557,13 +583,19 @@
 				BBE2663D25EE94EE00E33C25 /* AuthManager.swift in Sources */,
 				BBE2664725EE94EE00E33C25 /* User.swift in Sources */,
 				BBE2663E25EE94EE00E33C25 /* AuthenticationServices.swift in Sources */,
+				BBBEACA825F1464B00A85924 /* LoginInteractor.swift in Sources */,
 				BBE2664B25EE94EE00E33C25 /* SceneDelegate.swift in Sources */,
 				BBE2664E25EE94EE00E33C25 /* MainViewController.swift in Sources */,
+				BBBEAC9625F145F600A85924 /* LoginView.swift in Sources */,
+				BBBEACB625F14C2B00A85924 /* OAuthService.swift in Sources */,
+				BBBEACBB25F14E3700A85924 /* CommonError.swift in Sources */,
 				BBE2664925EE94EE00E33C25 /* Token.swift in Sources */,
+				BBBEAC9E25F1463000A85924 /* LoginPresenter.swift in Sources */,
 				BBE2664825EE94EE00E33C25 /* Repository.swift in Sources */,
+				BBBEACA325F1463B00A85924 /* LoginRouter.swift in Sources */,
 				BBE2665125EE94EE00E33C25 /* LoginViewController.swift in Sources */,
 				BBE2664225EE94EE00E33C25 /* Configs.swift in Sources */,
-				BBE2664425EE94EE00E33C25 /* API.swift in Sources */,
+				BBE2664425EE94EE00E33C25 /* RESTfulService.swift in Sources */,
 				BBE2664D25EE94EE00E33C25 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
