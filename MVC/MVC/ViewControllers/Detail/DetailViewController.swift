@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: BaseViewController {
 
     static var instantiate: DetailViewController {
         let st = UIStoryboard(name: "Detail", bundle: nil)

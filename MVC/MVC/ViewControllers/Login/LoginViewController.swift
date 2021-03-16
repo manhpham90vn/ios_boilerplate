@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import AuthenticationServices
 
-class LoginViewController: UIViewController {
+class LoginViewController: BaseViewController {
 
     private let bag = DisposeBag()
     private var authSession: AuthenticationServices?
@@ -30,7 +30,8 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginButtonTapped(_ sender: Any) {
         authSession = SafariExtensionFactory.provideAuthenticationService()
-        authSession?.initiateSession(url: URL(string: Configs.loginURL)!, callBackURL: Configs.callbackURLScheme, completionHandler: { (url, error) in
+        authSession?.initiateSession(url: URL(string: Configs.loginURL)!, callBackURL: Configs.callbackURLScheme, completionHandler: { [weak self] (url, error) in
+            guard let self = self else { return }
             if let error = error {
                 AppHelper.shared.showAlert(title: "Error", message: error.localizedDescription)
                 return
