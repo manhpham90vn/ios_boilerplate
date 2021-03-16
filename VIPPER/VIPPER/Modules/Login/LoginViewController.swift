@@ -1,6 +1,6 @@
 //
 //  LoginViewController.swift
-//  MVC
+//  VIPER
 //
 //  Created by Manh Pham on 2/8/21.
 //

@@ -37,7 +37,8 @@ class MainPresenter: BasePresenter, MainPresenterInterface {
     func viewDidLoad() {
         if let userName = interactor.getLoginedUser() {
             view.showLoading()
-            interactor.getUserReceivedEvents(userName: userName, page: 1)
+            let params = EventParams(username: userName, page: 1)
+            interactor.getUserReceivedEvents(params: params)
                 .do(onError: { error in
                     self.view.showAlert(title: "Error", message: error.localizedDescription)
                 })

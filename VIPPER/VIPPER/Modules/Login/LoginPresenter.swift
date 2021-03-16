@@ -42,7 +42,10 @@ class LoginPresenter: BasePresenter, LoginPresenterInterface {
                     self.view.showAlert(title: "Error", message: "Can not get code")
                     return .empty()
                 }
-                return self.interactor.createAccessToken(code: code)
+                let params = AccessTokenParams(clientId: Configs.shared.clientID,
+                                               clientSecret: Configs.shared.ClientSecrets,
+                                               code: code)
+                return self.interactor.createAccessToken(params: params)
                     .do(onError: { error in
                         self.view.showAlert(title: "Error", message: error.localizedDescription)
                     })

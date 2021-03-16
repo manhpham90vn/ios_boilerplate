@@ -1,13 +1,13 @@
 //
 //  DetailViewController.swift
-//  MVC
+//  VIPER
 //
 //  Created by Manh Pham on 2/8/21.
 //
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: BaseViewController {
 
     static var instantiate: DetailViewController {
         let st = UIStoryboard(name: "Detail", bundle: nil)
