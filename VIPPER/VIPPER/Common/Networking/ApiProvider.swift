@@ -8,6 +8,7 @@
 import Foundation
 import Moya
 import RxSwift
+import Alamofire
 
 final class ApiProvider<Target: TargetType>: MoyaProvider<Target> {
     
@@ -19,20 +20,86 @@ final class ApiProvider<Target: TargetType>: MoyaProvider<Target> {
         }
         super.init(plugins: plugins)
     }
-            
-    func request(target: Target) -> Single<Response> {
+    
+    func request(target: Target) -> Observable<Response> {
         return connectedToInternet()
-            .timeout(Configs.shared.apiTimeOut, scheduler: MainScheduler.instance)
-            .filter({ $0 == true })
             .take(1)
-            .flatMap({ _ in
+            .flatMapLatest({ _ -> Observable<Response> in
                 return self
                     .rx
                     .request(target)
-                    .timeout(Configs.shared.apiTimeOut, scheduler: MainScheduler.instance)
+                    .filterSuccessfulStatusCodes()
+                    .do(onError: { error in
+                        self.handleError(error: error)
+                    })
+                    .asObservable()
+                    .catchError { (error) -> Observable<Response> in
+                        return self.catchJustCompleted(error: error)
+                    }
             })
-            .observeOn(MainScheduler.instance)
-            .asSingle()
+        }
+    
+    private func handleError(error: Error) {
+        if let error = error as? MoyaError {
+            switch error {
+            case .statusCode(let response):
+                if response.statusCode == 401 {
+                    print("Unauthorized")
+                }
+            case .underlying(let error, _):
+                if let error = error as? AFError {
+                    switch error {
+                    case .sessionTaskFailed(let error as NSError):
+                        if error.domain == NSURLErrorDomain {
+                            switch error.code {
+                            case NSURLErrorTimedOut:
+                                print("Timeout")
+                            case NSURLErrorDataNotAllowed:
+                                print("No connect")
+                            default:
+                                break
+                            }
+                        }
+                    default:
+                        break
+                    }
+                }
+            default:
+                break
+            }
+        }
     }
-        
+    
+    private func catchJustCompleted(error: Error) -> Observable<Response> {
+        if let error = error as? MoyaError {
+            switch error {
+            case .statusCode(let response):
+                if response.statusCode == 401 {
+                    return .empty()
+                }
+            case .underlying(let error, _):
+                if let error = error as? AFError {
+                    switch error {
+                    case .sessionTaskFailed(let error as NSError):
+                        if error.domain == NSURLErrorDomain {
+                            switch error.code {
+                            case NSURLErrorTimedOut:
+                                return .empty()
+                            case NSURLErrorDataNotAllowed:
+                                return .empty()
+                            default:
+                                break
+                            }
+                        }
+                    default:
+                        break
+                    }
+                }
+            default:
+                break
+            }
+        }
+        return .error(error)
+    }
+    
 }

@@ -10,9 +10,9 @@ import RxSwift
 import RxCocoa
 
 protocol LoginInteractorInterface {
-    func createAccessToken(params: AccessTokenParams) -> Single<Token>
-    func getURLAuthen() -> Single<URL>
-    func getInfo() -> Single<User>
+    func createAccessToken(params: AccessTokenParams) -> Observable<Token>
+    func getURLAuthen() -> Observable<URL>
+    func getInfo() -> Observable<User>
     func saveToken(token: String)
     func saveUserInfo(user: User)
 }
@@ -27,15 +27,15 @@ class LoginInteractor: BaseInteractor, LoginInteractorInterface {
         self.oauthService = oauthService
     }
             
-    func getURLAuthen() -> Single<URL> {
+    func getURLAuthen() -> Observable<URL> {
         return oauthService.getURLAuthen()
     }
     
-    func createAccessToken(params: AccessTokenParams) -> Single<Token> {
+    func createAccessToken(params: AccessTokenParams) -> Observable<Token> {
         return restfulService.createAccessToken(params: params)
     }
         
-    func getInfo() -> Single<User> {
+    func getInfo() -> Observable<User> {
         return restfulService.getInfo()
     }
     

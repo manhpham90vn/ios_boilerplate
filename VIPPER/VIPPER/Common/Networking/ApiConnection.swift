@@ -31,11 +31,11 @@ final class ApiConnection {
 
 extension ApiConnection {
 
-    func request<T: Codable>(target: MultiTarget, type: T.Type) -> Single<T> {
+    func request<T: Codable>(target: MultiTarget, type: T.Type) -> Observable<T> {
         return makeProvider().request(target: target).map(T.self)
     }
 
-    func requestArray<T: Codable>(target: MultiTarget, type: T.Type) -> Single<[T]> {
+    func requestArray<T: Codable>(target: MultiTarget, type: T.Type) -> Observable<[T]> {
         return makeProvider().request(target: target).map([T].self)
     }
 

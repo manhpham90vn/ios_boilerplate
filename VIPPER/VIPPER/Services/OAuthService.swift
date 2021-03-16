@@ -10,27 +10,28 @@ import RxSwift
 import RxCocoa
 
 protocol OAuthService {
-    func getURLAuthen() -> Single<URL>
+    func getURLAuthen() -> Observable<URL>
 }
 
 class OAuthServiceComponent: OAuthService {
         
     private var authSession: AuthenticationServices?
         
-    func getURLAuthen() -> Single<URL> {
-        return Single<URL>.create { [weak self] (single) in
+    func getURLAuthen() -> Observable<URL> {
+        return Observable<URL>.create { [weak self] (observer) in
             self?.authSession = SafariExtensionFactory.provideAuthenticationService()
             self?.authSession?.initiateSession(url: URL(string: Configs.shared.loginURL)!,
                                                callBackURL: Configs.shared.callbackURLScheme,
                                               completionHandler: { (url, error) in
                                                 if let error = error {
-                                                    single(.error(error))
+                                                    observer.on(.error(error))
                                                     return
                                                 }
                                                 if let url = url {
-                                                    single(.success(url))
+                                                    observer.on(.next(url))
+                                                    observer.on(.completed)
                                                 } else {
-                                                    single(.error(CommonError.emptyData))
+                                                    observer.on(.error(CommonError.emptyData))
                                                 }
             })
             self?.authSession?.startSession()

@@ -47,6 +47,8 @@ class MainPresenter: BasePresenter, MainPresenterInterface {
                     self.elements = result
                     self.view.hideLoading()
                     self.view.didLoadData()
+                }, onCompleted: {
+                    self.view.hideLoading()
                 })
                 .disposed(by: bag)
         }
