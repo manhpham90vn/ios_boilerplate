@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import PKHUD
 
-class MainViewController: UIViewController {
+class MainViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     

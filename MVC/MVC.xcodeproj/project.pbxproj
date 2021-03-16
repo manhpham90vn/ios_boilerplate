@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BB0E63E92600475100FA8EEB /* PKHUD in Frameworks */ = {isa = PBXBuildFile; productRef = BB0E63E82600475100FA8EEB /* PKHUD */; };
+		BB0E63EF26004C3B00FA8EEB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0E63EE26004C3B00FA8EEB /* BaseViewController.swift */; };
 		BB2E66D925EDEE8900786271 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E66D825EDEE8900786271 /* AuthManager.swift */; };
 		BBC85A4825D113AA00F87653 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC85A4725D113AA00F87653 /* AppDelegate.swift */; };
 		BBC85A4A25D113AA00F87653 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC85A4925D113AA00F87653 /* SceneDelegate.swift */; };
@@ -55,6 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BB0E63EE26004C3B00FA8EEB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		BB2E66D825EDEE8900786271 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		BBC85A4425D113AA00F87653 /* MVC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MVC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBC85A4725D113AA00F87653 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +118,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB0E63ED26004C2700FA8EEB /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				BB0E63EE26004C3B00FA8EEB /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		BB2E66D725EDEE6400786271 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,6 +256,7 @@
 		BBC85ADE25D1869D00F87653 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BB0E63ED26004C2700FA8EEB /* Base */,
 				BBF0E46825EE188F007A5E4A /* Configs */,
 				BBF0E45F25EDF7C4007A5E4A /* Utilities */,
 				BB2E66D725EDEE6400786271 /* Managers */,
@@ -432,6 +443,7 @@
 				BBC85A4825D113AA00F87653 /* AppDelegate.swift in Sources */,
 				BBC85A9825D122AA00F87653 /* Token.swift in Sources */,
 				BBC85AA825D17EC300F87653 /* User.swift in Sources */,
+				BB0E63EF26004C3B00FA8EEB /* BaseViewController.swift in Sources */,
 				BBC85A4A25D113AA00F87653 /* SceneDelegate.swift in Sources */,
 				BBF0E46125EDF7CE007A5E4A /* AppHelper.swift in Sources */,
 				BBF0E47025EE2405007A5E4A /* AuthenticationServices.swift in Sources */,
