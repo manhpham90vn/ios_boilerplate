@@ -24,6 +24,7 @@ class MainRouter: BaseRouter, MainRouterInterface {
     
     func navigationToDetailScreen(nav: UINavigationController, item: Event) {
         let vc = DetailViewController.instantiate
+        vc.navigationItem.title = item.repo?.name
         nav.pushViewController(vc, animated: true)
     }
     

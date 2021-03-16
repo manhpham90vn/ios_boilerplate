@@ -16,16 +16,12 @@ protocol OAuthService {
 class OAuthServiceComponent: OAuthService {
         
     private var authSession: AuthenticationServices?
-    
-    deinit {
-        print("\(type(of: self)) Deinit")
-    }
-    
+        
     func getURLAuthen() -> Single<URL> {
         return Single<URL>.create { [weak self] (single) in
             self?.authSession = SafariExtensionFactory.provideAuthenticationService()
-            self?.authSession?.initiateSession(url: URL(string: Configs.loginURL)!,
-                                              callBackURL: Configs.callbackURLScheme,
+            self?.authSession?.initiateSession(url: URL(string: Configs.shared.loginURL)!,
+                                               callBackURL: Configs.shared.callbackURLScheme,
                                               completionHandler: { (url, error) in
                                                 if let error = error {
                                                     single(.error(error))
@@ -43,4 +39,9 @@ class OAuthServiceComponent: OAuthService {
             }
         }
     }
+    
+    deinit {
+        print("\(type(of: self)) Deinit")
+    }
+    
 }
