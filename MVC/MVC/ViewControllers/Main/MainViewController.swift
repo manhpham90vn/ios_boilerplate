@@ -16,10 +16,12 @@ class MainViewController: BaseViewController {
     
     private var elements = [Event]()
     private let bag = DisposeBag()
+    private var service: Service!
     
     static var instantiate: MainViewController {
         let st = UIStoryboard(name: "Main", bundle: nil)
         let vc = st.instantiateInitialViewController() as! MainViewController
+        vc.service = API.shared
         return vc
     }
     
@@ -35,7 +37,7 @@ class MainViewController: BaseViewController {
         
         if let userName = AuthManager.shared.user?.login {
             HUD.show(.progress)
-            API.shared
+            service
                 .userReceivedEvents(username: userName, page: 1)
                 .do(onError: { error in
                     AppHelper.shared.showAlert(title: "Error", message: error.localizedDescription)
