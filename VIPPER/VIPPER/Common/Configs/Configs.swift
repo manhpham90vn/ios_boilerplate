@@ -13,7 +13,6 @@ struct Configs {
     static var shared = Configs()
     
     let loggingEnabled = false
-    let apiTimeOut = RxTimeInterval.seconds(10)
     
     let clientID = "ee3f7a1e1e4d1719b770"
     let ClientSecrets = "e9fdb61bad71fe9f25f8c7844ef3303f019e69e0"

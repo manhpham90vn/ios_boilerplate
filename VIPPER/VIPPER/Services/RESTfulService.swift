@@ -11,24 +11,24 @@ import RxSwift
 import Moya
 
 protocol RESTfulService {
-    func createAccessToken(params: AccessTokenParams) -> Single<Token>
-    func userReceivedEvents(params: EventParams) -> Single<[Event]>
-    func getInfo() -> Single<User>
+    func createAccessToken(params: AccessTokenParams) -> Observable<Token>
+    func userReceivedEvents(params: EventParams) -> Observable<[Event]>
+    func getInfo() -> Observable<User>
 }
 
 class RESTfulServiceComponent: RESTfulService {
     
-    func createAccessToken(params: AccessTokenParams) -> Single<Token> {
+    func createAccessToken(params: AccessTokenParams) -> Observable<Token> {
         return ApiConnection.shared.request(target: MultiTarget(ApiRouter.createAccessToken(params: params)),
                                            type: Token.self)
     }
     
-    func userReceivedEvents(params: EventParams) -> Single<[Event]> {
+    func userReceivedEvents(params: EventParams) -> Observable<[Event]> {
         return ApiConnection.shared.requestArray(target: MultiTarget(ApiRouter.userReceivedEvents(params: params)),
                                                 type: Event.self)
     }
     
-    func getInfo() -> Single<User> {
+    func getInfo() -> Observable<User> {
         return ApiConnection.shared.request(target: MultiTarget(ApiRouter.getInfoUser),
                                            type: User.self)
     }

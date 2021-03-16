@@ -11,7 +11,7 @@ import RxSwift
 protocol MainInteractorInterface {
     func cleanData()
     func getLoginedUser() -> String?
-    func getUserReceivedEvents(params: EventParams) -> Single<[Event]>
+    func getUserReceivedEvents(params: EventParams) -> Observable<[Event]>
 }
 
 class MainInteractor: BaseInteractor, MainInteractorInterface {
@@ -30,7 +30,7 @@ class MainInteractor: BaseInteractor, MainInteractorInterface {
         return AuthManager.shared.user?.login
     }
     
-    func getUserReceivedEvents(params: EventParams) -> Single<[Event]> {
+    func getUserReceivedEvents(params: EventParams) -> Observable<[Event]> {
         return restfulService.userReceivedEvents(params: params)
     }
     
