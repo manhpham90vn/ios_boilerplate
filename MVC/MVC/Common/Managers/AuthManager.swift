@@ -44,15 +44,6 @@ class AuthManager {
     func logOut() {
         userDefaults.removeObject(forKey: keyToken)
         userDefaults.removeObject(forKey: keyUser)
-        lougOutWebView()
-    }
-    
-    func lougOutWebView() {
-        URLCache.shared.removeAllCachedResponses()
-        URLCache.shared.diskCapacity = 0
-        URLCache.shared.memoryCapacity = 0
-        HTTPCookieStorage.shared.cookies?.forEach(HTTPCookieStorage.shared.deleteCookie)
-        HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
     }
     
 }

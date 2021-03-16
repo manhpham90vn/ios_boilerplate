@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB0E63E92600475100FA8EEB /* PKHUD in Frameworks */ = {isa = PBXBuildFile; productRef = BB0E63E82600475100FA8EEB /* PKHUD */; };
 		BB2E66D925EDEE8900786271 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2E66D825EDEE8900786271 /* AuthManager.swift */; };
 		BBC85A4825D113AA00F87653 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC85A4725D113AA00F87653 /* AppDelegate.swift */; };
 		BBC85A4A25D113AA00F87653 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC85A4925D113AA00F87653 /* SceneDelegate.swift */; };
@@ -93,6 +94,7 @@
 				BBC85A9125D1226500F87653 /* RxSwift in Frameworks */,
 				BBC85A8F25D1226500F87653 /* RxCocoa in Frameworks */,
 				BBC85A9325D1226500F87653 /* RxRelay in Frameworks */,
+				BB0E63E92600475100FA8EEB /* PKHUD in Frameworks */,
 				BBC85A8925D1221B00F87653 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -298,6 +300,7 @@
 				BBC85A8E25D1226500F87653 /* RxCocoa */,
 				BBC85A9025D1226500F87653 /* RxSwift */,
 				BBC85A9225D1226500F87653 /* RxRelay */,
+				BB0E63E82600475100FA8EEB /* PKHUD */,
 			);
 			productName = MVC;
 			productReference = BBC85A4425D113AA00F87653 /* MVC.app */;
@@ -373,6 +376,7 @@
 			packageReferences = (
 				BBC85A8725D1221B00F87653 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				BBC85A8D25D1226500F87653 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				BB0E63E72600475100FA8EEB /* XCRemoteSwiftPackageReference "PKHUD" */,
 			);
 			productRefGroup = BBC85A4525D113AA00F87653 /* Products */;
 			projectDirPath = "";
@@ -767,6 +771,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		BB0E63E72600475100FA8EEB /* XCRemoteSwiftPackageReference "PKHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pkluz/PKHUD";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.0;
+			};
+		};
 		BBC85A8725D1221B00F87653 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -786,6 +798,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		BB0E63E82600475100FA8EEB /* PKHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB0E63E72600475100FA8EEB /* XCRemoteSwiftPackageReference "PKHUD" */;
+			productName = PKHUD;
+		};
 		BBC85A8825D1221B00F87653 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BBC85A8725D1221B00F87653 /* XCRemoteSwiftPackageReference "Alamofire" */;

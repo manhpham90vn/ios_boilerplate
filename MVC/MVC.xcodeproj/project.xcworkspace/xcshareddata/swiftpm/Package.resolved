@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "PKHUD",
+        "repositoryURL": "https://github.com/pkluz/PKHUD",
+        "state": {
+          "branch": null,
+          "revision": "8fd26f23057c6bebd6695524b1c3e05e93aba571",
+          "version": "5.4.0"
+        }
+      },
+      {
         "package": "RxSwift",
         "repositoryURL": "https://github.com/ReactiveX/RxSwift",
         "state": {
