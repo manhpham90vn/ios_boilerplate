@@ -15,10 +15,12 @@ class LoginViewController: BaseViewController {
 
     private let bag = DisposeBag()
     private var authSession: AuthenticationServices?
+    private var service: Service!
     
     static var instantiate: LoginViewController {
         let st = UIStoryboard(name: "Login", bundle: nil)
         let vc = st.instantiateInitialViewController() as! LoginViewController
+        vc.service = API.shared
         return vc
     }
     
@@ -40,7 +42,8 @@ class LoginViewController: BaseViewController {
                 AppHelper.shared.showAlert(title: "Error", message: "Can not get code")
                 return
             }
-            API.shared.createAccessToken(clientId: Configs.clientID,
+            self.service
+                .createAccessToken(clientId: Configs.clientID,
                                               clientSecret: Configs.ClientSecrets,
                                               code: code,
                                               redirectUri: nil,
