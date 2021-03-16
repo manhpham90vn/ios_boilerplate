@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import PKHUD
 
 class MainViewController: UIViewController {
 
@@ -33,12 +34,15 @@ class MainViewController: UIViewController {
         navigationItem.rightBarButtonItem = logOut
         
         if let userName = AuthManager.shared.user?.login {
-            API.shared.userReceivedEvents(username: userName, page: 1)
+            HUD.show(.progress)
+            API.shared
+                .userReceivedEvents(username: userName, page: 1)
                 .do(onError: { error in
                     AppHelper.shared.showAlert(title: "Error", message: error.localizedDescription)
                 })
                 .asDriver(onErrorDriveWith: .empty())
                 .drive(onNext: { result in
+                    HUD.hide()
                     self.elements = result
                     self.tableView.reloadData()
                 })
@@ -71,7 +75,10 @@ extension MainViewController: UITableViewDataSource {
 extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(elements[indexPath.row])
+        let vc = DetailViewController.instantiate
+        let title = elements[indexPath.row].repo?.name
+        vc.navigationItem.title = title
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
