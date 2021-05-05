@@ -16,6 +16,9 @@ final class ApiConnection {
     
     private func makeProvider() -> ApiProvider<MultiTarget> {
         var plugins = [PluginType]()
+
+        plugins.append(NetworkIndicatorPlugin.indicatorPlugin())
+
         if let token = AuthManager.shared.token {
             let tokenClosure: (AuthorizationType) -> String = { type in
                 return token
@@ -23,10 +26,13 @@ final class ApiConnection {
             let authPlugin = AccessTokenPlugin(tokenClosure: tokenClosure)
             plugins.append(authPlugin)
         }
+
+        if Configs.shared.loggingEnabled {
+            plugins.append(NetworkLoggerPlugin(configuration: .init(logOptions: .verbose)))
+        }
         let apiProvider = ApiProvider<MultiTarget>(plugins: plugins)
         return apiProvider
     }
-    
 }
 
 extension ApiConnection {
