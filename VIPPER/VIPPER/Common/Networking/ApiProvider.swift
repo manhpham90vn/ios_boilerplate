@@ -13,11 +13,6 @@ import Alamofire
 final class ApiProvider<Target: TargetType>: MoyaProvider<Target> {
     
     init(plugins: [PluginType]) {
-        var plugins = plugins
-        plugins.append(NetworkIndicatorPlugin.indicatorPlugin())
-        if Configs.shared.loggingEnabled {
-            plugins.append(NetworkLoggerPlugin(configuration: .init(logOptions: .verbose)))
-        }
         super.init(plugins: plugins)
     }
     
