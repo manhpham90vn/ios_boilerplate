@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BaseInteractor {
+class BaseInteractor: NSObject {
     
     deinit {
         print("\(type(of: self)) Deinit")

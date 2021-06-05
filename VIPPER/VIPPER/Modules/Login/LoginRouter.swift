@@ -8,22 +8,24 @@
 import UIKit
 
 protocol LoginRouterInterface {
-    func createLoginScreen(view: LoginViewInterface)
     func navigationToHomeScreen()
 }
 
 class LoginRouter: BaseRouter, LoginRouterInterface {
-    
-    func createLoginScreen(view: LoginViewInterface) {
-        let pr = LoginPresenter(view: view,
-                                router: self,
-                                interactor: LoginInteractor(service: RESTfulServiceComponent(),
-                                                            oauthService: OAuthServiceComponent()))
-        view.presenter = pr
-    }
-    
+
+    private(set) unowned var viewController: LoginViewController
+
     func navigationToHomeScreen() {
-        UIWindow.shared?.rootViewController = UINavigationController(rootViewController: MainViewController.instantiate)
+        UIWindow.shared?.rootViewController = UINavigationController(rootViewController: AppRouter.main.viewController)
+    }
+
+    override init() {
+        viewController = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController() as! LoginViewController
+        super.init()
+        viewController.presenter = LoginPresenter(view: viewController,
+                                      router: self,
+                                      interactor: LoginInteractor(service: RESTfulServiceComponent(),
+                                                                  oauthService: OAuthServiceComponent()))
     }
         
 }

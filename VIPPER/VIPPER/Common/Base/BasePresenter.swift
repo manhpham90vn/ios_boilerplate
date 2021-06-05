@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BasePresenter {
+class BasePresenter: NSObject {
     
     deinit {
         print("\(type(of: self)) Deinit")

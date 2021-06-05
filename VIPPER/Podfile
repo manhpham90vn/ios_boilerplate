@@ -8,6 +8,7 @@ target 'VIPPER' do
   pod 'RxCocoa', '~> 5.1.0'
   pod 'Moya/RxSwift', '~> 14.0'
   pod 'PKHUD', '~> 5.0'
+  pod 'NSObject+Rx'
 
   target 'VIPPERTests' do
     inherit! :search_paths

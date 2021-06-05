@@ -16,7 +16,7 @@ protocol MainPresenterInterface {
     var elements: [Event] { get set }
     func viewDidLoad()
     func didTapLogout()
-    func navigationToDetailScreen(nav: UINavigationController, item: Event)
+    func navigationToDetailScreen(item: Event)
 }
 
 class MainPresenter: BasePresenter, MainPresenterInterface {
@@ -32,8 +32,7 @@ class MainPresenter: BasePresenter, MainPresenterInterface {
     var interactor: MainInteractorInterface
     
     var elements: [Event] = []
-    private let bag = DisposeBag()
-    
+
     func viewDidLoad() {
         if let userName = interactor.getLoginedUser() {
             view.showLoading()
@@ -50,7 +49,7 @@ class MainPresenter: BasePresenter, MainPresenterInterface {
                 }, onCompleted: {
                     self.view.hideLoading()
                 })
-                .disposed(by: bag)
+                .disposed(by: rx.disposeBag)
         }
     }
     
@@ -59,8 +58,8 @@ class MainPresenter: BasePresenter, MainPresenterInterface {
         router.navigationToLoginScreen()
     }
     
-    func navigationToDetailScreen(nav: UINavigationController, item: Event) {
-        router.navigationToDetailScreen(nav: nav, item: item)
+    func navigationToDetailScreen(item: Event) {
+        router.navigationToDetailScreen(item: item)
     }
     
 }
