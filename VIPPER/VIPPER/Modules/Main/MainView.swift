@@ -8,7 +8,6 @@
 import Foundation
 
 protocol MainViewInterface: AnyObject {
-    var presenter: MainPresenterInterface! { get set }
     func showAlert(title: String, message: String)
     func didLoadData()
     func showLoading()

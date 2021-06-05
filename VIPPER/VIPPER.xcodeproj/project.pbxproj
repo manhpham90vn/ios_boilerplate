@@ -31,6 +31,11 @@
 		BBBF8C2E25F20EA800A37D63 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF8C2D25F20EA800A37D63 /* MainPresenter.swift */; };
 		BBBF8C3325F20EB500A37D63 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF8C3225F20EB500A37D63 /* MainRouter.swift */; };
 		BBBF8C3825F20EC200A37D63 /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF8C3725F20EC200A37D63 /* MainInteractor.swift */; };
+		BBD80973266BEAAE00F8EAE8 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD80972266BEAAE00F8EAE8 /* AppRouter.swift */; };
+		BBD80978266BEE3000F8EAE8 /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD80977266BEE3000F8EAE8 /* DetailRouter.swift */; };
+		BBD8097D266BEE5A00F8EAE8 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD8097C266BEE5A00F8EAE8 /* DetailView.swift */; };
+		BBD80982266BEF0700F8EAE8 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD80981266BEF0700F8EAE8 /* DetailPresenter.swift */; };
+		BBD8098D266BEFE600F8EAE8 /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD8098C266BEFE600F8EAE8 /* DetailInteractor.swift */; };
 		BBE2659425EE8F7900E33C25 /* VIPPERTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2659325EE8F7900E33C25 /* VIPPERTests.swift */; };
 		BBE2659F25EE8F7900E33C25 /* VIPPERUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2659E25EE8F7900E33C25 /* VIPPERUITests.swift */; };
 		BBE2663D25EE94EE00E33C25 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE2661C25EE94EE00E33C25 /* AuthManager.swift */; };
@@ -105,6 +110,11 @@
 		BBBF8C2D25F20EA800A37D63 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		BBBF8C3225F20EB500A37D63 /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
 		BBBF8C3725F20EC200A37D63 /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
+		BBD80972266BEAAE00F8EAE8 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
+		BBD80977266BEE3000F8EAE8 /* DetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRouter.swift; sourceTree = "<group>"; };
+		BBD8097C266BEE5A00F8EAE8 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		BBD80981266BEF0700F8EAE8 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
+		BBD8098C266BEFE600F8EAE8 /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
 		BBE2657925EE8F7900E33C25 /* VIPPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VIPPER.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBE2658F25EE8F7900E33C25 /* VIPPERTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VIPPERTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBE2659325EE8F7900E33C25 /* VIPPERTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VIPPERTests.swift; sourceTree = "<group>"; };
@@ -272,7 +282,11 @@
 			isa = PBXGroup;
 			children = (
 				BBE2663325EE94EE00E33C25 /* Detail.storyboard */,
+				BBD8097C266BEE5A00F8EAE8 /* DetailView.swift */,
 				BBE2663425EE94EE00E33C25 /* DetailViewController.swift */,
+				BBD80977266BEE3000F8EAE8 /* DetailRouter.swift */,
+				BBD80981266BEF0700F8EAE8 /* DetailPresenter.swift */,
+				BBD8098C266BEFE600F8EAE8 /* DetailInteractor.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -406,6 +420,7 @@
 			children = (
 				BBE2662F25EE94EE00E33C25 /* AppDelegate.swift */,
 				BBE2663025EE94EE00E33C25 /* SceneDelegate.swift */,
+				BBD80972266BEAAE00F8EAE8 /* AppRouter.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -668,9 +683,11 @@
 				BB0E643426005E1100FA8EEB /* Reachability.swift in Sources */,
 				BBE2664625EE94EE00E33C25 /* Event.swift in Sources */,
 				BBE2664125EE94EE00E33C25 /* AppHelper.swift in Sources */,
+				BBD80982266BEF0700F8EAE8 /* DetailPresenter.swift in Sources */,
 				BBE2663F25EE94EE00E33C25 /* UIWindow+Extensions.swift in Sources */,
 				BBE2664025EE94EE00E33C25 /* URL+Extensions.swift in Sources */,
 				BBE2663D25EE94EE00E33C25 /* AuthManager.swift in Sources */,
+				BBD8097D266BEE5A00F8EAE8 /* DetailView.swift in Sources */,
 				BBE2664725EE94EE00E33C25 /* User.swift in Sources */,
 				BBBF8C0F25F1EF9B00A37D63 /* BaseRouter.swift in Sources */,
 				BB0E640D260058D600FA8EEB /* AccessTokenParams.swift in Sources */,
@@ -686,8 +703,10 @@
 				BBBF8C1F25F20BBC00A37D63 /* BaseViewController.swift in Sources */,
 				BBBEAC9625F145F600A85924 /* LoginView.swift in Sources */,
 				BBBEACB625F14C2B00A85924 /* OAuthService.swift in Sources */,
+				BBD80973266BEAAE00F8EAE8 /* AppRouter.swift in Sources */,
 				BBBEACBB25F14E3700A85924 /* CommonError.swift in Sources */,
 				BBBF8C1425F1EFBD00A37D63 /* BaseInteractor.swift in Sources */,
+				BBD8098D266BEFE600F8EAE8 /* DetailInteractor.swift in Sources */,
 				BBE2664925EE94EE00E33C25 /* Token.swift in Sources */,
 				BBBF8C2E25F20EA800A37D63 /* MainPresenter.swift in Sources */,
 				BB0E642E26005D7A00FA8EEB /* ApiProvider.swift in Sources */,
@@ -697,6 +716,7 @@
 				BBE2664825EE94EE00E33C25 /* Repository.swift in Sources */,
 				BBBEACA325F1463B00A85924 /* LoginRouter.swift in Sources */,
 				BBE2665125EE94EE00E33C25 /* LoginViewController.swift in Sources */,
+				BBD80978266BEE3000F8EAE8 /* DetailRouter.swift in Sources */,
 				BBE2664225EE94EE00E33C25 /* Configs.swift in Sources */,
 				BBE2664425EE94EE00E33C25 /* RESTfulService.swift in Sources */,
 				BBE2664D25EE94EE00E33C25 /* DetailViewController.swift in Sources */,
@@ -870,6 +890,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2.0.0;
 				DEVELOPMENT_TEAM = UPJRMYQ38F;
 				INFOPLIST_FILE = VIPPER/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -877,6 +898,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.manhpham.VIPPER;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -891,6 +913,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2.0.0;
 				DEVELOPMENT_TEAM = UPJRMYQ38F;
 				INFOPLIST_FILE = VIPPER/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -898,6 +921,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.manhpham.VIPPER;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

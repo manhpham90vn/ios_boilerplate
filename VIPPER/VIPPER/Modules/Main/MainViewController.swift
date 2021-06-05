@@ -13,14 +13,7 @@ class MainViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
         
     var presenter: MainPresenterInterface!
-    
-    static var instantiate: MainViewController {
-        let st = UIStoryboard(name: "Home", bundle: nil)
-        let vc = st.instantiateInitialViewController() as! MainViewController
-        MainRouter().createMainScreen(view: vc)
-        return vc
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,7 +51,7 @@ extension MainViewController: UITableViewDataSource {
 extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter.navigationToDetailScreen(nav: navigationController!, item: presenter.elements[indexPath.row])
+        presenter.navigationToDetailScreen(item: presenter.elements[indexPath.row])
     }
     
 }
