@@ -10,14 +10,7 @@ import UIKit
 class LoginViewController: BaseViewController {
     
     var presenter: LoginPresenterInterface!
-    
-    static var instantiate: LoginViewController {
-        let st = UIStoryboard(name: "Login", bundle: nil)
-        let vc = st.instantiateInitialViewController() as! LoginViewController
-        LoginRouter().createLoginScreen(view: vc)
-        return vc
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

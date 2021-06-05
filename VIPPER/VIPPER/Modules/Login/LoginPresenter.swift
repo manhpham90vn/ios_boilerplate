@@ -29,9 +29,7 @@ class LoginPresenter: BasePresenter, LoginPresenterInterface {
     unowned var view: LoginViewInterface
     var router: LoginRouterInterface
     var interactor: LoginInteractorInterface
-    
-    private let bag = DisposeBag()
-    
+
     func didTapLoginButton() {
         interactor
             .getURLAuthen()
@@ -71,7 +69,7 @@ class LoginPresenter: BasePresenter, LoginPresenterInterface {
                 self.interactor.saveUserInfo(user: user)
                 self.router.navigationToHomeScreen()
             })
-            .disposed(by: bag)
+            .disposed(by: rx.disposeBag)
         
     }
     

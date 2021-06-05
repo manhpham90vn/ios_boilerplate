@@ -8,28 +8,30 @@
 import UIKit
 
 protocol MainRouterInterface {
-    func createMainScreen(view: MainViewInterface)
-    func navigationToDetailScreen(nav: UINavigationController, item: Event)
+    func navigationToDetailScreen(item: Event)
     func navigationToLoginScreen()
 }
 
 class MainRouter: BaseRouter, MainRouterInterface {
-    
-    func createMainScreen(view: MainViewInterface) {
-        let pr = MainPresenter(view: view,
-                               router: self,
-                               interactor: MainInteractor(restfulService: RESTfulServiceComponent()))
-        view.presenter = pr
+
+    private(set) unowned var viewController: MainViewController
+
+    override init() {
+        viewController = UIStoryboard(name: "Home", bundle: nil).instantiateInitialViewController() as! MainViewController
+        super.init()
+        viewController.presenter = MainPresenter(view: viewController,
+                                                     router: self,
+                                                     interactor: MainInteractor(restfulService: RESTfulServiceComponent()))
     }
     
-    func navigationToDetailScreen(nav: UINavigationController, item: Event) {
-        let vc = DetailViewController.instantiate
-        vc.navigationItem.title = item.repo?.name
-        nav.pushViewController(vc, animated: true)
+    func navigationToDetailScreen(item: Event) {
+        let vc = AppRouter.detail.viewController
+        vc.title = item.repo?.name
+        viewController.navigationController?.pushViewController(vc, animated: true)
     }
     
     func navigationToLoginScreen() {
-        UIWindow.shared?.rootViewController = UINavigationController(rootViewController: LoginViewController.instantiate)
+        UIWindow.shared?.rootViewController = UINavigationController(rootViewController: AppRouter.login.viewController)
     }
     
 }
