@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NSObject_Rx
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         } else {
             window = UIWindow(frame: UIScreen.main.bounds)
-            let vc = AuthManager.shared.isLogin ? MainViewController.instantiate : LoginViewController.instantiate
+            let vc = AuthManager.shared.isLogin ? AppRouter.main.viewController : AppRouter.login.viewController
             window?.rootViewController = UINavigationController(rootViewController: vc)
             window?.makeKeyAndVisible()
         }

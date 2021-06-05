@@ -9,16 +9,16 @@ import UIKit
 
 class DetailViewController: BaseViewController {
 
-    static var instantiate: DetailViewController {
-        let st = UIStoryboard(name: "Detail", bundle: nil)
-        let vc = st.instantiateInitialViewController() as! DetailViewController
-        return vc
-    }
-    
+    var presenter: DetailPresenterInterface!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+    
+}
+
+extension DetailViewController: DetailViewInterface {
     
 }
