@@ -17,7 +17,11 @@ protocol LoginPresenterInterface {
 }
 
 class LoginPresenter: BasePresenter, LoginPresenterInterface {
-    
+
+    unowned var view: LoginViewInterface
+    var router: LoginRouterInterface
+    var interactor: LoginInteractorInterface
+
     init(view: LoginViewInterface,
          router: LoginRouterInterface,
          interactor: LoginInteractorInterface) {
@@ -25,10 +29,12 @@ class LoginPresenter: BasePresenter, LoginPresenterInterface {
         self.router = router
         self.interactor = interactor
     }
-        
-    unowned var view: LoginViewInterface
-    var router: LoginRouterInterface
-    var interactor: LoginInteractorInterface
+
+    deinit {
+        print("\(type(of: self)) Deinit")
+        LeakDetector.instance.expectDeallocate(object: router as AnyObject)
+        LeakDetector.instance.expectDeallocate(object: interactor as AnyObject)
+    }
 
     func didTapLoginButton() {
         interactor

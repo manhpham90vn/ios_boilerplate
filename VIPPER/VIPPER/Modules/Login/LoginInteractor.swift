@@ -26,6 +26,12 @@ class LoginInteractor: BaseInteractor, LoginInteractorInterface {
         self.restfulService = service
         self.oauthService = oauthService
     }
+
+    deinit {
+        print("\(type(of: self)) Deinit")
+        LeakDetector.instance.expectDeallocate(object: restfulService as AnyObject)
+        LeakDetector.instance.expectDeallocate(object: oauthService as AnyObject)
+    }
             
     func getURLAuthen() -> Observable<URL> {
         return oauthService.getURLAuthen()
@@ -46,6 +52,5 @@ class LoginInteractor: BaseInteractor, LoginInteractorInterface {
     func saveUserInfo(user: User) {
         AuthManager.shared.user = user
     }
-    
-    
+
 }

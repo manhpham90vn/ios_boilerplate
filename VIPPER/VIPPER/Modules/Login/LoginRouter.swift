@@ -11,21 +11,24 @@ protocol LoginRouterInterface {
     func navigationToHomeScreen()
 }
 
-class LoginRouter: BaseRouter, LoginRouterInterface {
+class LoginRouter: LoginRouterInterface, Router {
 
-    private(set) unowned var viewController: LoginViewController
+    unowned var viewController: LoginViewController
 
     func navigationToHomeScreen() {
         UIWindow.shared?.rootViewController = UINavigationController(rootViewController: AppRouter.main.viewController)
     }
 
-    override init() {
-        viewController = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController() as! LoginViewController
-        super.init()
-        viewController.presenter = LoginPresenter(view: viewController,
+    required init(viewController: LoginViewController) {
+        self.viewController = viewController
+        self.viewController.presenter = LoginPresenter(view: viewController,
                                       router: self,
                                       interactor: LoginInteractor(service: RESTfulServiceComponent(),
                                                                   oauthService: OAuthServiceComponent()))
     }
-        
+
+    deinit {
+        print("\(type(of: self)) Deinit")
+    }
+
 }

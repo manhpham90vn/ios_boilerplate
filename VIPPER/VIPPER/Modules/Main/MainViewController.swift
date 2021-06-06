@@ -11,8 +11,13 @@ import PKHUD
 class MainViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
-        
+    
     var presenter: MainPresenterInterface!
+
+    deinit {
+        print("\(type(of: self)) Deinit")
+        LeakDetector.instance.expectDeallocate(object: presenter as AnyObject)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +36,7 @@ class MainViewController: BaseViewController {
     @objc func handleLogout() {
         presenter.didTapLogout()
     }
-    
+
 }
 
 extension MainViewController: UITableViewDataSource {

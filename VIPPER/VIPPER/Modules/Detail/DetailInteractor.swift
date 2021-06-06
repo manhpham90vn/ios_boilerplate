@@ -12,5 +12,9 @@ protocol DetailInteractorInterface {
 }
 
 class DetailInteractor: DetailInteractorInterface {
-    
+
+    deinit {
+        print("\(type(of: self)) Deinit")
+    }
+
 }

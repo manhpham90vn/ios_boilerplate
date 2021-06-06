@@ -8,5 +8,5 @@
 import Foundation
 
 protocol DetailViewInterface: AnyObject {
-
+    var presenter: DetailPresenterInterface! { get set }
 }
