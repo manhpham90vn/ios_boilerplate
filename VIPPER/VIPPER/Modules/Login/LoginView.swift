@@ -7,7 +7,6 @@
 
 import UIKit
 
-protocol LoginViewInterface: AnyObject {
+protocol LoginViewInterface: BaseView {
     var presenter: LoginPresenterInterface! { get set }
-    func showAlert(title: String, message: String)
 }

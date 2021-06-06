@@ -28,6 +28,15 @@ class LoginPresenter: BasePresenter, LoginPresenterInterface {
         self.view = view
         self.router = router
         self.interactor = interactor
+        super.init()
+
+        activityIndicator
+            .asSharedSequence()
+            .drive(onNext: { [weak self] isLoading in
+                guard let self = self else { return }
+                self.view.showLoading(isLoading: isLoading)
+            })
+            .disposed(by: rx.disposeBag)
     }
 
     deinit {
@@ -39,7 +48,7 @@ class LoginPresenter: BasePresenter, LoginPresenterInterface {
     func didTapLoginButton() {
         interactor
             .getURLAuthen()
-            .asObservable()
+            .trackActivity(activityIndicator)
             .flatMapLatest({ [weak self] url -> Driver<Token> in // need weak self here becase interactor have strong reference to AuthenticationServices
                 guard let self = self else { return .empty() }
                 guard let code = url.queryParameters?["code"] else {
@@ -50,6 +59,7 @@ class LoginPresenter: BasePresenter, LoginPresenterInterface {
                                                clientSecret: Configs.shared.ClientSecrets,
                                                code: code)
                 return self.interactor.createAccessToken(params: params)
+                    .trackActivity(self.activityIndicator)
                     .do(onError: { error in
                         self.view.showAlert(title: "Error", message: error.localizedDescription)
                     })
@@ -66,6 +76,7 @@ class LoginPresenter: BasePresenter, LoginPresenterInterface {
             .asDriver(onErrorDriveWith: .empty())
             .flatMap({ token -> Driver<User> in
                 return self.interactor.getInfo()
+                    .trackActivity(self.activityIndicator)
                     .do(onError: { error in
                         self.view.showAlert(title: "Error", message: error.localizedDescription)
                     })

@@ -7,10 +7,7 @@
 
 import Foundation
 
-protocol MainViewInterface: AnyObject {
+protocol MainViewInterface: BaseView {
     var presenter: MainPresenterInterface! { get set }
-    func showAlert(title: String, message: String)
     func didLoadData()
-    func showLoading()
-    func hideLoading()
 }

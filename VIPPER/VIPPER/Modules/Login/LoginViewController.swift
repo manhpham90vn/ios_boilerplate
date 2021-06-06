@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class LoginViewController: BaseViewController {
     
@@ -29,9 +30,11 @@ class LoginViewController: BaseViewController {
 }
 
 extension LoginViewController: LoginViewInterface {
-        
     func showAlert(title: String, message: String) {
         AppHelper.shared.showAlert(title: title, message: message)
     }
-    
+
+    func showLoading(isLoading: Bool) {
+        isLoading ? HUD.show(.progress) : PKHUD.sharedHUD.hide()
+    }
 }
