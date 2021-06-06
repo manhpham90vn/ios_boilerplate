@@ -12,16 +12,19 @@ protocol DetailRouterInterface {
 
 }
 
-class DetailRouter: BaseRouter, DetailRouterInterface {
+class DetailRouter: DetailRouterInterface, Router {
 
-    private(set) var viewController: DetailViewController
+    unowned var viewController: DetailViewController
 
-    override init() {
-        viewController = UIStoryboard(name: "Detail", bundle: nil).instantiateInitialViewController() as! DetailViewController
-        super.init()
+    required init(viewController: DetailViewController) {
+        self.viewController = viewController
         viewController.presenter = DetailPresenter(view: viewController,
                                                    router: self,
                                                    interactor: DetailInteractor())
+    }
+
+    deinit {
+        print("\(type(of: self)) Deinit")
     }
 
 }

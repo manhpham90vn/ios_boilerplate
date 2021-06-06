@@ -8,5 +8,6 @@
 import UIKit
 
 protocol LoginViewInterface: AnyObject {
+    var presenter: LoginPresenterInterface! { get set }
     func showAlert(title: String, message: String)
 }

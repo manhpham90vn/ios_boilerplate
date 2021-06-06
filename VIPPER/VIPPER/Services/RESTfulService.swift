@@ -32,9 +32,5 @@ class RESTfulServiceComponent: RESTfulService {
         return ApiConnection.shared.request(target: MultiTarget(ApiRouter.getInfoUser),
                                            type: User.self)
     }
-    
-    deinit {
-        print("\(type(of: self)) Deinit")
-    }
-  
+      
 }

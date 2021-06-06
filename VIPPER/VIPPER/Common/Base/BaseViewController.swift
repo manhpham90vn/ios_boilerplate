@@ -7,10 +7,4 @@
 
 import UIKit
 
-class BaseViewController: UIViewController {
-    
-    deinit {
-        print("\(type(of: self)) Deinit")
-    }
-    
-}
+class BaseViewController: UIViewController {}
