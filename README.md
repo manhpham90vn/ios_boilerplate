@@ -6,7 +6,7 @@ A collection of iOS architectures - MVC, MVP, MVVM, VIPER, RIBs and many others
 | MVC | Done |
 | MVP | In Progress |
 | MVVM | In Progress  |
-| VIPER | Done  |
+| VIPER | In Progress  |
 | Clean Architecture | [In Progress](https://github.com/manhpham90vn/iOS_Started_Kit)  |
 | RIBs | In Progress  |
 | ReSwift | In Progress  |
