@@ -16,11 +16,14 @@ enum AppRouter {
     var viewController: UIViewController {
         switch self {
         case .main:
-            return MainRouter().viewController
+            let vc = UIStoryboard(name: "Home", bundle: nil).instantiateInitialViewController() as! MainViewController
+            return MainRouter(viewController: vc).viewController
         case .login:
-            return LoginRouter().viewController
+            let vc = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController() as! LoginViewController
+            return LoginRouter(viewController: vc).viewController
         case .detail:
-            return DetailRouter().viewController
+            let vc = UIStoryboard(name: "Detail", bundle: nil).instantiateInitialViewController() as! DetailViewController
+            return DetailRouter(viewController: vc).viewController
         }
     }
 }

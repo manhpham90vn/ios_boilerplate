@@ -17,6 +17,8 @@
 		BB0E642926005D6300FA8EEB /* ApiConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0E642826005D6300FA8EEB /* ApiConnection.swift */; };
 		BB0E642E26005D7A00FA8EEB /* ApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0E642D26005D7A00FA8EEB /* ApiProvider.swift */; };
 		BB0E643426005E1100FA8EEB /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0E643326005E1100FA8EEB /* Reachability.swift */; };
+		BB6105B9266CBC1B00FE13DD /* LeakDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6105B7266CBC1B00FE13DD /* LeakDetector.swift */; };
+		BB6105BA266CBC1B00FE13DD /* Executor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6105B8266CBC1B00FE13DD /* Executor.swift */; };
 		BBBEAC9625F145F600A85924 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBEAC9525F145F600A85924 /* LoginView.swift */; };
 		BBBEAC9E25F1463000A85924 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBEAC9D25F1463000A85924 /* LoginPresenter.swift */; };
 		BBBEACA325F1463B00A85924 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBEACA225F1463B00A85924 /* LoginRouter.swift */; };
@@ -24,7 +26,7 @@
 		BBBEACB625F14C2B00A85924 /* OAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBEACB525F14C2B00A85924 /* OAuthService.swift */; };
 		BBBEACBB25F14E3700A85924 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBEACBA25F14E3700A85924 /* CommonError.swift */; };
 		BBBF8C0725F1EF7200A37D63 /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF8C0625F1EF7200A37D63 /* BasePresenter.swift */; };
-		BBBF8C0F25F1EF9B00A37D63 /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF8C0E25F1EF9B00A37D63 /* BaseRouter.swift */; };
+		BBBF8C0F25F1EF9B00A37D63 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF8C0E25F1EF9B00A37D63 /* Router.swift */; };
 		BBBF8C1425F1EFBD00A37D63 /* BaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF8C1325F1EFBD00A37D63 /* BaseInteractor.swift */; };
 		BBBF8C1F25F20BBC00A37D63 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF8C1E25F20BBC00A37D63 /* BaseViewController.swift */; };
 		BBBF8C2625F20E9B00A37D63 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF8C2525F20E9B00A37D63 /* MainView.swift */; };
@@ -96,6 +98,8 @@
 		BB0E642826005D6300FA8EEB /* ApiConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiConnection.swift; sourceTree = "<group>"; };
 		BB0E642D26005D7A00FA8EEB /* ApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProvider.swift; sourceTree = "<group>"; };
 		BB0E643326005E1100FA8EEB /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		BB6105B7266CBC1B00FE13DD /* LeakDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeakDetector.swift; sourceTree = "<group>"; };
+		BB6105B8266CBC1B00FE13DD /* Executor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Executor.swift; sourceTree = "<group>"; };
 		BBBEAC9525F145F600A85924 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BBBEAC9D25F1463000A85924 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		BBBEACA225F1463B00A85924 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
@@ -103,7 +107,7 @@
 		BBBEACB525F14C2B00A85924 /* OAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthService.swift; sourceTree = "<group>"; };
 		BBBEACBA25F14E3700A85924 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
 		BBBF8C0625F1EF7200A37D63 /* BasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePresenter.swift; sourceTree = "<group>"; };
-		BBBF8C0E25F1EF9B00A37D63 /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
+		BBBF8C0E25F1EF9B00A37D63 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		BBBF8C1325F1EFBD00A37D63 /* BaseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInteractor.swift; sourceTree = "<group>"; };
 		BBBF8C1E25F20BBC00A37D63 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		BBBF8C2525F20E9B00A37D63 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -244,6 +248,15 @@
 			path = Remote;
 			sourceTree = "<group>";
 		};
+		BB6105B6266CBC1100FE13DD /* LeakDetector */ = {
+			isa = PBXGroup;
+			children = (
+				BB6105B8266CBC1B00FE13DD /* Executor.swift */,
+				BB6105B7266CBC1B00FE13DD /* LeakDetector.swift */,
+			);
+			path = LeakDetector;
+			sourceTree = "<group>";
+		};
 		BBBEAC8F25F1449B00A85924 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,7 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				BBBF8C0625F1EF7200A37D63 /* BasePresenter.swift */,
-				BBBF8C0E25F1EF9B00A37D63 /* BaseRouter.swift */,
+				BBBF8C0E25F1EF9B00A37D63 /* Router.swift */,
 				BBBF8C1325F1EFBD00A37D63 /* BaseInteractor.swift */,
 				BBBF8C1E25F20BBC00A37D63 /* BaseViewController.swift */,
 			);
@@ -349,6 +362,7 @@
 		BBE2661A25EE94EE00E33C25 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BB6105B6266CBC1100FE13DD /* LeakDetector */,
 				BB0E641E26005D1F00FA8EEB /* Networking */,
 				BBBF8C0525F1EF6800A37D63 /* Base */,
 				BBE2661B25EE94EE00E33C25 /* Managers */,
@@ -679,6 +693,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBE2664A25EE94EE00E33C25 /* AppDelegate.swift in Sources */,
+				BB6105BA266CBC1B00FE13DD /* Executor.swift in Sources */,
 				BBBF8C3325F20EB500A37D63 /* MainRouter.swift in Sources */,
 				BB0E643426005E1100FA8EEB /* Reachability.swift in Sources */,
 				BBE2664625EE94EE00E33C25 /* Event.swift in Sources */,
@@ -686,10 +701,11 @@
 				BBD80982266BEF0700F8EAE8 /* DetailPresenter.swift in Sources */,
 				BBE2663F25EE94EE00E33C25 /* UIWindow+Extensions.swift in Sources */,
 				BBE2664025EE94EE00E33C25 /* URL+Extensions.swift in Sources */,
+				BB6105B9266CBC1B00FE13DD /* LeakDetector.swift in Sources */,
 				BBE2663D25EE94EE00E33C25 /* AuthManager.swift in Sources */,
 				BBD8097D266BEE5A00F8EAE8 /* DetailView.swift in Sources */,
 				BBE2664725EE94EE00E33C25 /* User.swift in Sources */,
-				BBBF8C0F25F1EF9B00A37D63 /* BaseRouter.swift in Sources */,
+				BBBF8C0F25F1EF9B00A37D63 /* Router.swift in Sources */,
 				BB0E640D260058D600FA8EEB /* AccessTokenParams.swift in Sources */,
 				BB0E63FD2600579D00FA8EEB /* ApiRoute.swift in Sources */,
 				BBE2663E25EE94EE00E33C25 /* AuthenticationServices.swift in Sources */,

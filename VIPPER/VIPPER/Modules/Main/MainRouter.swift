@@ -12,18 +12,21 @@ protocol MainRouterInterface {
     func navigationToLoginScreen()
 }
 
-class MainRouter: BaseRouter, MainRouterInterface {
+class MainRouter: MainRouterInterface, Router {
 
-    private(set) unowned var viewController: MainViewController
+    unowned var viewController: MainViewController
 
-    override init() {
-        viewController = UIStoryboard(name: "Home", bundle: nil).instantiateInitialViewController() as! MainViewController
-        super.init()
+    required init(viewController: MainViewController) {
+        self.viewController = viewController
         viewController.presenter = MainPresenter(view: viewController,
                                                      router: self,
                                                      interactor: MainInteractor(restfulService: RESTfulServiceComponent()))
     }
-    
+
+    deinit {
+        print("\(type(of: self)) Deinit")
+    }
+
     func navigationToDetailScreen(item: Event) {
         let vc = AppRouter.detail.viewController
         vc.title = item.repo?.name
@@ -33,5 +36,5 @@ class MainRouter: BaseRouter, MainRouterInterface {
     func navigationToLoginScreen() {
         UIWindow.shared?.rootViewController = UINavigationController(rootViewController: AppRouter.login.viewController)
     }
-    
+
 }

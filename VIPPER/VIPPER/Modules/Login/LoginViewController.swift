@@ -11,6 +11,11 @@ class LoginViewController: BaseViewController {
     
     var presenter: LoginPresenterInterface!
 
+    deinit {
+        print("\(type(of: self)) Deinit")
+        LeakDetector.instance.expectDeallocate(object: presenter as AnyObject)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,7 +25,7 @@ class LoginViewController: BaseViewController {
     @IBAction func loginButtonTapped(_ sender: Any) {
         presenter.didTapLoginButton()
     }
-        
+
 }
 
 extension LoginViewController: LoginViewInterface {
