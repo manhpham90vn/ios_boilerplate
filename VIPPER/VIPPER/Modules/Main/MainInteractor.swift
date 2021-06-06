@@ -21,7 +21,12 @@ class MainInteractor: BaseInteractor, MainInteractorInterface {
     internal init(restfulService: RESTfulService) {
         self.restfulService = restfulService
     }
-    
+
+    deinit {
+        print("\(type(of: self)) Deinit")
+        LeakDetector.instance.expectDeallocate(object: restfulService as AnyObject)
+    }
+
     func cleanData() {
         AuthManager.shared.logOut()
     }
@@ -33,5 +38,5 @@ class MainInteractor: BaseInteractor, MainInteractorInterface {
     func getUserReceivedEvents(params: EventParams) -> Observable<[Event]> {
         return restfulService.userReceivedEvents(params: params)
     }
-    
+
 }

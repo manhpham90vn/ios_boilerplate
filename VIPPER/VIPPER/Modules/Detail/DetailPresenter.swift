@@ -15,6 +15,10 @@ protocol DetailPresenterInterface {
 
 class DetailPresenter: BasePresenter, DetailPresenterInterface {
 
+    unowned var view: DetailViewInterface
+    var router: DetailRouterInterface
+    var interactor: DetailInteractorInterface
+
     init(view: DetailViewInterface,
          router: DetailRouterInterface,
          interactor: DetailInteractorInterface) {
@@ -23,8 +27,10 @@ class DetailPresenter: BasePresenter, DetailPresenterInterface {
         self.interactor = interactor
     }
 
-    unowned var view: DetailViewInterface
-    var router: DetailRouterInterface
-    var interactor: DetailInteractorInterface
+    deinit {
+        print("\(type(of: self)) Deinit")
+        LeakDetector.instance.expectDeallocate(object: router as AnyObject)
+        LeakDetector.instance.expectDeallocate(object: interactor as AnyObject)
+    }
 
 }

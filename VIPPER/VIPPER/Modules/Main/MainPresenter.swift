@@ -20,18 +20,24 @@ protocol MainPresenterInterface {
 }
 
 class MainPresenter: BasePresenter, MainPresenterInterface {
-    
+
+    unowned var view: MainViewInterface
+    var router: MainRouterInterface
+    var interactor: MainInteractorInterface
+
+    var elements: [Event] = []
+
     internal init(view: MainViewInterface, router: MainRouterInterface, interactor: MainInteractorInterface) {
         self.view = view
         self.router = router
         self.interactor = interactor
     }
-    
-    unowned var view: MainViewInterface
-    var router: MainRouterInterface
-    var interactor: MainInteractorInterface
-    
-    var elements: [Event] = []
+
+    deinit {
+        print("\(type(of: self)) Deinit")
+        LeakDetector.instance.expectDeallocate(object: router as AnyObject)
+        LeakDetector.instance.expectDeallocate(object: interactor as AnyObject)
+    }
 
     func viewDidLoad() {
         if let userName = interactor.getLoginedUser() {
@@ -61,5 +67,5 @@ class MainPresenter: BasePresenter, MainPresenterInterface {
     func navigationToDetailScreen(item: Event) {
         router.navigationToDetailScreen(item: item)
     }
-    
+
 }

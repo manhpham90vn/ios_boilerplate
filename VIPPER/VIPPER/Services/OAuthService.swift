@@ -40,9 +40,5 @@ class OAuthServiceComponent: OAuthService {
             }
         }
     }
-    
-    deinit {
-        print("\(type(of: self)) Deinit")
-    }
-    
+        
 }
