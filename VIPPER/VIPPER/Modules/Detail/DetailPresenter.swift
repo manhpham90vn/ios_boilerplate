@@ -25,6 +25,15 @@ class DetailPresenter: BasePresenter, DetailPresenterInterface {
         self.view = view
         self.router = router
         self.interactor = interactor
+        super.init()
+        
+        activityIndicator
+            .asSharedSequence()
+            .drive(onNext: { [weak self] isLoading in
+                guard let self = self else { return }
+                self.view.showLoading(isLoading: isLoading)
+            })
+            .disposed(by: rx.disposeBag)
     }
 
     deinit {

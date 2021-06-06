@@ -70,13 +70,8 @@ extension MainViewController: MainViewInterface {
     func didLoadData() {
         tableView.reloadData()
     }
-    
-    func showLoading() {
-        HUD.show(.progress)
+
+    func showLoading(isLoading: Bool) {
+        isLoading ? HUD.show(.progress) : PKHUD.sharedHUD.hide()
     }
-    
-    func hideLoading() {
-        PKHUD.sharedHUD.hide()
-    }
-        
 }

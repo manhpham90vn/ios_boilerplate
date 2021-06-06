@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol DetailViewInterface: AnyObject {
+protocol DetailViewInterface: BaseView {
     var presenter: DetailPresenterInterface! { get set }
 }

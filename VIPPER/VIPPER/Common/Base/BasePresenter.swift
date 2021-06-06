@@ -7,4 +7,6 @@
 
 import Foundation
 
-class BasePresenter: NSObject {}
+class BasePresenter: NSObject {
+    let activityIndicator = ActivityIndicator()
+}

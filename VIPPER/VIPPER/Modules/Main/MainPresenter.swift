@@ -31,6 +31,15 @@ class MainPresenter: BasePresenter, MainPresenterInterface {
         self.view = view
         self.router = router
         self.interactor = interactor
+        super.init()
+
+        activityIndicator
+            .asSharedSequence()
+            .drive(onNext: { [weak self] isLoading in
+                guard let self = self else { return }
+                self.view.showLoading(isLoading: isLoading)
+            })
+            .disposed(by: rx.disposeBag)
     }
 
     deinit {
@@ -41,19 +50,14 @@ class MainPresenter: BasePresenter, MainPresenterInterface {
 
     func viewDidLoad() {
         if let userName = interactor.getLoginedUser() {
-            view.showLoading()
+            view.showLoading(isLoading: true)
             let params = EventParams(username: userName, page: 1)
             interactor.getUserReceivedEvents(params: params)
-                .do(onError: { error in
-                    self.view.showAlert(title: "Error", message: error.localizedDescription)
-                })
+                .trackActivity(activityIndicator)
                 .asDriver(onErrorDriveWith: .just([]))
                 .drive(onNext: { result in
                     self.elements = result
-                    self.view.hideLoading()
                     self.view.didLoadData()
-                }, onCompleted: {
-                    self.view.hideLoading()
                 })
                 .disposed(by: rx.disposeBag)
         }
