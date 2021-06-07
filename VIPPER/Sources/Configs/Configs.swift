@@ -11,7 +11,7 @@ final class Configs {
     
     static let shared = Configs()
 
-    let loggingEnabled = true
+    let loggingEnabled = false
     var env: Environment {
         #if DEBUG
         return .develop
