@@ -27,6 +27,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = UINavigationController(rootViewController: vc)
             window?.makeKeyAndVisible()
         }
+
+        LoggerSetup()
         
         return true
     }

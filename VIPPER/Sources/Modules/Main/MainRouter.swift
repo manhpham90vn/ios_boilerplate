@@ -24,7 +24,7 @@ final class MainRouter: MainRouterInterface, Router {
     }
 
     deinit {
-        print("\(type(of: self)) Deinit")
+        LogInfo("\(type(of: self)) Deinit")
     }
 
     func navigationToDetailScreen(item: Event) {

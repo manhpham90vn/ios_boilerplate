@@ -23,7 +23,7 @@ final class MainInteractor: BaseInteractor, MainInteractorInterface {
     }
 
     deinit {
-        print("\(type(of: self)) Deinit")
+        LogInfo("\(type(of: self)) Deinit")
         LeakDetector.instance.expectDeallocate(object: restfulService as AnyObject)
     }
 

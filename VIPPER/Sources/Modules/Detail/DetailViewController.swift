@@ -12,7 +12,7 @@ final class DetailViewController: BaseViewController {
     var presenter: DetailPresenterInterface!
 
     deinit {
-        print("\(type(of: self)) Deinit")
+        LogInfo("\(type(of: self)) Deinit")
         LeakDetector.instance.expectDeallocate(object: presenter as AnyObject)
     }
 

@@ -30,7 +30,7 @@ final class ___FILEBASENAMEASIDENTIFIER___: BasePresenter, ___FILEBASENAMEASIDEN
     }
 
     deinit {
-        print("\(type(of: self)) Deinit")
+        LogInfo("\(type(of: self)) Deinit")
         LeakDetector.instance.expectDeallocate(object: router as AnyObject)
         LeakDetector.instance.expectDeallocate(object: interactor as AnyObject)
     }

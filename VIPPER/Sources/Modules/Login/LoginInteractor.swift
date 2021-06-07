@@ -28,7 +28,7 @@ final class LoginInteractor: BaseInteractor, LoginInteractorInterface {
     }
 
     deinit {
-        print("\(type(of: self)) Deinit")
+        LogInfo("\(type(of: self)) Deinit")
         LeakDetector.instance.expectDeallocate(object: restfulService as AnyObject)
         LeakDetector.instance.expectDeallocate(object: oauthService as AnyObject)
     }
