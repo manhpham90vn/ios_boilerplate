@@ -6,7 +6,7 @@ protocol ___FILEBASENAMEASIDENTIFIER___Interface {
     var interactor: ___VARIABLE_productName___InteractorInterface { get set }
 }
 
-class ___FILEBASENAMEASIDENTIFIER___: BasePresenter, ___FILEBASENAMEASIDENTIFIER___Interface {
+final class ___FILEBASENAMEASIDENTIFIER___: BasePresenter, ___FILEBASENAMEASIDENTIFIER___Interface {
 
     unowned var view: ___VARIABLE_productName___ViewInterface
     var router: ___VARIABLE_productName___RouterInterface
