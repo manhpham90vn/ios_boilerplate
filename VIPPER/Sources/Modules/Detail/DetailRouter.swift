@@ -24,7 +24,7 @@ final class DetailRouter: DetailRouterInterface, Router {
     }
 
     deinit {
-        print("\(type(of: self)) Deinit")
+        LogInfo("\(type(of: self)) Deinit")
     }
 
 }

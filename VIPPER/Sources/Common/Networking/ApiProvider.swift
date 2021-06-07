@@ -39,7 +39,7 @@ final class ApiProvider<Target: TargetType>: MoyaProvider<Target> {
             switch error {
             case .statusCode(let response):
                 if response.statusCode == 401 {
-                    print("Unauthorized")
+                    LogInfo("Unauthorized")
                 }
             case .underlying(let error, _):
                 if let error = error as? AFError {
@@ -48,9 +48,9 @@ final class ApiProvider<Target: TargetType>: MoyaProvider<Target> {
                         if error.domain == NSURLErrorDomain {
                             switch error.code {
                             case NSURLErrorTimedOut:
-                                print("Timeout")
+                                LogInfo("Timeout")
                             case NSURLErrorDataNotAllowed:
-                                print("No connect")
+                                LogInfo("No connect")
                             default:
                                 break
                             }

@@ -7,7 +7,7 @@ final class ___FILEBASENAMEASIDENTIFIER___: BaseViewController {
     var presenter: ___VARIABLE_productName___PresenterInterface!
 
     deinit {
-        print("\(type(of: self)) Deinit")
+        LogInfo("\(type(of: self)) Deinit")
         LeakDetector.instance.expectDeallocate(object: presenter as AnyObject)
     }
 

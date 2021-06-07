@@ -28,7 +28,7 @@ final class LoginRouter: LoginRouterInterface, Router {
     }
 
     deinit {
-        print("\(type(of: self)) Deinit")
+        LogInfo("\(type(of: self)) Deinit")
     }
 
 }

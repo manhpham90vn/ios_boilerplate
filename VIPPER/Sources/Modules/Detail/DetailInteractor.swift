@@ -14,7 +14,7 @@ protocol DetailInteractorInterface {
 class DetailInteractor: DetailInteractorInterface { // swiftlint:disable:this final_class
 
     deinit {
-        print("\(type(of: self)) Deinit")
+        LogInfo("\(type(of: self)) Deinit")
     }
 
 }

@@ -10,6 +10,8 @@ target 'MyApp' do
   pod 'PKHUD', '~> 5.0'
   pod 'NSObject+Rx'
 
+  pod 'XCGLogger'
+
   pod 'Firebase/Analytics'
   pod 'Firebase/Crashlytics'
 
