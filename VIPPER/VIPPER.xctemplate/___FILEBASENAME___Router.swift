@@ -6,7 +6,7 @@ protocol ___FILEBASENAMEASIDENTIFIER___Interface {
     
 }
 
-class ___FILEBASENAMEASIDENTIFIER___: ___FILEBASENAMEASIDENTIFIER___Interface, Router {
+final class ___FILEBASENAMEASIDENTIFIER___: ___FILEBASENAMEASIDENTIFIER___Interface, Router {
 
     unowned var viewController: ___VARIABLE_productName___ViewController
 
