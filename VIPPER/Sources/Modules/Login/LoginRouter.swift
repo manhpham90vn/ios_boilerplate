@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwinjectStoryboard
 
 protocol LoginRouterInterface {
     func navigationToHomeScreen()
@@ -23,8 +24,7 @@ final class LoginRouter: LoginRouterInterface, Router {
         self.viewController = viewController
         self.viewController.presenter = LoginPresenter(view: viewController,
                                                        router: self,
-                                                       interactor: LoginInteractor(service: RESTfulServiceComponent(),
-                                                                                   oauthService: OAuthServiceComponent()))
+                                                       interactor: SwinjectStoryboard.defaultContainer.resolve(LoginInteractorInterface.self)!)
     }
 
     deinit {

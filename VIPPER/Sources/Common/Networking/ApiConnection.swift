@@ -11,16 +11,18 @@ import RxSwift
 
 final class ApiConnection {
 
-    static let shared = ApiConnection()
+    internal init(authManager: AuthManagerInterface) {
+        self.authManager = authManager
+    }
 
-    private init() {}
+    let authManager: AuthManagerInterface
     
     private func makeProvider() -> ApiProvider<MultiTarget> {
         var plugins = [PluginType]()
 
         plugins.append(NetworkIndicatorPlugin.indicatorPlugin())
 
-        if let token = AuthManager.shared.token {
+        if let token = authManager.token {
             let tokenClosure: (AuthorizationType) -> String = { _ in
                 return token
             }

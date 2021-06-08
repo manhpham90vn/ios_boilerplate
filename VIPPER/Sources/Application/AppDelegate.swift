@@ -7,6 +7,7 @@
 
 import UIKit
 import NSObject_Rx
+import SwinjectStoryboard
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,7 +24,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             
         } else {
             window = UIWindow(frame: UIScreen.main.bounds)
-            let vc = AuthManager.shared.isLogin ? AppScenes.main.viewController : AppScenes.login.viewController
+            let authManager = SwinjectStoryboard.defaultContainer.resolve(AuthManagerInterface.self)!
+            let vc = authManager.isLogin ? AppScenes.main.viewController : AppScenes.login.viewController
             window?.rootViewController = UINavigationController(rootViewController: vc)
             window?.makeKeyAndVisible()
         }

@@ -122,6 +122,10 @@ PODS:
     - RxSwift (~> 5)
   - RxSwift (5.1.2)
   - SwiftGen (6.4.0)
+  - SwiftyUserDefaults (5.3.0)
+  - Swinject (2.7.1)
+  - SwinjectStoryboard (2.2.0):
+    - Swinject (~> 2.7.1)
   - XCGLogger (7.0.1):
     - XCGLogger/Core (= 7.0.1)
   - XCGLogger/Core (7.0.1):
@@ -138,6 +142,9 @@ DEPENDENCIES:
   - RxCocoa (~> 5.1.0)
   - RxSwift (~> 5.1.0)
   - SwiftGen (~> 6.0)
+  - SwiftyUserDefaults (~> 5.0)
+  - "Swinject (from `git@github.com:manhpham90vn/Swinject.git`, tag `2.8.0`)"
+  - "SwinjectStoryboard (from `git@github.com:manhpham90vn/SwinjectStoryboard.git`, tag `2.3.0`)"
   - XCGLogger
 
 SPEC REPOS:
@@ -163,7 +170,24 @@ SPEC REPOS:
     - RxRelay
     - RxSwift
     - SwiftGen
+    - SwiftyUserDefaults
     - XCGLogger
+
+EXTERNAL SOURCES:
+  Swinject:
+    :git: "git@github.com:manhpham90vn/Swinject.git"
+    :tag: 2.8.0
+  SwinjectStoryboard:
+    :git: "git@github.com:manhpham90vn/SwinjectStoryboard.git"
+    :tag: 2.3.0
+
+CHECKOUT OPTIONS:
+  Swinject:
+    :git: "git@github.com:manhpham90vn/Swinject.git"
+    :tag: 2.8.0
+  SwinjectStoryboard:
+    :git: "git@github.com:manhpham90vn/SwinjectStoryboard.git"
+    :tag: 2.3.0
 
 SPEC CHECKSUMS:
   Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
@@ -187,8 +211,11 @@ SPEC CHECKSUMS:
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 1e2e1f9570186967f617e49128ed26ccf1bafc8e
   SwiftGen: 67860cc7c3cfc2ed25b9b74cfd55495fc89f9108
+  SwiftyUserDefaults: 63f80248cf5bfb3458825d9a78f2eb7e1293a040
+  Swinject: e91b397902349198a5bfde7cae576dab1de74877
+  SwinjectStoryboard: 27d102caeaafc97eee058ee6637b4781f2e60f1a
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: cf7d6a78c86ed9a9888794d647260ef04c6714e0
+PODFILE CHECKSUM: 79e732ab693f8be13675a10c7593dc7e9c40d396
 
 COCOAPODS: 1.10.1

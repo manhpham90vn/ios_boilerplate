@@ -13,6 +13,9 @@ target 'MyApp' do
   pod 'XCGLogger'
   pod 'SwiftGen', '~> 6.0'
   pod 'Reusable'
+  pod 'SwiftyUserDefaults', '~> 5.0'
+  pod 'Swinject', :git => 'git@github.com:manhpham90vn/Swinject.git', :tag => '2.8.0'
+  pod 'SwinjectStoryboard', :git => 'git@github.com:manhpham90vn/SwinjectStoryboard.git', :tag => '2.3.0'
 
   pod 'Firebase/Analytics'
   pod 'Firebase/Crashlytics'

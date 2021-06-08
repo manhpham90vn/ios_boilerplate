@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import SwinjectStoryboard
 
 protocol MainInteractorInterface {
     func cleanData()
@@ -16,11 +17,13 @@ protocol MainInteractorInterface {
 
 final class MainInteractor: BaseInteractor, MainInteractorInterface {
 
-    let restfulService: RESTfulService
-    
-    internal init(restfulService: RESTfulService) {
+    internal init(restfulService: RESTfulService, authManager: AuthManagerInterface) {
         self.restfulService = restfulService
+        self.authManager = authManager
     }
+
+    let restfulService: RESTfulService
+    let authManager: AuthManagerInterface
 
     deinit {
         LogInfo("\(type(of: self)) Deinit")
@@ -28,15 +31,15 @@ final class MainInteractor: BaseInteractor, MainInteractorInterface {
     }
 
     func cleanData() {
-        AuthManager.shared.logOut()
+        authManager.logOut()
     }
     
     func getLoginedUser() -> String? {
-        return AuthManager.shared.user?.login
+        authManager.user?.login
     }
     
     func getUserReceivedEvents(params: EventParams) -> Observable<[Event]> {
-        return restfulService.userReceivedEvents(params: params)
+        restfulService.userReceivedEvents(params: params)
     }
 
 }
