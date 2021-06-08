@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyUserDefaults
 
 struct User: Codable {
     
@@ -34,3 +35,5 @@ extension User: CustomStringConvertible {
     }
     
 }
+
+extension User: DefaultsSerializable {}

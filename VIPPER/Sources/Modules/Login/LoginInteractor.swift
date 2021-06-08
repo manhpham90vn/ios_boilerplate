@@ -18,14 +18,16 @@ protocol LoginInteractorInterface {
 }
 
 final class LoginInteractor: BaseInteractor, LoginInteractorInterface {
-    
+
+    internal init(restfulService: RESTfulService, oauthService: OAuthService, authManager: AuthManagerInterface) {
+        self.restfulService = restfulService
+        self.oauthService = oauthService
+        self.authManager = authManager
+    }
+
     let restfulService: RESTfulService
     let oauthService: OAuthService
-    
-    init(service: RESTfulService, oauthService: OAuthService) {
-        self.restfulService = service
-        self.oauthService = oauthService
-    }
+    var authManager: AuthManagerInterface
 
     deinit {
         LogInfo("\(type(of: self)) Deinit")
@@ -46,11 +48,11 @@ final class LoginInteractor: BaseInteractor, LoginInteractorInterface {
     }
     
     func saveToken(token: String) {
-        AuthManager.shared.token = token
+        authManager.token = token
     }
     
     func saveUserInfo(user: User) {
-        AuthManager.shared.user = user
+        authManager.user = user
     }
 
 }

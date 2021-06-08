@@ -17,20 +17,26 @@ protocol RESTfulService {
 }
 
 final class RESTfulServiceComponent: RESTfulService {
-    
+
+    internal init(apiConnection: ApiConnection) {
+        self.apiConnection = apiConnection
+    }
+
+    let apiConnection: ApiConnection
+
     func createAccessToken(params: AccessTokenParams) -> Observable<Token> {
-        return ApiConnection.shared.request(target: MultiTarget(ApiRouter.createAccessToken(params: params)),
-                                            type: Token.self)
+        return apiConnection.request(target: MultiTarget(ApiRouter.createAccessToken(params: params)),
+                                     type: Token.self)
     }
     
     func userReceivedEvents(params: EventParams) -> Observable<[Event]> {
-        return ApiConnection.shared.requestArray(target: MultiTarget(ApiRouter.userReceivedEvents(params: params)),
-                                                 type: Event.self)
+        return apiConnection.requestArray(target: MultiTarget(ApiRouter.userReceivedEvents(params: params)),
+                                          type: Event.self)
     }
     
     func getInfo() -> Observable<User> {
-        return ApiConnection.shared.request(target: MultiTarget(ApiRouter.getInfoUser),
-                                            type: User.self)
+        return apiConnection.request(target: MultiTarget(ApiRouter.getInfoUser),
+                                     type: User.self)
     }
       
 }
