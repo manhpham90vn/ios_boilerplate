@@ -11,6 +11,8 @@ target 'MyApp' do
   pod 'NSObject+Rx'
 
   pod 'XCGLogger'
+  pod 'SwiftGen', '~> 6.0'
+  pod 'Reusable'
 
   pod 'Firebase/Analytics'
   pod 'Firebase/Crashlytics'

@@ -23,7 +23,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             
         } else {
             window = UIWindow(frame: UIScreen.main.bounds)
-            let vc = AuthManager.shared.isLogin ? AppRouter.main.viewController : AppRouter.login.viewController
+            let vc = AuthManager.shared.isLogin ? AppScenes.main.viewController : AppScenes.login.viewController
             window?.rootViewController = UINavigationController(rootViewController: vc)
             window?.makeKeyAndVisible()
         }

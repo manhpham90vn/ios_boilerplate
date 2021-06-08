@@ -1,5 +1,5 @@
 //
-//  AppRouter.swift
+//  AppScenes.swift
 //  VIPPER
 //
 //  Created by Manh Pham on 06/06/2021.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-enum AppRouter {
+enum AppScenes {
     case main
     case login
     case detail
@@ -16,13 +16,13 @@ enum AppRouter {
     var viewController: UIViewController {
         switch self {
         case .main:
-            let vc = UIStoryboard(name: "Home", bundle: nil).instantiateInitialViewController() as! MainViewController
+            let vc = StoryboardScene.Home.initialScene.instantiate()
             return MainRouter(viewController: vc).viewController
         case .login:
-            let vc = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController() as! LoginViewController
+            let vc = StoryboardScene.Login.initialScene.instantiate()
             return LoginRouter(viewController: vc).viewController
         case .detail:
-            let vc = UIStoryboard(name: "Detail", bundle: nil).instantiateInitialViewController() as! DetailViewController
+            let vc = StoryboardScene.Detail.initialScene.instantiate()
             return DetailRouter(viewController: vc).viewController
         }
     }
