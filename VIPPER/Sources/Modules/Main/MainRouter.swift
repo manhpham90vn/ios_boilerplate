@@ -28,13 +28,13 @@ final class MainRouter: MainRouterInterface, Router {
     }
 
     func navigationToDetailScreen(item: Event) {
-        let vc = AppRouter.detail.viewController
+        let vc = AppScenes.detail.viewController
         vc.title = item.repo?.name
         viewController.navigationController?.pushViewController(vc, animated: true)
     }
     
     func navigationToLoginScreen() {
-        UIWindow.shared?.rootViewController = UINavigationController(rootViewController: AppRouter.login.viewController)
+        UIWindow.shared?.rootViewController = UINavigationController(rootViewController: AppScenes.login.viewController)
     }
 
 }

@@ -30,7 +30,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: scene)
-        let vc = AuthManager.shared.isLogin ? AppRouter.main.viewController : AppRouter.login.viewController
+        let vc = AuthManager.shared.isLogin ? AppScenes.main.viewController : AppScenes.login.viewController
         window?.rootViewController = UINavigationController(rootViewController: vc)
         window?.makeKeyAndVisible()
         

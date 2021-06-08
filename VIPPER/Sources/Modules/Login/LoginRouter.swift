@@ -16,7 +16,7 @@ final class LoginRouter: LoginRouterInterface, Router {
     unowned var viewController: LoginViewController
 
     func navigationToHomeScreen() {
-        UIWindow.shared?.rootViewController = UINavigationController(rootViewController: AppRouter.main.viewController)
+        UIWindow.shared?.rootViewController = UINavigationController(rootViewController: AppScenes.main.viewController)
     }
 
     required init(viewController: LoginViewController) {

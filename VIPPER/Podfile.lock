@@ -110,12 +110,18 @@ PODS:
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - PKHUD (5.3.0)
   - PromisesObjC (1.2.12)
+  - Reusable (4.1.1):
+    - Reusable/Storyboard (= 4.1.1)
+    - Reusable/View (= 4.1.1)
+  - Reusable/Storyboard (4.1.1)
+  - Reusable/View (4.1.1)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
   - RxRelay (5.1.1):
     - RxSwift (~> 5)
   - RxSwift (5.1.2)
+  - SwiftGen (6.4.0)
   - XCGLogger (7.0.1):
     - XCGLogger/Core (= 7.0.1)
   - XCGLogger/Core (7.0.1):
@@ -128,8 +134,10 @@ DEPENDENCIES:
   - Moya/RxSwift (~> 14.0)
   - "NSObject+Rx"
   - PKHUD (~> 5.0)
+  - Reusable
   - RxCocoa (~> 5.1.0)
   - RxSwift (~> 5.1.0)
+  - SwiftGen (~> 6.0)
   - XCGLogger
 
 SPEC REPOS:
@@ -150,9 +158,11 @@ SPEC REPOS:
     - ObjcExceptionBridging
     - PKHUD
     - PromisesObjC
+    - Reusable
     - RxCocoa
     - RxRelay
     - RxSwift
+    - SwiftGen
     - XCGLogger
 
 SPEC CHECKSUMS:
@@ -172,11 +182,13 @@ SPEC CHECKSUMS:
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PKHUD: 98f3e4bc904b9c916f1c5bb6d765365b5357291b
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  Reusable: 53a9acf5c536f229b31b5865782414b508252ddb
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 1e2e1f9570186967f617e49128ed26ccf1bafc8e
+  SwiftGen: 67860cc7c3cfc2ed25b9b74cfd55495fc89f9108
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: 446fb5fd6f8ef371944d3123f9dfff762d26a39c
+PODFILE CHECKSUM: cf7d6a78c86ed9a9888794d647260ef04c6714e0
 
 COCOAPODS: 1.10.1
