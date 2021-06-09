@@ -5,38 +5,18 @@
 //  Created by Manh Pham on 09/06/2021.
 //
 
-import SwinjectStoryboard
+import DIKit
 
-extension SwinjectStoryboard {
-    @objc
-    class func setup() {
-        // Common
-        defaultContainer.register(AuthManagerInterface.self) { _ in
-            AuthManager()
-        }
+extension DependencyContainer {
+    static var authManager = module {
+        single { AuthManager() as AuthManagerInterface }
+    }
 
-        defaultContainer.register(ApiConnection.self) { resolve in
-            ApiConnection(authManager: resolve.resolve(AuthManagerInterface.self)!)
-        }
+    static var restfulService = module {
+        single { RESTfulServiceComponent() as RESTfulService }
+    }
 
-        defaultContainer.register(RESTfulService.self) { resolve in
-            RESTfulServiceComponent(apiConnection: resolve.resolve(ApiConnection.self)!)
-        }
-
-        defaultContainer.register(OAuthService.self) { _ in
-            OAuthServiceComponent()
-        }
-
-        // Interactor
-        defaultContainer.register(LoginInteractorInterface.self) { resolve in
-            LoginInteractor(restfulService: resolve.resolve(RESTfulService.self)!,
-                            oauthService: resolve.resolve(OAuthService.self)!,
-                            authManager: resolve.resolve(AuthManagerInterface.self)!)
-        }
-
-        defaultContainer.register(MainInteractorInterface.self) { (resolve) in
-            MainInteractor(restfulService: resolve.resolve(RESTfulService.self)!,
-                           authManager: resolve.resolve(AuthManagerInterface.self)!)
-        }
+    static var oauthService = module {
+        single { OAuthServiceComponent() as OAuthService }
     }
 }

@@ -8,15 +8,15 @@
 import Foundation
 import Moya
 import RxSwift
+import DIKit
 
 final class ApiConnection {
 
-    internal init(authManager: AuthManagerInterface) {
-        self.authManager = authManager
-    }
+    @Inject var authManager: AuthManagerInterface
 
-    let authManager: AuthManagerInterface
-    
+    static let shared = ApiConnection()
+    private init() {}
+
     private func makeProvider() -> ApiProvider<MultiTarget> {
         var plugins = [PluginType]()
 

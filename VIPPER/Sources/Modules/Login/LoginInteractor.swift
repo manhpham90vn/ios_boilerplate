@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import DIKit
 
 protocol LoginInteractorInterface {
     func createAccessToken(params: AccessTokenParams) -> Observable<Token>
@@ -19,20 +20,12 @@ protocol LoginInteractorInterface {
 
 final class LoginInteractor: BaseInteractor, LoginInteractorInterface {
 
-    internal init(restfulService: RESTfulService, oauthService: OAuthService, authManager: AuthManagerInterface) {
-        self.restfulService = restfulService
-        self.oauthService = oauthService
-        self.authManager = authManager
-    }
-
-    let restfulService: RESTfulService
-    let oauthService: OAuthService
-    var authManager: AuthManagerInterface
+    @Inject var restfulService: RESTfulService
+    @Inject var oauthService: OAuthService
+    @Inject var authManager: AuthManagerInterface
 
     deinit {
         LogInfo("\(type(of: self)) Deinit")
-        LeakDetector.instance.expectDeallocate(object: restfulService as AnyObject)
-        LeakDetector.instance.expectDeallocate(object: oauthService as AnyObject)
     }
             
     func getURLAuthen() -> Observable<URL> {

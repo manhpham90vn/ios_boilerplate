@@ -8,7 +8,7 @@
 import Foundation
 import SwiftyUserDefaults
 
-protocol AuthManagerInterface {
+protocol AuthManagerInterface: AnyObject {
     var token: String? { get set }
     var user: User? { get set }
     var isLogin: Bool { get }

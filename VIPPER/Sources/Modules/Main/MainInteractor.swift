@@ -7,7 +7,7 @@
 
 import Foundation
 import RxSwift
-import SwinjectStoryboard
+import DIKit
 
 protocol MainInteractorInterface {
     func cleanData()
@@ -17,17 +17,11 @@ protocol MainInteractorInterface {
 
 final class MainInteractor: BaseInteractor, MainInteractorInterface {
 
-    internal init(restfulService: RESTfulService, authManager: AuthManagerInterface) {
-        self.restfulService = restfulService
-        self.authManager = authManager
-    }
-
-    let restfulService: RESTfulService
-    let authManager: AuthManagerInterface
+    @Inject var restfulService: RESTfulService
+    @Inject var authManager: AuthManagerInterface
 
     deinit {
         LogInfo("\(type(of: self)) Deinit")
-        LeakDetector.instance.expectDeallocate(object: restfulService as AnyObject)
     }
 
     func cleanData() {

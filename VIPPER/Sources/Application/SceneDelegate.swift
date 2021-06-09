@@ -6,11 +6,12 @@
 //
 
 import UIKit
-import SwinjectStoryboard
+import DIKit
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    @LazyInject var authManager: AuthManagerInterface
     
     @available(iOS 13.0, *)
     static var keyWindow: UIWindow? {
@@ -31,7 +32,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: scene)
-        let authManager = SwinjectStoryboard.defaultContainer.resolve(AuthManagerInterface.self)!
         let vc = authManager.isLogin ? AppScenes.main.viewController : AppScenes.login.viewController
         window?.rootViewController = UINavigationController(rootViewController: vc)
         window?.makeKeyAndVisible()

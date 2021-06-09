@@ -7,31 +7,40 @@
 
 import UIKit
 import NSObject_Rx
-import SwinjectStoryboard
+import DIKit
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    @LazyInject var authManager: AuthManagerInterface
     
     static var keyWindow: UIWindow? {
         return UIApplication.shared.windows.first(where: { $0.isKeyWindow })
     }
-    
+
+    override init() {
+        super.init()
+
+        DependencyContainer.defined(by: modules {
+            DependencyContainer.authManager
+            DependencyContainer.restfulService
+            DependencyContainer.oauthService
+        })
+    }
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         if #available(iOS 13, *) {
             
         } else {
             window = UIWindow(frame: UIScreen.main.bounds)
-            let authManager = SwinjectStoryboard.defaultContainer.resolve(AuthManagerInterface.self)!
             let vc = authManager.isLogin ? AppScenes.main.viewController : AppScenes.login.viewController
             window?.rootViewController = UINavigationController(rootViewController: vc)
             window?.makeKeyAndVisible()
         }
 
         LoggerSetup()
-        
         return true
     }
 
