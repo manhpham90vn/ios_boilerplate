@@ -5,11 +5,6 @@
 //  Created by Manh Pham on 3/16/21.
 //
 
-import Foundation
-import Moya
-import RxSwift
-import Alamofire
-
 final class ApiProvider<Target: TargetType>: MoyaProvider<Target> {
     
     init(plugins: [PluginType]) {

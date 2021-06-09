@@ -5,9 +5,6 @@
 //  Created by Manh Pham on 3/16/21.
 //
 
-import Foundation
-import Moya
-
 extension Encodable {
 
     var dictionary: [String: Any]? {
@@ -18,9 +15,9 @@ extension Encodable {
         return nil
     }
     
-    var data: [MultipartFormData] {
+    var data: [Moya.MultipartFormData] {
         guard let dictionary = dictionary else { return [] }
-        var result = [MultipartFormData]()
+        var result = [Moya.MultipartFormData]()
         dictionary.forEach {
             if let valueString = $0.value as? String, let valueData = valueString.data(using: .utf8) {
                 result.append(MultipartFormData(provider: .data(valueData), name: $0.key))

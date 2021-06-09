@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import RxSwift
-import DIKit
 
 protocol MainInteractorInterface {
     func cleanData()

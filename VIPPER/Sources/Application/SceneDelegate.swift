@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import DIKit
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 

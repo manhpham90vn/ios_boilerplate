@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import RxSwift
 
 protocol MainPresenterInterface {
     var view: MainViewInterface { get set }

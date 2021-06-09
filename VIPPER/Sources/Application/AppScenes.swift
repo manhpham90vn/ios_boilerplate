@@ -5,9 +5,6 @@
 //  Created by Manh Pham on 06/06/2021.
 //
 
-import Foundation
-import UIKit
-
 enum AppScenes {
     case main
     case login

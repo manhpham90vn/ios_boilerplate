@@ -5,11 +5,6 @@
 //  Created by Manh Pham on 3/16/21.
 //
 
-import Foundation
-import Moya
-import RxSwift
-import DIKit
-
 final class ApiConnection {
 
     @Inject var authManager: AuthManagerInterface
