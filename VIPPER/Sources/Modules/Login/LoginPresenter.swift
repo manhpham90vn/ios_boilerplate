@@ -5,9 +5,6 @@
 //  Created by Manh Pham on 3/4/21.
 //
 
-import RxSwift
-import RxCocoa
-
 protocol LoginPresenterInterface {
     var view: LoginViewInterface { get set }
     var router: LoginRouterInterface { get set }

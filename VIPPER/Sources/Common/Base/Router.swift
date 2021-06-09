@@ -5,8 +5,6 @@
 //  Created by Manh Pham on 3/5/21.
 //
 
-import Foundation
-
 protocol Router: AnyObject {
     associatedtype ViewController: BaseViewController
 

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import DIKit
 
 protocol LoginRouterInterface {
     func navigationToHomeScreen()

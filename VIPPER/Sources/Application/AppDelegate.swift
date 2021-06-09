@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import NSObject_Rx
-import DIKit
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {

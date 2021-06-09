@@ -6,9 +6,6 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
-import DIKit
 
 protocol LoginInteractorInterface {
     func createAccessToken(params: AccessTokenParams) -> Observable<Token>

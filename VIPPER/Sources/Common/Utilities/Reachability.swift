@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import Alamofire
-import RxSwift
 
 func connectedToInternet() -> Observable<Bool> {
     return ReachabilityManager.shared.reach
