@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import SwinjectStoryboard
+import DIKit
 
 protocol LoginRouterInterface {
     func navigationToHomeScreen()
@@ -24,7 +24,7 @@ final class LoginRouter: LoginRouterInterface, Router {
         self.viewController = viewController
         self.viewController.presenter = LoginPresenter(view: viewController,
                                                        router: self,
-                                                       interactor: SwinjectStoryboard.defaultContainer.resolve(LoginInteractorInterface.self)!)
+                                                       interactor: LoginInteractor())
     }
 
     deinit {

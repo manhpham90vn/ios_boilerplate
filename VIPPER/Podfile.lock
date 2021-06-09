@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.4.1)
+  - DIKit (1.6.1)
   - Firebase/Analytics (8.1.0):
     - Firebase/Core
   - Firebase/Core (8.1.0):
@@ -123,9 +124,6 @@ PODS:
   - RxSwift (5.1.2)
   - SwiftGen (6.4.0)
   - SwiftyUserDefaults (5.3.0)
-  - Swinject (2.7.1)
-  - SwinjectStoryboard (2.2.0):
-    - Swinject (~> 2.7.1)
   - XCGLogger (7.0.1):
     - XCGLogger/Core (= 7.0.1)
   - XCGLogger/Core (7.0.1):
@@ -133,6 +131,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
+  - "DIKit (from `git@github.com:Liftric/DIKit.git`)"
   - Firebase/Analytics
   - Firebase/Crashlytics
   - Moya/RxSwift (~> 14.0)
@@ -143,8 +142,6 @@ DEPENDENCIES:
   - RxSwift (~> 5.1.0)
   - SwiftGen (~> 6.0)
   - SwiftyUserDefaults (~> 5.0)
-  - "Swinject (from `git@github.com:manhpham90vn/Swinject.git`, tag `2.8.0`)"
-  - "SwinjectStoryboard (from `git@github.com:manhpham90vn/SwinjectStoryboard.git`, tag `2.3.0`)"
   - XCGLogger
 
 SPEC REPOS:
@@ -174,23 +171,17 @@ SPEC REPOS:
     - XCGLogger
 
 EXTERNAL SOURCES:
-  Swinject:
-    :git: "git@github.com:manhpham90vn/Swinject.git"
-    :tag: 2.8.0
-  SwinjectStoryboard:
-    :git: "git@github.com:manhpham90vn/SwinjectStoryboard.git"
-    :tag: 2.3.0
+  DIKit:
+    :git: "git@github.com:Liftric/DIKit.git"
 
 CHECKOUT OPTIONS:
-  Swinject:
-    :git: "git@github.com:manhpham90vn/Swinject.git"
-    :tag: 2.8.0
-  SwinjectStoryboard:
-    :git: "git@github.com:manhpham90vn/SwinjectStoryboard.git"
-    :tag: 2.3.0
+  DIKit:
+    :commit: dd076cb4ba22e97599a7aff0f1fb3d43ffb8ac8e
+    :git: "git@github.com:Liftric/DIKit.git"
 
 SPEC CHECKSUMS:
   Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
+  DIKit: bab7ea0314648fb13a5ac11b1cc0fc9dd12b3367
   Firebase: b5956acddaaa53a6c292bec00649fadd18367344
   FirebaseAnalytics: e812eaae316ba8914b1ef06bef18f11efc1f56c6
   FirebaseCore: 389c4ce9a7cce4a7e25eb22326b4bee0050557b2
@@ -212,10 +203,8 @@ SPEC CHECKSUMS:
   RxSwift: 1e2e1f9570186967f617e49128ed26ccf1bafc8e
   SwiftGen: 67860cc7c3cfc2ed25b9b74cfd55495fc89f9108
   SwiftyUserDefaults: 63f80248cf5bfb3458825d9a78f2eb7e1293a040
-  Swinject: e91b397902349198a5bfde7cae576dab1de74877
-  SwinjectStoryboard: 27d102caeaafc97eee058ee6637b4781f2e60f1a
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: 79e732ab693f8be13675a10c7593dc7e9c40d396
+PODFILE CHECKSUM: ba9587580c3dece209d1b4eba960088532458a51
 
 COCOAPODS: 1.10.1

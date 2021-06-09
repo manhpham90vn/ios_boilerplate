@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwinjectStoryboard
 
 protocol MainRouterInterface {
     func navigationToDetailScreen(item: Event)
@@ -21,7 +20,7 @@ final class MainRouter: MainRouterInterface, Router {
         self.viewController = viewController
         viewController.presenter = MainPresenter(view: viewController,
                                                  router: self,
-                                                 interactor: SwinjectStoryboard.defaultContainer.resolve(MainInteractorInterface.self)!)
+                                                 interactor: MainInteractor())
     }
 
     deinit {
