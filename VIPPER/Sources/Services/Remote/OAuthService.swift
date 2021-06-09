@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import RxSwift
-import RxCocoa
 
 protocol OAuthService {
     func getURLAuthen() -> Observable<URL>

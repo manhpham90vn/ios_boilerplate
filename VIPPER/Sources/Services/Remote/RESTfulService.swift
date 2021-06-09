@@ -6,10 +6,6 @@
 //
 
 import Foundation
-import Alamofire
-import RxSwift
-import Moya
-import DIKit
 
 protocol RESTfulService {
     func createAccessToken(params: AccessTokenParams) -> Observable<Token>
