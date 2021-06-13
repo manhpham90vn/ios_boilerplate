@@ -6,7 +6,7 @@
 //
 
 protocol Router: AnyObject {
-    associatedtype ViewController: BaseViewController
+    associatedtype ViewController
 
     var viewController: ViewController { get set }
 
