@@ -13,11 +13,13 @@ protocol DetailPresenterInterface: Presenter {
     var interactor: DetailInteractorInterface { get set }
 }
 
-final class DetailPresenter: DetailPresenterInterface {
+final class DetailPresenter: DetailPresenterInterface, HasActivityIndicator, HasDisposeBag {
 
     unowned var view: DetailViewInterface
     var router: DetailRouterInterface
     var interactor: DetailInteractorInterface
+
+    var activityIndicator = ActivityIndicator()
 
     init(view: DetailViewInterface,
          router: DetailRouterInterface,

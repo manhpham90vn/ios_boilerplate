@@ -8,7 +8,7 @@
 import UIKit
 import MJRefresh
 
-class BaseTableViewViewController: BaseViewController, Paggingable { // swiftlint:disable:this final_class
+class BaseTableViewViewController: BaseViewController, Paggingable, HeaderFooterPaggingable { // swiftlint:disable:this final_class
 
     var headerRefreshTrigger = PublishRelay<Void>()
     var footerLoadMoreTrigger = PublishRelay<Void>()

@@ -8,10 +8,8 @@
 import UIKit
 import PKHUD
 
-final class MainViewController: BaseViewController {
+final class MainViewController: BaseTableViewViewController {
 
-    @IBOutlet weak var tableView: UITableView!
-    
     var presenter: MainPresenter!
 
     deinit {
@@ -19,20 +17,30 @@ final class MainViewController: BaseViewController {
         LeakDetector.instance.expectDeallocate(object: presenter as AnyObject)
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        tableView.dataSource = self
+    override func setupUI() {
+        super.setupUI()
+
+        tableView.rx.setDelegate(self) ~ rx.disposeBag
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
+
         navigationItem.title = "Events"
         let logOut = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         navigationItem.rightBarButtonItem = logOut
-        
-        presenter.viewDidLoad()
     }
-    
+
+    override func bindViewModel() {
+        super.bindViewModel()
+
+        presenter.viewDidLoad()
+        presenter.bind(isLoading: isLoading)
+        presenter.bind(paggingable: self)
+        presenter.elements.bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: UITableViewCell.self)) { _, element, cell in
+            cell.textLabel?.text = element.repo?.name
+        }
+        .disposed(by: rx.disposeBag)
+    }
+
     @objc
     func handleLogout() {
         presenter.didTapLogout()
@@ -40,24 +48,10 @@ final class MainViewController: BaseViewController {
 
 }
 
-extension MainViewController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter.elements.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = presenter.elements[indexPath.row].repo?.name
-        return cell
-    }
-    
-}
-
 extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter.navigationToDetailScreen(item: presenter.elements[indexPath.row])
+        presenter.navigationToDetailScreen(item: presenter.elements.value[indexPath.row])
     }
     
 }

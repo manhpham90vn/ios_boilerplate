@@ -6,8 +6,6 @@
 //
 
 import UIKit
-
-import UIKit
 import PKHUD
 
 class BaseViewController: UIViewController { // swiftlint:disable:this final_class

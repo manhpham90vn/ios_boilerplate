@@ -21,15 +21,21 @@ final class DetailViewController: BaseViewController {
 
         // Do any additional setup after loading the view.
     }
+
+    override func setupUI() {
+        super.setupUI()
+    }
+
+    override func bindViewModel() {
+        super.bindViewModel()
+
+        presenter.bind(isLoading: isLoading)
+    }
     
 }
 
 extension DetailViewController: DetailViewInterface {
     func showAlert(title: String, message: String) {
 
-    }
-
-    func showLoading(isLoading: Bool) {
-        
     }
 }
