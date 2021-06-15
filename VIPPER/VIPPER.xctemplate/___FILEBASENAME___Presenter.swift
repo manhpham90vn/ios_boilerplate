@@ -1,16 +1,18 @@
 //___FILEHEADER___
 
-protocol ___FILEBASENAMEASIDENTIFIER___Interface {
-    var view: ___VARIABLE_productName___ViewInterface { get set }
-    var router: ___VARIABLE_productName___RouterInterface { get set }
-    var interactor: ___VARIABLE_productName___InteractorInterface { get set }
+protocol ___FILEBASENAMEASIDENTIFIER___Interface: Presenter {
+    var view: ___VARIABLE_productName___ViewInterface { get }
+    var router: ___VARIABLE_productName___RouterInterface { get }
+    var interactor: ___VARIABLE_productName___InteractorInterface { get }
 }
 
-final class ___FILEBASENAMEASIDENTIFIER___: BasePresenter, ___FILEBASENAMEASIDENTIFIER___Interface {
+final class ___FILEBASENAMEASIDENTIFIER___: ___FILEBASENAMEASIDENTIFIER___Interface, HasActivityIndicator, HasDisposeBag {
 
     unowned var view: ___VARIABLE_productName___ViewInterface
     var router: ___VARIABLE_productName___RouterInterface
     var interactor: ___VARIABLE_productName___InteractorInterface
+
+    var activityIndicator = ActivityIndicator()
 
     init(view: ___VARIABLE_productName___ViewInterface,
          router: ___VARIABLE_productName___RouterInterface,
@@ -18,15 +20,6 @@ final class ___FILEBASENAMEASIDENTIFIER___: BasePresenter, ___FILEBASENAMEASIDEN
         self.view = view
         self.router = router
         self.interactor = interactor
-        super.init()
-        
-        activityIndicator
-            .asSharedSequence()
-            .drive(onNext: { [weak self] isLoading in
-                guard let self = self else { return }
-                self.view.showLoading(isLoading: isLoading)
-            })
-            .disposed(by: rx.disposeBag)
     }
 
     deinit {

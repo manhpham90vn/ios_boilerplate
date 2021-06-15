@@ -6,6 +6,7 @@
 //
 
 import UIKit
+@_exported import RxBinding
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {

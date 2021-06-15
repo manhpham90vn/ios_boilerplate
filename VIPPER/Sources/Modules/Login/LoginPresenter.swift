@@ -5,7 +5,7 @@
 //  Created by Manh Pham on 3/4/21.
 //
 
-protocol LoginPresenterInterface {
+protocol LoginPresenterInterface: Presenter {
     var view: LoginViewInterface { get set }
     var router: LoginRouterInterface { get set }
     var interactor: LoginInteractorInterface { get set }
@@ -13,11 +13,13 @@ protocol LoginPresenterInterface {
     func didTapLoginButton()
 }
 
-final class LoginPresenter: BasePresenter, LoginPresenterInterface {
+final class LoginPresenter: LoginPresenterInterface, HasDisposeBag, HasActivityIndicator {
 
     unowned var view: LoginViewInterface
     var router: LoginRouterInterface
     var interactor: LoginInteractorInterface
+
+    var activityIndicator = ActivityIndicator()
 
     init(view: LoginViewInterface,
          router: LoginRouterInterface,
@@ -25,15 +27,6 @@ final class LoginPresenter: BasePresenter, LoginPresenterInterface {
         self.view = view
         self.router = router
         self.interactor = interactor
-        super.init()
-
-        activityIndicator
-            .asSharedSequence()
-            .drive(onNext: { [weak self] isLoading in
-                guard let self = self else { return }
-                self.view.showLoading(isLoading: isLoading)
-            })
-            .disposed(by: rx.disposeBag)
     }
 
     deinit {
@@ -83,7 +76,7 @@ final class LoginPresenter: BasePresenter, LoginPresenterInterface {
                 self.interactor.saveUserInfo(user: user)
                 self.router.navigationToHomeScreen()
             })
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
     }
     
