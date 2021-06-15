@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol MainPresenterInterface {
+protocol MainPresenterInterface: Presenter {
     var view: MainViewInterface { get set }
     var router: MainRouterInterface { get set }
     var interactor: MainInteractorInterface { get set }
@@ -19,27 +19,19 @@ protocol MainPresenterInterface {
     func navigationToDetailScreen(item: Event)
 }
 
-final class MainPresenter: BasePresenter, MainPresenterInterface {
+final class MainPresenter: MainPresenterInterface, HasActivityIndicator, HasDisposeBag {
 
     unowned var view: MainViewInterface
     var router: MainRouterInterface
     var interactor: MainInteractorInterface
 
     var elements: [Event] = []
+    var activityIndicator = ActivityIndicator()
 
     internal init(view: MainViewInterface, router: MainRouterInterface, interactor: MainInteractorInterface) {
         self.view = view
         self.router = router
         self.interactor = interactor
-        super.init()
-
-        activityIndicator
-            .asSharedSequence()
-            .drive(onNext: { [weak self] isLoading in
-                guard let self = self else { return }
-                self.view.showLoading(isLoading: isLoading)
-            })
-            .disposed(by: rx.disposeBag)
     }
 
     deinit {
@@ -50,7 +42,6 @@ final class MainPresenter: BasePresenter, MainPresenterInterface {
 
     func viewDidLoad() {
         if let userName = interactor.getLoginedUser() {
-            view.showLoading(isLoading: true)
             let params = EventParams(username: userName, page: 1)
             interactor.getUserReceivedEvents(params: params)
                 .trackActivity(activityIndicator)
@@ -59,7 +50,7 @@ final class MainPresenter: BasePresenter, MainPresenterInterface {
                     self.elements = result
                     self.view.didLoadData()
                 })
-                .disposed(by: rx.disposeBag)
+                .disposed(by: disposeBag)
         }
     }
     

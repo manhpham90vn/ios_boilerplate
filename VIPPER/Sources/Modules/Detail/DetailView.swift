@@ -8,5 +8,4 @@
 import Foundation
 
 protocol DetailViewInterface: BaseView {
-    var presenter: DetailPresenterInterface! { get set }
 }

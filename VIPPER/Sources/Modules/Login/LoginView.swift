@@ -8,5 +8,4 @@
 import UIKit
 
 protocol LoginViewInterface: BaseView {
-    var presenter: LoginPresenterInterface! { get set }
 }

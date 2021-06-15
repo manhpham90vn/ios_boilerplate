@@ -9,7 +9,7 @@ import UIKit
 
 final class DetailViewController: BaseViewController {
 
-    var presenter: DetailPresenterInterface!
+    var presenter: DetailPresenter!
 
     deinit {
         LogInfo("\(type(of: self)) Deinit")

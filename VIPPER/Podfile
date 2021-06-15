@@ -18,5 +18,11 @@ target 'MyApp' do
 
   pod 'Firebase/Analytics'
   pod 'Firebase/Crashlytics'
+  pod 'Anchorage'
+  pod 'MJRefresh'
+  pod 'Then'
+  pod 'RxBinding'
+  pod 'RxViewController'
+  pod 'RxSwiftExt', '~> 5'
 
 end

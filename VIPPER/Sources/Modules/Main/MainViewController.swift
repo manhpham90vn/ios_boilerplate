@@ -12,7 +12,7 @@ final class MainViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var presenter: MainPresenterInterface!
+    var presenter: MainPresenter!
 
     deinit {
         LogInfo("\(type(of: self)) Deinit")
@@ -70,9 +70,5 @@ extension MainViewController: MainViewInterface {
     
     func didLoadData() {
         tableView.reloadData()
-    }
-
-    func showLoading(isLoading: Bool) {
-        isLoading ? HUD.show(.progress) : PKHUD.sharedHUD.hide()
     }
 }

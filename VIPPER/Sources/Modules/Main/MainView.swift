@@ -8,7 +8,5 @@
 import Foundation
 
 protocol MainViewInterface: BaseView {
-    var presenter: MainPresenterInterface! { get set }
-    
     func didLoadData()
 }

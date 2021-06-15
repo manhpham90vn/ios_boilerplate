@@ -71,6 +71,12 @@ public class ActivityIndicator : SharedSequenceConvertibleType {
     public func asSharedSequence() -> SharedSequence<SharingStrategy, Element> {
         _loading
     }
+
+    func asSignalOnErrorJustComplete() -> Signal<Element> {
+        return asSignal { _ in
+            return Signal.empty()
+        }
+    }
 }
 
 extension ObservableConvertibleType {

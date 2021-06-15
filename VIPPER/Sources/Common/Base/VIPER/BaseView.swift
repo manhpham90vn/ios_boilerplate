@@ -7,5 +7,4 @@
 
 protocol BaseView: AnyObject {
     func showAlert(title: String, message: String)
-    func showLoading(isLoading: Bool)
 }

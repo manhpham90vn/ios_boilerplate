@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol DetailPresenterInterface {
+protocol DetailPresenterInterface: Presenter {
     var view: DetailViewInterface { get set }
     var router: DetailRouterInterface { get set }
     var interactor: DetailInteractorInterface { get set }
 }
 
-final class DetailPresenter: BasePresenter, DetailPresenterInterface {
+final class DetailPresenter: DetailPresenterInterface {
 
     unowned var view: DetailViewInterface
     var router: DetailRouterInterface
@@ -25,15 +25,6 @@ final class DetailPresenter: BasePresenter, DetailPresenterInterface {
         self.view = view
         self.router = router
         self.interactor = interactor
-        super.init()
-        
-        activityIndicator
-            .asSharedSequence()
-            .drive(onNext: { [weak self] isLoading in
-                guard let self = self else { return }
-                self.view.showLoading(isLoading: isLoading)
-            })
-            .disposed(by: rx.disposeBag)
     }
 
     deinit {

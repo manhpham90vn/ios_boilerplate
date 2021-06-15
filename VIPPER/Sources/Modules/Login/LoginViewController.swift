@@ -10,7 +10,7 @@ import PKHUD
 
 final class LoginViewController: BaseViewController {
     
-    var presenter: LoginPresenterInterface!
+    var presenter: LoginPresenter!
 
     deinit {
         LogInfo("\(type(of: self)) Deinit")

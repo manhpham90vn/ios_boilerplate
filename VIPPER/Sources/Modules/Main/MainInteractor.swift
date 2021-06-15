@@ -13,7 +13,7 @@ protocol MainInteractorInterface {
     func getUserReceivedEvents(params: EventParams) -> Observable<[Event]>
 }
 
-final class MainInteractor: BaseInteractor, MainInteractorInterface {
+final class MainInteractor: MainInteractorInterface {
 
     @Inject var restfulService: RESTfulService
     @Inject var authManager: AuthManagerInterface

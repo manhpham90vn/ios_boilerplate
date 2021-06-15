@@ -15,7 +15,7 @@ protocol LoginInteractorInterface {
     func saveUserInfo(user: User)
 }
 
-final class LoginInteractor: BaseInteractor, LoginInteractorInterface {
+final class LoginInteractor: LoginInteractorInterface {
 
     @Inject var restfulService: RESTfulService
     @Inject var oauthService: OAuthService

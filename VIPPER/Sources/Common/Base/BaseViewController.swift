@@ -7,4 +7,26 @@
 
 import UIKit
 
-class BaseViewController: UIViewController {} // swiftlint:disable:this final_class
+import UIKit
+import PKHUD
+
+class BaseViewController: UIViewController { // swiftlint:disable:this final_class
+
+    let isLoading = PublishRelay<Bool>()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        setupUI()
+        bindViewModel()
+    }
+
+    func setupUI() {
+
+    }
+
+    func bindViewModel() {
+        isLoading ~> PKHUD.rx.isAnimating ~ rx.disposeBag
+    }
+
+}
