@@ -19,8 +19,18 @@ final class LoginViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    override func setupUI() {
+        super.setupUI()
 
         navigationItem.title = "Login"
+    }
+
+    override func bindViewModel() {
+        super.bindViewModel()
+
+        presenter.bind(isLoading: isLoading)
     }
     
     @IBAction func loginButtonTapped(_ sender: Any) {
@@ -32,9 +42,5 @@ final class LoginViewController: BaseViewController {
 extension LoginViewController: LoginViewInterface {
     func showAlert(title: String, message: String) {
         AppHelper.shared.showAlert(title: title, message: message)
-    }
-
-    func showLoading(isLoading: Bool) {
-        isLoading ? HUD.show(.progress) : PKHUD.sharedHUD.hide()
     }
 }

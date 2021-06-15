@@ -11,27 +11,71 @@ protocol MainPresenterInterface: Presenter {
     var view: MainViewInterface { get set }
     var router: MainRouterInterface { get set }
     var interactor: MainInteractorInterface { get set }
-    
-    var elements: [Event] { get set }
 
     func viewDidLoad()
     func didTapLogout()
     func navigationToDetailScreen(item: Event)
 }
 
-final class MainPresenter: MainPresenterInterface, HasActivityIndicator, HasDisposeBag {
-
+final class MainPresenter: MainPresenterInterface, HasActivityIndicator, HasDisposeBag, Paggingable, HeaderFooterActivityIndicator {
     unowned var view: MainViewInterface
     var router: MainRouterInterface
     var interactor: MainInteractorInterface
 
-    var elements: [Event] = []
+    let elements = BehaviorRelay<[Event]>(value: [])
     var activityIndicator = ActivityIndicator()
+    var headerRefreshTrigger = PublishRelay<Void>()
+    var footerLoadMoreTrigger = PublishRelay<Void>()
+    var isEnableLoadMore = PublishRelay<Bool>()
+    var isEmptyData = PublishRelay<Bool>()
+    var headerActivityIndicator = ActivityIndicator()
+    var footerActivityIndicator = ActivityIndicator()
+    var currentPage = 1
 
     internal init(view: MainViewInterface, router: MainRouterInterface, interactor: MainInteractorInterface) {
         self.view = view
         self.router = router
         self.interactor = interactor
+
+        headerRefreshTrigger
+            .flatMapLatest { [weak self] () -> Driver<[Event]> in
+                guard let self = self else { return .never() }
+                guard let userName = interactor.getLoginedUser() else { return .never() }
+                self.currentPage = 1
+                self.isEnableLoadMore.accept(true)
+                let params = EventParams(username: userName, page: self.currentPage)
+                return interactor
+                    .getUserReceivedEvents(params: params)
+                    .trackActivity(self.headerActivityIndicator)
+                    .asDriverOnErrorJustComplete()
+            }
+            ~> elements
+            ~ disposeBag
+
+        footerLoadMoreTrigger
+            .flatMapLatest { [weak self] () -> Driver<[Event]> in
+                guard let self = self else { return .never() }
+                guard let userName = interactor.getLoginedUser() else { return .never() }
+                self.currentPage += 1
+                let params = EventParams(username: userName, page: self.currentPage)
+                return interactor
+                    .getUserReceivedEvents(params: params)
+                    .trackActivity(self.headerActivityIndicator)
+                    .asDriverOnErrorJustComplete()
+            }
+            .asDriverOnErrorJustComplete()
+            .drive(onNext: { [weak self] result in
+                guard let self = self else { return }
+                var current = self.elements.value
+                current += result
+                if current.count > 100 {
+                    self.isEnableLoadMore.accept(false)
+                } else {
+                    self.isEnableLoadMore.accept(true)
+                }
+                self.elements.accept(current)
+            })
+            ~ disposeBag
     }
 
     deinit {
@@ -42,15 +86,13 @@ final class MainPresenter: MainPresenterInterface, HasActivityIndicator, HasDisp
 
     func viewDidLoad() {
         if let userName = interactor.getLoginedUser() {
-            let params = EventParams(username: userName, page: 1)
+            currentPage = 1
+            let params = EventParams(username: userName, page: currentPage)
             interactor.getUserReceivedEvents(params: params)
                 .trackActivity(activityIndicator)
                 .asDriver(onErrorDriveWith: .just([]))
-                .drive(onNext: { result in
-                    self.elements = result
-                    self.view.didLoadData()
-                })
-                .disposed(by: disposeBag)
+                ~> elements
+                ~ disposeBag
         }
     }
     
