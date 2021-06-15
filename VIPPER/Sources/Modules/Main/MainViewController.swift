@@ -61,8 +61,4 @@ extension MainViewController: MainViewInterface {
     func showAlert(title: String, message: String) {
         AppHelper.shared.showAlert(title: title, message: message)
     }
-    
-    func didLoadData() {
-        tableView.reloadData()
-    }
 }
