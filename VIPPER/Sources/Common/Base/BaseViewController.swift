@@ -8,7 +8,7 @@
 import UIKit
 import PKHUD
 
-class BaseViewController: UIViewController { // swiftlint:disable:this final_class
+class BaseViewController: UIViewController, HasDisposeBag { // swiftlint:disable:this final_class
 
     let isLoading = PublishRelay<Bool>()
 
@@ -24,7 +24,7 @@ class BaseViewController: UIViewController { // swiftlint:disable:this final_cla
     }
 
     func bindViewModel() {
-        isLoading ~> PKHUD.rx.isAnimating ~ rx.disposeBag
+        isLoading ~> PKHUD.rx.isAnimating ~ disposeBag
     }
 
 }

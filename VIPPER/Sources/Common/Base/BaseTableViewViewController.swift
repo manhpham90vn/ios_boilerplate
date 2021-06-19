@@ -8,7 +8,7 @@
 import UIKit
 import MJRefresh
 
-class BaseTableViewViewController: BaseViewController, Paggingable, HeaderFooterPaggingable { // swiftlint:disable:this final_class
+class BaseTableViewViewController: BaseViewController, ViewControllerPageable { // swiftlint:disable:this final_class
 
     var headerRefreshTrigger = PublishRelay<Void>()
     var footerLoadMoreTrigger = PublishRelay<Void>()
@@ -36,7 +36,7 @@ class BaseTableViewViewController: BaseViewController, Paggingable, HeaderFooter
         tableView.mj_header = tableViewHeader()
         isHeaderLoading
             .bind(to: rx.isAnimatingHeader)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         // footer
         tableView.mj_footer = tableViewFooter()
@@ -49,17 +49,17 @@ class BaseTableViewViewController: BaseViewController, Paggingable, HeaderFooter
             .compactMap { $0 }
             .asDriverOnErrorJustComplete()
             .drive(rx.isAnimatingFooter)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
 
         // no data
         isEmptyData
             .bind(to: rx.isEmpyData)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
 
         // loadmore
         isEnableLoadMore
             .bind(to: rx.isEnableLoadMoreBinder)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
     }
     
     func tableViewHeader() -> MJRefreshHeader? {

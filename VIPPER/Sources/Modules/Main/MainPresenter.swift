@@ -17,7 +17,7 @@ protocol MainPresenterInterface: Presenter {
     func navigationToDetailScreen(item: Event)
 }
 
-final class MainPresenter: MainPresenterInterface, HasActivityIndicator, HasDisposeBag, Paggingable, HeaderFooterActivityIndicator {
+final class MainPresenter: MainPresenterInterface, PresenterPageable {
     unowned var view: MainViewInterface
     var router: MainRouterInterface
     var interactor: MainInteractorInterface

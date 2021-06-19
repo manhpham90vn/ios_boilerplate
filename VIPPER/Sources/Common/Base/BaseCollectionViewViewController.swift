@@ -8,7 +8,7 @@
 import UIKit
 import MJRefresh
 
-class BaseCollectionViewViewController: BaseViewController, Paggingable, HeaderFooterPaggingable { // swiftlint:disable:this final_class
+class BaseCollectionViewViewController: BaseViewController, ViewControllerPageable { // swiftlint:disable:this final_class
 
     var headerRefreshTrigger = PublishRelay<Void>()
     var footerLoadMoreTrigger = PublishRelay<Void>()
@@ -26,7 +26,7 @@ class BaseCollectionViewViewController: BaseViewController, Paggingable, HeaderF
         collectionView.mj_header = viewForHeaderOfCollectionView()
         isHeaderLoading
             .bind(to: rx.isAnimatingHeaderBinder)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         // footer
         collectionView.mj_footer = viewForFooterOfCollectionView()
@@ -39,18 +39,18 @@ class BaseCollectionViewViewController: BaseViewController, Paggingable, HeaderF
             .compactMap { $0 }
             .asDriverOnErrorJustComplete()
             .drive(rx.isAnimatingFooterBinder)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         // loadmore
         isEnableLoadMore
             .bind(to: rx.isEnableLoadMoreBinder)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
                 
         // empty data
         isEmptyData
             .asDriverOnErrorJustComplete()
             .drive(rx.isEmpyDataBinder)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
     }
     
     func viewForHeaderOfCollectionView() -> MJRefreshHeader? {

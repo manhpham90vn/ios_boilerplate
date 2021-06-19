@@ -20,7 +20,7 @@ final class MainViewController: BaseTableViewViewController {
     override func setupUI() {
         super.setupUI()
 
-        tableView.rx.setDelegate(self) ~ rx.disposeBag
+        tableView.rx.setDelegate(self) ~ disposeBag
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
 
@@ -38,7 +38,7 @@ final class MainViewController: BaseTableViewViewController {
         presenter.elements.bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: UITableViewCell.self)) { _, element, cell in
             cell.textLabel?.text = element.repo?.name
         }
-        .disposed(by: rx.disposeBag)
+        .disposed(by: disposeBag)
     }
 
     @objc
