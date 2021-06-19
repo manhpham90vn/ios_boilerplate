@@ -1,5 +1,5 @@
 //
-//  Paggingable.swift
+//  Pageable.swift
 //  StoryApp
 //
 //  Created by Manh Pham on 15/06/2021.
@@ -7,7 +7,10 @@
 
 import Foundation
 
-protocol Paggingable {
+typealias PresenterPageable = Pageable & HasHeaderFooterActivityIndicator & HasActivityIndicator & HasDisposeBag
+typealias ViewControllerPageable = Pageable & HeaderFooterPageable
+
+protocol Pageable {
     // trigger when pull to refresh and loadmore
     var headerRefreshTrigger: PublishRelay<Void> { get }
     var footerLoadMoreTrigger: PublishRelay<Void> { get }
@@ -17,18 +20,18 @@ protocol Paggingable {
     var isEmptyData: PublishRelay<Bool> { get }
 }
 
-protocol HeaderFooterPaggingable {
+protocol HeaderFooterPageable {
     var isHeaderLoading: PublishRelay<Bool> { get }
     var isFooterLoading: PublishRelay<Bool> { get }
 }
 
-protocol HeaderFooterActivityIndicator {
+protocol HasHeaderFooterActivityIndicator {
     var headerActivityIndicator: ActivityIndicator { get }
     var footerActivityIndicator: ActivityIndicator { get }
 }
 
-extension Paggingable where Self: HasDisposeBag & HeaderFooterActivityIndicator {
-    func bind<T>(paggingable: T) where T: Paggingable & HeaderFooterPaggingable {
+extension Pageable where Self: HasDisposeBag & HasHeaderFooterActivityIndicator {
+    func bind<T>(paggingable: T) where T: ViewControllerPageable {
 
         // from viewcontroller to presenter
         paggingable.headerRefreshTrigger ~> headerRefreshTrigger ~ disposeBag

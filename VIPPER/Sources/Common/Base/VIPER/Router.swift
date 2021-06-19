@@ -7,8 +7,6 @@
 
 protocol Router: AnyObject {
     associatedtype ViewController
-
     var viewController: ViewController { get set }
-
     init(viewController: ViewController)
 }
