@@ -5,9 +5,11 @@ all: generate install open
 
 # generate project with xcodegen
 .PHONY: generate
-generate: xcodegen
+generate: swiftgen xcodegen
 xcodegen: 
 	xcodegen generate --spec project.yml
+swiftgen:
+	./Pods/SwiftGen/bin/swiftgen
 
 # install bundle and install pod
 .PHONY: install
