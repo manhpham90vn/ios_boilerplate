@@ -8,7 +8,8 @@
 import Foundation
 
 protocol HasActivityIndicator {
-    var activityIndicator: ActivityIndicator { get set }
+    var trigger: PublishRelay<Void> { get }
+    var activityIndicator: ActivityIndicator { get }
 }
 
 extension HasActivityIndicator where Self: HasDisposeBag {

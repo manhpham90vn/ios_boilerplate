@@ -40,6 +40,7 @@ public class ActivityIndicator : SharedSequenceConvertibleType {
     private let _lock = NSRecursiveLock()
     private let _relay = BehaviorRelay(value: 0)
     private let _loading: SharedSequence<SharingStrategy, Bool>
+    @Atomic private var isShowedLoading = false
 
     public init() {
         _loading = _relay.asDriver()
@@ -47,15 +48,31 @@ public class ActivityIndicator : SharedSequenceConvertibleType {
             .distinctUntilChanged()
     }
 
-    fileprivate func trackActivityOfObservable<Source: ObservableConvertibleType>(_ source: Source) -> Observable<Source.Element> {
+    fileprivate func trackActivityOfObservable<Source: ObservableConvertibleType>(_ source: Source, ignore: Bool) -> Observable<Source.Element> {
         return Observable.using({ () -> ActivityToken<Source.Element> in
-            self.increment()
-            return ActivityToken(source: source.asObservable(), disposeAction: self.decrement)
+            if !ignore {
+                self.increment()
+            }
+            let disposeAction = ignore ? {} : self.decrement
+            return ActivityToken(source: source.asObservable(), disposeAction: disposeAction)
         }) { t in
             return t.asObservable()
         }
     }
 
+    fileprivate func trackActivityOfObservableOnlyOnce<Source: ObservableConvertibleType>(_ source: Source) -> Observable<Source.Element> {
+        return Observable.using({ () -> ActivityToken<Source.Element> in
+            if !self.isShowedLoading {
+                self.increment()
+            }
+            let action = self.isShowedLoading ? {} : self.decrement
+            self.isShowedLoading = true
+            return ActivityToken(source: source.asObservable(), disposeAction: action)
+        }, observableFactory: { value in
+            return value.asObservable()
+        })
+    }
+    
     private func increment() {
         _lock.lock()
         _relay.accept(_relay.value + 1)
@@ -80,7 +97,11 @@ public class ActivityIndicator : SharedSequenceConvertibleType {
 }
 
 extension ObservableConvertibleType {
-    public func trackActivity(_ activityIndicator: ActivityIndicator) -> Observable<Element> {
-        activityIndicator.trackActivityOfObservable(self)
+    public func trackActivity(_ activityIndicator: ActivityIndicator, ignore: Bool = false) -> Observable<Element> {
+        activityIndicator.trackActivityOfObservable(self, ignore: ignore)
+    }
+    
+    public func trackActivityOnlyOnce(_ activityIndicator: ActivityIndicator) -> Observable<Element> {
+        return activityIndicator.trackActivityOfObservableOnlyOnce(self)
     }
 }

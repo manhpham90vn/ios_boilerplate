@@ -20,6 +20,7 @@ final class DetailPresenter: DetailPresenterInterface, HasActivityIndicator, Has
     var interactor: DetailInteractorInterface
 
     var activityIndicator = ActivityIndicator()
+    var trigger = PublishRelay<Void>()
 
     init(view: DetailViewInterface,
          router: DetailRouterInterface,

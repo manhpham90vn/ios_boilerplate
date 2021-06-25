@@ -38,15 +38,15 @@ final class SFWebAuthenticationWrapper: NSObject, AuthenticationServices {
     
     func initiateSession(url: URL, callBackURL: String, completionHandler: @escaping ((URL?, Error?) -> Void)) {
         self.userCancelError = NSError(domain: "com.apple.SafariServices.Authentication", code: 1, userInfo: nil)
-        self.safariSession = SFAuthenticationSession(url: url, callbackURLScheme: callBackURL, completionHandler: completionHandler)
+        self.safariSession = ASWebAuthenticationSession(url: url, callbackURLScheme: callBackURL, completionHandler: completionHandler)
     }
     
     func startSession() {
-        (self.safariSession as! SFAuthenticationSession).start()
+        (self.safariSession as! ASWebAuthenticationSession).start()
     }
     
     func cancelSession() {
-        (self.safariSession as! SFAuthenticationSession).cancel()
+        (self.safariSession as! ASWebAuthenticationSession).cancel()
     }
     
 }

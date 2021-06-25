@@ -12,18 +12,20 @@ protocol MainPresenterInterface: Presenter {
     var router: MainRouterInterface { get set }
     var interactor: MainInteractorInterface { get set }
 
-    func viewDidLoad()
     func didTapLogout()
     func navigationToDetailScreen(item: Event)
 }
 
 final class MainPresenter: MainPresenterInterface, PresenterPageable {
+    
     unowned var view: MainViewInterface
     var router: MainRouterInterface
     var interactor: MainInteractorInterface
 
     let elements = BehaviorRelay<[Event]>(value: [])
+    
     var activityIndicator = ActivityIndicator()
+    var trigger = PublishRelay<Void>()
     var headerRefreshTrigger = PublishRelay<Void>()
     var footerLoadMoreTrigger = PublishRelay<Void>()
     var isEnableLoadMore = PublishRelay<Bool>()
@@ -37,6 +39,21 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
         self.router = router
         self.interactor = interactor
 
+        trigger
+            .flatMapLatest { [weak self] () -> Driver<[Event]> in
+                guard let self = self else { return .never() }
+                guard let userName = interactor.getLoginedUser() else { return .never() }
+                self.currentPage = 1
+                self.isEnableLoadMore.accept(true)
+                let params = EventParams(username: userName, page: self.currentPage)
+                return interactor
+                    .getUserReceivedEvents(params: params)
+                    .trackActivity(self.headerActivityIndicator)
+                    .asDriverOnErrorJustComplete()
+            }
+            ~> elements
+            ~ disposeBag
+        
         headerRefreshTrigger
             .flatMapLatest { [weak self] () -> Driver<[Event]> in
                 guard let self = self else { return .never() }
@@ -82,18 +99,6 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
         LogInfo("\(type(of: self)) Deinit")
         LeakDetector.instance.expectDeallocate(object: router as AnyObject)
         LeakDetector.instance.expectDeallocate(object: interactor as AnyObject)
-    }
-
-    func viewDidLoad() {
-        if let userName = interactor.getLoginedUser() {
-            currentPage = 1
-            let params = EventParams(username: userName, page: currentPage)
-            interactor.getUserReceivedEvents(params: params)
-                .trackActivity(activityIndicator)
-                .asDriver(onErrorDriveWith: .just([]))
-                ~> elements
-                ~ disposeBag
-        }
     }
     
     func didTapLogout() {
