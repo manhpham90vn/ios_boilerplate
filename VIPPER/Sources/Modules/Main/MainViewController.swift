@@ -32,7 +32,7 @@ final class MainViewController: BaseTableViewViewController {
     override func bindViewModel() {
         super.bindViewModel()
 
-        presenter.viewDidLoad()
+        Observable.just(()) ~> presenter.trigger ~ disposeBag
         presenter.bind(isLoading: isLoading)
         presenter.bind(paggingable: self)
         presenter.elements.bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: UITableViewCell.self)) { _, element, cell in

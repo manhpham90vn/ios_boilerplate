@@ -26,6 +26,7 @@ protocol HeaderFooterPageable {
 }
 
 protocol HasHeaderFooterActivityIndicator {
+    var currentPage: Int { get set }
     var headerActivityIndicator: ActivityIndicator { get }
     var footerActivityIndicator: ActivityIndicator { get }
 }

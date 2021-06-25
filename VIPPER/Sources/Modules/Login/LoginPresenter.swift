@@ -20,6 +20,7 @@ final class LoginPresenter: LoginPresenterInterface, HasDisposeBag, HasActivityI
     var interactor: LoginInteractorInterface
 
     var activityIndicator = ActivityIndicator()
+    var trigger = PublishRelay<Void>()
 
     init(view: LoginViewInterface,
          router: LoginRouterInterface,
