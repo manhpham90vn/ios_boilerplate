@@ -64,10 +64,10 @@ public class ActivityIndicator : SharedSequenceConvertibleType {
         return Observable.using({ () -> ActivityToken<Source.Element> in
             if !self.isShowedLoading {
                 self.increment()
+                self.isShowedLoading = true
             }
-            let action = self.isShowedLoading ? {} : self.decrement
-            self.isShowedLoading = true
-            return ActivityToken(source: source.asObservable(), disposeAction: action)
+            let disposeAction = self.isShowedLoading ? {} : self.decrement
+            return ActivityToken(source: source.asObservable(), disposeAction: disposeAction)
         }, observableFactory: { value in
             return value.asObservable()
         })
