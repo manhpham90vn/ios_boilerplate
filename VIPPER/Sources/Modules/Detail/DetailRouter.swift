@@ -14,7 +14,7 @@ protocol DetailRouterInterface {
 
 final class DetailRouter: DetailRouterInterface, Router {
 
-    unowned var viewController: DetailViewController
+    unowned let viewController: DetailViewController
 
     required init(viewController: DetailViewController) {
         self.viewController = viewController

@@ -6,21 +6,21 @@
 //
 
 protocol LoginPresenterInterface: Presenter {
-    var view: LoginViewInterface { get set }
-    var router: LoginRouterInterface { get set }
-    var interactor: LoginInteractorInterface { get set }
+    var view: LoginViewInterface { get }
+    var router: LoginRouterInterface { get }
+    var interactor: LoginInteractorInterface { get }
     
     func didTapLoginButton()
 }
 
 final class LoginPresenter: LoginPresenterInterface, HasDisposeBag, HasActivityIndicator {
 
-    unowned var view: LoginViewInterface
-    var router: LoginRouterInterface
-    var interactor: LoginInteractorInterface
+    unowned let view: LoginViewInterface
+    let router: LoginRouterInterface
+    let interactor: LoginInteractorInterface
 
-    var activityIndicator = ActivityIndicator()
-    var trigger = PublishRelay<Void>()
+    let activityIndicator = ActivityIndicator()
+    let trigger = PublishRelay<Void>()
 
     init(view: LoginViewInterface,
          router: LoginRouterInterface,

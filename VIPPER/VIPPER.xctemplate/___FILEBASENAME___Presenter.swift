@@ -8,12 +8,12 @@ protocol ___FILEBASENAMEASIDENTIFIER___Interface: Presenter {
 
 final class ___FILEBASENAMEASIDENTIFIER___: ___FILEBASENAMEASIDENTIFIER___Interface, HasActivityIndicator, HasDisposeBag {
 
-    unowned var view: ___VARIABLE_productName___ViewInterface
-    var router: ___VARIABLE_productName___RouterInterface
-    var interactor: ___VARIABLE_productName___InteractorInterface
+    unowned let view: ___VARIABLE_productName___ViewInterface
+    let router: ___VARIABLE_productName___RouterInterface
+    let interactor: ___VARIABLE_productName___InteractorInterface
 
-    var activityIndicator = ActivityIndicator()
-    var trigger = PublishRelay<Void>()
+    let activityIndicator = ActivityIndicator()
+    let trigger = PublishRelay<Void>()
 
     init(view: ___VARIABLE_productName___ViewInterface,
          router: ___VARIABLE_productName___RouterInterface,

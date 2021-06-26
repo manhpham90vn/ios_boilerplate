@@ -8,9 +8,9 @@
 import UIKit
 
 protocol MainPresenterInterface: Presenter {
-    var view: MainViewInterface { get set }
-    var router: MainRouterInterface { get set }
-    var interactor: MainInteractorInterface { get set }
+    var view: MainViewInterface { get }
+    var router: MainRouterInterface { get }
+    var interactor: MainInteractorInterface { get }
 
     func didTapLogout()
     func navigationToDetailScreen(item: Event)
@@ -23,15 +23,14 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
     var interactor: MainInteractorInterface
 
     let elements = BehaviorRelay<[Event]>(value: [])
-    
-    var activityIndicator = ActivityIndicator()
-    var trigger = PublishRelay<Void>()
-    var headerRefreshTrigger = PublishRelay<Void>()
-    var footerLoadMoreTrigger = PublishRelay<Void>()
-    var isEnableLoadMore = PublishRelay<Bool>()
-    var isEmptyData = PublishRelay<Bool>()
-    var headerActivityIndicator = ActivityIndicator()
-    var footerActivityIndicator = ActivityIndicator()
+    let activityIndicator = ActivityIndicator()
+    let trigger = PublishRelay<Void>()
+    let headerRefreshTrigger = PublishRelay<Void>()
+    let footerLoadMoreTrigger = PublishRelay<Void>()
+    let isEnableLoadMore = PublishRelay<Bool>()
+    let isEmptyData = PublishRelay<Bool>()
+    let headerActivityIndicator = ActivityIndicator()
+    let footerActivityIndicator = ActivityIndicator()
     var currentPage = 1
 
     internal init(view: MainViewInterface, router: MainRouterInterface, interactor: MainInteractorInterface) {

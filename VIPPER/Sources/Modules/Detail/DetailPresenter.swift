@@ -8,19 +8,19 @@
 import Foundation
 
 protocol DetailPresenterInterface: Presenter {
-    var view: DetailViewInterface { get set }
-    var router: DetailRouterInterface { get set }
-    var interactor: DetailInteractorInterface { get set }
+    var view: DetailViewInterface { get }
+    var router: DetailRouterInterface { get }
+    var interactor: DetailInteractorInterface { get }
 }
 
 final class DetailPresenter: DetailPresenterInterface, HasActivityIndicator, HasDisposeBag {
 
-    unowned var view: DetailViewInterface
-    var router: DetailRouterInterface
-    var interactor: DetailInteractorInterface
+    unowned let view: DetailViewInterface
+    let router: DetailRouterInterface
+    let interactor: DetailInteractorInterface
 
-    var activityIndicator = ActivityIndicator()
-    var trigger = PublishRelay<Void>()
+    let activityIndicator = ActivityIndicator()
+    let trigger = PublishRelay<Void>()
 
     init(view: DetailViewInterface,
          router: DetailRouterInterface,
