@@ -14,7 +14,7 @@ protocol MainRouterInterface {
 
 final class MainRouter: MainRouterInterface, Router {
 
-    unowned var viewController: MainViewController
+    unowned let viewController: MainViewController
 
     required init(viewController: MainViewController) {
         self.viewController = viewController
