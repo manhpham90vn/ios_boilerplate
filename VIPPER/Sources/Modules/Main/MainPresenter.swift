@@ -47,7 +47,7 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
                 let params = EventParams(username: userName, page: self.currentPage)
                 return interactor
                     .getUserReceivedEvents(params: params)
-                    .trackActivity(self.headerActivityIndicator)
+                    .trackActivity(self.activityIndicator)
                     .asDriverOnErrorJustComplete()
             }
             ~> elements
@@ -76,7 +76,7 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
                 let params = EventParams(username: userName, page: self.currentPage)
                 return interactor
                     .getUserReceivedEvents(params: params)
-                    .trackActivity(self.headerActivityIndicator)
+                    .trackActivity(self.footerActivityIndicator)
                     .asDriverOnErrorJustComplete()
             }
             .asDriverOnErrorJustComplete()
