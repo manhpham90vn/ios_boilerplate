@@ -90,8 +90,8 @@ public class ActivityIndicator : SharedSequenceConvertibleType {
     }
 
     func asSignalOnErrorJustComplete() -> Signal<Element> {
-        return asSignal { _ in
-            return Signal.empty()
+        _loading.asSignal { _ in
+            Signal.empty()
         }
     }
 }
