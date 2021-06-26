@@ -27,8 +27,8 @@ final class LoginViewController: BaseViewController {
         navigationItem.title = "Login"
     }
 
-    override func bindViewModel() {
-        super.bindViewModel()
+    override func bindDatas() {
+        super.bindDatas()
 
         presenter.bind(isLoading: isLoading)
     }

@@ -60,13 +60,13 @@ public class ActivityIndicator : SharedSequenceConvertibleType {
         }
     }
 
-    fileprivate func trackActivityOfObservableOnlyOnce<Source: ObservableConvertibleType>(_ source: Source) -> Observable<Source.Element> {
+    fileprivate func trackActivityOfObservableOnlyOnce<Source: ObservableConvertibleType>(_ source: Source, ignore: Bool) -> Observable<Source.Element> {
         return Observable.using({ () -> ActivityToken<Source.Element> in
-            if !self.isShowedLoading {
+            if !self.isShowedLoading && !ignore {
                 self.increment()
-                self.isShowedLoading = true
             }
-            let disposeAction = self.isShowedLoading ? {} : self.decrement
+            let disposeAction = (self.isShowedLoading && ignore) ? {} : self.decrement
+            self.isShowedLoading = true
             return ActivityToken(source: source.asObservable(), disposeAction: disposeAction)
         }, observableFactory: { value in
             return value.asObservable()
@@ -101,7 +101,7 @@ extension ObservableConvertibleType {
         activityIndicator.trackActivityOfObservable(self, ignore: ignore)
     }
     
-    public func trackActivityOnlyOnce(_ activityIndicator: ActivityIndicator) -> Observable<Element> {
-        return activityIndicator.trackActivityOfObservableOnlyOnce(self)
+    public func trackActivityOnlyOnce(_ activityIndicator: ActivityIndicator, ignore: Bool = false) -> Observable<Element> {
+        return activityIndicator.trackActivityOfObservableOnlyOnce(self, ignore: ignore)
     }
 }

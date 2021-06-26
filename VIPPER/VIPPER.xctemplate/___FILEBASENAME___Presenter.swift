@@ -13,6 +13,7 @@ final class ___FILEBASENAMEASIDENTIFIER___: ___FILEBASENAMEASIDENTIFIER___Interf
     var interactor: ___VARIABLE_productName___InteractorInterface
 
     var activityIndicator = ActivityIndicator()
+    var trigger = PublishRelay<Void>()
 
     init(view: ___VARIABLE_productName___ViewInterface,
          router: ___VARIABLE_productName___RouterInterface,
