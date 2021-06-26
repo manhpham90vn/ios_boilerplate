@@ -19,8 +19,8 @@ final class ___FILEBASENAMEASIDENTIFIER___: BaseViewController {
         super.setupUI()
     }    
 
-    override func bindViewModel() {
-        super.bindViewModel()
+    override func bindDatas() {
+        super.bindDatas()
         
         presenter.bind(isLoading: isLoading)
     }

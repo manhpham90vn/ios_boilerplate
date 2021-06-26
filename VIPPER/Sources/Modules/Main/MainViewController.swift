@@ -29,12 +29,12 @@ final class MainViewController: BaseTableViewViewController {
         navigationItem.rightBarButtonItem = logOut
     }
 
-    override func bindViewModel() {
-        super.bindViewModel()
+    override func bindDatas() {
+        super.bindDatas()
 
         Observable.just(()) ~> presenter.trigger ~ disposeBag
         presenter.bind(isLoading: isLoading)
-        presenter.bind(paggingable: self)
+        presenter.bind(pageable: self)
         presenter.elements.bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: UITableViewCell.self)) { _, element, cell in
             cell.textLabel?.text = element.repo?.name
         }

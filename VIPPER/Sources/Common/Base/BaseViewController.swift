@@ -16,14 +16,14 @@ class BaseViewController: UIViewController, HasDisposeBag { // swiftlint:disable
         super.viewDidLoad()
 
         setupUI()
-        bindViewModel()
+        bindDatas()
     }
 
     func setupUI() {
 
     }
 
-    func bindViewModel() {
+    func bindDatas() {
         isLoading ~> PKHUD.rx.isAnimating ~ disposeBag
     }
 

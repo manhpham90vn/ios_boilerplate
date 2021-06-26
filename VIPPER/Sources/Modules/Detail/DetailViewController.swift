@@ -26,8 +26,8 @@ final class DetailViewController: BaseViewController {
         super.setupUI()
     }
 
-    override func bindViewModel() {
-        super.bindViewModel()
+    override func bindDatas() {
+        super.bindDatas()
 
         presenter.bind(isLoading: isLoading)
     }

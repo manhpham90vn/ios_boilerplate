@@ -19,8 +19,8 @@ class BaseCollectionViewViewController: BaseViewController, ViewControllerPageab
     
     @IBOutlet weak var collectionView: UICollectionView!
 
-    override func bindViewModel() {
-        super.bindViewModel()
+    override func bindDatas() {
+        super.bindDatas()
                 
         // header
         collectionView.mj_header = viewForHeaderOfCollectionView()

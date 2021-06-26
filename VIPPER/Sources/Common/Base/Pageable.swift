@@ -32,16 +32,16 @@ protocol HasHeaderFooterActivityIndicator {
 }
 
 extension Pageable where Self: HasDisposeBag & HasHeaderFooterActivityIndicator {
-    func bind<T>(paggingable: T) where T: ViewControllerPageable {
+    func bind<T>(pageable: T) where T: ViewControllerPageable {
 
         // from viewcontroller to presenter
-        paggingable.headerRefreshTrigger ~> headerRefreshTrigger ~ disposeBag
-        paggingable.footerLoadMoreTrigger ~> footerLoadMoreTrigger ~ disposeBag
+        pageable.headerRefreshTrigger ~> headerRefreshTrigger ~ disposeBag
+        pageable.footerLoadMoreTrigger ~> footerLoadMoreTrigger ~ disposeBag
 
         // from presenter to viewcontroller
-        isEnableLoadMore ~> paggingable.isEnableLoadMore ~ disposeBag
-        isEmptyData ~> paggingable.isEmptyData ~ disposeBag
-        headerActivityIndicator.asSignalOnErrorJustComplete() ~> paggingable.isHeaderLoading ~ disposeBag
-        footerActivityIndicator.asSignalOnErrorJustComplete() ~> paggingable.isFooterLoading ~ disposeBag
+        isEnableLoadMore ~> pageable.isEnableLoadMore ~ disposeBag
+        isEmptyData ~> pageable.isEmptyData ~ disposeBag
+        headerActivityIndicator.asSignalOnErrorJustComplete() ~> pageable.isHeaderLoading ~ disposeBag
+        footerActivityIndicator.asSignalOnErrorJustComplete() ~> pageable.isFooterLoading ~ disposeBag
     }
 }

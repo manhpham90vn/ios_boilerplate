@@ -29,8 +29,8 @@ class BaseTableViewViewController: BaseViewController, ViewControllerPageable { 
         tableView.tableFooterView = UIView()
     }
     
-    override func bindViewModel() {
-        super.bindViewModel()
+    override func bindDatas() {
+        super.bindDatas()
         
         // header
         tableView.mj_header = tableViewHeader()
