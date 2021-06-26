@@ -13,7 +13,7 @@ protocol LoginRouterInterface {
 
 final class LoginRouter: LoginRouterInterface, Router {
 
-    unowned var viewController: LoginViewController
+    unowned let viewController: LoginViewController
 
     func navigationToHomeScreen() {
         UIWindow.shared?.rootViewController = UINavigationController(rootViewController: AppScenes.main.viewController)

@@ -8,7 +8,7 @@ protocol ___FILEBASENAMEASIDENTIFIER___Interface {
 
 final class ___FILEBASENAMEASIDENTIFIER___: ___FILEBASENAMEASIDENTIFIER___Interface, Router {
 
-    unowned var viewController: ___VARIABLE_productName___ViewController
+    unowned let viewController: ___VARIABLE_productName___ViewController
 
     required init(viewController: ___VARIABLE_productName___ViewController) {
         self.viewController = viewController

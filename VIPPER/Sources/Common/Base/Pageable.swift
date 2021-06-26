@@ -26,7 +26,9 @@ protocol HeaderFooterPageable {
 }
 
 protocol HasHeaderFooterActivityIndicator {
+    associatedtype Element
     var currentPage: Int { get set }
+    var elements: BehaviorRelay<[Element]> { get }
     var headerActivityIndicator: ActivityIndicator { get }
     var footerActivityIndicator: ActivityIndicator { get }
 }
