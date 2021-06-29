@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := all
 
 .PHONY: all
-all: install generate open
+all: install generate installPods open
 
 # generate project with xcodegen
 .PHONY: generate
@@ -11,15 +11,18 @@ xcodegen:
 swiftgen:
 	mint run swiftgen
 
-# install bundle and install pod
+# install
 .PHONY: install
-install: installBrew installMint installBundle installPods
+install: installBrew installMint installBundle
 installBrew:
 	brew bundle
 installMint:
 	mint bootstrap
 installBundle: 
 	bundle install
+
+# and install pod
+.PHONY: installPods
 installPods: 
 	bundle exec pod install
 

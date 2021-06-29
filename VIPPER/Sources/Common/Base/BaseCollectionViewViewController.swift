@@ -8,7 +8,7 @@
 import UIKit
 import MJRefresh
 
-class BaseCollectionViewViewController: BaseViewController, ViewControllerPageable {
+class BaseCollectionViewViewController: BaseViewController, ViewControllerPageable { // swiftlint:disable:this final_class
 
     var headerRefreshTrigger = PublishRelay<Void>()
     var footerLoadMoreTrigger = PublishRelay<Void>()
