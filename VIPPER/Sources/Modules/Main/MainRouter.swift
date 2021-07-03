@@ -28,8 +28,7 @@ final class MainRouter: MainRouterInterface, Router {
     }
 
     func navigationToDetailScreen(item: Event) {
-        let vc = AppScenes.detail.viewController
-        vc.title = item.repo?.name
+        let vc = AppScenes.detail(event: item).viewController
         viewController.navigationController?.pushViewController(vc, animated: true)
     }
     
