@@ -27,8 +27,18 @@ final class MainViewController: BaseTableViewViewController {
         navigationItem.title = "Events"
         let logOut = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         navigationItem.rightBarButtonItem = logOut
+        let log = UIBarButtonItem(title: "Log", style: .plain, target: self, action: #selector(showLog))
+        navigationItem.leftBarButtonItem = log
     }
 
+    @objc
+    func showLog() {
+        let data = getLogFile()
+        let content = try? String(contentsOf: data)
+        let pasteBoard = UIPasteboard.general
+        pasteBoard.string = content
+    }
+    
     override func bindDatas() {
         super.bindDatas()
 

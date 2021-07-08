@@ -48,6 +48,7 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
                 return interactor
                     .getUserReceivedEvents(params: params)
                     .trackActivity(self.activityIndicator)
+                    .debugToFile()
                     .asDriverOnErrorJustComplete()
             }
             ~> elements

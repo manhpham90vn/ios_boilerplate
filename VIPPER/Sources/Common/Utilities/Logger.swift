@@ -9,14 +9,23 @@ import Foundation
 import XCGLogger
 
 private let log = XCGLogger.default // swiftlint:disable:this prefixed_toplevel_constant
+private let file = getCacheDirectoryPath().appendingPathComponent(UUID().uuidString) // swiftlint:disable:this prefixed_toplevel_constant
+
+func getLogFile() -> URL {
+    file
+}
 
 func LoggerSetup() {
     
     #if DEBUG
     let logLevel = XCGLogger.Level.debug
     #else
-    let logLevel = XCGLogger.Level.none
+    let logLevel = XCGLogger.Level.debug
     #endif
+    
+    let fileDestination = FileDestination(writeToFile: file, identifier: "advancedLogger.fileDestination")
+    log.add(destination: fileDestination)
+    log.logAppDetails()
     
     log.setup(level: logLevel,
               showLogIdentifier: false,
@@ -98,4 +107,10 @@ func LogError(_ closure: @autoclosure @escaping () -> Any?,
               lineNumber: lineNumber,
               userInfo: userInfo,
               closure: closure)
+}
+
+private func getCacheDirectoryPath() -> URL {
+  let arrayPaths = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
+  let cacheDirectoryPath = arrayPaths[0]
+  return cacheDirectoryPath
 }
