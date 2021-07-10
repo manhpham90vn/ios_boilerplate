@@ -12,20 +12,10 @@ import UIKit
 final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    @LazyInject var authManager: AuthManagerInterface
+    @LazyInjected var authManager: AuthManagerInterface
     
     static var keyWindow: UIWindow? {
         return UIApplication.shared.windows.first(where: { $0.isKeyWindow })
-    }
-
-    override init() {
-        super.init()
-
-        DependencyContainer.defined(by: modules {
-            DependencyContainer.authManager
-            DependencyContainer.restfulService
-            DependencyContainer.oauthService
-        })
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

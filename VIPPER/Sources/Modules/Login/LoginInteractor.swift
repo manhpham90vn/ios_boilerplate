@@ -17,9 +17,9 @@ protocol LoginInteractorInterface {
 
 final class LoginInteractor: LoginInteractorInterface {
 
-    @Inject var restfulService: RESTfulService
-    @Inject var oauthService: OAuthService
-    @Inject var authManager: AuthManagerInterface
+    @Injected var restfulService: RESTfulService
+    @Injected var oauthService: OAuthService
+    @Injected var authManager: AuthManagerInterface
 
     deinit {
         LogInfo("\(type(of: self)) Deinit")

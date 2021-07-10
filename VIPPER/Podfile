@@ -14,7 +14,7 @@ target 'MyApp' do
   pod 'SwiftGen', '~> 6.0'
   pod 'Reusable'
   pod 'SwiftyUserDefaults', '~> 5.0'
-  pod 'DIKit', :git => 'git@github.com:Liftric/DIKit.git'
+  pod 'Resolver'
 
   pod 'Firebase/Analytics'
   pod 'Firebase/Crashlytics'
