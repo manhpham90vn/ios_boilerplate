@@ -7,7 +7,7 @@
 
 @import RxSwift;
 @import RxCocoa;
-@import DIKit;
+@import Resolver;
 @import NSObject_Rx;
 @import Moya;
 @import Alamofire;

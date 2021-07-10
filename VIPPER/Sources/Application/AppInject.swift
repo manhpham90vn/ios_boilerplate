@@ -5,16 +5,21 @@
 //  Created by Manh Pham on 09/06/2021.
 //
 
-extension DependencyContainer {
-    static var authManager = module {
-        single { AuthManager() as AuthManagerInterface }
-    }
+extension Resolver: ResolverRegistering {
+    public static func registerAllServices() {
+        register {
+            AuthManager()
+        }
+        .implements(AuthManagerInterface.self)
 
-    static var restfulService = module {
-        single { RESTfulServiceComponent() as RESTfulService }
-    }
+        register {
+            RESTfulServiceComponent()
+        }
+        .implements(RESTfulService.self)
 
-    static var oauthService = module {
-        single { OAuthServiceComponent() as OAuthService }
+        register {
+            OAuthServiceComponent()
+        }
+        .implements(OAuthService.self)
     }
 }

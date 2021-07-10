@@ -7,7 +7,7 @@
 
 final class ApiConnection {
 
-    @Inject var authManager: AuthManagerInterface
+    @Injected var authManager: AuthManagerInterface
 
     static let shared = ApiConnection()
     private init() {}

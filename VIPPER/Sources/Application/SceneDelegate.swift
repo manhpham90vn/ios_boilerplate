@@ -10,7 +10,7 @@ import UIKit
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    @LazyInject var authManager: AuthManagerInterface
+    @LazyInjected var authManager: AuthManagerInterface
     
     @available(iOS 13.0, *)
     static var keyWindow: UIWindow? {

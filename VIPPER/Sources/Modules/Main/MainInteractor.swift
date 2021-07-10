@@ -15,8 +15,8 @@ protocol MainInteractorInterface {
 
 final class MainInteractor: MainInteractorInterface {
 
-    @Inject var restfulService: RESTfulService
-    @Inject var authManager: AuthManagerInterface
+    @Injected var restfulService: RESTfulService
+    @Injected var authManager: AuthManagerInterface
 
     deinit {
         LogInfo("\(type(of: self)) Deinit")
