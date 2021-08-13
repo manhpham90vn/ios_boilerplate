@@ -19,37 +19,48 @@ final class ApiProvider<Target: TargetType>: MoyaProvider<Target> {
                     .rx
                     .request(target)
                     .filterSuccessfulStatusCodes()
-                    .do(onError: { error in
-                        self.handleError(error: error)
+                    .do(onError: { [weak self] error in
+                        guard let self = self else { return }
+                        self.handleError(error: error, target: target)
                     })
                     .asObservable()
-                    .catchError { (error) -> Observable<Response> in
-                        return self.catchJustCompleted(error: error)
+                    .catchError { [weak self] (error) -> Observable<Response> in
+                        guard let self = self else { return .empty() }
+                        return self.handleRetry(error: error, target: target)
                     }
             })
-        }
+    }
     
-    private func handleError(error: Error) {
+    private func handleError(error: Error, target: Target) {
         if let error = error as? MoyaError {
             switch error {
             case .statusCode(let response):
-                if response.statusCode == 401 {
-                    LogInfo("Unauthorized")
+                guard let target = (target as? MultiTarget)?.target as? ApiRouter else { return }
+                guard target.needShowDialogWhenBadStatuCode else { return }
+                if ErrorCode(rawValue: response.statusCode)?.isError ?? false {
+                    AppHelper.shared.showAlert(title: "Đã Xảy ra lỗi", message: "Lỗi không xác định")
                 }
+            default:
+                break
+            }
+        }
+    }
+    
+    private func handleRetry(error: Error, target: Target) -> Observable<Response> {
+        guard let _target = (target as? MultiTarget)?.target as? ApiRouter else { return .empty() }
+        guard _target.canRetryRequest else { return .empty() }
+        if let error = error as? MoyaError {
+            switch error {
             case .underlying(let error, _):
                 if let error = error as? AFError {
                     switch error {
-                    case .sessionTaskFailed(let error as NSError):
-                        if error.domain == NSURLErrorDomain {
-                            switch error.code {
-                            case NSURLErrorTimedOut:
-                                LogInfo("Timeout")
-                            case NSURLErrorDataNotAllowed:
-                                LogInfo("No connect")
-                            default:
-                                break
+                    case .sessionTaskFailed:
+                        return AppHelper
+                            .shared
+                            .showAlertRx(title: "Không thể kết nối tới máy chủ", message: "Vui lòng kiểm tra kết nối và thử lại", ok: "Tải Lại")
+                            .flatMap { [weak self] in
+                                self?.request(target: target) ?? .empty()
                             }
-                        }
                     default:
                         break
                     }
@@ -58,38 +69,6 @@ final class ApiProvider<Target: TargetType>: MoyaProvider<Target> {
                 break
             }
         }
+        return .empty()
     }
-    
-    private func catchJustCompleted(error: Error) -> Observable<Response> {
-        if let error = error as? MoyaError {
-            switch error {
-            case .statusCode(let response):
-                if response.statusCode == 401 {
-                    return .empty()
-                }
-            case .underlying(let error, _):
-                if let error = error as? AFError {
-                    switch error {
-                    case .sessionTaskFailed(let error as NSError):
-                        if error.domain == NSURLErrorDomain {
-                            switch error.code {
-                            case NSURLErrorTimedOut:
-                                return .empty()
-                            case NSURLErrorDataNotAllowed:
-                                return .empty()
-                            default:
-                                break
-                            }
-                        }
-                    default:
-                        break
-                    }
-                }
-            default:
-                break
-            }
-        }
-        return .error(error)
-    }
-    
 }

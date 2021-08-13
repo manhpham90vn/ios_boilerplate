@@ -8,6 +8,14 @@
 import Foundation
 import Moya
 
+protocol RetryRequestable {
+    var canRetryRequest: Bool { get }
+}
+
+protocol ShowDialogableWhenError {
+    var needShowDialogWhenBadStatuCode: Bool { get }
+}
+
 enum ApiRouter {
     case createAccessToken(params: AccessTokenParams)
     case userReceivedEvents(params: EventParams)
@@ -82,4 +90,16 @@ extension ApiRouter: AccessTokenAuthorizable {
         }
     }
     
+}
+
+extension ApiRouter: RetryRequestable {
+    var canRetryRequest: Bool {
+        return true
+    }
+}
+
+extension ApiRouter: ShowDialogableWhenError {
+    var needShowDialogWhenBadStatuCode: Bool {
+        return true
+    }
 }

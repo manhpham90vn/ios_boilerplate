@@ -17,7 +17,7 @@ protocol MainPresenterInterface: Presenter {
 }
 
 final class MainPresenter: MainPresenterInterface, PresenterPageable {
-    
+
     unowned var view: MainViewInterface
     var router: MainRouterInterface
     var interactor: MainInteractorInterface
@@ -27,8 +27,8 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
     let trigger = PublishRelay<Void>()
     let headerRefreshTrigger = PublishRelay<Void>()
     let footerLoadMoreTrigger = PublishRelay<Void>()
-    let isEnableLoadMore = PublishRelay<Bool>()
-    let isEmptyData = PublishRelay<Bool>()
+    let isEnableLoadMore = BehaviorRelay<Bool>(value: true)
+    let isEmptyData = BehaviorRelay<Bool>(value: true)
     let headerActivityIndicator = ActivityIndicator()
     let footerActivityIndicator = ActivityIndicator()
     var currentPage = 1

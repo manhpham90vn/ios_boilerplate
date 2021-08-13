@@ -10,15 +10,15 @@ import MJRefresh
 
 class BaseCollectionViewViewController: BaseViewController, ViewControllerPageable { // swiftlint:disable:this final_class
 
-    var headerRefreshTrigger = PublishRelay<Void>()
-    var footerLoadMoreTrigger = PublishRelay<Void>()
-    var isEnableLoadMore = PublishRelay<Bool>()
-    var isEmptyData = PublishRelay<Bool>()
-    var isHeaderLoading = PublishRelay<Bool>()
-    var isFooterLoading = PublishRelay<Bool>()
+    let headerRefreshTrigger = PublishRelay<Void>()
+    let footerLoadMoreTrigger = PublishRelay<Void>()
+    let isEnableLoadMore = PublishRelay<Bool>()
+    let isEmptyData = PublishRelay<Bool>()
+    let isHeaderLoading = PublishRelay<Bool>()
+    let isFooterLoading = PublishRelay<Bool>()
     
     @IBOutlet weak var collectionView: UICollectionView!
-
+    
     override func bindDatas() {
         super.bindDatas()
                 
@@ -69,7 +69,7 @@ class BaseCollectionViewViewController: BaseViewController, ViewControllerPageab
         footer.setTitle("", for: .noMoreData)
         footer.setTitle("", for: .willRefresh)
         footer.setTitle("", for: .pulling)
-        footer.setTitle("ロード中", for: .refreshing)
+        footer.setTitle("Loading...", for: .refreshing)
         footer.setTitle("", for: .idle)
         return footer
     }
