@@ -39,8 +39,4 @@ final class LoginViewController: BaseViewController {
 
 }
 
-extension LoginViewController: LoginViewInterface {
-    func showAlert(title: String, message: String) {
-        AppHelper.shared.showAlert(title: title, message: message)
-    }
-}
+extension LoginViewController: LoginViewInterface {}

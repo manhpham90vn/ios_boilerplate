@@ -44,7 +44,7 @@ final class MainViewController: BaseTableViewViewController {
 
         Observable.just(()) ~> presenter.trigger ~ disposeBag
         presenter.bind(isLoading: isLoading)
-        presenter.bind(pageable: self)
+        presenter.bind(paggingable: self)
         presenter.elements.bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: UITableViewCell.self)) { _, element, cell in
             cell.textLabel?.text = element.repo?.name
         }
@@ -66,9 +66,4 @@ extension MainViewController: UITableViewDelegate {
     
 }
 
-extension MainViewController: MainViewInterface {
-    
-    func showAlert(title: String, message: String) {
-        AppHelper.shared.showAlert(title: title, message: message)
-    }
-}
+extension MainViewController: MainViewInterface {}

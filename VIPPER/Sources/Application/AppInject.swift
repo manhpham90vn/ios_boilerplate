@@ -11,15 +11,18 @@ extension Resolver: ResolverRegistering {
             AuthManager()
         }
         .implements(AuthManagerInterface.self)
+        .scope(.application)
 
         register {
             RESTfulServiceComponent()
         }
         .implements(RESTfulService.self)
+        .scope(.application)
 
         register {
             OAuthServiceComponent()
         }
         .implements(OAuthService.self)
+        .scope(.graph)
     }
 }

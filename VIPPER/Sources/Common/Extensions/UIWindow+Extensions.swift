@@ -10,11 +10,7 @@ import UIKit
 extension UIWindow {
     
     static var shared: UIWindow? {
-        if #available(iOS 13, *) {
-            return SceneDelegate.keyWindow
-        } else {
-            return AppDelegate.keyWindow
-        }
+        return AppDelegate.keyWindow
     }
     
 }

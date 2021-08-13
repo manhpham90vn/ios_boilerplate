@@ -51,7 +51,3 @@ exportTestFlight:
 .PHONY: open
 open:
 	xed .
-
-.PHONY: template
-template: 
-	scripts/install-xcode-template.sh

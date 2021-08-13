@@ -34,8 +34,4 @@ final class DetailViewController: BaseViewController {
     
 }
 
-extension DetailViewController: DetailViewInterface {
-    func showAlert(title: String, message: String) {
-
-    }
-}
+extension DetailViewController: DetailViewInterface {}
