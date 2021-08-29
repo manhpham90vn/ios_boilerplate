@@ -33,55 +33,111 @@ Enables monitoring of sequence computation.
 If there is at least one sequence computation in progress, `true` will be sent.
 When all activities complete `false` will be sent.
 */
+
+private enum LoadingState {
+    case isLoading(info: String)
+    case done(info: String)
+    
+    var isLoading: Bool {
+        switch self {
+        case .isLoading:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    var infoData: String {
+        switch self {
+        case let .isLoading(info):
+            return info
+        case let .done(info):
+            return info
+        }
+    }
+}
+
+extension LoadingState: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .isLoading:
+            return "\(isLoading) : \(infoData)"
+        case .done:
+            return "\(isLoading) : \(infoData)"
+        }
+    }
+}
+
+extension LoadingState: Equatable {
+    static func == (lhs: LoadingState, rhs: LoadingState) -> Bool {
+        switch (lhs, rhs) {
+        case let (.isLoading(value1), .isLoading(value2)):
+            return value1 == value2
+        case let (.done(value1), .done(value2)):
+            return value1 == value2
+        default:
+            return false
+        }
+    }
+}
+
 public class ActivityIndicator : SharedSequenceConvertibleType {
     public typealias Element = Bool
     public typealias SharingStrategy = DriverSharingStrategy
+    public static let shared = ActivityIndicator()
 
     private let _lock = NSRecursiveLock()
-    private let _relay = BehaviorRelay(value: 0)
+    private let _relay = BehaviorRelay<[String: LoadingState]>(value: [:])
     private let _loading: SharedSequence<SharingStrategy, Bool>
-    @Atomic private var isShowedLoading = false
 
     public init() {
         _loading = _relay.asDriver()
-            .map { $0 > 0 }
+            .do(onNext: { elements in
+                LogInfo(elements)
+            })
+            .map { $0.first(where: { $0.value.isLoading }) != nil }
             .distinctUntilChanged()
     }
 
-    fileprivate func trackActivityOfObservable<Source: ObservableConvertibleType>(_ source: Source, ignore: Bool) -> Observable<Source.Element> {
+    fileprivate func trackActivityOfObservable<Source: ObservableConvertibleType>(_ source: Source,
+                                                                                  isIgnore: Bool,
+                                                                                  isShowOneTime: Bool,
+                                                                                  functionName: StaticString = #function,
+                                                                                  fileName: StaticString = #file,
+                                                                                  lineNumber: Int = #line
+    ) -> Observable<Source.Element> {
         return Observable.using({ () -> ActivityToken<Source.Element> in
-            if !ignore {
-                self.increment()
+            if isIgnore {
+                return ActivityToken(source: source.asObservable(), disposeAction: {})
             }
-            let disposeAction = ignore ? {} : self.decrement
-            return ActivityToken(source: source.asObservable(), disposeAction: disposeAction)
+            let info = "\(fileName) \(functionName) \(lineNumber)"
+            let infos = self._relay.value.map { $0.value.infoData }
+            if isShowOneTime && infos.contains(info) {
+                return ActivityToken(source: source.asObservable(), disposeAction: {})
+            }
+            let id = UUID().uuidString
+            self.increment(id: id, info: info)
+            return ActivityToken(source: source.asObservable()) {
+                self.decrement(id: id, info: info)
+            }
         }) { t in
             return t.asObservable()
         }
     }
-
-    fileprivate func trackActivityOfObservableOnlyOnce<Source: ObservableConvertibleType>(_ source: Source, ignore: Bool) -> Observable<Source.Element> {
-        return Observable.using({ () -> ActivityToken<Source.Element> in
-            if !self.isShowedLoading && !ignore {
-                self.increment()
-            }
-            let disposeAction = (self.isShowedLoading && ignore) ? {} : self.decrement
-            self.isShowedLoading = true
-            return ActivityToken(source: source.asObservable(), disposeAction: disposeAction)
-        }, observableFactory: { value in
-            return value.asObservable()
-        })
-    }
     
-    private func increment() {
+    private func increment(id: String, info: String) {
         _lock.lock()
-        _relay.accept(_relay.value + 1)
+        var elements = _relay.value
+        elements[id] = .isLoading(info: info)
+        _relay.accept(elements)
         _lock.unlock()
     }
 
-    private func decrement() {
+    private func decrement(id: String, info: String) {
         _lock.lock()
-        _relay.accept(_relay.value - 1)
+        var elements = _relay.value
+        elements[id] = .done(info: info)
+        _relay.accept(elements)
         _lock.unlock()
     }
 
@@ -89,19 +145,31 @@ public class ActivityIndicator : SharedSequenceConvertibleType {
         _loading
     }
 
-    func asSignalOnErrorJustComplete() -> Signal<Element> {
+    public func asSignalOnErrorJustComplete() -> Signal<Element> {
         _loading.asSignal { _ in
             Signal.empty()
         }
     }
+    
+    public func forceStopAll() {
+        _lock.lock()
+        _relay.accept([:])
+        _lock.unlock()
+    }
 }
 
 extension ObservableConvertibleType {
-    public func trackActivity(_ activityIndicator: ActivityIndicator, ignore: Bool = false) -> Observable<Element> {
-        activityIndicator.trackActivityOfObservable(self, ignore: ignore)
-    }
-    
-    public func trackActivityOnlyOnce(_ activityIndicator: ActivityIndicator, ignore: Bool = false) -> Observable<Element> {
-        return activityIndicator.trackActivityOfObservableOnlyOnce(self, ignore: ignore)
+    public func trackActivity(_ activityIndicator: ActivityIndicator,
+                              isIgnore: Bool = false,
+                              isShowOneTime: Bool = false,
+                              functionName: StaticString = #function,
+                              fileName: StaticString = #file,
+                              lineNumber: Int = #line) -> Observable<Element> {
+        activityIndicator.trackActivityOfObservable(self,
+                                                    isIgnore: isIgnore,
+                                                    isShowOneTime: isShowOneTime,
+                                                    functionName: functionName,
+                                                    fileName: fileName,
+                                                    lineNumber: lineNumber)
     }
 }
