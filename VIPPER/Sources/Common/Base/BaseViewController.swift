@@ -8,9 +8,7 @@
 import UIKit
 
 class BaseViewController: UIViewController, HasDisposeBag { // swiftlint:disable:this final_class
-
-    let isLoading = PublishRelay<Bool>()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

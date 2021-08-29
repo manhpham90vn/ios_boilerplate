@@ -29,8 +29,6 @@ final class LoginViewController: BaseViewController {
 
     override func bindDatas() {
         super.bindDatas()
-
-        presenter.bind(isLoading: isLoading)
     }
     
     @IBAction func loginButtonTapped(_ sender: Any) {
