@@ -49,7 +49,6 @@ final class MainViewController: BaseTableViewViewController {
         super.bindDatas()
 
         Observable.just(()) ~> presenter.trigger ~ disposeBag
-        presenter.bind(isLoading: isLoading)
         presenter.bind(paggingable: self)
         presenter.elements.bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: UITableViewCell.self)) { _, element, cell in
             cell.textLabel?.text = element.repo?.name

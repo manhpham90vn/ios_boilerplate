@@ -28,8 +28,6 @@ final class DetailViewController: BaseViewController {
 
     override func bindDatas() {
         super.bindDatas()
-
-        presenter.bind(isLoading: isLoading)
     }
     
 }
