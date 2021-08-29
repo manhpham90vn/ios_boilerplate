@@ -14,6 +14,7 @@ protocol MainPresenterInterface: Presenter {
 
     func didTapLogout()
     func navigationToDetailScreen(item: Event)
+    func reload()
 }
 
 final class MainPresenter: MainPresenterInterface, PresenterPageable {
@@ -23,7 +24,7 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
     var interactor: MainInteractorInterface
 
     let elements = BehaviorRelay<[Event]>(value: [])
-    let activityIndicator = ActivityIndicator()
+    let activityIndicator = ActivityIndicator.shared
     let trigger = PublishRelay<Void>()
     let headerRefreshTrigger = PublishRelay<Void>()
     let footerLoadMoreTrigger = PublishRelay<Void>()
@@ -108,6 +109,10 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
     
     func navigationToDetailScreen(item: Event) {
         router.navigationToDetailScreen(item: item)
+    }
+    
+    func reload() {
+        trigger.accept(())
     }
 
 }

@@ -28,9 +28,15 @@ final class MainViewController: BaseTableViewViewController {
         let logOut = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         navigationItem.rightBarButtonItem = logOut
         let log = UIBarButtonItem(title: "Log", style: .plain, target: self, action: #selector(showLog))
-        navigationItem.leftBarButtonItem = log
+        let reload = UIBarButtonItem(title: "Reload", style: .plain, target: self, action: #selector(self.reload))
+        navigationItem.leftBarButtonItems = [log, reload]
     }
 
+    @objc
+    func reload() {
+        presenter.reload()
+    }
+    
     @objc
     func showLog() {
         let data = getLogFile()

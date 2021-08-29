@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class BaseViewController: UIViewController, HasDisposeBag { // swiftlint:disable:this final_class
 
@@ -19,12 +18,8 @@ class BaseViewController: UIViewController, HasDisposeBag { // swiftlint:disable
         bindDatas()
     }
 
-    func setupUI() {
+    func setupUI() {}
 
-    }
-
-    func bindDatas() {
-        isLoading ~> PKHUD.rx.isAnimating ~ disposeBag
-    }
+    func bindDatas() {}
 
 }

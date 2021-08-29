@@ -19,7 +19,7 @@ final class LoginPresenter: LoginPresenterInterface, HasDisposeBag, HasActivityI
     let router: LoginRouterInterface
     let interactor: LoginInteractorInterface
 
-    let activityIndicator = ActivityIndicator()
+    let activityIndicator = ActivityIndicator.shared
     let trigger = PublishRelay<Void>()
 
     init(view: LoginViewInterface,

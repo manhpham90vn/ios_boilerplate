@@ -26,6 +26,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
 
         LoggerSetup()
+        LoadingHelper.shared.perform()
+        
         return true
     }
 
