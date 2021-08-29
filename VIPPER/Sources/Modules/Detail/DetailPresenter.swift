@@ -19,7 +19,7 @@ final class DetailPresenter: DetailPresenterInterface, HasActivityIndicator, Has
     let router: DetailRouterInterface
     let interactor: DetailInteractorInterface
 
-    let activityIndicator = ActivityIndicator()
+    let activityIndicator = ActivityIndicator.shared
     let trigger = PublishRelay<Void>()
 
     init(view: DetailViewInterface,
