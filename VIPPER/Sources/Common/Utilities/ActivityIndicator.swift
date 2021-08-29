@@ -61,9 +61,9 @@ extension LoadingState: CustomStringConvertible {
     var description: String {
         switch self {
         case .isLoading:
-            return "\(isLoading) : \(infoData)"
+            return "\(infoData) - \(isLoading)"
         case .done:
-            return "\(isLoading) : \(infoData)"
+            return "\(infoData) - \(isLoading)"
         }
     }
 }
@@ -110,6 +110,7 @@ public class ActivityIndicator : SharedSequenceConvertibleType {
             if isIgnore {
                 return ActivityToken(source: source.asObservable(), disposeAction: {})
             }
+            let fileName = "\((String(describing: fileName) as NSString).lastPathComponent)"
             let info = "\(fileName) \(functionName) \(lineNumber)"
             let infos = self._relay.value.map { $0.value.infoData }
             if isShowOneTime && infos.contains(info) {
