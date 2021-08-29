@@ -25,19 +25,11 @@ protocol Pageable {
 
 protocol PageablePresenter {
     var isEnableLoadMore: BehaviorRelay<Bool> { get }
-    var isEmptyData: BehaviorRelay<Bool> { get }
-    var isShowEmptyViewForFirstTime: Bool { get }
 }
 
 protocol PageableViewController {
     var isEnableLoadMore: PublishRelay<Bool> { get }
     var isEmptyData: PublishRelay<Bool> { get }
-}
-
-extension PageablePresenter {
-    var isShowEmptyViewForFirstTime: Bool {
-        false
-    }
 }
 
 protocol HeaderFooterPageable {
@@ -68,16 +60,11 @@ extension Pageable where Self: PageablePresenter & HasHeaderFooterActivityIndica
         // from presenter to viewcontroller
         elements
             .map { $0.isEmpty }
-            ~> isEmptyData
+            ~> paggingable.isEmptyData
             ~ disposeBag
         
         isEnableLoadMore
             ~> paggingable.isEnableLoadMore
-            ~ disposeBag
-        
-        isEmptyData
-            .skip(isShowEmptyViewForFirstTime ? 0 : 1)
-            ~> paggingable.isEmptyData
             ~ disposeBag
         
         headerActivityIndicator
