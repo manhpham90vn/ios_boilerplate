@@ -25,7 +25,7 @@ final class ApiConnection {
             plugins.append(authPlugin)
         }
 
-        if Configs.shared.loggingEnabled {
+        if Configs.shared.loggingAPIEnabled {
             plugins.append(NetworkLoggerPlugin(configuration: .init(logOptions: .verbose)))
         }
         let apiProvider = ApiProvider<MultiTarget>(plugins: plugins)

@@ -10,13 +10,20 @@ import PKHUD
 
 final class MainViewController: BaseTableViewViewController {
 
-    var presenter: MainPresenter!
+    @Injected var presenter: MainPresenterInterface
 
     deinit {
-        LogInfo("\(type(of: self)) Deinit")
+        if Configs.shared.loggingDeinitEnabled {
+            LogInfo("\(Swift.type(of: self)) Deinit")
+        }
         LeakDetector.instance.expectDeallocate(object: presenter as AnyObject)
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        presenter.viewDidLoad(view: self)
+    }
+    
     override func setupUI() {
         super.setupUI()
 
@@ -48,6 +55,7 @@ final class MainViewController: BaseTableViewViewController {
     override func bindDatas() {
         super.bindDatas()
 
+        guard let presenter = presenter as? MainPresenter else { return }
         Observable.just(()) ~> presenter.trigger ~ disposeBag
         presenter.bind(paggingable: self)
         presenter.elements.bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: UITableViewCell.self)) { _, element, cell in
@@ -66,6 +74,7 @@ final class MainViewController: BaseTableViewViewController {
 extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let presenter = presenter as? MainPresenter else { return }
         presenter.navigationToDetailScreen(item: presenter.elements.value[indexPath.row])
     }
     

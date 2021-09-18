@@ -40,6 +40,7 @@ final class AuthManager: AuthManagerInterface {
     
     func logOut() {
         Defaults.removeAll()
+        ResolverScope.cached.reset()
     }
 
 }

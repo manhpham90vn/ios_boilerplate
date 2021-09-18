@@ -10,15 +10,18 @@ import PKHUD
 
 final class LoginViewController: BaseViewController {
     
-    var presenter: LoginPresenter!
+    @Injected var presenter: LoginPresenterInterface
 
     deinit {
-        LogInfo("\(type(of: self)) Deinit")
+        if Configs.shared.loggingDeinitEnabled {
+            LogInfo("\(Swift.type(of: self)) Deinit")
+        }
         LeakDetector.instance.expectDeallocate(object: presenter as AnyObject)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.viewDidLoad(view: self)
     }
 
     override func setupUI() {

@@ -14,7 +14,9 @@ protocol DetailInteractorInterface {
 final class DetailInteractor: DetailInteractorInterface {
 
     deinit {
-        LogInfo("\(type(of: self)) Deinit")
+        if Configs.shared.loggingDeinitEnabled {
+            LogInfo("\(Swift.type(of: self)) Deinit")
+        }
     }
 
 }

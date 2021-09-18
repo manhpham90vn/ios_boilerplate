@@ -8,26 +8,19 @@
 import UIKit
 
 protocol MainRouterInterface {
-    func navigationToDetailScreen(item: Event)
+    func navigationToDetailScreen(viewController: UIViewController, item: Event)
     func navigationToLoginScreen()
 }
 
-final class MainRouter: MainRouterInterface, Router {
-
-    unowned let viewController: MainViewController
-
-    required init(viewController: MainViewController) {
-        self.viewController = viewController
-        viewController.presenter = MainPresenter(view: viewController,
-                                                 router: self,
-                                                 interactor: MainInteractor())
-    }
-
+final class MainRouter: MainRouterInterface {
+    
     deinit {
-        LogInfo("\(type(of: self)) Deinit")
+        if Configs.shared.loggingDeinitEnabled {
+            LogInfo("\(Swift.type(of: self)) Deinit")
+        }
     }
 
-    func navigationToDetailScreen(item: Event) {
+    func navigationToDetailScreen(viewController: UIViewController, item: Event) {
         let vc = AppScenes.detail(event: item).viewController
         viewController.navigationController?.pushViewController(vc, animated: true)
     }
