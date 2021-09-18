@@ -7,11 +7,14 @@
 
 import UIKit
 
-protocol MainPresenterInterface: Presenter {
-    var view: MainViewInterface { get }
+protocol MainPresenterInterface {
+    
+    var view: MainViewInterface! { get }
     var router: MainRouterInterface { get }
     var interactor: MainInteractorInterface { get }
 
+    func viewDidLoad(view: MainViewInterface)
+    
     func didTapLogout()
     func navigationToDetailScreen(item: Event)
     func reload()
@@ -19,9 +22,9 @@ protocol MainPresenterInterface: Presenter {
 
 final class MainPresenter: MainPresenterInterface, PresenterPageable {
 
-    unowned var view: MainViewInterface
-    var router: MainRouterInterface
-    var interactor: MainInteractorInterface
+    unowned var view: MainViewInterface!
+    @Injected var router: MainRouterInterface
+    @Injected var interactor: MainInteractorInterface
 
     let elements = BehaviorRelay<[Event]>(value: [])
     let activityIndicator = ActivityIndicator.shared
@@ -34,19 +37,15 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
     let footerActivityIndicator = ActivityIndicator()
     var currentPage = 1
 
-    internal init(view: MainViewInterface, router: MainRouterInterface, interactor: MainInteractorInterface) {
-        self.view = view
-        self.router = router
-        self.interactor = interactor
-
+    init() {
         trigger
             .flatMapLatest { [weak self] () -> Driver<[Event]> in
                 guard let self = self else { return .never() }
-                guard let userName = interactor.getLoginedUser() else { return .never() }
+                guard let userName = self.interactor.getLoginedUser() else { return .never() }
                 self.currentPage = 1
                 self.isEnableLoadMore.accept(true)
                 let params = EventParams(username: userName, page: self.currentPage)
-                return interactor
+                return self.interactor
                     .getUserReceivedEvents(params: params)
                     .trackActivity(self.activityIndicator)
                     .debugToFile()
@@ -58,11 +57,11 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
         headerRefreshTrigger
             .flatMapLatest { [weak self] () -> Driver<[Event]> in
                 guard let self = self else { return .never() }
-                guard let userName = interactor.getLoginedUser() else { return .never() }
+                guard let userName = self.interactor.getLoginedUser() else { return .never() }
                 self.currentPage = 1
                 self.isEnableLoadMore.accept(true)
                 let params = EventParams(username: userName, page: self.currentPage)
-                return interactor
+                return self.interactor
                     .getUserReceivedEvents(params: params)
                     .trackActivity(self.headerActivityIndicator)
                     .asDriverOnErrorJustComplete()
@@ -73,10 +72,10 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
         footerLoadMoreTrigger
             .flatMapLatest { [weak self] () -> Driver<[Event]> in
                 guard let self = self else { return .never() }
-                guard let userName = interactor.getLoginedUser() else { return .never() }
+                guard let userName = self.interactor.getLoginedUser() else { return .never() }
                 self.currentPage += 1
                 let params = EventParams(username: userName, page: self.currentPage)
-                return interactor
+                return self.interactor
                     .getUserReceivedEvents(params: params)
                     .trackActivity(self.footerActivityIndicator)
                     .asDriverOnErrorJustComplete()
@@ -96,8 +95,14 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
             ~ disposeBag
     }
 
+    func viewDidLoad(view: MainViewInterface) {
+        self.view = view
+    }
+    
     deinit {
-        LogInfo("\(type(of: self)) Deinit")
+        if Configs.shared.loggingDeinitEnabled {
+            LogInfo("\(Swift.type(of: self)) Deinit")
+        }
         LeakDetector.instance.expectDeallocate(object: router as AnyObject)
         LeakDetector.instance.expectDeallocate(object: interactor as AnyObject)
     }
@@ -108,7 +113,8 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
     }
     
     func navigationToDetailScreen(item: Event) {
-        router.navigationToDetailScreen(item: item)
+        guard let view = view as? UIViewController else { return }
+        router.navigationToDetailScreen(viewController: view, item: item)
     }
     
     func reload() {

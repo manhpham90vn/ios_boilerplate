@@ -22,7 +22,9 @@ final class LoginInteractor: LoginInteractorInterface {
     @Injected var authManager: AuthManagerInterface
 
     deinit {
-        LogInfo("\(type(of: self)) Deinit")
+        if Configs.shared.loggingDeinitEnabled {
+            LogInfo("\(Swift.type(of: self)) Deinit")
+        }
     }
             
     func getURLAuthen() -> Observable<URL> {

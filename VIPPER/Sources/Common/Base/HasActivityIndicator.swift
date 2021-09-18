@@ -8,7 +8,6 @@
 import Foundation
 
 protocol HasActivityIndicator {
-    associatedtype ElementType
-    var trigger: PublishRelay<ElementType> { get }
+    var trigger: PublishRelay<Void> { get }
     var activityIndicator: ActivityIndicator { get }
 }

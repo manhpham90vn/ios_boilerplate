@@ -12,19 +12,12 @@ protocol DetailRouterInterface {
 
 }
 
-final class DetailRouter: DetailRouterInterface, Router {
-
-    unowned let viewController: DetailViewController
-
-    required init(viewController: DetailViewController) {
-        self.viewController = viewController
-        viewController.presenter = DetailPresenter(view: viewController,
-                                                   router: self,
-                                                   interactor: DetailInteractor())
-    }
+final class DetailRouter: DetailRouterInterface {
 
     deinit {
-        LogInfo("\(type(of: self)) Deinit")
+        if Configs.shared.loggingDeinitEnabled {
+            LogInfo("\(Swift.type(of: self)) Deinit")
+        }
     }
 
 }

@@ -20,7 +20,7 @@ func LoggerSetup() {
     #if DEBUG
     let logLevel = XCGLogger.Level.debug
     #else
-    let logLevel = XCGLogger.Level.debug
+    let logLevel = XCGLogger.Level.none
     #endif
     
     let fileDestination = FileDestination(writeToFile: file, identifier: "advancedLogger.fileDestination")

@@ -93,7 +93,9 @@ public class ActivityIndicator : SharedSequenceConvertibleType {
     public init() {
         _loading = _relay.asDriver()
             .do(onNext: { elements in
-                LogInfo(elements)
+                if Configs.shared.loggingLoadingEnabled {
+                    LogInfo(elements)
+                }
             })
             .map { $0.first(where: { $0.value.isLoading }) != nil }
             .distinctUntilChanged()

@@ -1,7 +1,5 @@
 .DEFAULT_GOAL := all
 
-PROJECT_PATH=./
-
 .PHONY: all
 all: install generate installPods open
 
@@ -19,7 +17,7 @@ installBundle:
 .PHONY: generate
 generate: swiftgen xcodegen
 swiftgen:
-	touch $(PROJECT_PATH)/Sources/Resources/Generated/SwiftGen/Assets.swift
+	mkdir -p Sources/Resources/Generated/SwiftGen
 	mint run swiftgen
 xcodegen: 
 	mint run xcodegen generate --spec project.yml	

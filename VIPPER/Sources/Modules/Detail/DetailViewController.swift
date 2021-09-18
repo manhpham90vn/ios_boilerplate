@@ -9,17 +9,18 @@ import UIKit
 
 final class DetailViewController: BaseViewController {
 
-    var presenter: DetailPresenter!
+    @Injected var presenter: DetailPresenterInterface
 
     deinit {
-        LogInfo("\(type(of: self)) Deinit")
+        if Configs.shared.loggingDeinitEnabled {
+            LogInfo("\(Swift.type(of: self)) Deinit")
+        }
         LeakDetector.instance.expectDeallocate(object: presenter as AnyObject)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        presenter.viewDidLoad(view: self)
     }
 
     override func setupUI() {

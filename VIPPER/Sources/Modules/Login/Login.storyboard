@@ -12,7 +12,7 @@
         <!--Login View Controller-->
         <scene sceneID="AEv-x9-ed7">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="sFI-8n-key" customClass="LoginViewController" customModule="MVC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="sFI-8n-key" customClass="LoginViewController" customModule="My_App_Debug" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aYe-0q-JB1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

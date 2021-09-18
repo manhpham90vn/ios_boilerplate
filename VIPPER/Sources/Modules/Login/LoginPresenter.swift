@@ -5,37 +5,36 @@
 //  Created by Manh Pham on 3/4/21.
 //
 
-protocol LoginPresenterInterface: Presenter {
-    var view: LoginViewInterface { get }
+protocol LoginPresenterInterface {
+    var view: LoginViewInterface! { get }
     var router: LoginRouterInterface { get }
     var interactor: LoginInteractorInterface { get }
     
+    func viewDidLoad(view: LoginViewInterface)
     func didTapLoginButton()
 }
 
 final class LoginPresenter: LoginPresenterInterface, HasDisposeBag, HasActivityIndicator {
 
-    unowned let view: LoginViewInterface
-    let router: LoginRouterInterface
-    let interactor: LoginInteractorInterface
+    unowned var view: LoginViewInterface!
+    @Injected var router: LoginRouterInterface
+    @Injected var interactor: LoginInteractorInterface
 
     let activityIndicator = ActivityIndicator.shared
     let trigger = PublishRelay<Void>()
 
-    init(view: LoginViewInterface,
-         router: LoginRouterInterface,
-         interactor: LoginInteractorInterface) {
-        self.view = view
-        self.router = router
-        self.interactor = interactor
-    }
-
     deinit {
-        LogInfo("\(type(of: self)) Deinit")
+        if Configs.shared.loggingDeinitEnabled {
+            LogInfo("\(Swift.type(of: self)) Deinit")
+        }
         LeakDetector.instance.expectDeallocate(object: router as AnyObject)
         LeakDetector.instance.expectDeallocate(object: interactor as AnyObject)
     }
 
+    func viewDidLoad(view: LoginViewInterface) {
+        self.view = view
+    }
+    
     func didTapLoginButton() {
         interactor
             .getURLAuthen()

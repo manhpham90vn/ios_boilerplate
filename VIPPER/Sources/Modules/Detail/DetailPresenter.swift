@@ -7,31 +7,31 @@
 
 import Foundation
 
-protocol DetailPresenterInterface: Presenter {
-    var view: DetailViewInterface { get }
+protocol DetailPresenterInterface {
+    var view: DetailViewInterface! { get }
     var router: DetailRouterInterface { get }
     var interactor: DetailInteractorInterface { get }
+    
+    func viewDidLoad(view: DetailViewInterface)
 }
 
 final class DetailPresenter: DetailPresenterInterface, HasActivityIndicator, HasDisposeBag {
 
-    unowned let view: DetailViewInterface
-    let router: DetailRouterInterface
-    let interactor: DetailInteractorInterface
+    unowned var view: DetailViewInterface!
+    @Injected var router: DetailRouterInterface
+    @Injected var interactor: DetailInteractorInterface
 
     let activityIndicator = ActivityIndicator.shared
     let trigger = PublishRelay<Void>()
 
-    init(view: DetailViewInterface,
-         router: DetailRouterInterface,
-         interactor: DetailInteractorInterface) {
+    func viewDidLoad(view: DetailViewInterface) {
         self.view = view
-        self.router = router
-        self.interactor = interactor
     }
-
+    
     deinit {
-        LogInfo("\(type(of: self)) Deinit")
+        if Configs.shared.loggingDeinitEnabled {
+            LogInfo("\(Swift.type(of: self)) Deinit")
+        }
         LeakDetector.instance.expectDeallocate(object: router as AnyObject)
         LeakDetector.instance.expectDeallocate(object: interactor as AnyObject)
     }

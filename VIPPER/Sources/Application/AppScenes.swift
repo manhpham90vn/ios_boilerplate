@@ -14,14 +14,14 @@ enum AppScenes {
         switch self {
         case .main:
             let vc = StoryboardScene.Home.initialScene.instantiate()
-            return MainRouter(viewController: vc).viewController
+            return vc
         case .login:
             let vc = StoryboardScene.Login.initialScene.instantiate()
-            return LoginRouter(viewController: vc).viewController
+            return vc
         case let .detail(event):
             let vc = StoryboardScene.Detail.initialScene.instantiate()
             vc.title = event.repo?.name
-            return DetailRouter(viewController: vc).viewController
+            return vc
         }
     }
 }
