@@ -7,5 +7,4 @@
 
 import UIKit
 
-protocol LoginViewInterface: BaseView {
-}
+protocol LoginViewInterface: BaseView {}
