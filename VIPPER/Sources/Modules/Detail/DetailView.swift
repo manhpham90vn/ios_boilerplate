@@ -7,5 +7,4 @@
 
 import Foundation
 
-protocol DetailViewInterface: BaseView {
-}
+protocol DetailViewInterface: BaseView {}

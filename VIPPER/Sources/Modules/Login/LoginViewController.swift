@@ -8,6 +8,8 @@
 import UIKit
 import PKHUD
 
+
+
 final class LoginViewController: BaseViewController {
     
     @Injected var presenter: LoginPresenterInterface
@@ -21,9 +23,9 @@ final class LoginViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.viewDidLoad(view: self)
+        presenter.inject(view: self)
     }
-
+    
     override func setupUI() {
         super.setupUI()
 

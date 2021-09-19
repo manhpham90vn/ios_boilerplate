@@ -8,7 +8,7 @@
 enum AppScenes {
     case main
     case login
-    case detail(event: Event)
+    case detail(params: DetailViewControllerParams)
 
     var viewController: UIViewController {
         switch self {
@@ -18,9 +18,9 @@ enum AppScenes {
         case .login:
             let vc = StoryboardScene.Login.initialScene.instantiate()
             return vc
-        case let .detail(event):
+        case let .detail(params):
             let vc = StoryboardScene.Detail.initialScene.instantiate()
-            vc.title = event.repo?.name
+            vc.inject(params: params)
             return vc
         }
     }

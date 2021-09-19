@@ -7,9 +7,14 @@
 
 import UIKit
 
+struct DetailViewControllerParams {
+    var event: Event
+}
+
 final class DetailViewController: BaseViewController {
 
     @Injected var presenter: DetailPresenterInterface
+    private var params: DetailViewControllerParams?
 
     deinit {
         if Configs.shared.loggingDeinitEnabled {
@@ -20,11 +25,17 @@ final class DetailViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.viewDidLoad(view: self)
+        presenter.inject(view: self)
     }
 
+    func inject(params: DetailViewControllerParams) {
+        self.params = params
+    }
+    
     override func setupUI() {
         super.setupUI()
+        
+        navigationItem.title = params?.event.repo?.name
     }
 
     override func bindDatas() {

@@ -9,11 +9,18 @@ import Foundation
 import UIKit
 
 protocol DetailRouterInterface {
-
+    var view: DetailViewInterface? { get }
+    func inject(view: DetailViewInterface)
 }
 
 final class DetailRouter: DetailRouterInterface {
 
+    weak var view: DetailViewInterface?
+    
+    func inject(view: DetailViewInterface) {
+        self.view = view
+    }
+    
     deinit {
         if Configs.shared.loggingDeinitEnabled {
             LogInfo("\(Swift.type(of: self)) Deinit")
