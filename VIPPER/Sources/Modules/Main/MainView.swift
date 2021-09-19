@@ -7,5 +7,4 @@
 
 import Foundation
 
-protocol MainViewInterface: BaseView {
-}
+protocol MainViewInterface: BaseView {}
