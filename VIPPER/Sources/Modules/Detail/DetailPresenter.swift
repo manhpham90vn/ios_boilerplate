@@ -8,24 +8,24 @@
 import Foundation
 
 protocol DetailPresenterInterface {
-    var view: DetailViewInterface! { get }
+    var view: DetailViewInterface? { get }
     var router: DetailRouterInterface { get }
     var interactor: DetailInteractorInterface { get }
-    
-    func viewDidLoad(view: DetailViewInterface)
+    func inject(view: DetailViewInterface)
 }
 
 final class DetailPresenter: DetailPresenterInterface, HasActivityIndicator, HasDisposeBag {
 
-    unowned var view: DetailViewInterface!
+    weak var view: DetailViewInterface?
     @Injected var router: DetailRouterInterface
     @Injected var interactor: DetailInteractorInterface
 
     let activityIndicator = ActivityIndicator.shared
     let trigger = PublishRelay<Void>()
 
-    func viewDidLoad(view: DetailViewInterface) {
+    func inject(view: DetailViewInterface) {
         self.view = view
+        self.router.inject(view: view)
     }
     
     deinit {

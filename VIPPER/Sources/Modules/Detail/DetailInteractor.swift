@@ -7,9 +7,7 @@
 
 import Foundation
 
-protocol DetailInteractorInterface {
-
-}
+protocol DetailInteractorInterface {}
 
 final class DetailInteractor: DetailInteractorInterface {
 

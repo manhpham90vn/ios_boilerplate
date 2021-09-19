@@ -8,11 +8,20 @@
 import UIKit
 
 protocol MainRouterInterface {
-    func navigationToDetailScreen(viewController: UIViewController, item: Event)
+    var view: MainViewInterface? { get }
+    func inject(view: MainViewInterface)
+    
+    func navigationToDetailScreen(item: Event)
     func navigationToLoginScreen()
 }
 
 final class MainRouter: MainRouterInterface {
+    
+    weak var view: MainViewInterface?
+    
+    func inject(view: MainViewInterface) {
+        self.view = view
+    }
     
     deinit {
         if Configs.shared.loggingDeinitEnabled {
@@ -20,8 +29,9 @@ final class MainRouter: MainRouterInterface {
         }
     }
 
-    func navigationToDetailScreen(viewController: UIViewController, item: Event) {
-        let vc = AppScenes.detail(event: item).viewController
+    func navigationToDetailScreen(item: Event) {
+        guard let viewController = view as? MainViewController else { return }
+        let vc = AppScenes.detail(params: .init(event: item)).viewController
         viewController.navigationController?.pushViewController(vc, animated: true)
     }
     

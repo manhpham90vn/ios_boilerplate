@@ -6,17 +6,17 @@
 //
 
 protocol LoginPresenterInterface {
-    var view: LoginViewInterface! { get }
+    var view: LoginViewInterface? { get }
     var router: LoginRouterInterface { get }
     var interactor: LoginInteractorInterface { get }
+    func inject(view: LoginViewInterface)
     
-    func viewDidLoad(view: LoginViewInterface)
     func didTapLoginButton()
 }
 
 final class LoginPresenter: LoginPresenterInterface, HasDisposeBag, HasActivityIndicator {
 
-    unowned var view: LoginViewInterface!
+    weak var view: LoginViewInterface?
     @Injected var router: LoginRouterInterface
     @Injected var interactor: LoginInteractorInterface
 
@@ -31,8 +31,9 @@ final class LoginPresenter: LoginPresenterInterface, HasDisposeBag, HasActivityI
         LeakDetector.instance.expectDeallocate(object: interactor as AnyObject)
     }
 
-    func viewDidLoad(view: LoginViewInterface) {
+    func inject(view: LoginViewInterface) {
         self.view = view
+        self.router.inject(view: view)
     }
     
     func didTapLoginButton() {
@@ -42,7 +43,7 @@ final class LoginPresenter: LoginPresenterInterface, HasDisposeBag, HasActivityI
             .flatMapLatest({ [weak self] url -> Driver<Token> in // need weak self here becase interactor have strong reference to AuthenticationServices
                 guard let self = self else { return .empty() }
                 guard let code = url.queryParameters?["code"] else {
-                    self.view.showAlert(title: "Error", message: "Can not get code")
+                    self.view?.showAlert(title: "Error", message: "Can not get code")
                     return .empty()
                 }
                 let params = AccessTokenParams(clientId: Configs.shared.env.clientID,
@@ -51,7 +52,7 @@ final class LoginPresenter: LoginPresenterInterface, HasDisposeBag, HasActivityI
                 return self.interactor.createAccessToken(params: params)
                     .trackActivity(self.activityIndicator)
                     .do(onError: { error in
-                        self.view.showAlert(title: "Error", message: error.localizedDescription)
+                        self.view?.showAlert(title: "Error", message: error.localizedDescription)
                     })
                     .asDriver(onErrorDriveWith: .empty())
             })
@@ -60,7 +61,7 @@ final class LoginPresenter: LoginPresenterInterface, HasDisposeBag, HasActivityI
                 if let token = token.accessToken {
                     self.interactor.saveToken(token: token)
                 } else {
-                    self.view.showAlert(title: "Error", message: "Can not get access token")
+                    self.view?.showAlert(title: "Error", message: "Can not get access token")
                 }
             })
             .asDriver(onErrorDriveWith: .empty())
@@ -68,7 +69,7 @@ final class LoginPresenter: LoginPresenterInterface, HasDisposeBag, HasActivityI
                 return self.interactor.getInfo()
                     .trackActivity(self.activityIndicator)
                     .do(onError: { error in
-                        self.view.showAlert(title: "Error", message: error.localizedDescription)
+                        self.view?.showAlert(title: "Error", message: error.localizedDescription)
                     })
                     .asDriver(onErrorDriveWith: .empty())
             })

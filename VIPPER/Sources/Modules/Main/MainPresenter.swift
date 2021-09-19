@@ -9,11 +9,10 @@ import UIKit
 
 protocol MainPresenterInterface {
     
-    var view: MainViewInterface! { get }
+    var view: MainViewInterface? { get }
     var router: MainRouterInterface { get }
     var interactor: MainInteractorInterface { get }
-
-    func viewDidLoad(view: MainViewInterface)
+    func inject(view: MainViewInterface)
     
     func didTapLogout()
     func navigationToDetailScreen(item: Event)
@@ -22,7 +21,7 @@ protocol MainPresenterInterface {
 
 final class MainPresenter: MainPresenterInterface, PresenterPageable {
 
-    unowned var view: MainViewInterface!
+    weak var view: MainViewInterface?
     @Injected var router: MainRouterInterface
     @Injected var interactor: MainInteractorInterface
 
@@ -95,8 +94,9 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
             ~ disposeBag
     }
 
-    func viewDidLoad(view: MainViewInterface) {
+    func inject(view: MainViewInterface) {
         self.view = view
+        self.router.inject(view: view)
     }
     
     deinit {
@@ -113,8 +113,7 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
     }
     
     func navigationToDetailScreen(item: Event) {
-        guard let view = view as? UIViewController else { return }
-        router.navigationToDetailScreen(viewController: view, item: item)
+        router.navigationToDetailScreen(item: item)
     }
     
     func reload() {
