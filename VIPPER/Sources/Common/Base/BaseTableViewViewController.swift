@@ -33,13 +33,13 @@ class BaseTableViewViewController: BaseViewController, ViewControllerPageable { 
         super.bindDatas()
         
         // header
-        tableView.mj_header = tableViewHeader()
+        tableView.mj_header = viewForHeaderOfTableView()
         isHeaderLoading
             .bind(to: rx.isAnimatingHeader)
             .disposed(by: disposeBag)
         
         // footer
-        tableView.mj_footer = tableViewFooter()
+        tableView.mj_footer = viewForFooterOfTableView()
 
         // check logic animation footer
         Observable
@@ -62,7 +62,7 @@ class BaseTableViewViewController: BaseViewController, ViewControllerPageable { 
             .disposed(by: disposeBag)
     }
     
-    func tableViewHeader() -> MJRefreshHeader? {
+    func viewForHeaderOfTableView() -> MJRefreshHeader? {
         let header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
             self?.headerRefreshTrigger.accept(())
         })
@@ -71,7 +71,7 @@ class BaseTableViewViewController: BaseViewController, ViewControllerPageable { 
         return header
     }
     
-    func tableViewFooter() -> MJRefreshFooter? {
+    func viewForFooterOfTableView() -> MJRefreshFooter? {
         let footer = MJRefreshAutoNormalFooter(refreshingBlock: { [weak self] in
             self?.footerLoadMoreTrigger.accept(())
         })
@@ -83,12 +83,12 @@ class BaseTableViewViewController: BaseViewController, ViewControllerPageable { 
         return footer
     }
     
-    func tableViewNoData() -> UIView {
+    func viewForEmptyDataOfTableView() -> UIView {
         return UIView()
     }
     
     fileprivate func setNoDataView() {
-        tableView.backgroundView = tableViewNoData()
+        tableView.backgroundView = viewForEmptyDataOfTableView()
     }
     
     fileprivate func removeNoDataView() {
