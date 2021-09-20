@@ -30,6 +30,13 @@ protocol HasPresenterPagging {
     var headerActivityIndicator: ActivityIndicator { get }
     var footerActivityIndicator: ActivityIndicator { get }
     var isEnableLoadMore: BehaviorRelay<Bool> { get }
+    
+    // optinal override if you want in presenter
+    func bind(paggingable: ViewControllerPageable)
+    func bindTrigger(paggingable: ViewControllerPageable)
+    func mapEmptyData(paggingable: ViewControllerPageable)
+    func mapEnableLoadMore(paggingable: ViewControllerPageable)
+    func bindActivityIndicator(paggingable: ViewControllerPageable)
 }
 
 protocol HasViewControllerPagging {
@@ -40,9 +47,18 @@ protocol HasViewControllerPagging {
 }
 
 extension HasPresenterPagging where Self: HasHeaderFooterTrigger & HasDisposeBag & HasActivityIndicator {
-    func bind<ViewController>(paggingable: ViewController) where ViewController: ViewControllerPageable {
+    func bind(paggingable: ViewControllerPageable) {
 
-        // from viewcontroller to presenter
+        // viewcontroller trigger to presenter
+        bindTrigger(paggingable: paggingable)
+
+        // from presenter to viewcontroller
+        mapEmptyData(paggingable: paggingable)
+        mapEnableLoadMore(paggingable: paggingable)
+        bindActivityIndicator(paggingable: paggingable)
+    }
+
+    func bindTrigger(paggingable: ViewControllerPageable) {
         paggingable.headerRefreshTrigger
             ~> headerRefreshTrigger
             ~ disposeBag
@@ -50,22 +66,27 @@ extension HasPresenterPagging where Self: HasHeaderFooterTrigger & HasDisposeBag
         paggingable.footerLoadMoreTrigger
             ~> footerLoadMoreTrigger
             ~ disposeBag
+    }
 
-        // from presenter to viewcontroller
+    func mapEmptyData(paggingable: ViewControllerPageable) {
         elements
             .map { $0.isEmpty }
             ~> paggingable.isEmptyData
             ~ disposeBag
-        
+    }
+
+    func mapEnableLoadMore(paggingable: ViewControllerPageable) {
         isEnableLoadMore
             ~> paggingable.isEnableLoadMore
             ~ disposeBag
-        
+    }
+
+    func bindActivityIndicator(paggingable: ViewControllerPageable) {
         headerActivityIndicator
             .asSignalOnErrorJustComplete()
             ~> paggingable.isHeaderLoading
             ~ disposeBag
-        
+
         footerActivityIndicator
             .asSignalOnErrorJustComplete()
             ~> paggingable.isFooterLoading
