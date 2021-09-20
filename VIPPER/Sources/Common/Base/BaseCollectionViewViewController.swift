@@ -78,17 +78,17 @@ class BaseCollectionViewViewController: BaseViewController, ViewControllerPageab
         return UIView()
     }
     
-    func setNoDataView() {
+    fileprivate func setNoDataView() {
         collectionView.backgroundView = viewForEmptyDataOfCollectionView()
     }
     
-    func removeNoDataView() {
+    fileprivate func removeNoDataView() {
         collectionView.backgroundView = nil
     }
     
 }
 
-extension Reactive where Base: BaseCollectionViewViewController {
+fileprivate extension Reactive where Base: BaseCollectionViewViewController {
     
     var isEnableLoadMoreBinder: Binder<Bool> {
         return Binder(base) { viewController, enable in

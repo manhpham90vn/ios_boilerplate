@@ -37,7 +37,7 @@ final class ApiProvider<Target: TargetType>: MoyaProvider<Target> {
             case .statusCode(let response):
                 guard let target = (target as? MultiTarget)?.target as? ApiRouter else { return }
                 guard target.needShowDialogWhenBadStatuCode else { return }
-                if ErrorCode(rawValue: response.statusCode)?.isError ?? false {
+                if HTTPStatusCode(rawValue: response.statusCode)?.isError ?? false {
                     AppHelper.shared.showAlert(title: "Đã Xảy ra lỗi", message: "Lỗi không xác định")
                 }
             default:

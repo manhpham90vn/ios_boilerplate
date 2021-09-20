@@ -97,7 +97,7 @@ class BaseTableViewViewController: BaseViewController, ViewControllerPageable { 
     
 }
 
-extension Reactive where Base: BaseTableViewViewController {
+fileprivate extension Reactive where Base: BaseTableViewViewController {
     
     var isEnableLoadMoreBinder: Binder<Bool> {
         return Binder(base) { viewController, enable in
