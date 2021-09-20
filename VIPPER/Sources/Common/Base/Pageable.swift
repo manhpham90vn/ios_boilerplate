@@ -40,7 +40,7 @@ protocol HasViewControllerPagging {
 }
 
 extension HasPresenterPagging where Self: HasHeaderFooterTrigger & HasDisposeBag & HasActivityIndicator {
-    func bind<T>(paggingable: T) where T: ViewControllerPageable {
+    func bind<ViewController>(paggingable: ViewController) where ViewController: ViewControllerPageable {
 
         // from viewcontroller to presenter
         paggingable.headerRefreshTrigger
