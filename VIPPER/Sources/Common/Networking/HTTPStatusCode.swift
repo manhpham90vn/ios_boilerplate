@@ -1,5 +1,5 @@
 //
-//  ErrorCode.swift
+//  HTTPStatusCode.swift
 //  StoryApp
 //
 //  Created by Manh Pham on 7/24/21.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ErrorCode: Int, CaseIterable {
+enum HTTPStatusCode: Int, CaseIterable {
     case success = 200
     case unauthorized = 401
     case forbidden = 403

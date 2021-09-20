@@ -31,7 +31,7 @@ protocol HasPresenterPagging {
     var footerActivityIndicator: ActivityIndicator { get }
     var isEnableLoadMore: BehaviorRelay<Bool> { get }
     
-    // optinal override if you want in presenter
+    // optional override if you want in presenter
     func bind(paggingable: ViewControllerPageable)
     func bindTrigger(paggingable: ViewControllerPageable)
     func mapEmptyData(paggingable: ViewControllerPageable)
