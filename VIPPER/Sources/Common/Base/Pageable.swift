@@ -7,45 +7,39 @@
 
 import Foundation
 
-typealias PresenterPageable = Pageable
-    & PageablePresenter
-    & HasHeaderFooterActivityIndicator
-    & HasActivityIndicator
+// view controller
+typealias ViewControllerPageable = HasViewControllerPagging
+    & HasHeaderFooterTrigger
+
+// presenter
+typealias PresenterPageable = HasPresenterPagging
+    & HasHeaderFooterTrigger
     & HasDisposeBag
+    & HasActivityIndicator
 
-typealias ViewControllerPageable = Pageable
-    & PageableViewController
-    & HeaderFooterPageable
-
-protocol Pageable {
+protocol HasHeaderFooterTrigger {
     // trigger when pull to refresh and loadmore
     var headerRefreshTrigger: PublishRelay<Void> { get }
     var footerLoadMoreTrigger: PublishRelay<Void> { get }
 }
 
-protocol PageablePresenter {
-    var isEnableLoadMore: BehaviorRelay<Bool> { get }
-}
-
-protocol PageableViewController {
-    var isEnableLoadMore: PublishRelay<Bool> { get }
-    var isEmptyData: PublishRelay<Bool> { get }
-}
-
-protocol HeaderFooterPageable {
-    var isHeaderLoading: PublishRelay<Bool> { get }
-    var isFooterLoading: PublishRelay<Bool> { get }
-}
-
-protocol HasHeaderFooterActivityIndicator {
+protocol HasPresenterPagging {
     associatedtype Element
     var currentPage: Int { get set }
     var elements: BehaviorRelay<[Element]> { get }
     var headerActivityIndicator: ActivityIndicator { get }
     var footerActivityIndicator: ActivityIndicator { get }
+    var isEnableLoadMore: BehaviorRelay<Bool> { get }
 }
 
-extension Pageable where Self: PageablePresenter & HasHeaderFooterActivityIndicator & HasDisposeBag {
+protocol HasViewControllerPagging {
+    var isEnableLoadMore: PublishRelay<Bool> { get }
+    var isEmptyData: PublishRelay<Bool> { get }
+    var isHeaderLoading: PublishRelay<Bool> { get }
+    var isFooterLoading: PublishRelay<Bool> { get }
+}
+
+extension HasPresenterPagging where Self: HasHeaderFooterTrigger & HasDisposeBag & HasActivityIndicator {
     func bind<T>(paggingable: T) where T: ViewControllerPageable {
 
         // from viewcontroller to presenter
