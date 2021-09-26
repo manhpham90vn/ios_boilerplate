@@ -33,3 +33,11 @@ final class LoginRouter: LoginRouterInterface {
     }
 
 }
+
+extension LoginRouter: ResolverRegistering {
+    static func registerAllServices() {
+        Resolver.register { LoginInteractor() as LoginInteractorInterface }
+        Resolver.register { LoginRouter() as LoginRouterInterface }
+        Resolver.register { LoginPresenter() as LoginPresenterInterface }
+    }
+}
