@@ -28,3 +28,11 @@ final class DetailRouter: DetailRouterInterface {
     }
 
 }
+
+extension DetailRouter: ResolverRegistering {
+    static func registerAllServices() {
+        Resolver.register { DetailInteractor() as DetailInteractorInterface }
+        Resolver.register { DetailRouter() as DetailRouterInterface }
+        Resolver.register { DetailPresenter() as DetailPresenterInterface }
+    }
+}

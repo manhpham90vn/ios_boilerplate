@@ -40,3 +40,11 @@ final class MainRouter: MainRouterInterface {
     }
 
 }
+
+extension MainRouter: ResolverRegistering {
+    static func registerAllServices() {
+        Resolver.register { MainInteractor() as MainInteractorInterface }
+        Resolver.register { MainRouter() as MainRouterInterface }
+        Resolver.register { MainPresenter() as MainPresenterInterface }
+    }
+}
