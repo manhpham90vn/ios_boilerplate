@@ -1,6 +1,8 @@
 # iOS-Architecture
 A collection of iOS architectures - MVC, MVP, MVVM, VIPER, RIBs and many others
 
+Use template here to generate faster https://github.com/manhpham90vn/XCTemplate
+
 | Example | Description |
 | ------------- | ------------- |
 | MVC | Done |
