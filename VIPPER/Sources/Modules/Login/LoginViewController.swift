@@ -8,8 +8,6 @@
 import UIKit
 import PKHUD
 
-
-
 final class LoginViewController: BaseViewController {
     
     @Injected var presenter: LoginPresenterInterface

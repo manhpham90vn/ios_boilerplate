@@ -40,45 +40,21 @@ final class LoginPresenter: LoginPresenterInterface, HasDisposeBag, HasActivityI
         interactor
             .getURLAuthen()
             .trackActivity(activityIndicator)
-            .flatMapLatest({ [weak self] url -> Driver<Token> in // need weak self here becase interactor have strong reference to AuthenticationServices
+            .flatMap { [weak self] url -> Observable<Void> in
                 guard let self = self else { return .empty() }
-                guard let code = url.queryParameters?["code"] else {
-                    self.view?.showAlert(title: "Error", message: "Can not get code")
-                    return .empty()
-                }
-                let params = AccessTokenParams(clientId: Configs.shared.env.clientID,
-                                               clientSecret: Configs.shared.env.clientSecrets,
-                                               code: code)
-                return self.interactor.createAccessToken(params: params)
-                    .trackActivity(self.activityIndicator)
-                    .do(onError: { error in
-                        self.view?.showAlert(title: "Error", message: error.localizedDescription)
-                    })
-                    .asDriver(onErrorDriveWith: .empty())
+                return self.interactor.login(url: url).trackActivity(self.activityIndicator)
+            }
+            .do(onError: { [weak self] error in
+                guard let self = self else { return }
+                guard let error = error as? LoginUseCaseError else { return }
+                self.view?.showAlert(title: "Error", message: error.message)
             })
-            .asDriver(onErrorDriveWith: .empty())
-            .do(onNext: { token in
-                if let token = token.accessToken {
-                    self.interactor.saveToken(token: token)
-                } else {
-                    self.view?.showAlert(title: "Error", message: "Can not get access token")
-                }
-            })
-            .asDriver(onErrorDriveWith: .empty())
-            .flatMap({ _ -> Driver<User> in
-                return self.interactor.getInfo()
-                    .trackActivity(self.activityIndicator)
-                    .do(onError: { error in
-                        self.view?.showAlert(title: "Error", message: error.localizedDescription)
-                    })
-                    .asDriver(onErrorDriveWith: .empty())
-            })
-            .drive(onNext: { user in
-                self.interactor.saveUserInfo(user: user)
+            .asDriverOnErrorJustComplete()
+            .drive(onNext: { [weak self] _ in
+                guard let self = self else { return }
                 self.router.navigationToHomeScreen()
             })
             .disposed(by: disposeBag)
-        
     }
     
 }

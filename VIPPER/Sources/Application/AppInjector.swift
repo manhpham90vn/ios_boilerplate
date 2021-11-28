@@ -7,19 +7,23 @@
 
 extension Resolver: ResolverRegistering {
     public static func registerAllServices() {
-        // MARK: Default scrope
-        Resolver.defaultScope = .unique
-        
         // MARK: Service
         register { AuthManager() as AuthManagerInterface }
-        .scope(.cached)
-
         register { RESTfulServiceComponent() as RESTfulService }
-        .scope(.application)
-
         register { OAuthServiceComponent() as OAuthService }
-        .scope(.application)
 
+        // MARK: Repository
+        register { UserRepository() as UserRepositoryInterface }
+        register { HomeRepository() as HomeRepositoryInterface }
+        
+        // MARK: UseCase
+        register { GETURLAuthenUseCase() as GETURLAuthenUseCaseInterFace }
+        register { LoginUseCase() as LoginUseCaseInterface }
+        register { GETEventUseCase() as GETEventUseCaseInterface }
+        register { CleanUserInfoUseCase() as CleanUserInfoUseCaseInterface }
+        register { GETLoginStatusUseCase() as GETLoginStatusUseCaseInterface }
+        register { GETTokenUseCase() as GETTokenUseCaseInterface }
+        
         // MARK: Register All
         MainRouter.registerAllServices()
         LoginRouter.registerAllServices()

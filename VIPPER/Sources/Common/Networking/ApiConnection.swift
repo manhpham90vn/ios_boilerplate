@@ -7,7 +7,7 @@
 
 final class ApiConnection {
 
-    @Injected var authManager: AuthManagerInterface
+    @Injected var getTokenUseCaseInterface: GETTokenUseCaseInterface
 
     static let shared = ApiConnection()
     private init() {}
@@ -17,7 +17,7 @@ final class ApiConnection {
 
         plugins.append(NetworkIndicatorPlugin.indicatorPlugin())
 
-        if let token = authManager.token {
+        if let token = getTokenUseCaseInterface.getToken() {
             let tokenClosure: (AuthorizationType) -> String = { _ in
                 return token
             }
