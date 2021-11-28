@@ -9,14 +9,13 @@ import Foundation
 
 protocol MainInteractorInterface {
     func cleanData()
-    func getLoginedUser() -> String?
-    func getUserReceivedEvents(params: EventParams) -> Observable<[Event]>
+    func getUserReceivedEvents(page: Int) -> Observable<[Event]>
 }
 
 final class MainInteractor: MainInteractorInterface {
 
-    @Injected var restfulService: RESTfulService
-    @Injected var authManager: AuthManagerInterface
+    @Injected var getEventUseCaseInterface: GETEventUseCaseInterface
+    @Injected var cleanUserInfoUseCaseInterface: CleanUserInfoUseCaseInterface
 
     deinit {
         if Configs.shared.loggingDeinitEnabled {
@@ -25,15 +24,11 @@ final class MainInteractor: MainInteractorInterface {
     }
 
     func cleanData() {
-        authManager.logOut()
+        cleanUserInfoUseCaseInterface.clean()
     }
-    
-    func getLoginedUser() -> String? {
-        authManager.user?.login
-    }
-    
-    func getUserReceivedEvents(params: EventParams) -> Observable<[Event]> {
-        restfulService.userReceivedEvents(params: params)
+
+    func getUserReceivedEvents(page: Int) -> Observable<[Event]> {
+        getEventUseCaseInterface.userReceivedEvents(page: page)
     }
 
 }

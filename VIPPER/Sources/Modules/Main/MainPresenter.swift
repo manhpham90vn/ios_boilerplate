@@ -40,14 +40,16 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
         trigger
             .flatMapLatest { [weak self] () -> Driver<[Event]> in
                 guard let self = self else { return .never() }
-                guard let userName = self.interactor.getLoginedUser() else { return .never() }
                 self.currentPage = 1
                 self.isEnableLoadMore.accept(true)
-                let params = EventParams(username: userName, page: self.currentPage)
                 return self.interactor
-                    .getUserReceivedEvents(params: params)
+                    .getUserReceivedEvents(page: self.currentPage)
                     .trackActivity(self.activityIndicator)
                     .debugToFile()
+                    .do(onError: { [weak self] error in
+                        guard let error = error as? GETEventUseCaseError else { return }
+                        self?.view?.showAlert(title: "Error", message: error.message)
+                    })
                     .asDriverOnErrorJustComplete()
             }
             ~> elements
@@ -56,13 +58,15 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
         headerRefreshTrigger
             .flatMapLatest { [weak self] () -> Driver<[Event]> in
                 guard let self = self else { return .never() }
-                guard let userName = self.interactor.getLoginedUser() else { return .never() }
                 self.currentPage = 1
                 self.isEnableLoadMore.accept(true)
-                let params = EventParams(username: userName, page: self.currentPage)
                 return self.interactor
-                    .getUserReceivedEvents(params: params)
+                    .getUserReceivedEvents(page: self.currentPage)
                     .trackActivity(self.headerActivityIndicator)
+                    .do(onError: { [weak self] error in
+                        guard let error = error as? GETEventUseCaseError else { return }
+                        self?.view?.showAlert(title: "Error", message: error.message)
+                    })
                     .asDriverOnErrorJustComplete()
             }
             ~> elements
@@ -71,12 +75,14 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
         footerLoadMoreTrigger
             .flatMapLatest { [weak self] () -> Driver<[Event]> in
                 guard let self = self else { return .never() }
-                guard let userName = self.interactor.getLoginedUser() else { return .never() }
                 self.currentPage += 1
-                let params = EventParams(username: userName, page: self.currentPage)
                 return self.interactor
-                    .getUserReceivedEvents(params: params)
+                    .getUserReceivedEvents(page: self.currentPage)
                     .trackActivity(self.footerActivityIndicator)
+                    .do(onError: { [weak self] error in
+                        guard let error = error as? GETEventUseCaseError else { return }
+                        self?.view?.showAlert(title: "Error", message: error.message)
+                    })
                     .asDriverOnErrorJustComplete()
             }
             .asDriverOnErrorJustComplete()

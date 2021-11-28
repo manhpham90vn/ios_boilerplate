@@ -8,43 +8,28 @@
 import UIKit
 
 protocol LoginInteractorInterface {
-    func createAccessToken(params: AccessTokenParams) -> Observable<Token>
     func getURLAuthen() -> Observable<URL>
-    func getInfo() -> Observable<User>
-    func saveToken(token: String)
-    func saveUserInfo(user: User)
+    func login(url: URL) -> Observable<Void>
 }
 
-final class LoginInteractor: LoginInteractorInterface {
+final class LoginInteractor {
 
-    @Injected var restfulService: RESTfulService
-    @Injected var oauthService: OAuthService
-    @Injected var authManager: AuthManagerInterface
+    @Injected var getURLAuthenUseCaseInterFace: GETURLAuthenUseCaseInterFace
+    @Injected var loginUseCase: LoginUseCaseInterface
 
     deinit {
         if Configs.shared.loggingDeinitEnabled {
             LogInfo("\(Swift.type(of: self)) Deinit")
         }
     }
-            
-    func getURLAuthen() -> Observable<URL> {
-        return oauthService.getURLAuthen()
-    }
-    
-    func createAccessToken(params: AccessTokenParams) -> Observable<Token> {
-        return restfulService.createAccessToken(params: params)
-    }
-        
-    func getInfo() -> Observable<User> {
-        return restfulService.getInfo()
-    }
-    
-    func saveToken(token: String) {
-        authManager.token = token
-    }
-    
-    func saveUserInfo(user: User) {
-        authManager.user = user
-    }
+}
 
+extension LoginInteractor: LoginInteractorInterface {
+    func getURLAuthen() -> Observable<URL> {
+        getURLAuthenUseCaseInterFace.getURLAuthen()
+    }
+    
+    func login(url: URL) -> Observable<Void> {
+        loginUseCase.login(url: url)
+    }
 }
