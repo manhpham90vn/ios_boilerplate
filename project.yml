@@ -3,10 +3,6 @@ configs:
     Debug: debug
     Staging: release
     Release: release
-configFiles:
-    Debug: Sources/Configs/BuildConfigurations/Debug.xcconfig
-    Staging: Sources/Configs/BuildConfigurations/Staging.xcconfig
-    Release: Sources/Configs/BuildConfigurations/Release.xcconfig
 options:
     createIntermediateGroups: true
     groupSortPosition: top
@@ -16,7 +12,6 @@ options:
     bundleIdPrefix: "com.manhpham"
 settings:
     PRODUCT_BUNDLE_IDENTIFIER: $(PRODUCT_BUNDLE_IDENTIFIER)
-
 targets:
   MyApp:
     type: application
@@ -71,7 +66,6 @@ targets:
             ${PODS_ROOT}/FirebaseCrashlytics/run
           inputFiles:
             - $(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)
-
 schemes:
   My Project:
     build:
