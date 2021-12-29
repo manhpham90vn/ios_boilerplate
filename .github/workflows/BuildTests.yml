@@ -22,4 +22,4 @@ jobs:
     - name: Generate
       run: make generate
     - name: Run unit tests
-      run: xcodebuild test -scheme My Project -workspace My Project.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max,OS=14.4' | xcpretty && exit ${PIPESTATUS[0]}
+      run: xcodebuild build -scheme "My Project" -workspace "My Project.xcworkspace" -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max,OS=14.4' | xcpretty && exit ${PIPESTATUS[0]}
