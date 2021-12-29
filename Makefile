@@ -8,11 +8,11 @@ all: install generate open
 
 # install
 .PHONY: install
-install: install-ruby installBrew installMint installBundle
-install-ruby:
-	cat .ruby-version | xargs rbenv install --skip-existing
+install: installBrew install-ruby installMint installBundle
 installBrew:
 	brew bundle install
+install-ruby:
+	cat .ruby-version | xargs rbenv install --skip-existing	
 installMint:
 	mkdir -p Mints/{lib,bin}
 	mint bootstrap -m Mintfile --link
