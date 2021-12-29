@@ -1,0 +1,13 @@
+//
+//  Release.xcconfig
+//  My Project
+//
+
+// https://help.apple.com/xcode/#/dev745c5c974
+#include "./Pods/Target Support Files/Pods-MyApp/Pods-MyApp.release.xcconfig"
+
+PRODUCT_NAME = My App Release
+PRODUCT_BUNDLE_IDENTIFIER = com.manhpham.myapp.release
+BUNDLE_SHORT_VERSION_STRING = 1.0
+BUNDLE_VERSION = 1
+OTHER_SWIFT_FLAGS = -D RELEASE

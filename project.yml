@@ -1,0 +1,83 @@
+name: My Project
+configs:
+    Debug: debug
+    Staging: release
+    Release: release
+options:
+    createIntermediateGroups: true
+    groupSortPosition: top
+    generateEmptyDirectories: true
+    indentWidth: 4
+    tabWidth: 4
+    bundleIdPrefix: "com.manhpham"
+settings:
+    PRODUCT_BUNDLE_IDENTIFIER: $(PRODUCT_BUNDLE_IDENTIFIER)
+targets:
+  MyApp:
+    type: application
+    platform: iOS
+    deploymentTarget: "12.0"
+    sources: [Sources]
+    configFiles:
+        Debug: Sources/Configs/BuildConfigurations/Debug.xcconfig
+        Staging: Sources/Configs/BuildConfigurations/Staging.xcconfig
+        Release: Sources/Configs/BuildConfigurations/Release.xcconfig
+    settings:
+        INFOPLIST_FILE: Sources/Resources/Info.plist
+        SWIFT_VERSION: "5.0"
+        SWIFT_OBJC_BRIDGING_HEADER: Sources/Resources/MyApp-Bridging-Header.h
+        CODE_SIGN_STYLE: "Manual"
+        UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        UILaunchStoryboardName: LaunchScreen
+        EXCLUDED_ARCHS[sdk=iphonesimulator*]: "arm64"
+        VALIDATE_WORKSPACE: YES
+    preBuildScripts: &preBuildScripts
+        - name: SwiftGen
+          script: |
+            if [[ -f "${PODS_ROOT}/SwiftGen/bin/swiftgen" ]]; then
+              "${PODS_ROOT}/SwiftGen/bin/swiftgen"
+            else
+              echo "warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it."
+            fi
+    postCompileScripts:
+        - name: Swiftlint
+          script: |
+            if which swiftlint >/dev/null; then
+              swiftlint
+            else
+              echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
+            fi
+        - name: GoogleServiceInfo
+          script: |
+            PATH_TO_GOOGLE_PLISTS="${PROJECT_DIR}/Sources/Configs/GoogleServices"
+            case "${CONFIGURATION}" in
+            "Debug" )
+            cp -r "$PATH_TO_GOOGLE_PLISTS/GoogleService-Info-Debug.plist" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist" ;;
+            "Staging" )
+            cp -r "$PATH_TO_GOOGLE_PLISTS/GoogleService-Info-Staging.plist" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist" ;;
+            "Release" )
+            cp -r "$PATH_TO_GOOGLE_PLISTS/GoogleService-Info-Release.plist" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist" ;;
+            *)
+            ;;
+            esac
+    postBuildScripts:
+        - name: Crashlytics
+          script: |
+            ${PODS_ROOT}/FirebaseCrashlytics/run
+          inputFiles:
+            - $(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)
+schemes:
+  My Project:
+    build:
+      targets:
+        MyApp: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+    profile:
+      config: Debug
+    analyze:
+      config: Debug
+    archive:
+      config: Release
