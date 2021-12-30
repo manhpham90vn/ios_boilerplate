@@ -18,6 +18,12 @@ jobs:
     - name: Generate
       run: make generate
     - name: Run build tests
-      run: xcodebuild test -scheme "My Project" -workspace "My Project.xcworkspace" -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max,OS=14.4' -enableCodeCoverage YES build test
+      run: xcodebuild test -scheme "My Project" -workspace "My Project.xcworkspace" -destination 'platform=iOS Simulator,name=iPhone 12 Pro Max,OS=14.4' | xcpretty && exit ${PIPESTATUS[0]}
+    - name: Generate Coverage
+      run: make generateCoverage
     - name: Upload Coverage
       uses: codecov/codecov-action@v2
+      with:
+        files: ./xml_report/cobertura.xml
+        fail_ci_if_error: true
+        verbose: true
