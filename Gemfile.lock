@@ -32,6 +32,7 @@ GEM
       aws-eventstream (~> 1, >= 1.0.2)
     babosa (1.0.4)
     claide (1.0.3)
+    clamp (1.3.2)
     cocoapods (1.10.1)
       addressable (~> 2.6)
       claide (>= 1.0.2, < 2.0)
@@ -200,6 +201,7 @@ GEM
     memoist (0.16.2)
     mini_magick (4.11.0)
     mini_mime (1.1.0)
+    mini_portile2 (2.6.1)
     minitest (5.14.4)
     molinillo (0.6.6)
     multi_json (1.15.0)
@@ -208,9 +210,13 @@ GEM
     nap (1.1.0)
     naturally (2.2.1)
     netrc (0.11.0)
+    nokogiri (1.12.5)
+      mini_portile2 (~> 2.6.1)
+      racc (~> 1.4)
     os (1.1.1)
     plist (3.6.0)
     public_suffix (4.0.6)
+    racc (1.6.0)
     rake (13.0.6)
     representable (3.1.1)
       declarative (< 0.1.0)
@@ -231,6 +237,12 @@ GEM
     simctl (1.6.8)
       CFPropertyList
       naturally
+    slather (2.7.1)
+      CFPropertyList (>= 2.2, < 4)
+      activesupport
+      clamp (~> 1.3)
+      nokogiri (~> 1.11)
+      xcodeproj (~> 1.7)
     terminal-notifier (2.0.0)
     terminal-table (1.8.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
@@ -269,6 +281,7 @@ PLATFORMS
 DEPENDENCIES
   cocoapods
   fastlane
+  slather
 
 BUNDLED WITH
    2.1.4
