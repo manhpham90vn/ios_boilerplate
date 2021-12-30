@@ -40,10 +40,6 @@ updateBundle:
 updatePods: 
 	bundle exec pod update
 
-.PHONY: generateCoverage
-generateCoverage: 
-	bundle exec slather
-
 # delete
 .PHONY: delete
 delete: 

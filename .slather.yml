@@ -1,9 +1,0 @@
-coverage_service: cobertura_xml
-xcodeproj: "My Project.xcodeproj"
-workspace: "My Project.xcworkspace"
-scheme: "My Project"
-configuration: Debug
-source_directory: Sources
-output_directory: xml_report
-ignore:
-  - Resources/*
