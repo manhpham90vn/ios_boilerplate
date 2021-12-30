@@ -77,7 +77,7 @@ targets:
     dependencies:
       - target: MyApp  
 schemes:
-  MyProject:
+  My Project:
     build:
       targets:
         MyApp: all
