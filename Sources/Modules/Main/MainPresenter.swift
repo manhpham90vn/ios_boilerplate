@@ -46,9 +46,6 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
                     .getUserReceivedEvents(page: self.currentPage)
                     .trackActivity(self.activityIndicator)
                     .debugToFile()
-                    .do(onError: { [weak self] error in
-                        self?.view?.showAlert(title: "Error", message: error.localizedDescription)
-                    })
                     .asDriverOnErrorJustComplete()
             }
             ~> elements
@@ -62,9 +59,6 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
                 return self.interactor
                     .getUserReceivedEvents(page: self.currentPage)
                     .trackActivity(self.headerActivityIndicator)
-                    .do(onError: { [weak self] error in
-                        self?.view?.showAlert(title: "Error", message: error.localizedDescription)
-                    })
                     .asDriverOnErrorJustComplete()
             }
             ~> elements
@@ -77,9 +71,6 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
                 return self.interactor
                     .getUserReceivedEvents(page: self.currentPage)
                     .trackActivity(self.footerActivityIndicator)
-                    .do(onError: { [weak self] error in
-                        self?.view?.showAlert(title: "Error", message: error.localizedDescription)
-                    })
                     .asDriverOnErrorJustComplete()
             }
             .asDriverOnErrorJustComplete()
