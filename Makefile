@@ -20,7 +20,7 @@ installBundle:
 	bundle config path vendor/bundle
 	bundle install --without=documentation --jobs 4 --retry 3
 
-# generate project with xcodegen
+# generate
 .PHONY: generate
 generate: swiftgen xcodegen installPods
 swiftgen:
@@ -31,7 +31,7 @@ xcodegen:
 installPods: 
 	bundle exec pod install
 
-# update bundle and install pod
+# update
 .PHONY: update
 update: updateBundle updatePods
 updateBundle: 
@@ -39,6 +39,20 @@ updateBundle:
 	bundle update --jobs 4 --retry 3
 updatePods: 
 	bundle exec pod update
+
+.PHONY: xcodetest
+xcodetest:
+	xcodebuild test \
+	-scheme "My Project" \
+	-workspace "My Project.xcworkspace" \
+	-destination 'platform=iOS Simulator,name=iPhone 12 Pro Max,OS=14.4' \
+	-derivedDataPath "build" \
+	-enableCodeCoverage YES \
+	| xcpretty -s -c
+
+.PHONY: generateCoverage
+generateCoverage: 
+	bundle exec slather coverage
 
 # delete
 .PHONY: delete
