@@ -5,5 +5,6 @@ scheme: "My Project"
 configuration: Debug
 source_directory: Sources
 output_directory: xml_report
+build_directory: "build"
 ignore:
   - Resources/*
