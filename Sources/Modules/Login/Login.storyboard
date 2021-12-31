@@ -17,24 +17,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDz-xt-i6b">
-                                <rect key="frame" x="20" y="428" width="374" height="50"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TW9-hf-N8r">
+                                <rect key="frame" x="20" y="398" width="374" height="110"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDz-xt-i6b">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Zvu-YO-bWe"/>
+                                        </constraints>
+                                        <state key="normal" title="Login"/>
+                                        <connections>
+                                            <action selector="loginButtonTapped:" destination="sFI-8n-key" eventType="touchUpInside" id="Tbp-kZ-7N1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgC-My-Zh1">
+                                        <rect key="frame" x="0.0" y="60" width="374" height="50"/>
+                                        <state key="normal" title="Skip"/>
+                                        <connections>
+                                            <action selector="skipButtonTapped:" destination="sFI-8n-key" eventType="touchUpInside" id="51U-V0-EZt"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Zvu-YO-bWe"/>
+                                    <constraint firstAttribute="height" constant="110" id="PoG-ut-4H5"/>
+                                    <constraint firstItem="IDz-xt-i6b" firstAttribute="leading" secondItem="TW9-hf-N8r" secondAttribute="leading" id="QhH-gE-Crl"/>
+                                    <constraint firstAttribute="trailing" secondItem="tgC-My-Zh1" secondAttribute="trailing" id="UNl-iQ-30H"/>
+                                    <constraint firstAttribute="trailing" secondItem="IDz-xt-i6b" secondAttribute="trailing" id="UUI-xp-deI"/>
+                                    <constraint firstItem="tgC-My-Zh1" firstAttribute="leading" secondItem="TW9-hf-N8r" secondAttribute="leading" id="xvD-2v-tpo"/>
                                 </constraints>
-                                <state key="normal" title="Login"/>
-                                <connections>
-                                    <action selector="loginButtonTapped:" destination="sFI-8n-key" eventType="touchUpInside" id="Tbp-kZ-7N1"/>
-                                </connections>
-                            </button>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="iNb-VW-4E0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="iNb-VW-4E0" firstAttribute="trailing" secondItem="IDz-xt-i6b" secondAttribute="trailing" constant="20" id="FEv-On-tLe"/>
-                            <constraint firstItem="IDz-xt-i6b" firstAttribute="leading" secondItem="iNb-VW-4E0" secondAttribute="leading" constant="20" id="bx7-OV-iSj"/>
-                            <constraint firstItem="IDz-xt-i6b" firstAttribute="centerX" secondItem="iNb-VW-4E0" secondAttribute="centerX" id="c60-AS-Eqf"/>
-                            <constraint firstItem="IDz-xt-i6b" firstAttribute="centerY" secondItem="iNb-VW-4E0" secondAttribute="centerY" id="jVq-es-6pm"/>
+                            <constraint firstItem="TW9-hf-N8r" firstAttribute="centerX" secondItem="iNb-VW-4E0" secondAttribute="centerX" id="3Eg-ES-hrt"/>
+                            <constraint firstItem="TW9-hf-N8r" firstAttribute="leading" secondItem="iNb-VW-4E0" secondAttribute="leading" constant="20" id="YCl-aq-OYA"/>
+                            <constraint firstItem="TW9-hf-N8r" firstAttribute="centerY" secondItem="iNb-VW-4E0" secondAttribute="centerY" id="vkl-Hh-b5a"/>
+                            <constraint firstItem="iNb-VW-4E0" firstAttribute="trailing" secondItem="TW9-hf-N8r" secondAttribute="trailing" constant="20" id="zSM-7I-OKL"/>
                         </constraints>
                     </view>
                 </viewController>

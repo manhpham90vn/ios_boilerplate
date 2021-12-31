@@ -37,7 +37,10 @@ final class LoginViewController: BaseViewController {
     @IBAction func loginButtonTapped(_ sender: Any) {
         presenter.didTapLoginButton()
     }
-
+    
+    @IBAction func skipButtonTapped(_ sender: Any) {
+        presenter.didTapSkipButton()
+    }
 }
 
 extension LoginViewController: LoginViewInterface {}
