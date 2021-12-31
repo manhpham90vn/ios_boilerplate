@@ -12,6 +12,7 @@ protocol LoginPresenterInterface {
     func inject(view: LoginViewInterface)
     
     func didTapLoginButton()
+    func didTapSkipButton()
 }
 
 final class LoginPresenter: LoginPresenterInterface, HasDisposeBag, HasActivityIndicator {
@@ -55,6 +56,10 @@ final class LoginPresenter: LoginPresenterInterface, HasDisposeBag, HasActivityI
                 self.router.navigationToHomeScreen()
             })
             .disposed(by: disposeBag)
+    }
+    
+    func didTapSkipButton() {
+        router.navigationToHomeScreen()
     }
     
 }

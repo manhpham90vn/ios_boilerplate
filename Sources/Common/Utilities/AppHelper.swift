@@ -24,7 +24,7 @@ final class AppHelper {
         UIWindow.shared?.rootViewController?.present(vc, animated: true)
     }
     
-    func showAlertRx(title: String, message: String, cancel: String = "Huỷ", ok: String = "Chấp Nhận") -> Observable<Void> {
+    func showAlertRx(title: String?, message: String?, cancel: String? = "Huỷ", ok: String? = "Chấp Nhận") -> Observable<Void> {
         guard !isShowAlert else { return .empty() }
         return Observable<Void>.create { [weak self] observer in
             guard let self = self else { return Disposables.create() }

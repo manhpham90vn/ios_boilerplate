@@ -46,10 +46,6 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
                     .getUserReceivedEvents(page: self.currentPage)
                     .trackActivity(self.activityIndicator)
                     .debugToFile()
-                    .do(onError: { [weak self] error in
-                        guard let error = error as? GETEventUseCaseError else { return }
-                        self?.view?.showAlert(title: "Error", message: error.message)
-                    })
                     .asDriverOnErrorJustComplete()
             }
             ~> elements
@@ -63,10 +59,6 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
                 return self.interactor
                     .getUserReceivedEvents(page: self.currentPage)
                     .trackActivity(self.headerActivityIndicator)
-                    .do(onError: { [weak self] error in
-                        guard let error = error as? GETEventUseCaseError else { return }
-                        self?.view?.showAlert(title: "Error", message: error.message)
-                    })
                     .asDriverOnErrorJustComplete()
             }
             ~> elements
@@ -79,10 +71,6 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
                 return self.interactor
                     .getUserReceivedEvents(page: self.currentPage)
                     .trackActivity(self.footerActivityIndicator)
-                    .do(onError: { [weak self] error in
-                        guard let error = error as? GETEventUseCaseError else { return }
-                        self?.view?.showAlert(title: "Error", message: error.message)
-                    })
                     .asDriverOnErrorJustComplete()
             }
             .asDriverOnErrorJustComplete()
@@ -90,7 +78,7 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
                 guard let self = self else { return }
                 var current = self.elements.value
                 current += result
-                if current.count > 100 {
+                if current.count > 1000 {
                     self.isEnableLoadMore.accept(false)
                 } else {
                     self.isEnableLoadMore.accept(true)
