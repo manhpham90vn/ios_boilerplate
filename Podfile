@@ -2,6 +2,7 @@ platform :ios, '12.0'
 
 target 'MyApp' do
   use_frameworks!
+  inhibit_all_warnings!
 
   pod 'Alamofire', '~> 5.2'
   pod 'RxSwift', '~> 5.1.0'
