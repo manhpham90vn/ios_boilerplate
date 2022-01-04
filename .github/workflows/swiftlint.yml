@@ -5,6 +5,7 @@ on:
     paths:
       - '.swiftlint.yml'
       - 'Sources/*.swift'
+      -  SourcesTests/*.swift'
 
 jobs:
   Danger-Swift-with-SwiftLint:
