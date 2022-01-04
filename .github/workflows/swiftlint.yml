@@ -1,0 +1,19 @@
+name: Danger with SwiftLint
+
+on:
+  pull_request:
+    paths:
+      - '.swiftlint.yml'
+      - 'Sources/*.swift'
+
+jobs:
+  Danger-Swift-with-SwiftLint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Run Danger"
+        uses: docker://ghcr.io/danger/danger-swift-with-swiftlint:3.12.3
+        with:
+          args: --failOnErrors --no-publish-check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
