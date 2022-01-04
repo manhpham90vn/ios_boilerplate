@@ -4,8 +4,8 @@ on:
   pull_request:
     paths:
       - '.swiftlint.yml'
-      - 'Sources/*.swift'
-      - 'SourcesTests/*.swift'
+      - 'Sources/**.swift'
+      - 'SourcesTests/**.swift'
 
 jobs:
   Danger-Swift-with-SwiftLint:
