@@ -12,4 +12,8 @@ class MyiOSAppTests: XCTestCase {
     func testExample() throws {
         XCTAssertEqual(1, Int("1"))
     }
+
+    func testExample1() throws {
+        _ = XCTAssertEqual(1, Int("1"))
+    }
 }
