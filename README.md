@@ -1,5 +1,7 @@
 # Base VIPER
 
+[![codecov](https://codecov.io/gh/manhpham90vn/iOS-VIPER-Architecture/branch/master/graph/badge.svg?token=VABBKXP9O2)](https://codecov.io/gh/manhpham90vn/iOS-VIPER-Architecture)
+
 ## Install
 ```shell
 make
