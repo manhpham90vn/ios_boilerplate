@@ -8,7 +8,7 @@
 import XCTest
 @testable import My_App_Debug
 
-class MyiOSAppTests: XCTestCase {
+final class MyiOSAppTests: XCTestCase {
     func testExample() throws {
         XCTAssertEqual(1, Int("1"))
     }

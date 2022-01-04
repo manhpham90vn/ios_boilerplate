@@ -1,11 +1,11 @@
-name: Danger with SwiftLint
+name: Run SwiftLint
 
 on:
   pull_request:
     paths:
       - '.swiftlint.yml'
       - 'Sources/*.swift'
-      -  SourcesTests/*.swift'
+      - 'SourcesTests/*.swift'
 
 jobs:
   Danger-Swift-with-SwiftLint:
