@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PKHUD
 
 final class MainViewController: BaseTableViewViewController {
 
