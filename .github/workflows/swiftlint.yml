@@ -1,4 +1,4 @@
-name: Danger with SwiftLint
+name: Run SwiftLint
 
 on:
   pull_request:
