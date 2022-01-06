@@ -8,9 +8,9 @@
 import Foundation
 
 protocol UserRepositoryInterface {
-    func getURLAuthen() -> Observable<URL>
-    func createAccessToken(params: AccessTokenParams) -> Observable<Token>
-    func getInfo() -> Observable<User>
+    func getURLAuthen() -> Single<URL>
+    func createAccessToken(params: AccessTokenParams) -> Single<Token>
+    func getInfo() -> Single<User>
     
     /// token from UserDefault
     var token: String? { get set }
@@ -28,15 +28,15 @@ final class UserRepository {
 }
 
 extension UserRepository: UserRepositoryInterface {
-    func getURLAuthen() -> Observable<URL> {
+    func getURLAuthen() -> Single<URL> {
         oauthService.getURLAuthen()
     }
     
-    func createAccessToken(params: AccessTokenParams) -> Observable<Token> {
+    func createAccessToken(params: AccessTokenParams) -> Single<Token> {
         restfulService.createAccessToken(params: params)
     }
     
-    func getInfo() -> Observable<User> {
+    func getInfo() -> Single<User> {
         restfulService.getInfo()
     }
     

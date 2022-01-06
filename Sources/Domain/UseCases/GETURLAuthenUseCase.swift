@@ -8,7 +8,7 @@
 import Foundation
 
 protocol GETURLAuthenUseCaseInterFace {
-    func getURLAuthen() -> Observable<URL>
+    func getURLAuthen() -> Single<URL>
 }
 
 final class GETURLAuthenUseCase {
@@ -16,7 +16,7 @@ final class GETURLAuthenUseCase {
 }
 
 extension GETURLAuthenUseCase: GETURLAuthenUseCaseInterFace {
-    func getURLAuthen() -> Observable<URL> {
+    func getURLAuthen() -> Single<URL> {
         repo.getURLAuthen()
     }
 }

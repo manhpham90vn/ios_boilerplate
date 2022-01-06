@@ -10,14 +10,15 @@ import PKHUD
 
 extension Reactive where Base: PKHUD {
 
+    // TODO: fix can not tap to alert whem device offline
     static var isAnimating: Binder<Bool> {
         return Binder(UIApplication.shared) {_, isVisible in
             if isVisible {
                 HUD.show(.progress)
-                UIApplication.shared.beginIgnoringInteractionEvents()
+//                UIApplication.shared.beginIgnoringInteractionEvents()
             } else {
                 HUD.hide()
-                UIApplication.shared.endIgnoringInteractionEvents()
+//                UIApplication.shared.endIgnoringInteractionEvents()
             }
         }
     }
