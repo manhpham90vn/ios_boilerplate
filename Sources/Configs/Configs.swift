@@ -11,7 +11,7 @@ final class Configs {
     
     static let shared = Configs()
 
-    let loggingAPIEnabled = false
+    let loggingAPIEnabled = true
     let loggingLoadingEnabled = false
     let loggingToFileEnabled = false
     let loggingDeinitEnabled = true

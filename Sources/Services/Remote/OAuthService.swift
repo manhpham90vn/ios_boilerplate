@@ -8,28 +8,27 @@
 import Foundation
 
 protocol OAuthService {
-    func getURLAuthen() -> Observable<URL>
+    func getURLAuthen() -> Single<URL>
 }
 
 final class OAuthServiceComponent: OAuthService {
         
     private var authSession: AuthenticationServices?
         
-    func getURLAuthen() -> Observable<URL> {
-        return Observable<URL>.create { [weak self] (observer) in
+    func getURLAuthen() -> Single<URL> {
+        return Single<URL>.create { [weak self] (single) in
             self?.authSession = SafariExtensionFactory.provideAuthenticationService()
             self?.authSession?.initiateSession(url: URL(string: Configs.shared.env.loginURL)!,
                                                callBackURL: Configs.shared.env.callbackURLScheme,
                                                completionHandler: { (url, error) in
                                                 if let error = error {
-                                                    observer.on(.error(error))
+                                                    single(.failure(error))
                                                     return
                                                 }
                                                 if let url = url {
-                                                    observer.on(.next(url))
-                                                    observer.on(.completed)
+                                                    single(.success(url))
                                                 } else {
-                                                    observer.on(.error(CommonError.emptyData))
+                                                    single(.failure(CommonError.emptyData))
                                                 }
             })
             self?.authSession?.startSession()
