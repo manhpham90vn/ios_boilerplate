@@ -38,7 +38,7 @@ public class Executor {
         var didExecute = false
         _ = Observable<Int>
             .timer(DispatchTimeInterval.milliseconds(0), period: period, scheduler: MainScheduler.instance)
-            .takeWhile({  _ in
+            .take(while: {  _ in
                 !didExecute
             })
             .subscribe(onNext: { _ in
