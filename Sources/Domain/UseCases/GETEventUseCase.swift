@@ -8,7 +8,7 @@
 import Foundation
 
 protocol GETEventUseCaseInterface {
-    func userReceivedEvents(page: Int) -> Observable<[Event]>
+    func userReceivedEvents(page: Int) -> Single<[Event]>
 }
 
 final class GETEventUseCase {
@@ -17,7 +17,7 @@ final class GETEventUseCase {
 }
 
 extension GETEventUseCase: GETEventUseCaseInterface {
-    func userReceivedEvents(page: Int) -> Observable<[Event]> {
+    func userReceivedEvents(page: Int) -> Single<[Event]> {
         let userName = userRepo.user?.login ?? "manhpham90vn"
         let params = EventParams(username: userName, page: page)
         return repo.userReceivedEvents(params: params)

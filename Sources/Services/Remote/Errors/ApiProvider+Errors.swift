@@ -12,7 +12,8 @@ extension ApiProvider {
     // api UserReceivedEvents
     func userReceivedEventsErrors(target: Target,
                                   response: UserReceivedEventsError,
-                                  appCommonError: AppCommonErrorInterface) -> Observable<Response> {
+                                  appCommonError: AppCommonErrorInterface,
+                                  error: Error) -> Single<Response> {
         return AppHelper
             .shared
             .showAlertRx(title: appCommonError.errorTitle,
@@ -20,7 +21,7 @@ extension ApiProvider {
                          cancel: appCommonError.buttonLeft,
                          ok: "Thử lại")
             .flatMap { [weak self] in
-                self?.request(target: target) ?? .empty()
+                self?.request(target: target) ?? .error(error)
             }
     }
 }

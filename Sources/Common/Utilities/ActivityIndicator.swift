@@ -97,7 +97,7 @@ public class ActivityIndicator : SharedSequenceConvertibleType {
                     LogInfo(elements)
                 }
             })
-            .map { $0.first(where: { $0.value.isLoading }) != nil }
+            .map { $0.contains(where: { $0.value.isLoading }) }
             .distinctUntilChanged()
     }
 

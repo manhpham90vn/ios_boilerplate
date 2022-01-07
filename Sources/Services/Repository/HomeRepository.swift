@@ -8,7 +8,7 @@
 import Foundation
 
 protocol HomeRepositoryInterface {
-    func userReceivedEvents(params: EventParams) -> Observable<[Event]>
+    func userReceivedEvents(params: EventParams) -> Single<[Event]>
 }
 
 final class HomeRepository {
@@ -16,7 +16,7 @@ final class HomeRepository {
 }
 
 extension HomeRepository: HomeRepositoryInterface {
-    func userReceivedEvents(params: EventParams) -> Observable<[Event]> {
+    func userReceivedEvents(params: EventParams) -> Single<[Event]> {
         restfulService.userReceivedEvents(params: params)
     }
 }

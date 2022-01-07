@@ -8,8 +8,8 @@
 import UIKit
 
 protocol LoginInteractorInterface {
-    func getURLAuthen() -> Observable<URL>
-    func login(url: URL) -> Observable<Void>
+    func getURLAuthen() -> Single<URL>
+    func login(url: URL) -> Single<Void>
 }
 
 final class LoginInteractor {
@@ -25,11 +25,11 @@ final class LoginInteractor {
 }
 
 extension LoginInteractor: LoginInteractorInterface {
-    func getURLAuthen() -> Observable<URL> {
+    func getURLAuthen() -> Single<URL> {
         getURLAuthenUseCaseInterFace.getURLAuthen()
     }
     
-    func login(url: URL) -> Observable<Void> {
+    func login(url: URL) -> Single<Void> {
         loginUseCase.login(url: url)
     }
 }
