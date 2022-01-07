@@ -4,10 +4,10 @@ target 'MyApp' do
   use_frameworks!
   inhibit_all_warnings!
 
-  pod 'Alamofire', '~> 5.2'
-  pod 'RxSwift', '~> 5.1.0'
-  pod 'RxCocoa', '~> 5.1.0'
-  pod 'Moya/RxSwift', '~> 14.0'
+  pod 'Alamofire', '~> 5.5'
+  pod 'RxSwift', '~> 6.2.0'
+  pod 'RxCocoa', '~> 6.2.0'
+  pod 'Moya/RxSwift', '~> 15.0'
   pod 'PKHUD', '~> 5.0'
   pod 'NSObject+Rx'
 
@@ -24,6 +24,7 @@ target 'MyApp' do
   pod 'Then'
   pod 'RxBinding'
   pod 'RxViewController'
-  pod 'RxSwiftExt', '~> 5'
+  pod 'RxSwiftExt', '~> 6'
+  pod 'RxReachability', '~> 1.2.1'
 
 end
