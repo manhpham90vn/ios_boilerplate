@@ -17,9 +17,9 @@ extension PrimitiveSequence {
     /// connection becomes reachable.
     /// - parameter shouldRetry: Always retruns `true` by default.
     func autoRetry(_ maxAttemptCount: Int = 3,
-               delay: DelayOptions,
-               didBecomeReachable: Observable<Void> = Reachability.rx.isConnected,
-               shouldRetry: @escaping (Error) -> Bool = { _ in true }) -> PrimitiveSequence<Trait, Element> {
+                   delay: DelayOptions,
+                   didBecomeReachable: Observable<Void> = Reachability.rx.isConnected,
+                   shouldRetry: @escaping (Error) -> Bool = { _ in true }) -> PrimitiveSequence<Trait, Element> {
         return retry { (errors: Observable<Error>) in
             return errors.enumerated().flatMap { attempt, error -> Observable<Void> in
                 let attemptCount = attempt + 1
