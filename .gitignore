@@ -5,7 +5,7 @@
 ## User settings
 xcuserdata/
 Sources/Resources/Generated/
-vendor/
+vendor/bundle
 Mints
 .bundle/
 html_report/

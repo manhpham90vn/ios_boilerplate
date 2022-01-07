@@ -15,7 +15,7 @@ final class ApiProvider<Target: TargetType>: MoyaProvider<Target> {
         return rx
             .request(target)
             .filterSuccessfulStatusCodes()
-            .retry(delay: .constant(time: 1), shouldRetry: { (error) -> Bool in
+            .autoRetry(delay: .constant(time: 1), shouldRetry: { (error) -> Bool in
                 if let error = error as? MoyaError {
                     switch error {
                     case .underlying(let error, _):
