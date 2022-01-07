@@ -7,6 +7,10 @@
 
 import UIKit
 
+enum ShowAlertError: Error {
+    case didCancel
+}
+
 final class AppHelper {
     
     static let shared = AppHelper()
@@ -24,19 +28,18 @@ final class AppHelper {
         UIWindow.shared?.rootViewController?.present(vc, animated: true)
     }
     
-    func showAlertRx(title: String?, message: String?, cancel: String? = "Huỷ", ok: String? = "Chấp Nhận") -> Observable<Void> {
-        guard !isShowAlert else { return .empty() }
-        return Observable<Void>.create { [weak self] observer in
+    func showAlertRx(title: String?, message: String?, cancel: String? = "Huỷ", ok: String? = "Chấp Nhận") -> Single<Void> {
+        guard !isShowAlert else { return .never() }
+        return Single<Void>.create { [weak self] single in
             guard let self = self else { return Disposables.create() }
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.addAction(.init(title: cancel, style: .cancel, handler: { [weak self] _ in
                 self?.isShowAlert = false
-                observer.onCompleted()
+                single(.failure(ShowAlertError.didCancel))
             }))
             alert.addAction(.init(title: ok, style: .default, handler: { [weak self] _ in
                 self?.isShowAlert = false
-                observer.onNext(())
-                observer.onCompleted()
+                single(.success(()))
             }))
             self.isShowAlert = true
             AppHelper.shared.topViewController()?.present(alert, animated: true, completion: nil)
@@ -45,7 +48,7 @@ final class AppHelper {
             }
         }
     }
-    
+        
     func topViewController(_ viewController: UIViewController? = UIWindow.shared?.rootViewController) -> UIViewController? {
         if let nav = viewController as? UINavigationController {
             return topViewController(nav.visibleViewController)

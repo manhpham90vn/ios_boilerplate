@@ -9,7 +9,7 @@ import Foundation
 
 protocol MainInteractorInterface {
     func cleanData()
-    func getUserReceivedEvents(page: Int) -> Observable<[Event]>
+    func getUserReceivedEvents(page: Int) -> Single<[Event]>
 }
 
 final class MainInteractor: MainInteractorInterface {
@@ -27,7 +27,7 @@ final class MainInteractor: MainInteractorInterface {
         cleanUserInfoUseCaseInterface.clean()
     }
 
-    func getUserReceivedEvents(page: Int) -> Observable<[Event]> {
+    func getUserReceivedEvents(page: Int) -> Single<[Event]> {
         getEventUseCaseInterface.userReceivedEvents(page: page)
     }
 

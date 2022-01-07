@@ -8,7 +8,7 @@
 import Foundation
 
 protocol LoginUseCaseInterface {
-    func login(url: URL) -> Observable<Void>
+    func login(url: URL) -> Single<Void>
 }
 
 enum LoginUseCaseError: Error {
@@ -33,10 +33,10 @@ final class LoginUseCase {
 }
 
 extension LoginUseCase: LoginUseCaseInterface {
-    func login(url: URL) -> Observable<Void> {
-        return Observable.just(url)
-            .flatMap { [weak self] url -> Observable<Token> in
-                guard let self = self else { return .empty() }
+    func login(url: URL) -> Single<Void> {
+        return Single.just(url)
+            .flatMap { [weak self] url -> Single<Token> in
+                guard let self = self else { return .never() }
                 guard let code = url.queryParameters?["code"] else {
                     return .error(LoginUseCaseError.codeNotFound)
                 }
@@ -45,16 +45,16 @@ extension LoginUseCase: LoginUseCaseInterface {
                                                code: code)
                 return self.repo.createAccessToken(params: params)
             }
-            .flatMap { [weak self] token -> Observable<User> in
-                guard let self = self else { return .empty() }
+            .flatMap { [weak self] token -> Single<User> in
+                guard let self = self else { return .never() }
                 guard let token = token.accessToken else {
                     return .error(LoginUseCaseError.createAccessTokenFailed)
                 }
                 self.repo.token = token
                 return self.repo.getInfo()
             }
-            .flatMap { [weak self] user -> Observable<Void> in
-                guard let self = self else { return .empty() }
+            .flatMap { [weak self] user -> Single<Void> in
+                guard let self = self else { return .never() }
                 self.repo.user = user
                 return .just(())
             }
