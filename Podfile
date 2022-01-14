@@ -6,7 +6,7 @@ target 'MyApp' do
 
   pod 'Alamofire', '~> 5.5'
   pod 'RxSwift', '~> 6.2.0'
-  pod 'RxCocoa', '~> 6.2.0'
+  pod 'RxCocoa', '~> 6.5.0'
   pod 'Moya/RxSwift', '~> 15.0'
   pod 'PKHUD', '~> 5.0'
   pod 'NSObject+Rx'
