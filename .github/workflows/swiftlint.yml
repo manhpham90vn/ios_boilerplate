@@ -7,6 +7,10 @@ on:
       - 'Sources/**.swift'
       - 'SourcesTests/**.swift'
 
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   Danger-Swift-with-SwiftLint:
     runs-on: ubuntu-latest
