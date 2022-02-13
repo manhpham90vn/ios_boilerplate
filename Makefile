@@ -45,7 +45,7 @@ xcodetest:
 	xcodebuild test \
 	-scheme "My Project" \
 	-workspace "My Project.xcworkspace" \
-	-destination 'platform=iOS Simulator,name=iPhone 12 Pro Max,OS=14.4' \
+	-destination 'platform=iOS Simulator,name=iPhone 13 Pro Max' \
 	-derivedDataPath "build" \
 	-enableCodeCoverage YES \
 	| xcpretty -s -c
