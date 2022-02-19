@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxSwift
 
 extension ObservableType {
     func debugToFile(fileName: StaticString = #file, lineNumber: Int = #line, functionName: StaticString = #function) -> Observable<Element> {

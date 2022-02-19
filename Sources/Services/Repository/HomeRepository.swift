@@ -6,6 +6,9 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
+import Resolver
 
 protocol HomeRepositoryInterface {
     func userReceivedEvents(params: EventParams) -> Single<[Event]>
