@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NSObject_Rx
 
 class BaseViewController: UIViewController, HasDisposeBag { // swiftlint:disable:this final_class
     

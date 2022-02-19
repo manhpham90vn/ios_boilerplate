@@ -7,6 +7,9 @@
 
 import Foundation
 import SwiftyUserDefaults
+import RxSwift
+import RxCocoa
+import Resolver
 
 protocol AuthManagerInterface: AnyObject {
     var token: String? { get set }
