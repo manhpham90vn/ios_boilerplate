@@ -5,6 +5,8 @@
 //  Created by Manh Pham on 3/16/21.
 //
 
+import Moya
+
 extension Encodable {
 
     var dictionary: [String: Any]? {

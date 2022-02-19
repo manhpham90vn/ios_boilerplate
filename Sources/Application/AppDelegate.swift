@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Resolver
 @_exported import RxBinding
 
 @main
