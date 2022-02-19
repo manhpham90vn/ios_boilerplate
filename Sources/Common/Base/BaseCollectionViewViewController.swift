@@ -7,6 +7,8 @@
 
 import UIKit
 import MJRefresh
+import RxSwift
+import RxCocoa
 
 class BaseCollectionViewViewController: BaseViewController, ViewControllerPageable { // swiftlint:disable:this final_class
 

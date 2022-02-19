@@ -7,6 +7,9 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
+import Resolver
 
 protocol DetailRouterInterface {
     var view: DetailViewInterface? { get }

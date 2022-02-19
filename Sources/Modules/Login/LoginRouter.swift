@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Resolver
 
 protocol LoginRouterInterface {
     var view: LoginViewInterface? { get }

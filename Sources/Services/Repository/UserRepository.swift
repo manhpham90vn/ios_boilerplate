@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import RxSwift
+import Resolver
 
 protocol UserRepositoryInterface {
     func getURLAuthen() -> Single<URL>

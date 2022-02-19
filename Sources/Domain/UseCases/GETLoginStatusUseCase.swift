@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Resolver
 
 protocol GETLoginStatusUseCaseInterface {
     func isLogin() -> Bool

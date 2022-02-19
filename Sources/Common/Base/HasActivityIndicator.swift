@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 protocol HasActivityIndicator {
     var trigger: PublishRelay<Void> { get }

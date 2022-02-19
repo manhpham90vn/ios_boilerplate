@@ -6,6 +6,9 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
+import NSObject_Rx
 
 // view controller
 typealias ViewControllerPageable = HasViewControllerPagging
