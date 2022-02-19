@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Resolver
 
 protocol MainRouterInterface {
     var view: MainViewInterface? { get }

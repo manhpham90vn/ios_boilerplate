@@ -7,6 +7,7 @@
 
 import Foundation
 import PKHUD
+import RxSwift
 
 extension Reactive where Base: PKHUD {
 
