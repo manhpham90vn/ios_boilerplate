@@ -6,6 +6,10 @@
 //
 
 import Foundation
+import Resolver
+import NSObject_Rx
+import RxSwift
+import RxCocoa
 
 protocol DetailPresenterInterface {
     var view: DetailViewInterface? { get }

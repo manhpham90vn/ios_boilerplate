@@ -6,6 +6,9 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
+import Resolver
 
 protocol GETEventUseCaseInterface {
     func userReceivedEvents(page: Int) -> Single<[Event]>

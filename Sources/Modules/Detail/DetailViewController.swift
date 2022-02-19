@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Resolver
 
 struct DetailViewControllerParams {
     var event: Event

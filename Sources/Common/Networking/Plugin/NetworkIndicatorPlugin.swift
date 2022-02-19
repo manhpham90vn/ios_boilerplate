@@ -5,6 +5,8 @@
 //  Created by Manh Pham on 3/16/21.
 //
 
+import Moya
+
 enum NetworkIndicatorPlugin {
     
     static func indicatorPlugin() -> NetworkActivityPlugin {

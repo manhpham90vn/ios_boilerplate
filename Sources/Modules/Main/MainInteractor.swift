@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import RxSwift
+import Resolver
 
 protocol MainInteractorInterface {
     func cleanData()
