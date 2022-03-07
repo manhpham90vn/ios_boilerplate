@@ -7,7 +7,6 @@
 
 import UIKit
 import Resolver
-@_exported import RxBinding
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
