@@ -1,5 +1,4 @@
 PODS:
-  - Alamofire (5.5.0)
   - Anchorage (4.5.0)
   - Firebase/Analytics (8.10.0):
     - Firebase/Core
@@ -94,54 +93,22 @@ PODS:
   - GoogleUtilities/UserDefaults (7.6.0):
     - GoogleUtilities/Logger
   - MJRefresh (3.7.5)
-  - Moya/Core (15.0.0):
-    - Alamofire (~> 5.0)
-  - Moya/RxSwift (15.0.0):
-    - Moya/Core
-    - RxSwift (~> 6.0)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
-  - "NSObject+Rx (5.2.2)":
-    - RxSwift (~> 6.2)
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - PKHUD (5.3.0)
   - PromisesObjC (2.0.0)
-  - ReachabilitySwift (5.0.0)
   - Resolver (1.5.0)
   - Reusable (4.1.2):
     - Reusable/Storyboard (= 4.1.2)
     - Reusable/View (= 4.1.2)
   - Reusable/Storyboard (4.1.2)
   - Reusable/View (4.1.2)
-  - RxBinding (0.5):
-    - RxCocoa (~> 6)
-    - RxSwift (~> 6)
-  - RxCocoa (6.2.0):
-    - RxRelay (= 6.2.0)
-    - RxSwift (= 6.2.0)
-  - RxReachability (1.2.1):
-    - ReachabilitySwift (< 6.0, >= 5.0)
-    - RxCocoa (~> 6)
-    - RxSwift (~> 6)
-  - RxRelay (6.2.0):
-    - RxSwift (= 6.2.0)
-  - RxSwift (6.2.0)
-  - RxSwiftExt (6.0.1):
-    - RxSwiftExt/Core (= 6.0.1)
-    - RxSwiftExt/RxCocoa (= 6.0.1)
-  - RxSwiftExt/Core (6.0.1):
-    - RxSwift (~> 6.0)
-  - RxSwiftExt/RxCocoa (6.0.1):
-    - RxCocoa (~> 6.0)
-    - RxSwiftExt/Core
-  - RxViewController (2.0.0):
-    - RxCocoa (~> 6.0)
-    - RxSwift (~> 6.0)
   - SwiftGen (6.5.1)
   - SwiftyUserDefaults (5.3.0)
   - Then (2.7.0)
@@ -151,22 +118,13 @@ PODS:
     - ObjcExceptionBridging
 
 DEPENDENCIES:
-  - Alamofire (~> 5.5)
   - Anchorage
   - Firebase/Analytics
   - Firebase/Crashlytics
   - MJRefresh
-  - Moya/RxSwift (~> 15.0)
-  - "NSObject+Rx"
   - PKHUD (~> 5.0)
   - Resolver
   - Reusable
-  - RxBinding
-  - RxCocoa (~> 6.2.0)
-  - RxReachability (~> 1.2.1)
-  - RxSwift (~> 6.2.0)
-  - RxSwiftExt (~> 6)
-  - RxViewController
   - SwiftGen (~> 6.0)
   - SwiftyUserDefaults (~> 5.0)
   - Then
@@ -174,7 +132,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - Alamofire
     - Anchorage
     - Firebase
     - FirebaseAnalytics
@@ -186,29 +143,18 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleUtilities
     - MJRefresh
-    - Moya
     - nanopb
-    - "NSObject+Rx"
     - ObjcExceptionBridging
     - PKHUD
     - PromisesObjC
-    - ReachabilitySwift
     - Resolver
     - Reusable
-    - RxBinding
-    - RxCocoa
-    - RxReachability
-    - RxRelay
-    - RxSwift
-    - RxSwiftExt
-    - RxViewController
     - SwiftGen
     - SwiftyUserDefaults
     - Then
     - XCGLogger
 
 SPEC CHECKSUMS:
-  Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   Anchorage: 1961bc81c84aeed54ad7ffc697c50cd9de748ba6
   Firebase: 44213362f1dcc52555b935dc925ed35ac55f1b20
   FirebaseAnalytics: 319c9b3b1bdd400d60e2f415dff0c5f6959e6760
@@ -220,27 +166,17 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleUtilities: 684ee790a24f73ebb2d1d966e9711c203f2a4237
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
-  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
-  "NSObject+Rx": 61cf1f7306a73dcef8b36649198af0813ec18dfd
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PKHUD: 98f3e4bc904b9c916f1c5bb6d765365b5357291b
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
-  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   Resolver: 68984624572763018fd8ec7b8e3e8df0e3b6bba5
   Reusable: 6bae6a5e8aa793c9c441db0213c863a64bce9136
-  RxBinding: e3c76d02d0ee3f1a306a0fb8e8ef6f2eda65a375
-  RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
-  RxReachability: bfd13548bf1dac7a877082d13918a9f39bdb5c18
-  RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
-  RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
-  RxSwiftExt: d61c4b9b06e0a448041b1c659e0f1b5c5a035afc
-  RxViewController: 56486fa0afd629a1d6b5ba077f3b8cd9dc31b5d2
   SwiftGen: a6d22010845f08fe18fbdf3a07a8e380fd22e0ea
   SwiftyUserDefaults: 63f80248cf5bfb3458825d9a78f2eb7e1293a040
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: f966eca54c7638cbef75f9d1f927554fd2b11b7e
+PODFILE CHECKSUM: a92ca5d445f7b5bf0d01e0f13929b39a997b6d1b
 
 COCOAPODS: 1.11.2
