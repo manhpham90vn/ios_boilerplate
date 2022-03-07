@@ -9,6 +9,7 @@ import Resolver
 import Moya
 import RxSwift
 import RxCocoa
+import RxMoya
 
 final class ApiConnection {
 

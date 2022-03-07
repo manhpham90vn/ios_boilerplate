@@ -12,12 +12,38 @@ options:
     bundleIdPrefix: "com.manhpham"
 settings:
     PRODUCT_BUNDLE_IDENTIFIER: $(PRODUCT_BUNDLE_IDENTIFIER)
+packages:
+  Alamofire:
+    url: https://github.com/Alamofire/Alamofire
+    from: "5.5.0"
+  RxMoya:
+    url: https://github.com/Moya/Moya
+    from: "15.0.0"
+  RxSwift:
+    url: https://github.com/ReactiveX/RxSwift
+    from: "6.5.0"
+  NSObject-Rx:
+    url: https://github.com/RxSwiftCommunity/NSObject-Rx
+    from: "5.1.1"
+  RxSwiftExt:
+    url: https://github.com/RxSwiftCommunity/RxSwiftExt
+    from: "6.1.0"
+  RxReachability:
+    url: https://github.com/RxSwiftCommunity/RxReachability
+    from: "1.2.1"
 targets:
   MyApp:
     type: application
     platform: iOS
     deploymentTarget: "12.0"
     sources: [Sources, Library]
+    dependencies:
+      - package: Alamofire
+      - package: RxMoya
+      - package: RxSwift
+      - package: NSObject-Rx
+      - package: RxSwiftExt
+      - package: RxReachability
     configFiles:
         Debug: Sources/Configs/BuildConfigurations/Debug.xcconfig
         Staging: Sources/Configs/BuildConfigurations/Staging.xcconfig

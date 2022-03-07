@@ -6,6 +6,7 @@
 //
 
 import Moya
+import Foundation
 
 extension Encodable {
 

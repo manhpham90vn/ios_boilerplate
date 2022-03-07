@@ -6,6 +6,8 @@
 //
 
 import Moya
+import Foundation
+import UIKit
 
 enum NetworkIndicatorPlugin {
     
