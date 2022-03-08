@@ -22,7 +22,7 @@ installBundle:
 
 # generate
 .PHONY: generate
-generate: swiftgen xcodegen installPods
+generate: swiftgen xcodegen
 swiftgen:
 	mkdir -p Sources/Resources/Generated/SwiftGen
 	mint run swiftgen
