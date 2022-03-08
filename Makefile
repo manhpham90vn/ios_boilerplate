@@ -42,12 +42,13 @@ updatePods:
 
 .PHONY: xcodetest
 xcodetest:
-	xcodebuild test \
-	-workspace "My Project.xcworkspace" \
+	xcodebuild \
+	-project "My Project.xcodeproj" \
 	-scheme "My Project" \
 	-destination 'platform=iOS Simulator,name=iPhone 13 Pro Max' \
 	-derivedDataPath "build" \
 	-enableCodeCoverage YES \
+	test \
 	| bundle exec xcpretty -s -c
 
 .PHONY: generateCoverage
