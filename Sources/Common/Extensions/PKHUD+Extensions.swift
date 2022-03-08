@@ -8,6 +8,7 @@
 import Foundation
 import PKHUD
 import RxSwift
+import UIKit
 
 extension Reactive where Base: PKHUD {
 
