@@ -4,7 +4,6 @@
 //
 
 // https://help.apple.com/xcode/#/dev745c5c974
-#include "./Pods/Target Support Files/Pods-MyApp/Pods-MyApp.debug.xcconfig"
 
 PRODUCT_NAME = My App Debug
 PRODUCT_BUNDLE_IDENTIFIER = com.manhpham.myapp.debug
