@@ -1,16 +1,16 @@
 .DEFAULT_GOAL := all
 
-export MINT_PATH := Mints/lib
-export MINT_LINK_PATH := Mints/bin
+# export MINT_PATH := Mints/lib
+# export MINT_LINK_PATH := Mints/bin
 
 .PHONY: all
 all: install generate
 
 # install
 .PHONY: install
-install: installBrew install-ruby installMint installBundle
+install: installBrew install-ruby installBundle
 installBrew:
-	brew bundle install
+	scripts/installBrew.sh
 install-ruby:
 	cat .ruby-version | xargs rbenv install --skip-existing	
 installMint:
@@ -25,9 +25,9 @@ installBundle:
 generate: swiftgen xcodegen
 swiftgen:
 	mkdir -p Sources/Resources/Generated/SwiftGen
-	mint run swiftgen
+	swiftgen
 xcodegen: 
-	mint run xcodegen generate --spec project.yml	
+	xcodegen generate --spec project.yml	
 installPods: 
 	bundle exec pod install
 
