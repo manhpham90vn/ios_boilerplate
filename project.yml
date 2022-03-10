@@ -90,10 +90,14 @@ targets:
         UILaunchStoryboardName: LaunchScreen
         EXCLUDED_ARCHS[sdk=iphonesimulator*]: "arm64"
         VALIDATE_WORKSPACE: YES
-    preBuildScripts: &preBuildScripts
+    preBuildScripts:
         - name: SwiftGen
           script: |
-            mint run swiftgen swiftgen
+            if which swiftgen >/dev/null; then
+              swiftgen
+            else
+              echo "warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen"
+            fi
     postCompileScripts:
         - name: Swiftlint
           script: |
