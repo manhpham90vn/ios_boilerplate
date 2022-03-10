@@ -1,20 +1,24 @@
 #!/usr/bin/env bash
 set -e
 
-BREW_CMD="brew"
+if ! rbenv -v &> /dev/null
+then
+    brew install rbenv
+fi
 
-PACKAGES=(
-    rbenv
-    xcodegen
-    swiftgen
-    swiftlint
-)
+if ! xcodegen --version &> /dev/null
+then
+    brew install xcodegen
+fi
 
-echo "Installing packages..."
-$BREW_CMD install ${PACKAGES[@]}
+if ! swiftgen --version &> /dev/null
+then
+    brew install swiftgen
+fi
 
-echo "Config PATH..."
-echo 'if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.bash_profile 
-source ~/.bash_profile 
+if ! swiftlint --version &> /dev/null
+then
+    brew install swiftlint
+fi
 
 echo "Done"
