@@ -4,3 +4,8 @@ tap "homebrew/core"
 
 brew "mint"
 brew "rbenv"
+brew "fastlane"
+brew "xcodegen"
+brew "swiftgen"
+brew "swiftgen"
+brew "swiftlint"
