@@ -21,4 +21,8 @@ fi
 echo "Installing packages..."
 $BREW_CMD install ${PACKAGES[@]}
 
+echo "Config PATH..."
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
 echo "Done"
