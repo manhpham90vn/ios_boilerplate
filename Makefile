@@ -10,7 +10,7 @@ all: install generate
 .PHONY: install
 install: installBrew install-ruby installBundle
 installBrew:
-	brew bundle install
+	scripts/installBrew.sh
 install-ruby:
 	cat .ruby-version | xargs rbenv install --skip-existing	
 installMint:
