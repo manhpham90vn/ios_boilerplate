@@ -4,7 +4,7 @@ export MINT_PATH := Mints/lib
 export MINT_LINK_PATH := Mints/bin
 
 .PHONY: all
-all: install generate open
+all: install generate
 
 # install
 .PHONY: install
