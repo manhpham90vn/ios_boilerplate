@@ -22,7 +22,7 @@ echo "Installing packages..."
 $BREW_CMD install ${PACKAGES[@]}
 
 echo "Config PATH..."
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+echo 'if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.bash_profile 
+source ~/.bash_profile 
 
 echo "Done"
