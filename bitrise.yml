@@ -42,5 +42,6 @@ app:
       is_expand: false
     BITRISE_DISTRIBUTION_METHOD: app-store
 trigger_map:
-- push_branch: "*"
+- pull_request_source_branch: "*"
+  pull_request_target_branch: master
   workflow: primary
