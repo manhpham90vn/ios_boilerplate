@@ -16,7 +16,7 @@ packages:
   Alamofire:
     url: https://github.com/Alamofire/Alamofire
     from: "5.5.0"
-  RxMoya:
+  Moya:
     url: https://github.com/Moya/Moya
     from: "15.0.0"
   RxSwift:
@@ -63,7 +63,8 @@ targets:
     sources: [Sources, Library]
     dependencies:
       - package: Alamofire
-      - package: RxMoya
+      - package: Moya
+        product: RxMoya
       - package: RxSwift
       - package: NSObject-Rx
       - package: RxSwiftExt
