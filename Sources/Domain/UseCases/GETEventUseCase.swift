@@ -11,18 +11,15 @@ import RxCocoa
 import Resolver
 
 protocol GETEventUseCaseInterface {
-    func userReceivedEvents(page: Int) -> Single<[Event]>
+    func paging(page: Int) -> Single<[Paging]>
 }
 
 final class GETEventUseCase {
     @Injected var repo: HomeRepositoryInterface
-    @Injected var userRepo: UserRepositoryInterface
 }
 
 extension GETEventUseCase: GETEventUseCaseInterface {
-    func userReceivedEvents(page: Int) -> Single<[Event]> {
-        let userName = userRepo.user?.login ?? "manhpham90vn"
-        let params = EventParams(username: userName, page: page)
-        return repo.userReceivedEvents(params: params)
+    func paging(page: Int) -> Single<[Paging]> {
+        repo.pagging(page: page)
     }
 }

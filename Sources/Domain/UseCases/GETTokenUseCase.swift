@@ -11,15 +11,15 @@ import RxCocoa
 import Resolver
 
 protocol GETTokenUseCaseInterface {
-    func getToken() -> String?
+    func getToken() -> Single<String?>
 }
 
 final class GETTokenUseCase {
-    @Injected var repo: UserRepositoryInterface
+    @Injected var repo: LocalStorageRepository
 }
 
 extension GETTokenUseCase: GETTokenUseCaseInterface {
-    func getToken() -> String? {
-        repo.token
+    func getToken() -> Single<String?> {
+        .just(repo.getAccessToken())
     }
 }
