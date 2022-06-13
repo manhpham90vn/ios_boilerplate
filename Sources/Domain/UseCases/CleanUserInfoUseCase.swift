@@ -7,17 +7,22 @@
 
 import Foundation
 import Resolver
+import RxSwift
 
 protocol CleanUserInfoUseCaseInterface {
-    func clean()
+    func clean() -> Single<Void>
 }
 
 final class CleanUserInfoUseCase {
-    @Injected var repo: UserRepositoryInterface
+    @Injected var repo: LocalStorageRepository
 }
 
 extension CleanUserInfoUseCase: CleanUserInfoUseCaseInterface {
-    func clean() {
-        repo.logOut()
+    func clean() -> Single<Void> {
+        repo.clearAccessToken()
+        repo.clearRefreshToken()
+        repo.clearUserInfo()
+        repo.clearLoginState()
+        return .just(())
     }
 }

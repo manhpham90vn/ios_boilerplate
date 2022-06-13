@@ -7,17 +7,18 @@
 
 import Foundation
 import Resolver
+import RxSwift
 
 protocol GETLoginStatusUseCaseInterface {
-    func isLogin() -> Bool
+    func isLogin() -> Single<Bool>
 }
 
 final class GETLoginStatusUseCase {
-    @Injected var repo: UserRepositoryInterface
+    @Injected var repo: LocalStorageRepository
 }
 
 extension GETLoginStatusUseCase: GETLoginStatusUseCaseInterface {
-    func isLogin() -> Bool {
-        repo.isLogin()
+    func isLogin() -> Single<Bool> {
+        return .just(repo.getAccessToken() != nil)
     }
 }

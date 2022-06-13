@@ -6,7 +6,6 @@ import Foundation
 import RxSwift
 import RxCocoa
 import Reachability
-import RxReachability
 
 extension PrimitiveSequence {
     /// Retries the source observable sequence on error using a provided retry
