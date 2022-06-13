@@ -1,45 +1,31 @@
 .DEFAULT_GOAL := all
 
-# export MINT_PATH := Mints/lib
-# export MINT_LINK_PATH := Mints/bin
-
 .PHONY: all
 all: install generate
 
 # install
 .PHONY: install
-install: installBrew install-ruby installBundle
+install: installBrew installRuby installBundle
 installBrew:
-	scripts/installBrew.sh
-install-ruby:
-	cat .ruby-version | xargs rbenv install --skip-existing	
-installMint:
-	mkdir -p Mints/{lib,bin}
-	mint bootstrap -m Mintfile --link
-installBundle: 
+	scripts/installDependencies.sh
+installRuby:
+	cat .ruby-version | xargs rbenv install --skip-existing
+installBundle:
 	bundle config path vendor/bundle
 	bundle install --without=documentation --jobs 4 --retry 3
 
 # generate
 .PHONY: generate
-generate: swiftgen xcodegen
-swiftgen:
-	mkdir -p Sources/Resources/Generated/SwiftGen
+generate: generateSwiftgen generateXcodegen installCarthage
+generateSwiftgen:
+	mkdir -p Sources/Presentation/Resources/Generated/SwiftGen
 	swiftgen
-xcodegen: 
-	xcodegen generate --spec project.yml	
-installPods: 
-	bundle exec pod install
+generateXcodegen:
+	xcodegen generate --spec project.yml
+installCarthage:
+	carthage bootstrap --use-xcframeworks --platform iOS --no-use-binaries --cache-builds --use-ssh
 
-# update
-.PHONY: update
-update: updateBundle updatePods
-updateBundle: 
-	bundle config path vendor/bundle
-	bundle update --jobs 4 --retry 3
-updatePods: 
-	bundle exec pod update
-
+# test
 .PHONY: xcodetest
 xcodetest:
 	xcodebuild \
@@ -62,7 +48,7 @@ delete:
 
 # fastlane
 .PHONY: exportIpa
-exportIpa: 
+exportIpa:
 	bundle exec fastlane export --env App
 
 .PHONY: exportTestFlight
