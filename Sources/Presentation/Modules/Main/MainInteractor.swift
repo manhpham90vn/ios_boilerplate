@@ -10,27 +10,33 @@ import RxSwift
 import Resolver
 
 protocol MainInteractorInterface {
-//    func cleanData()
-//    func getUserReceivedEvents(page: Int) -> Single<[Event]>
+    func cleanData()
+    func getDataPaging(page: Int) -> Single<[Paging]>
+    func getUserInfo() -> Single<User>
 }
 
 final class MainInteractor: MainInteractorInterface {
 
-//    @Injected var getEventUseCaseInterface: GETEventUseCaseInterface
-//    @Injected var cleanUserInfoUseCaseInterface: CleanUserInfoUseCaseInterface
-//
-//    deinit {
-//        if Configs.shared.loggingDeinitEnabled {
-//            LogInfo("\(Swift.type(of: self)) Deinit")
-//        }
-//    }
-//
-//    func cleanData() {
-//        cleanUserInfoUseCaseInterface.clean()
-//    }
-//
-//    func getUserReceivedEvents(page: Int) -> Single<[Event]> {
-//        getEventUseCaseInterface.userReceivedEvents(page: page)
-//    }
+    @Injected var getEventUseCaseInterface: GETEventUseCaseInterface
+    @Injected var cleanUserInfoUseCaseInterface: CleanUserInfoUseCaseInterface
+    @Injected var getUserInfoUseCase: GETUserInfoUseCase
+
+    deinit {
+        if Configs.shared.loggingDeinitEnabled {
+            LogInfo("\(Swift.type(of: self)) Deinit")
+        }
+    }
+
+    func cleanData() {
+        cleanUserInfoUseCaseInterface.clean()
+    }
+
+    func getDataPaging(page: Int) -> Single<[Paging]> {
+        getEventUseCaseInterface.paging(page: page)
+    }
+    
+    func getUserInfo() -> Single<User> {
+        getUserInfoUseCase.getInfo()
+    }
 
 }

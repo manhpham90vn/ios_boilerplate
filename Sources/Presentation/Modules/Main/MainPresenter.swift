@@ -18,17 +18,17 @@ protocol MainPresenterInterface {
     func inject(view: MainViewInterface)
     
     func didTapLogout()
-//    func navigationToDetailScreen(item: Event)
+    func navigationToDetailScreen(item: Paging)
     func reload()
 }
 
-final class MainPresenter: MainPresenterInterface {//, PresenterPageable {
+final class MainPresenter: MainPresenterInterface, PresenterPageable {
 
     weak var view: MainViewInterface?
     @Injected var router: MainRouterInterface
     @Injected var interactor: MainInteractorInterface
 
-//    let elements = BehaviorRelay<[Event]>(value: [])
+    let elements = BehaviorRelay<[Paging]>(value: [])
     let activityIndicator = ActivityIndicator.shared
     let trigger = PublishRelay<Void>()
     let headerRefreshTrigger = PublishRelay<Void>()
@@ -40,55 +40,66 @@ final class MainPresenter: MainPresenterInterface {//, PresenterPageable {
     var currentPage = 1
 
     init() {
-//        trigger
-//            .flatMapLatest { [weak self] () -> Driver<[Event]> in
-//                guard let self = self else { return .never() }
-//                self.currentPage = 1
-//                self.isEnableLoadMore.accept(true)
-//                return self.interactor
-//                    .getUserReceivedEvents(page: self.currentPage)
-//                    .trackActivity(self.activityIndicator)
-//                    .debugToFile()
-//                    .asDriverOnErrorJustComplete()
-//            }
-//            ~> elements
-//            ~ disposeBag
-//
-//        headerRefreshTrigger
-//            .flatMapLatest { [weak self] () -> Driver<[Event]> in
-//                guard let self = self else { return .never() }
-//                self.currentPage = 1
-//                self.isEnableLoadMore.accept(true)
-//                return self.interactor
-//                    .getUserReceivedEvents(page: self.currentPage)
-//                    .trackActivity(self.headerActivityIndicator)
-//                    .asDriverOnErrorJustComplete()
-//            }
-//            ~> elements
-//            ~ disposeBag
-//
-//        footerLoadMoreTrigger
-//            .flatMapLatest { [weak self] () -> Driver<[Event]> in
-//                guard let self = self else { return .never() }
-//                self.currentPage += 1
-//                return self.interactor
-//                    .getUserReceivedEvents(page: self.currentPage)
-//                    .trackActivity(self.footerActivityIndicator)
-//                    .asDriverOnErrorJustComplete()
-//            }
-//            .asDriverOnErrorJustComplete()
-//            .drive(onNext: { [weak self] result in
-//                guard let self = self else { return }
-//                var current = self.elements.value
-//                current += result
-//                if current.count > 1000 {
-//                    self.isEnableLoadMore.accept(false)
-//                } else {
-//                    self.isEnableLoadMore.accept(true)
-//                }
-//                self.elements.accept(current)
-//            })
-//            ~ disposeBag
+        trigger
+            .flatMapLatest { [weak self] () -> Driver<[Paging]> in
+                guard let self = self else { return .never() }
+                self.currentPage = 1
+                self.isEnableLoadMore.accept(true)
+                return self.interactor
+                    .getDataPaging(page: self.currentPage)
+                    .trackActivity(self.activityIndicator)
+                    .debugToFile()
+                    .asDriverOnErrorJustComplete()
+            }
+            ~> elements
+            ~ disposeBag
+
+        trigger
+            .flatMapLatest { [weak self] () -> Driver<User> in
+                guard let self = self else { return .never() }
+                return self.interactor.getUserInfo()
+                    .trackActivity(self.activityIndicator)
+                    .asDriverOnErrorJustComplete()
+            }
+            .asDriverOnErrorJustComplete()
+            .drive()
+            ~ disposeBag
+        
+        headerRefreshTrigger
+            .flatMapLatest { [weak self] () -> Driver<[Paging]> in
+                guard let self = self else { return .never() }
+                self.currentPage = 1
+                self.isEnableLoadMore.accept(true)
+                return self.interactor
+                    .getDataPaging(page: self.currentPage)
+                    .trackActivity(self.headerActivityIndicator)
+                    .asDriverOnErrorJustComplete()
+            }
+            ~> elements
+            ~ disposeBag
+
+        footerLoadMoreTrigger
+            .flatMapLatest { [weak self] () -> Driver<[Paging]> in
+                guard let self = self else { return .never() }
+                self.currentPage += 1
+                return self.interactor
+                    .getDataPaging(page: self.currentPage)
+                    .trackActivity(self.footerActivityIndicator)
+                    .asDriverOnErrorJustComplete()
+            }
+            .asDriverOnErrorJustComplete()
+            .drive(onNext: { [weak self] result in
+                guard let self = self else { return }
+                var current = self.elements.value
+                current += result
+                if current.count > 1000 {
+                    self.isEnableLoadMore.accept(false)
+                } else {
+                    self.isEnableLoadMore.accept(true)
+                }
+                self.elements.accept(current)
+            })
+            ~ disposeBag
     }
 
     func inject(view: MainViewInterface) {
@@ -105,13 +116,13 @@ final class MainPresenter: MainPresenterInterface {//, PresenterPageable {
     }
     
     func didTapLogout() {
-//        interactor.cleanData()
-//        router.navigationToLoginScreen()
+        interactor.cleanData()
+        router.navigationToLoginScreen()
     }
     
-//    func navigationToDetailScreen(item: Event) {
-//        router.navigationToDetailScreen(item: item)
-//    }
+    func navigationToDetailScreen(item: Paging) {
+        router.navigationToDetailScreen(item: item)
+    }
     
     func reload() {
         trigger.accept(())
