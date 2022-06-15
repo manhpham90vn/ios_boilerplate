@@ -36,6 +36,8 @@ final class LoginViewController: BaseViewController {
         super.setupUI()
 
         navigationItem.title = "Login"
+        emailTextField.text = "admin@admin.com"
+        passwordTextField.text = "pwd12345"
     }
 
     override func bindDatas() {

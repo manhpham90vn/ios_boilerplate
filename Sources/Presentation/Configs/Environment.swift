@@ -12,7 +12,7 @@ enum Environment {
     case product
 
     var baseURL: String {
-        "http://localhost:3000/"
+        "http://localhost.charlesproxy.com:3000/"
     }
 
 }
