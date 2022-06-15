@@ -51,8 +51,8 @@ final class LoginPresenter: LoginPresenterInterface, HasDisposeBag, HasActivityI
             .login(email: login.value, password: password.value)
             .trackActivity(activityIndicator)
             .asDriverOnErrorJustComplete()
-            .drive(onNext: { _ in
-                
+            .drive(onNext: { [weak self] _ in
+                self?.router.navigationToHomeScreen()
             })
             .disposed(by: disposeBag)
     }

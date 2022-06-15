@@ -10,16 +10,14 @@ import Resolver
 extension Resolver: ResolverRegistering {
     public static func registerAllServices() {
         // MARK: Service
-//        register { AuthManager() as AuthManagerInterface }
-//        register { RESTfulServiceComponent() as RESTfulService }
-//        register { OAuthServiceComponent() as OAuthService }
+        register { AppApiComponent() as AppApi }
 
         // MARK: Repository
         register { UserRepository() as UserRepositoryInterface }
         register { HomeRepository() as HomeRepositoryInterface }
+        register { LocalStorage() as LocalStorageRepository }
         
         // MARK: UseCase
-//        register { GETURLAuthenUseCase() as GETURLAuthenUseCaseInterFace }
         register { LoginUseCase() as LoginUseCaseInterface }
         register { GETEventUseCase() as GETEventUseCaseInterface }
         register { CleanUserInfoUseCase() as CleanUserInfoUseCaseInterface }

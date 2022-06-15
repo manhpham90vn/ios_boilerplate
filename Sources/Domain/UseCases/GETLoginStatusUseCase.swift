@@ -10,7 +10,7 @@ import Resolver
 import RxSwift
 
 protocol GETLoginStatusUseCaseInterface {
-    func isLogin() -> Single<Bool>
+    func isLogin() -> Bool
 }
 
 final class GETLoginStatusUseCase {
@@ -18,7 +18,7 @@ final class GETLoginStatusUseCase {
 }
 
 extension GETLoginStatusUseCase: GETLoginStatusUseCaseInterface {
-    func isLogin() -> Single<Bool> {
-        return .just(repo.getAccessToken() != nil)
+    func isLogin() -> Bool {
+        return repo.getAccessToken() != nil
     }
 }

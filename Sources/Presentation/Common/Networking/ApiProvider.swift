@@ -20,23 +20,9 @@ final class ApiProvider<Target: TargetType>: MoyaProvider<Target> {
         return rx
             .request(target)
             .filterSuccessfulStatusCodes()
-            .autoRetry(delay: .constant(time: 1), shouldRetry: { (error) -> Bool in
-                if let error = error as? MoyaError {
-                    switch error {
-                    case .underlying(let error, _):
-                        if let error = error as? AFError {
-                            switch error {
-                            case .sessionTaskFailed:
-                                return true
-                            default:
-                                break
-                            }
-                        }
-                    default:
-                        break
-                    }
-                }
-                return false
+            .autoRetry(delay: .constant(time: 1), shouldRetry: { _ -> Bool in
+                guard let autoRetry = (target as? MultiTarget)?.target as? Retryable else { return false }
+                return autoRetry.autoRetry
             })
             .catch { [weak self] (error) -> Single<Response> in
                 guard let self = self else { return .never() }
@@ -45,7 +31,7 @@ final class ApiProvider<Target: TargetType>: MoyaProvider<Target> {
     }
 
     private func handleRetry(error: Error, target: Target) -> Single<Response> {
-        guard let appCommonError = (target as? MultiTarget)?.target as? AppCommonErrorInterface else { return .error(error) }
+        guard let appCommonError = (target as? MultiTarget)?.target as? AppError else { return .error(error) }
         guard appCommonError.needHandleError else { return .error(error) }
         if let error = error as? MoyaError {
             switch error {
@@ -68,11 +54,16 @@ final class ApiProvider<Target: TargetType>: MoyaProvider<Target> {
                 }
             case .statusCode(let response):
                 // handle error of each api here
-                if let response = try? response.map(UserReceivedEventsError.self) {
-                    return userReceivedEventsErrors(target: target,
-                                                    response: response,
-                                                    appCommonError: appCommonError,
-                                                    error: error)
+                if let response = try? response.map(ServerErrorResponse.self) {
+                    return AppHelper
+                        .shared
+                        .showAlertRx(title: appCommonError.errorTitle,
+                                     message: response.message,
+                                     cancel: appCommonError.buttonLeft,
+                                     ok: "Thử lại")
+                        .flatMap { [weak self] in
+                            self?.request(target: target) ?? .error(error)
+                        }
                 }
             default:
                 break

@@ -24,13 +24,13 @@ final class ApiConnection {
 
         plugins.append(NetworkIndicatorPlugin.indicatorPlugin())
 
-//        if let token = getTokenUseCaseInterface.getToken() {
-//            let tokenClosure: (TargetType) -> String = { _ in
-//                return token
-//            }
-//            let authPlugin = AccessTokenPlugin(tokenClosure: tokenClosure)
-//            plugins.append(authPlugin)
-//        }
+        if let token = getTokenUseCaseInterface.getToken() {
+            let tokenClosure: (TargetType) -> String = { _ in
+                return token
+            }
+            let authPlugin = AccessTokenPlugin(tokenClosure: tokenClosure)
+            plugins.append(authPlugin)
+        }
 
         if Configs.shared.loggingAPIEnabled {
             plugins.append(NetworkLoggerPlugin(configuration: .init(logOptions: .verbose)))
