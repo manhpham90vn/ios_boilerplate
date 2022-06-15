@@ -11,7 +11,7 @@ import RxCocoa
 import Resolver
 
 protocol GETTokenUseCaseInterface {
-    func getToken() -> Single<String?>
+    func getToken() -> String?
 }
 
 final class GETTokenUseCase {
@@ -19,7 +19,7 @@ final class GETTokenUseCase {
 }
 
 extension GETTokenUseCase: GETTokenUseCaseInterface {
-    func getToken() -> Single<String?> {
-        .just(repo.getAccessToken())
+    func getToken() -> String? {
+        repo.getAccessToken()
     }
 }
