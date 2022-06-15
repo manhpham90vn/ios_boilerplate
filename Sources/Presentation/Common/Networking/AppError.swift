@@ -1,5 +1,5 @@
 //
-//  AppCommonErrorInterface.swift
+//  AppError.swift
 //  MyApp
 //
 //  Created by Manh Pham on 12/31/21.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol AppCommonErrorInterface {
+protocol AppError {
     var errorTitle: String? { get }
     var errorMessage: String? { get }
     var buttonLeft: String? { get }
@@ -15,7 +15,7 @@ protocol AppCommonErrorInterface {
     var needHandleError: Bool { get }
 }
 
-extension AppCommonErrorInterface {
+extension AppError {
     var errorTitle: String? {
         "Đã xảy ra lỗi"
     }

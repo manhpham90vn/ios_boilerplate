@@ -26,9 +26,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         window = UIWindow(frame: UIScreen.main.bounds)
-//        let vc = getLoginStatusUseCaseInterface.isLogin() ? AppScenes.main.viewController : AppScenes.login.viewController
-//        window?.rootViewController = UINavigationController(rootViewController: vc)
-//        window?.makeKeyAndVisible()
+        let vc = getLoginStatusUseCaseInterface.isLogin() ? AppScenes.main.viewController : AppScenes.login.viewController
+        window?.rootViewController = UINavigationController(rootViewController: vc)
+        window?.makeKeyAndVisible()
 
         LoggerSetup()
         LoadingHelper.shared.perform()
