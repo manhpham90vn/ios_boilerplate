@@ -85,6 +85,4 @@ extension AppRouter: AccessTokenAuthorizable {
     
 }
 
-extension AppRouter: AppError {}
-
 extension AppRouter: Retryable {}

@@ -57,13 +57,13 @@ final class MainViewController: BaseTableViewViewController {
     override func bindDatas() {
         super.bindDatas()
 
-//        guard let presenter = presenter as? MainPresenter else { return }
-//        Observable.just(()) ~> presenter.trigger ~ disposeBag
-//        presenter.bind(paggingable: self)
-//        presenter.elements.bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: UITableViewCell.self)) { _, element, cell in
-//            cell.textLabel?.text = element.repo?.name
-//        }
-//        .disposed(by: disposeBag)
+        guard let presenter = presenter as? MainPresenter else { return }
+        Observable.just(()) ~> presenter.trigger ~ disposeBag
+        presenter.bind(paggingable: self)
+        presenter.elements.bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: UITableViewCell.self)) { _, element, cell in
+            cell.textLabel?.text = element.name
+        }
+        .disposed(by: disposeBag)
     }
 
     @objc
@@ -77,7 +77,7 @@ extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let presenter = presenter as? MainPresenter else { return }
-//        presenter.navigationToDetailScreen(item: presenter.elements.value[indexPath.row])
+        presenter.navigationToDetailScreen(item: presenter.elements.value[indexPath.row])
     }
     
 }

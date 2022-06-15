@@ -12,7 +12,7 @@ protocol MainRouterInterface {
     var view: MainViewInterface? { get }
     func inject(view: MainViewInterface)
     
-//    func navigationToDetailScreen(item: Event)
+    func navigationToDetailScreen(item: Paging)
     func navigationToLoginScreen()
 }
 
@@ -30,11 +30,11 @@ final class MainRouter: MainRouterInterface {
         }
     }
 
-//    func navigationToDetailScreen(item: Event) {
+    func navigationToDetailScreen(item: Paging) {
 //        guard let viewController = view as? MainViewController else { return }
 //        let vc = AppScenes.detail(params: .init(event: item)).viewController
 //        viewController.navigationController?.pushViewController(vc, animated: true)
-//    }
+    }
     
     func navigationToLoginScreen() {
         UIWindow.shared?.rootViewController = UINavigationController(rootViewController: AppScenes.login.viewController)

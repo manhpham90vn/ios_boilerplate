@@ -10,7 +10,7 @@ import Resolver
 import RxSwift
 
 protocol CleanUserInfoUseCaseInterface {
-    func clean() -> Single<Void>
+    func clean()
 }
 
 final class CleanUserInfoUseCase {
@@ -18,11 +18,10 @@ final class CleanUserInfoUseCase {
 }
 
 extension CleanUserInfoUseCase: CleanUserInfoUseCaseInterface {
-    func clean() -> Single<Void> {
+    func clean() {
         repo.clearAccessToken()
         repo.clearRefreshToken()
         repo.clearUserInfo()
         repo.clearLoginState()
-        return .just(())
     }
 }

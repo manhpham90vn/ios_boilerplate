@@ -23,6 +23,7 @@ extension Resolver: ResolverRegistering {
         register { CleanUserInfoUseCase() as CleanUserInfoUseCaseInterface }
         register { GETLoginStatusUseCase() as GETLoginStatusUseCaseInterface }
         register { GETTokenUseCase() as GETTokenUseCaseInterface }
+        register { GETUserInfoUseCaseImp() as GETUserInfoUseCase }
         
         // MARK: Register All
         MainRouter.registerAllServices()
