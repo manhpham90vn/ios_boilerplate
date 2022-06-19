@@ -8,7 +8,6 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import Moya
 
 protocol AppApi {
     func login(email: String, password: String) -> Single<Token>
@@ -19,25 +18,22 @@ protocol AppApi {
 
 final class AppApiComponent: AppApi {
     func login(email: String, password: String) -> Single<Token> {
-        return ApiConnection.shared.request(target: MultiTarget(AppRouter.login(email: email,
-                                                                                password: password)),
-                                            type: LoginResponse.self)
+        return AppNetwork.default.request(route: AppRoute.login(username: email, password: password), type: LoginResponse.self)
             .map { $0.asEntity() }
     }
     
     func userInfo() -> Single<User> {
-        return ApiConnection.shared.request(target: MultiTarget(AppRouter.userInfo), type: UserResponse.self)
+        return AppNetwork.default.request(route: AppRoute.getUserInfo, type: UserResponse.self)
             .map { $0.asEntity() }
     }
     
     func paging(page: Int) -> Single<[Paging]> {
-        return ApiConnection.shared.request(target: MultiTarget(AppRouter.paging(page: page)), type: PagingResponse.self)
+        return AppNetwork.default.request(route: AppRoute.getList(page: page), type: PagingResponse.self)
             .map { $0.asEntity() }
     }
     
     func refreshToken(token: String) -> Single<RefreshToken> {
-        return ApiConnection.shared
-            .request(target: MultiTarget(AppRouter.refreshToken(token: token)), type: RefreshTokenResponse.self)
+        return AppNetwork.default.request(route: AppRoute.refreshToken(token: token), type: RefreshTokenResponse.self)
             .map { $0.asEntity() }
     }
 }
