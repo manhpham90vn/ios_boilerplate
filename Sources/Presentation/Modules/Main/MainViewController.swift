@@ -29,7 +29,7 @@ final class MainViewController: BaseTableViewViewController {
     override func setupUI() {
         super.setupUI()
 
-        tableView.rx.setDelegate(self) ~ disposeBag
+        tableView.rx.setDelegate(self).disposed(by: disposeBag)
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
 
@@ -58,7 +58,7 @@ final class MainViewController: BaseTableViewViewController {
         super.bindDatas()
 
         guard let presenter = presenter as? MainPresenter else { return }
-        Observable.just(()) ~> presenter.trigger ~ disposeBag
+        Observable.just(()).bind(to: presenter.trigger).disposed(by: disposeBag)
         presenter.bind(paggingable: self)
         presenter.elements.bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: UITableViewCell.self)) { _, element, cell in
             cell.textLabel?.text = element.name
