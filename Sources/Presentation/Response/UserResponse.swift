@@ -8,8 +8,8 @@
 import Foundation
 
 struct UserResponse: Codable {
-    var email: String
-    var name: String
+    var email: String?
+    var name: String?
 }
 
 extension UserResponse: EntityConvertibleType {

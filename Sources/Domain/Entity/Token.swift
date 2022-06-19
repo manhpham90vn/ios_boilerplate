@@ -7,7 +7,9 @@
 
 import Foundation
 
-struct Token: Codable {
-    var token: String
-    var refreshToken: String
+struct Token: Codable, ServerMessageError {
+    var token: String?
+    var refreshToken: String?
+    var status: String?
+    var message: String?
 }

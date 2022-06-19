@@ -8,6 +8,6 @@
 import Foundation
 
 struct Paging: Codable {
-    var name: String
-    var age: Int
+    var name: String?
+    var age: Int?
 }
