@@ -12,49 +12,6 @@ options:
     bundleIdPrefix: "com.manhpham"
 settings:
     PRODUCT_BUNDLE_IDENTIFIER: $(PRODUCT_BUNDLE_IDENTIFIER)
-packages:
-  Alamofire:
-    url: https://github.com/Alamofire/Alamofire
-    from: "5.5.0"
-  Moya:
-    url: https://github.com/Moya/Moya
-    from: "15.0.0"
-  RxSwift:
-    url: https://github.com/ReactiveX/RxSwift
-    from: "6.5.0"
-  NSObject-Rx:
-    url: https://github.com/RxSwiftCommunity/NSObject-Rx
-    from: "5.1.1"
-  RxSwiftExt:
-    url: https://github.com/RxSwiftCommunity/RxSwiftExt
-    from: "6.1.0"
-  RxReachability:
-    url: https://github.com/RxSwiftCommunity/RxReachability
-    from: "1.2.1"
-  PKHUD:
-    url: https://github.com/pkluz/PKHUD
-    from: "5.4.0"
-  XCGLogger:
-    url: https://github.com/DaveWoodCom/XCGLogger
-    from: "7.0.0"
-  Reusable:
-    url: https://github.com/AliSoftware/Reusable
-    from: "4.1.2"
-  SwiftyUserDefaults:
-    url: https://github.com/sunshinejr/SwiftyUserDefaults
-    from: "5.3.0"
-  Resolver:
-    url: https://github.com/hmlongco/Resolver
-    from: "1.5.0"
-  MJRefresh:
-    url: https://github.com/CoderMJLee/MJRefresh
-    from: "3.7.5"
-  Then:
-    url: https://github.com/devxoul/Then
-    from: "2.7.0"
-  Firebase:
-    url: https://github.com/firebase/firebase-ios-sdk
-    from: "8.12.1" 
 targets:
   MyApp:
     type: application
@@ -62,30 +19,37 @@ targets:
     deploymentTarget: "12.0"
     sources: [Sources, Library]
     dependencies:
-      - package: Alamofire
-      - package: Moya
-        product: RxMoya
-      - package: RxSwift
-      - package: NSObject-Rx
-      - package: RxSwiftExt
-      - package: RxReachability
-      - package: PKHUD
-      - package: XCGLogger
-      - package: Reusable
-      - package: SwiftyUserDefaults
-      - package: Resolver
-      - package: MJRefresh
-      - package: Then
-      - package: Firebase
-        product: FirebaseCrashlytics
+      - framework: "Carthage/Build/Alamofire.xcframework"
+      - framework: "Carthage/Build/RxSwift.xcframework"
+      - framework: "Carthage/Build/RxCocoa.xcframework"
+      - framework: "Carthage/Build/RxRelay.xcframework"
+      - framework: "Carthage/Build/RxSwiftExt.xcframework"
+      - framework: "Carthage/Build/NSObject_Rx.xcframework"
+      - framework: "Carthage/Build/Resolver.xcframework"
+      - framework: "Carthage/Build/Reusable.xcframework"
+      - framework: "Carthage/Build/SwiftyUserDefaults.xcframework"
+      - framework: "Carthage/Build/XCGLogger.xcframework"
+      - framework: "Carthage/Build/ObjcExceptionBridging.xcframework"
+      - framework: "Carthage/Build/Reachability.xcframework"
+      - framework: "Carthage/Build/MJRefresh.xcframework"
+      - framework: "Carthage/Build/PKHUD.xcframework"
+      - framework: "Carthage/Build/FirebaseCrashlytics.xcframework"
+      - framework: "Carthage/Build/FirebaseCore.xcframework"
+      - framework: "Carthage/Build/FirebaseAnalytics.xcframework"
+      - framework: "Carthage/Build/FirebaseCoreDiagnostics.xcframework"
+      - framework: "Carthage/Build/FirebaseCoreInternal.xcframework"
+      - framework: "Carthage/Build/GoogleAppMeasurement.xcframework"
+      - framework: "Carthage/Build/GoogleAppMeasurementIdentitySupport.xcframework"
+      - framework: "Carthage/Build/GoogleDataTransport.xcframework"
+      - framework: "Carthage/Build/GoogleUtilities.xcframework"
     configFiles:
-        Debug: Sources/Configs/BuildConfigurations/Debug.xcconfig
-        Staging: Sources/Configs/BuildConfigurations/Staging.xcconfig
-        Release: Sources/Configs/BuildConfigurations/Release.xcconfig
+        Debug: Sources/Presentation/Configs/BuildConfigurations/Debug.xcconfig
+        Staging: Sources/Presentation/Configs/BuildConfigurations/Staging.xcconfig
+        Release: Sources/Presentation/Configs/BuildConfigurations/Release.xcconfig
     settings:
-        INFOPLIST_FILE: Sources/Resources/Info.plist
+        INFOPLIST_FILE: Sources/Presentation/Resources/Info.plist
         SWIFT_VERSION: "5.0"
-        SWIFT_OBJC_BRIDGING_HEADER: Sources/Resources/MyApp-Bridging-Header.h
+        SWIFT_OBJC_BRIDGING_HEADER: Sources/Presentation/Resources/MyApp-Bridging-Header.h
         CODE_SIGN_STYLE: "Manual"
         UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
         UILaunchStoryboardName: LaunchScreen
@@ -109,7 +73,7 @@ targets:
             fi
         - name: GoogleServiceInfo
           script: |
-            PATH_TO_GOOGLE_PLISTS="${PROJECT_DIR}/Sources/Configs/GoogleServices"
+            PATH_TO_GOOGLE_PLISTS="${PROJECT_DIR}/Sources/Presentation/Configs/GoogleServices"
             case "${CONFIGURATION}" in
             "Debug" )
             cp -r "$PATH_TO_GOOGLE_PLISTS/GoogleService-Info-Debug.plist" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist" ;;
@@ -123,9 +87,10 @@ targets:
     postBuildScripts:
         - name: Crashlytics
           script: |
-            ${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run
+            "${PROJECT_DIR}/scripts/run"
           inputFiles:
             - $(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)
+            - ${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}
   MyAppTests:
     type: bundle.unit-test
     platform: iOS
