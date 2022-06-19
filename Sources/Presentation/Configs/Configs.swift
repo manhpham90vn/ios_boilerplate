@@ -11,10 +11,10 @@ final class Configs {
     
     static let shared = Configs()
 
-    let loggingAPIEnabled = true
+    let loggingAPIEnabled = false
     let loggingLoadingEnabled = false
     let loggingToFileEnabled = false
-    let loggingDeinitEnabled = true
+    let loggingDeinitEnabled = false
     
     var env: Environment {
         #if DEBUG

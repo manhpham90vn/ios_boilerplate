@@ -61,16 +61,16 @@ extension DefaultsKeys {
 
 final class LocalStorage: LocalStorageRepository {
     @SwiftyUserDefault(keyPath: \.token, options: .cached)
-    var token: String?
+    private var token: String?
 
     @SwiftyUserDefault(keyPath: \.refreshToken, options: .cached)
-    var refreshToken: String?
+    private var refreshToken: String?
 
     @SwiftyUserDefault(keyPath: \.loginState, options: .cached)
-    var state: LoginState?
+    private var state: LoginState?
     
     @SwiftyUserDefault(keyPath: \.user, options: .cached)
-    var user: User?
+    private var user: User?
     
     func getAccessToken() -> String? {
         token

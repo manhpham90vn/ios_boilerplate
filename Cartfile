@@ -1,5 +1,4 @@
 github "Alamofire/Alamofire"
-github "Moya/Moya"
 github "ReactiveX/RxSwift"
 github "RxSwiftCommunity/NSObject-Rx"
 github "RxSwiftCommunity/RxSwiftExt"
