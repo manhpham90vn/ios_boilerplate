@@ -50,6 +50,9 @@ final class LoginPresenter: LoginPresenterInterface, HasDisposeBag, HasActivityI
         interactor
             .login(email: login.value, password: password.value)
             .trackActivity(activityIndicator)
+            .do(onError: { error in
+                AppHelper.shared.showAlert(title: "Error", message: error.localizedDescription)
+            })
             .asDriverOnErrorJustComplete()
             .drive(onNext: { [weak self] result in
                 if result.token != nil {
