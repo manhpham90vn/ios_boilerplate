@@ -7,12 +7,15 @@
 
 import Foundation
 import Alamofire
+import Resolver
 
 final class RefreshTokenInterceptor: RequestInterceptor {
     typealias RequestRetryCompletion = (RetryResult) -> Void
     private var lock = NSLock()
     private var isRefreshing = false
     private var requestsToRetry: [RequestRetryCompletion] = []
+    
+    @Injected var local: LocalStorageRepository
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         completion(.success(urlRequest))
@@ -35,7 +38,7 @@ final class RefreshTokenInterceptor: RequestInterceptor {
                     self.lock.lock {
                         switch result {
                         case let .success(token):
-                            UserDefaults.standard.set(token, forKey: "token")
+                            self.local.setAccessToken(newValue: token)
                             self.requestsToRetry.forEach { $0(.retry) }
                             self.requestsToRetry.removeAll()
                         case let .failure(error):
@@ -50,11 +53,11 @@ final class RefreshTokenInterceptor: RequestInterceptor {
         }
     }
     
-    // TODO: use AppNetwork.default but lead can not get callback
+    // TODO: use AppNetwork.default or  but lead can not get callback
     func refreshToken(completion: @escaping (Result<String, Error>) -> Void) {
         AF.request("\(Configs.shared.env.baseURL)refreshToken",
                    method: .post,
-                   parameters: ["token": UserDefaults.standard.value(forKey: "refreshToken") as? String ?? ""],
+                   parameters: ["token": local.getRefreshToken() ?? ""],
                    encoding: URLEncoding.httpBody)
             .responseDecodable(of: RefreshTokenResponse.self) { response in
                 switch response.result {

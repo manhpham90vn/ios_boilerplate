@@ -15,7 +15,7 @@ import FirebaseCore
 final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    @LazyInjected var getLoginStatusUseCaseInterface: GETLoginStatusUseCaseInterface
+    @LazyInjected var local: LocalStorageRepository
     
     static var keyWindow: UIWindow? {
         return UIApplication.shared.windows.first(where: { $0.isKeyWindow })
@@ -26,7 +26,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        let vc = getLoginStatusUseCaseInterface.isLogin() ? AppScenes.main.viewController : AppScenes.login.viewController
+        let vc = local.getLoginState() == .logined ? AppScenes.main.viewController : AppScenes.login.viewController
         window?.rootViewController = UINavigationController(rootViewController: vc)
         window?.makeKeyAndVisible()
 

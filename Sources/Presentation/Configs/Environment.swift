@@ -9,6 +9,7 @@ import Foundation
 
 enum Environment {
     case develop
+    case staging
     case product
 
     var baseURL: String {

@@ -21,8 +21,6 @@ extension Resolver: ResolverRegistering {
         register { LoginUseCase() as LoginUseCaseInterface }
         register { GETEventUseCase() as GETEventUseCaseInterface }
         register { CleanUserInfoUseCase() as CleanUserInfoUseCaseInterface }
-        register { GETLoginStatusUseCase() as GETLoginStatusUseCaseInterface }
-        register { GETTokenUseCase() as GETTokenUseCaseInterface }
         register { GETUserInfoUseCaseImp() as GETUserInfoUseCase }
         register { RefreshTokenImp() as RefreshTokenUseCase }
         
