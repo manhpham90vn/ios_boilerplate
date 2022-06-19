@@ -11,19 +11,19 @@ import SwiftyUserDefaults
 
 protocol LocalStorageRepository {
     func getAccessToken() -> String?
-    func setAccessToken(newValue: String)
+    func setAccessToken(newValue: String?)
     func clearAccessToken()
     
     func getRefreshToken() -> String?
-    func setRefreshToken(newValue: String)
+    func setRefreshToken(newValue: String?)
     func clearRefreshToken()
     
     func getLoginState() -> LoginState?
-    func setLoginState(newValue: LoginState)
+    func setLoginState(newValue: LoginState?)
     func clearLoginState()
     
     func getUserInfo() -> User?
-    func setUserInfo(newValue: User)
+    func setUserInfo(newValue: User?)
     func clearUserInfo()
 }
 
@@ -76,7 +76,7 @@ final class LocalStorage: LocalStorageRepository {
         token
     }
     
-    func setAccessToken(newValue: String) {
+    func setAccessToken(newValue: String?) {
         token = newValue
     }
     
@@ -88,7 +88,7 @@ final class LocalStorage: LocalStorageRepository {
         refreshToken
     }
     
-    func setRefreshToken(newValue: String) {
+    func setRefreshToken(newValue: String?) {
         refreshToken = newValue
     }
     
@@ -100,7 +100,7 @@ final class LocalStorage: LocalStorageRepository {
         state
     }
     
-    func setLoginState(newValue: LoginState) {
+    func setLoginState(newValue: LoginState?) {
         state = newValue
     }
     
@@ -112,7 +112,7 @@ final class LocalStorage: LocalStorageRepository {
         user
     }
     
-    func setUserInfo(newValue: User) {
+    func setUserInfo(newValue: User?) {
         user = newValue
     }
     

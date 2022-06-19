@@ -11,8 +11,8 @@ struct PagingResponse: Codable {
     var array: [PagingUserResponse]
     
     struct PagingUserResponse: Codable {
-        var name: String
-        var age: Int
+        var name: String?
+        var age: Int?
     }
 }
 

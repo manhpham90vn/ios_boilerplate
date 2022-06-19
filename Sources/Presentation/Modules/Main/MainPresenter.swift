@@ -58,7 +58,7 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
             .bind(to: elements)
             .disposed(by: disposeBag)
 
-        Observable.merge(triggerGetUserInfo.asObservable())
+        Observable.merge(trigger.asObservable(), triggerGetUserInfo.asObservable())
             .flatMapLatest { [weak self] _ -> Driver<User> in
                 guard let self = self else { return .never() }
                 return self.interactor.getUserInfo()

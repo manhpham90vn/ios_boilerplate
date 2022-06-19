@@ -11,7 +11,7 @@ import RxCocoa
 import Resolver
 
 protocol LoginUseCaseInterface {
-    func login(email: String, password: String) -> Single<Void>
+    func login(email: String, password: String) -> Single<Token>
 }
 
 final class LoginUseCase {
@@ -20,13 +20,14 @@ final class LoginUseCase {
 }
 
 extension LoginUseCase: LoginUseCaseInterface {
-    func login(email: String, password: String) -> Single<Void> {
+    func login(email: String, password: String) -> Single<Token> {
         repo.login(email: email, password: password)
-            .do(onSuccess: { [weak self] token in
-                self?.local.setAccessToken(newValue: token.token)
-                self?.local.setRefreshToken(newValue: token.refreshToken)
-                self?.local.setLoginState(newValue: .logined)
+            .do(onSuccess: { [weak self] data in
+                if let token = data.token, let refreshToken = data.refreshToken {
+                    self?.local.setAccessToken(newValue: token)
+                    self?.local.setRefreshToken(newValue: refreshToken)
+                    self?.local.setLoginState(newValue: .logined)
+                }
             })
-            .map { _ in }
     }
 }

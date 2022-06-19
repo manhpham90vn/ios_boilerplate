@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ServerError: Codable {
-    var status: String
-    var message: String
+protocol ServerMessageError {
+    var status: String? { get }
+    var message: String? { get }
 }
