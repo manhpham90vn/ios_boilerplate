@@ -19,8 +19,8 @@ final class LoadingHelper: HasDisposeBag {
     init() {}
     
     func perform() {
-        ActivityIndicator.shared.asSignalOnErrorJustComplete() ~> isLoading ~ disposeBag
-        isLoading ~> PKHUD.rx.isAnimating ~ disposeBag
+        ActivityIndicator.shared.asSignalOnErrorJustComplete().emit(to: isLoading).disposed(by: disposeBag)
+        isLoading.bind(to: PKHUD.rx.isAnimating).disposed(by: disposeBag)
     }
     
     func showLoading() {
