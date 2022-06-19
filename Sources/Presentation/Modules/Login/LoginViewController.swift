@@ -43,8 +43,8 @@ final class LoginViewController: BaseViewController {
     override func bindDatas() {
         super.bindDatas()
         
-        emailTextField.rx.text.orEmpty ~> presenter.login ~ rx.disposeBag
-        passwordTextField.rx.text.orEmpty ~> presenter.password ~ rx.disposeBag
+        emailTextField.rx.text.orEmpty.bind(to: presenter.login).disposed(by: disposeBag)
+        passwordTextField.rx.text.orEmpty.bind(to: presenter.password).disposed(by: disposeBag)
         
         loginButton.rx.tap.asDriver()
             .drive(onNext: { [weak self] in

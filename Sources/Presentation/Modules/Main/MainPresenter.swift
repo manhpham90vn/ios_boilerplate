@@ -55,8 +55,8 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
             .do(onNext: { [weak self] _ in
                 self?.triggerGetUserInfo.accept(())
             })
-            ~> elements
-            ~ disposeBag
+            .bind(to: elements)
+            .disposed(by: disposeBag)
 
         Observable.merge(triggerGetUserInfo.asObservable())
             .flatMapLatest { [weak self] _ -> Driver<User> in
@@ -67,7 +67,7 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
             }
             .asDriverOnErrorJustComplete()
             .drive()
-            ~ disposeBag
+            .disposed(by: disposeBag)
         
         headerRefreshTrigger
             .flatMapLatest { [weak self] () -> Driver<[Paging]> in
@@ -79,8 +79,8 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
                     .trackActivity(self.headerActivityIndicator)
                     .asDriver(onErrorJustReturn: [])
             }
-            ~> elements
-            ~ disposeBag
+            .bind(to: elements)
+            .disposed(by: disposeBag)
 
         footerLoadMoreTrigger
             .flatMapLatest { [weak self] () -> Driver<[Paging]> in
@@ -103,7 +103,7 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
                 }
                 self.elements.accept(current)
             })
-            ~ disposeBag
+            .disposed(by: disposeBag)
     }
 
     func inject(view: MainViewInterface) {
