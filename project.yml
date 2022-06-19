@@ -20,7 +20,6 @@ targets:
     sources: [Sources, Library]
     dependencies:
       - framework: "Carthage/Build/Alamofire.xcframework"
-      - framework: "Carthage/Build/Moya.xcframework"
       - framework: "Carthage/Build/RxSwift.xcframework"
       - framework: "Carthage/Build/RxCocoa.xcframework"
       - framework: "Carthage/Build/RxRelay.xcframework"
@@ -34,7 +33,6 @@ targets:
       - framework: "Carthage/Build/Reachability.xcframework"
       - framework: "Carthage/Build/MJRefresh.xcframework"
       - framework: "Carthage/Build/PKHUD.xcframework"
-      - framework: "Carthage/Build/RxMoya.xcframework"
       - framework: "Carthage/Build/FirebaseCrashlytics.xcframework"
       - framework: "Carthage/Build/FirebaseCore.xcframework"
       - framework: "Carthage/Build/FirebaseAnalytics.xcframework"
