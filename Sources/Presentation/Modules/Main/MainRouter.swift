@@ -31,9 +31,9 @@ final class MainRouter: MainRouterInterface {
     }
 
     func navigationToDetailScreen(item: Paging) {
-//        guard let viewController = view as? MainViewController else { return }
-//        let vc = AppScenes.detail(params: .init(event: item)).viewController
-//        viewController.navigationController?.pushViewController(vc, animated: true)
+        guard let viewController = view as? MainViewController else { return }
+        let vc = AppScenes.detail(params: .init(event: item)).viewController
+        viewController.navigationController?.pushViewController(vc, animated: true)
     }
     
     func navigationToLoginScreen() {
