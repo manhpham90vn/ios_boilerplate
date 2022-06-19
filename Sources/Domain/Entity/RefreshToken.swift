@@ -8,5 +8,5 @@
 import Foundation
 
 struct RefreshToken: Codable {
-    var token: String
+    var token: String?
 }

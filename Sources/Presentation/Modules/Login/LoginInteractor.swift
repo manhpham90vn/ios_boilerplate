@@ -11,7 +11,7 @@ import RxCocoa
 import Resolver
 
 protocol LoginInteractorInterface {
-    func login(email: String, password: String) -> Single<Void>
+    func login(email: String, password: String) -> Single<Token>
 }
 
 final class LoginInteractor {
@@ -26,7 +26,7 @@ final class LoginInteractor {
 }
 
 extension LoginInteractor: LoginInteractorInterface {
-    func login(email: String, password: String) -> Single<Void> {
+    func login(email: String, password: String) -> Single<Token> {
         loginUseCase.login(email: email, password: password)
     }
 }

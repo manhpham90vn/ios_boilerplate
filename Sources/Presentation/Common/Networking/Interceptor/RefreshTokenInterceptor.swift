@@ -62,7 +62,7 @@ final class RefreshTokenInterceptor: RequestInterceptor {
             .responseDecodable(of: RefreshTokenResponse.self) { response in
                 switch response.result {
                 case .success(let data):
-                    completion(.success(data.token))
+                    completion(.success(data.token ?? ""))
                 case .failure(let error):
                     completion(.failure(error))
                 }
