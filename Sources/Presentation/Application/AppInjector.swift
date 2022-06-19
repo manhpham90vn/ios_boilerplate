@@ -24,6 +24,7 @@ extension Resolver: ResolverRegistering {
         register { GETLoginStatusUseCase() as GETLoginStatusUseCaseInterface }
         register { GETTokenUseCase() as GETTokenUseCaseInterface }
         register { GETUserInfoUseCaseImp() as GETUserInfoUseCase }
+        register { RefreshTokenImp() as RefreshTokenUseCase }
         
         // MARK: Register All
         MainRouter.registerAllServices()

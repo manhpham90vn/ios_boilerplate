@@ -38,6 +38,7 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
     let headerActivityIndicator = ActivityIndicator()
     let footerActivityIndicator = ActivityIndicator()
     var currentPage = 1
+    let triggerGetUserInfo = PublishRelay<Void>()
 
     init() {
         trigger
@@ -49,13 +50,16 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
                     .getDataPaging(page: self.currentPage)
                     .trackActivity(self.activityIndicator)
                     .debugToFile()
-                    .asDriverOnErrorJustComplete()
+                    .asDriver(onErrorJustReturn: [])
             }
+            .do(onNext: { [weak self] _ in
+                self?.triggerGetUserInfo.accept(())
+            })
             ~> elements
             ~ disposeBag
 
-        trigger
-            .flatMapLatest { [weak self] () -> Driver<User> in
+        Observable.merge(triggerGetUserInfo.asObservable())
+            .flatMapLatest { [weak self] _ -> Driver<User> in
                 guard let self = self else { return .never() }
                 return self.interactor.getUserInfo()
                     .trackActivity(self.activityIndicator)
@@ -73,7 +77,7 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
                 return self.interactor
                     .getDataPaging(page: self.currentPage)
                     .trackActivity(self.headerActivityIndicator)
-                    .asDriverOnErrorJustComplete()
+                    .asDriver(onErrorJustReturn: [])
             }
             ~> elements
             ~ disposeBag
@@ -85,9 +89,9 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
                 return self.interactor
                     .getDataPaging(page: self.currentPage)
                     .trackActivity(self.footerActivityIndicator)
-                    .asDriverOnErrorJustComplete()
+                    .asDriver(onErrorJustReturn: [])
             }
-            .asDriverOnErrorJustComplete()
+            .asDriver(onErrorJustReturn: [])
             .drive(onNext: { [weak self] result in
                 guard let self = self else { return }
                 var current = self.elements.value
