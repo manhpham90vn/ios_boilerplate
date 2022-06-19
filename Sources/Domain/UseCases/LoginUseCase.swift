@@ -11,55 +11,23 @@ import RxCocoa
 import Resolver
 
 protocol LoginUseCaseInterface {
-    func login(url: URL) -> Single<Void>
-}
-
-enum LoginUseCaseError: Error {
-    case codeNotFound
-    case createAccessTokenFailed
-    case getUserInfoFailed
-    
-    var message: String {
-        switch self {
-        case .codeNotFound:
-            return "Can not get code"
-        case .createAccessTokenFailed:
-            return "Can not get access token"
-        case .getUserInfoFailed:
-            return "Can not get User Info"
-        }
-    }
+    func login(email: String, password: String) -> Single<Token>
 }
 
 final class LoginUseCase {
     @Injected var repo: UserRepositoryInterface
+    @Injected var local: LocalStorageRepository
 }
 
 extension LoginUseCase: LoginUseCaseInterface {
-    func login(url: URL) -> Single<Void> {
-        return Single.just(url)
-            .flatMap { [weak self] url -> Single<Token> in
-                guard let self = self else { return .never() }
-                guard let code = url.queryParameters?["code"] else {
-                    return .error(LoginUseCaseError.codeNotFound)
+    func login(email: String, password: String) -> Single<Token> {
+        repo.login(email: email, password: password)
+            .do(onSuccess: { [weak self] data in
+                if let token = data.token, let refreshToken = data.refreshToken {
+                    self?.local.setAccessToken(newValue: token)
+                    self?.local.setRefreshToken(newValue: refreshToken)
+                    self?.local.setLoginState(newValue: .logined)
                 }
-                let params = AccessTokenParams(clientId: Configs.shared.env.clientID,
-                                               clientSecret: Configs.shared.env.clientSecrets,
-                                               code: code)
-                return self.repo.createAccessToken(params: params)
-            }
-            .flatMap { [weak self] token -> Single<User> in
-                guard let self = self else { return .never() }
-                guard let token = token.accessToken else {
-                    return .error(LoginUseCaseError.createAccessTokenFailed)
-                }
-                self.repo.token = token
-                return self.repo.getInfo()
-            }
-            .flatMap { [weak self] user -> Single<Void> in
-                guard let self = self else { return .never() }
-                self.repo.user = user
-                return .just(())
-            }
+            })
     }
 }
