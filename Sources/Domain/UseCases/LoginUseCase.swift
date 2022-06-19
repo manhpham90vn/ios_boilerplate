@@ -25,6 +25,7 @@ extension LoginUseCase: LoginUseCaseInterface {
             .do(onSuccess: { [weak self] token in
                 self?.local.setAccessToken(newValue: token.token)
                 self?.local.setRefreshToken(newValue: token.refreshToken)
+                self?.local.setLoginState(newValue: .logined)
             })
             .map { _ in }
     }

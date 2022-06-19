@@ -54,7 +54,9 @@ final class AppNetwork {
         let request = session
             .request(route)
             .cURLDescription(calling: { curl in
-                print(curl)
+                if Configs.shared.loggingcURLEnabled {
+                    LogInfo(curl)
+                }
             })
             .responseDecodable(of: T.self) { response in
                 switch response.result {

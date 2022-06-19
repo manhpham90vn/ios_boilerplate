@@ -22,5 +22,8 @@ extension RefreshTokenImp: RefreshTokenUseCase {
     func getNewToken() -> Single<RefreshToken> {
         guard let token = local.getRefreshToken() else { return .never() }
         return userRepo.refreshToken(token: token)
+            .do(onSuccess: { [weak self] token in
+                self?.local.setAccessToken(newValue: token.token)
+            })
     }
 }
