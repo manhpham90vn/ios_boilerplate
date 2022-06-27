@@ -43,17 +43,11 @@ jobs:
         run: |
           make copyFrameworks
 
-      - name: Commit and push
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Update frameworks
-          branch: update-framework
-          file_pattern: Frameworks/*.xcframework
-
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
           branch: update-framework
           title: Update framework (carthage)
+          commit-message: update sdk
           reviewers: manhpham90vn
           delete-branch: true
