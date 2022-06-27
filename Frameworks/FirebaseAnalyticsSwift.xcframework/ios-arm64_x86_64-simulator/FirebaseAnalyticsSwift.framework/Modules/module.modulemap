@@ -1,0 +1,11 @@
+framework module FirebaseAnalyticsSwift {
+  umbrella header "FirebaseAnalyticsSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module FirebaseAnalyticsSwift.Swift {
+    header "FirebaseAnalyticsSwift-Swift.h"
+    requires objc
+}
