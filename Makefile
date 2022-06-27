@@ -24,6 +24,10 @@ generateXcodegen:
 	xcodegen generate --spec project.yml
 installCarthage:
 	carthage bootstrap --use-xcframeworks --platform iOS --no-use-binaries --cache-builds
+copyFrameworks:
+	rm -rf Frameworks/*
+	mkdir -p Frameworks
+	cp -R Carthage/Build/*.xcframework Frameworks
 
 # test
 .PHONY: xcodetest
