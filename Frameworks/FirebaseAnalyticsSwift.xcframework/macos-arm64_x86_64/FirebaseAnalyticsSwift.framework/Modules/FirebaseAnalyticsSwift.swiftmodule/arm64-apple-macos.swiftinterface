@@ -1,0 +1,14 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.62 clang-1316.0.20.8)
+// swift-module-flags: -target arm64-apple-macos10.15 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FirebaseAnalyticsSwift
+import FirebaseAnalytics
+@_exported import FirebaseAnalyticsSwift
+import Swift
+import SwiftUI
+import _Concurrency
+@available(iOS 13.0, macOS 10.15, macCatalyst 13.0, tvOS 13.0, *)
+@available(watchOS, unavailable)
+extension SwiftUI.View {
+  public func analyticsScreen(name: Swift.String, class: Swift.String = "View", extraParameters: [Swift.String : Any] = [:]) -> some SwiftUI.View
+  
+}
