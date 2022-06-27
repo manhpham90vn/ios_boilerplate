@@ -33,7 +33,7 @@ DerivedData/
 
 ## App packaging
 *.ipa
-# *.dSYM.zip
+*.dSYM.zip
 # *.dSYM
 
 ## Playgrounds
@@ -70,8 +70,7 @@ Pods/
 #
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
 Carthage/Checkouts
-
-# Carthage/Build/
+Carthage/Build/
 
 # Accio dependency management
 Dependencies/

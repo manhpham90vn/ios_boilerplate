@@ -35,9 +35,13 @@ jobs:
       - name: Select Xcode
         run: sudo xcode-select -switch /Applications/Xcode_13.2.1.app && /usr/bin/xcodebuild -version
 
-      - name: Create frame work
+      - name: Create frameworks
         run: |
           make installCarthage
+
+      - name: Copy frameworks
+        run: |
+          make copyFrameworks
 
       - name: Commit and push
         uses: stefanzweifel/git-auto-commit-action@v4
