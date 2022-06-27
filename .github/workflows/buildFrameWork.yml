@@ -18,7 +18,7 @@ jobs:
   # This workflow contains a single job called "sync-develop"
   update-dependencies:
     # The type of runner that the job will run on
-    runs-on: macos-latest
+    runs-on: macos-12
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -28,6 +28,13 @@ jobs:
           ref: master
           fetch-depth: 0
   
+      - name: List available Xcode versions
+        run: |
+          ls /Applications | grep Xcode
+
+      - name: Select Xcode
+        run: sudo xcode-select -switch /Applications/Xcode_13.2.1.app && /usr/bin/xcodebuild -version
+
       - name: Create frame work
         run: |
           make update-sdk
