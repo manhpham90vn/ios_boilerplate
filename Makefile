@@ -16,7 +16,7 @@ installBundle:
 
 # generate
 .PHONY: generate
-generate: generateSwiftgen generateXcodegen installCarthage
+generate: generateSwiftgen generateXcodegen
 generateSwiftgen:
 	mkdir -p Sources/Presentation/Resources/Generated/SwiftGen
 	swiftgen
