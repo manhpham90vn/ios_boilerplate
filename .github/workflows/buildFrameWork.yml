@@ -27,13 +27,7 @@ jobs:
         with:
           ref: master
           fetch-depth: 0
-
-      # Runs a set of commands using the runners shell
-      - name: Reset branch
-        run: |
-          git fetch origin master:master
-          git reset --hard master
-      
+  
       - name: Create frame work
         run: |
           make update-sdk
