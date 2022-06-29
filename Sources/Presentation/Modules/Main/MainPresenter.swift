@@ -52,8 +52,10 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
                     .debugToFile()
                     .asDriver(onErrorJustReturn: [])
             }
-            .do(onNext: { [weak self] _ in
-                self?.triggerGetUserInfo.accept(())
+            .do(onNext: { [weak self] elements in
+                if !elements.isEmpty {
+                    self?.triggerGetUserInfo.accept(())
+                }
             })
             .bind(to: elements)
             .disposed(by: disposeBag)

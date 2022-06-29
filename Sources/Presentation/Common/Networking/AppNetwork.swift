@@ -47,8 +47,7 @@ final class AppNetwork {
         session.cancelAllRequests()
     }
     
-    // TODO: check if use validate() funtion lead call refresh token 2 time
-    func request<T: Decodable>(route: URLRequestConvertible,
+    func request<T: Decodable>(route: AppRequestConvertible,
                                type: T.Type,
                                completion: @escaping (Result<T, Error>) -> Void) -> DataRequest {
         let request = session
@@ -69,7 +68,7 @@ final class AppNetwork {
         return request
     }
     
-    func request<T: Decodable>(route: URLRequestConvertible,
+    func request<T: Decodable>(route: AppRequestConvertible,
                                type: T.Type) -> Single<T> {
         Single<T>.create { single in
             let request = self.request(route: route, type: T.self) { result in
