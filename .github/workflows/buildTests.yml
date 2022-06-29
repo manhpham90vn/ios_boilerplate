@@ -13,18 +13,31 @@ jobs:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v3
+    
     - name: List available Xcode versions
-      run: ls /Applications | grep Xcode
+      run: |
+        ls /Applications | grep Xcode
+
     - name: Select Xcode
-      run: sudo xcode-select -switch /Applications/Xcode_13.2.1.app && /usr/bin/xcodebuild -version
+      run: |
+          sudo xcode-select -switch /Applications/Xcode_13.2.1.app && /usr/bin/xcodebuild -version
+
     - name: Install 
-      run: make install
+      run: |
+        make install
+  
     - name: Generate
-      run: make generate
+      run: |
+        make generate
+  
     - name: Run build tests
-      run: set -o pipefail && make xcodetest
+      run: |
+        set -o pipefail && make xcodetest
+  
     - name: Generate Coverage
-      run: make generateCoverage
+      run: |
+        make generateCoverage
+      
     - name: Upload Coverage
       uses: codecov/codecov-action@v3
       with:
