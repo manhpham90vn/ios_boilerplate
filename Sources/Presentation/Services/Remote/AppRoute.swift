@@ -15,7 +15,7 @@ enum AppRoute {
     case refreshToken(token: String)
 }
 
-extension AppRoute: URLRequestConvertible {
+extension AppRoute: AppRequestConvertible {
 
     var baseURL: URL {
         return URL(string: Configs.shared.env.baseURL)!
@@ -79,7 +79,7 @@ extension AppRoute: URLRequestConvertible {
             return URLEncoding.httpBody
         }
     }
-    
+        
     func asURLRequest() throws -> URLRequest {
         let url = baseURL.appendingPathComponent(path)
         var request = URLRequest(url: url)
@@ -88,3 +88,4 @@ extension AppRoute: URLRequestConvertible {
         return try encoding.encode(request.asURLRequest(), with: parameters)
     }
 }
+
