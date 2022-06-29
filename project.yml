@@ -1,17 +1,17 @@
 name: My Project
 configs:
-    Debug: debug
-    Staging: release
-    Release: release
+  Debug: debug
+  Staging: release
+  Release: release
 options:
-    createIntermediateGroups: true
-    groupSortPosition: top
-    generateEmptyDirectories: true
-    indentWidth: 4
-    tabWidth: 4
-    bundleIdPrefix: "com.manhpham"
+  createIntermediateGroups: true
+  groupSortPosition: top
+  generateEmptyDirectories: true
+  indentWidth: 4
+  tabWidth: 4
+  bundleIdPrefix: "com.manhpham"
 settings:
-    PRODUCT_BUNDLE_IDENTIFIER: $(PRODUCT_BUNDLE_IDENTIFIER)
+  PRODUCT_BUNDLE_IDENTIFIER: $(PRODUCT_BUNDLE_IDENTIFIER)
 targets:
   MyApp:
     type: application
@@ -30,7 +30,6 @@ targets:
       - framework: "Frameworks/SwiftyUserDefaults.xcframework"
       - framework: "Frameworks/XCGLogger.xcframework"
       - framework: "Frameworks/ObjcExceptionBridging.xcframework"
-      - framework: "Frameworks/Reachability.xcframework"
       - framework: "Frameworks/MJRefresh.xcframework"
       - framework: "Frameworks/PKHUD.xcframework"
       - framework: "Frameworks/FirebaseCrashlytics.xcframework"
@@ -43,54 +42,54 @@ targets:
       - framework: "Frameworks/GoogleDataTransport.xcframework"
       - framework: "Frameworks/GoogleUtilities.xcframework"
     configFiles:
-        Debug: Sources/Presentation/Configs/BuildConfigurations/Debug.xcconfig
-        Staging: Sources/Presentation/Configs/BuildConfigurations/Staging.xcconfig
-        Release: Sources/Presentation/Configs/BuildConfigurations/Release.xcconfig
+      Debug: Sources/Presentation/Configs/BuildConfigurations/Debug.xcconfig
+      Staging: Sources/Presentation/Configs/BuildConfigurations/Staging.xcconfig
+      Release: Sources/Presentation/Configs/BuildConfigurations/Release.xcconfig
     settings:
-        INFOPLIST_FILE: Sources/Presentation/Resources/Info.plist
-        SWIFT_VERSION: "5.0"
-        SWIFT_OBJC_BRIDGING_HEADER: Sources/Presentation/Resources/MyApp-Bridging-Header.h
-        CODE_SIGN_STYLE: "Manual"
-        UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
-        UILaunchStoryboardName: LaunchScreen
-        EXCLUDED_ARCHS[sdk=iphonesimulator*]: "arm64"
-        VALIDATE_WORKSPACE: YES
+      INFOPLIST_FILE: Sources/Presentation/Resources/Info.plist
+      SWIFT_VERSION: "5.0"
+      SWIFT_OBJC_BRIDGING_HEADER: Sources/Presentation/Resources/MyApp-Bridging-Header.h
+      CODE_SIGN_STYLE: "Manual"
+      UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+      UILaunchStoryboardName: LaunchScreen
+      EXCLUDED_ARCHS[sdk=iphonesimulator*]: "arm64"
+      VALIDATE_WORKSPACE: YES
     preBuildScripts:
-        - name: SwiftGen
-          script: |
-            if which swiftgen >/dev/null; then
-              swiftgen
-            else
-              echo "warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen"
-            fi
+      - name: SwiftGen
+        script: |
+          if which swiftgen >/dev/null; then
+            swiftgen
+          else
+            echo "warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen"
+          fi
     postCompileScripts:
-        - name: Swiftlint
-          script: |
-            if which swiftlint >/dev/null; then
-              swiftlint
-            else
-              echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
-            fi
-        - name: GoogleServiceInfo
-          script: |
-            PATH_TO_GOOGLE_PLISTS="${PROJECT_DIR}/Sources/Presentation/Configs/GoogleServices"
-            case "${CONFIGURATION}" in
-            "Debug" )
-            cp -r "$PATH_TO_GOOGLE_PLISTS/GoogleService-Info-Debug.plist" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist" ;;
-            "Staging" )
-            cp -r "$PATH_TO_GOOGLE_PLISTS/GoogleService-Info-Staging.plist" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist" ;;
-            "Release" )
-            cp -r "$PATH_TO_GOOGLE_PLISTS/GoogleService-Info-Release.plist" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist" ;;
-            *)
-            ;;
-            esac
+      - name: Swiftlint
+        script: |
+          if which swiftlint >/dev/null; then
+            swiftlint
+          else
+            echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
+          fi
+      - name: GoogleServiceInfo
+        script: |
+          PATH_TO_GOOGLE_PLISTS="${PROJECT_DIR}/Sources/Presentation/Configs/GoogleServices"
+          case "${CONFIGURATION}" in
+          "Debug" )
+          cp -r "$PATH_TO_GOOGLE_PLISTS/GoogleService-Info-Debug.plist" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist" ;;
+          "Staging" )
+          cp -r "$PATH_TO_GOOGLE_PLISTS/GoogleService-Info-Staging.plist" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist" ;;
+          "Release" )
+          cp -r "$PATH_TO_GOOGLE_PLISTS/GoogleService-Info-Release.plist" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist" ;;
+          *)
+          ;;
+          esac
     postBuildScripts:
-        - name: Crashlytics
-          script: |
-            "${PROJECT_DIR}/scripts/run"
-          inputFiles:
-            - $(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)
-            - ${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}
+      - name: Crashlytics
+        script: |
+          "${PROJECT_DIR}/scripts/run"
+        inputFiles:
+          - $(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)
+          - ${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}
   MyAppTests:
     type: bundle.unit-test
     platform: iOS
@@ -98,9 +97,9 @@ targets:
       TEST_HOST: $(BUILT_PRODUCTS_DIR)/My App Debug.app/My App Debug
       LD_RUNPATH_SEARCH_PATHS: $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks' $(FRAMEWORK_SEARCH_PATHS)
       IPHONEOS_DEPLOYMENT_TARGET: 12.0
-    sources: SourcesTests 
+    sources: SourcesTests
     dependencies:
-      - target: MyApp  
+      - target: MyApp
 schemes:
   My Project:
     build:
