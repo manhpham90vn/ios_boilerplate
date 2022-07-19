@@ -5,11 +5,9 @@ all: install generate
 
 # install
 .PHONY: install
-install: installBrew installRuby installBundle
+install: installBrew installBundle
 installBrew:
 	scripts/installDependencies.sh
-installRuby:
-	cat .ruby-version | xargs rbenv install --skip-existing
 installBundle:
 	bundle config path vendor/bundle
 	bundle install --without=documentation --jobs 4 --retry 3
