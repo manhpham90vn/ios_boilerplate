@@ -42,13 +42,13 @@ targets:
       - framework: "Frameworks/GoogleDataTransport.xcframework"
       - framework: "Frameworks/GoogleUtilities.xcframework"
     configFiles:
-      Debug: Sources/Presentation/Configs/BuildConfigurations/Debug.xcconfig
-      Staging: Sources/Presentation/Configs/BuildConfigurations/Staging.xcconfig
-      Release: Sources/Presentation/Configs/BuildConfigurations/Release.xcconfig
+      Debug: Sources/Common/Configs/BuildConfigurations/Debug.xcconfig
+      Staging: Sources/Common/Configs/BuildConfigurations/Staging.xcconfig
+      Release: Sources/Common/Configs/BuildConfigurations/Release.xcconfig
     settings:
-      INFOPLIST_FILE: Sources/Presentation/Resources/Info.plist
+      INFOPLIST_FILE: Sources/Common/Resources/Info.plist
       SWIFT_VERSION: "5.0"
-      SWIFT_OBJC_BRIDGING_HEADER: Sources/Presentation/Resources/MyApp-Bridging-Header.h
+      SWIFT_OBJC_BRIDGING_HEADER: Sources/Common/Resources/MyApp-Bridging-Header.h
       CODE_SIGN_STYLE: "Manual"
       UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
       UILaunchStoryboardName: LaunchScreen
@@ -72,7 +72,7 @@ targets:
           fi
       - name: GoogleServiceInfo
         script: |
-          PATH_TO_GOOGLE_PLISTS="${PROJECT_DIR}/Sources/Presentation/Configs/GoogleServices"
+          PATH_TO_GOOGLE_PLISTS="${PROJECT_DIR}/Sources/Common/Configs/GoogleServices"
           case "${CONFIGURATION}" in
           "Debug" )
           cp -r "$PATH_TO_GOOGLE_PLISTS/GoogleService-Info-Debug.plist" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist" ;;
