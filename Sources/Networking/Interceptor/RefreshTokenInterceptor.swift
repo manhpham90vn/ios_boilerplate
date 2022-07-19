@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 import Resolver
+import UIKit
 
 final class RefreshTokenInterceptor: RequestInterceptor {
     typealias RequestRetryCompletion = (RetryResult) -> Void
@@ -44,12 +45,17 @@ final class RefreshTokenInterceptor: RequestInterceptor {
                         case let .failure(error):
                             self.requestsToRetry.forEach { $0(.doNotRetryWithError(error)) }
                             self.requestsToRetry.removeAll()
+                            self.toLogin()
                         }
                         self.isRefreshing = false
                     }
                 }
             }
         }
+    }
+    
+    func toLogin() {
+        UIWindow.shared?.rootViewController = UINavigationController(rootViewController: AppScenes.login.viewController)
     }
     
     func refreshToken(completion: @escaping (Result<String, Error>) -> Void) {
