@@ -27,38 +27,6 @@ protocol LocalStorageRepository {
     func clearUserInfo()
 }
 
-extension Token: DefaultsSerializable {}
-extension RefreshToken: DefaultsSerializable {}
-extension LoginState: DefaultsSerializable {
-    static var _defaults: DefaultsCodableBridge<LoginState> {
-        return DefaultsCodableBridge<LoginState>()
-    }
-    
-    static var _defaultsArray: DefaultsCodableBridge<[LoginState]> {
-        return  DefaultsCodableBridge<[LoginState]>()
-    }
-}
-extension User: DefaultsSerializable {}
-
-extension DefaultsKeys {
-    
-    var token: DefaultsKey<String?> {
-        .init("token", defaultValue: nil)
-    }
-    
-    var refreshToken: DefaultsKey<String?> {
-        .init("refreshToken", defaultValue: nil)
-    }
-    
-    var loginState: DefaultsKey<LoginState?> {
-        .init("loginState", defaultValue: nil)
-    }
-
-    var user: DefaultsKey<User?> {
-        .init("user", defaultValue: nil)
-    }
-}
-
 final class LocalStorage: LocalStorageRepository {
     @SwiftyUserDefault(keyPath: \.token, options: .cached)
     private var token: String?

@@ -7,4 +7,4 @@ output_directory: xml_report
 build_directory: "build"
 binary_basename: "My App Debug"
 ignore:
-  - Resources/*
+  - Sources/Common/Resources/*

@@ -18,7 +18,7 @@ installBundle:
 .PHONY: generate
 generate: generateSwiftgen generateXcodegen
 generateSwiftgen:
-	mkdir -p Sources/Presentation/Resources/Generated/SwiftGen
+	mkdir -p Sources/Common/Resources/Generated/SwiftGen
 	swiftgen
 generateXcodegen:
 	xcodegen generate --spec project.yml
