@@ -4,12 +4,13 @@
 
 ## User settings
 xcuserdata/
-Sources/Resources/Generated/
+Sources/Common/Resources/Generated/
 vendor/bundle
 Mints
 .bundle/
 html_report/
 xml_report/
+Gemfile.lock
 
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
 *.xcscmblueprint
