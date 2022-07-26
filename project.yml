@@ -38,9 +38,12 @@ targets:
       - framework: "Frameworks/FirebaseCoreDiagnostics.xcframework"
       - framework: "Frameworks/FirebaseCoreInternal.xcframework"
       - framework: "Frameworks/GoogleAppMeasurement.xcframework"
-      - framework: "Frameworks/GoogleAppMeasurementIdentitySupport.xcframework"
       - framework: "Frameworks/GoogleDataTransport.xcframework"
       - framework: "Frameworks/GoogleUtilities.xcframework"
+      - framework: "Frameworks/FirebaseMessaging.xcframework"
+      - framework: "Frameworks/FirebaseInstallations.xcframework"
+      - framework: "Frameworks/nanopb.xcframework"
+      - framework: "Frameworks/PromisesObjC.xcframework"
     configFiles:
       Debug: Sources/Common/Configs/BuildConfigurations/Debug.xcconfig
       Staging: Sources/Common/Configs/BuildConfigurations/Staging.xcconfig
