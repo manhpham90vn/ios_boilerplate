@@ -18,32 +18,6 @@ targets:
     platform: iOS
     deploymentTarget: "12.0"
     sources: [Sources, Library]
-    dependencies:
-      - framework: "Frameworks/Alamofire.xcframework"
-      - framework: "Frameworks/RxSwift.xcframework"
-      - framework: "Frameworks/RxCocoa.xcframework"
-      - framework: "Frameworks/RxRelay.xcframework"
-      - framework: "Frameworks/RxSwiftExt.xcframework"
-      - framework: "Frameworks/NSObject_Rx.xcframework"
-      - framework: "Frameworks/Resolver.xcframework"
-      - framework: "Frameworks/Reusable.xcframework"
-      - framework: "Frameworks/SwiftyUserDefaults.xcframework"
-      - framework: "Frameworks/XCGLogger.xcframework"
-      - framework: "Frameworks/ObjcExceptionBridging.xcframework"
-      - framework: "Frameworks/MJRefresh.xcframework"
-      - framework: "Frameworks/PKHUD.xcframework"
-      - framework: "Frameworks/FirebaseCrashlytics.xcframework"
-      - framework: "Frameworks/FirebaseCore.xcframework"
-      - framework: "Frameworks/FirebaseAnalytics.xcframework"
-      - framework: "Frameworks/FirebaseCoreDiagnostics.xcframework"
-      - framework: "Frameworks/FirebaseCoreInternal.xcframework"
-      - framework: "Frameworks/GoogleAppMeasurement.xcframework"
-      - framework: "Frameworks/GoogleDataTransport.xcframework"
-      - framework: "Frameworks/GoogleUtilities.xcframework"
-      - framework: "Frameworks/FirebaseMessaging.xcframework"
-      - framework: "Frameworks/FirebaseInstallations.xcframework"
-      - framework: "Frameworks/nanopb.xcframework"
-      - framework: "Frameworks/PromisesObjC.xcframework"
     configFiles:
       Debug: Sources/Common/Configs/BuildConfigurations/Debug.xcconfig
       Staging: Sources/Common/Configs/BuildConfigurations/Staging.xcconfig
