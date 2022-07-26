@@ -18,27 +18,27 @@
 		</data>
 		<key>Modules/Reusable.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		CIEzUS4nWCyMAIfR+HwQlCwKwls=
+		8XlnUv8qF+i2ftWxnSF2mRIJaTY=
 		</data>
 		<key>Modules/Reusable.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<data>
-		CIEzUS4nWCyMAIfR+HwQlCwKwls=
+		8XlnUv8qF+i2ftWxnSF2mRIJaTY=
 		</data>
 		<key>Modules/Reusable.swiftmodule/Project/i386-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		GDMqMf8eof/EnptAFif+M43hVlA=
+		BrhMAstnIiHCt0/ii4zTvDSErMA=
 		</data>
 		<key>Modules/Reusable.swiftmodule/Project/i386.swiftsourceinfo</key>
 		<data>
-		GDMqMf8eof/EnptAFif+M43hVlA=
+		BrhMAstnIiHCt0/ii4zTvDSErMA=
 		</data>
 		<key>Modules/Reusable.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		7cKYJXoUPOZmOZvewpBV4P9OsbU=
+		eVxBVnfsDOMXDsgWASiymk4cktE=
 		</data>
 		<key>Modules/Reusable.swiftmodule/Project/x86_64.swiftsourceinfo</key>
 		<data>
-		7cKYJXoUPOZmOZvewpBV4P9OsbU=
+		eVxBVnfsDOMXDsgWASiymk4cktE=
 		</data>
 		<key>Modules/Reusable.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -121,66 +121,66 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			CIEzUS4nWCyMAIfR+HwQlCwKwls=
+			8XlnUv8qF+i2ftWxnSF2mRIJaTY=
 			</data>
 			<key>hash2</key>
 			<data>
-			4Kn6N13adwxYVIkcM5xNvPy+CAwm/HWLWBKpquGnK4Y=
+			HX7lOzyu8IhFewBt4pW6xUtG/xZ6kjanq3MmLp17894=
 			</data>
 		</dict>
 		<key>Modules/Reusable.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			CIEzUS4nWCyMAIfR+HwQlCwKwls=
+			8XlnUv8qF+i2ftWxnSF2mRIJaTY=
 			</data>
 			<key>hash2</key>
 			<data>
-			4Kn6N13adwxYVIkcM5xNvPy+CAwm/HWLWBKpquGnK4Y=
+			HX7lOzyu8IhFewBt4pW6xUtG/xZ6kjanq3MmLp17894=
 			</data>
 		</dict>
 		<key>Modules/Reusable.swiftmodule/Project/i386-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			GDMqMf8eof/EnptAFif+M43hVlA=
+			BrhMAstnIiHCt0/ii4zTvDSErMA=
 			</data>
 			<key>hash2</key>
 			<data>
-			5I/TWdIhyYdww945qK/lozj6IaVFHzE6a5MnmgZ+Y4c=
+			W3yldJyqB9eRyU4+bdupjqPkjIYny2mTFQRxf7Ul92g=
 			</data>
 		</dict>
 		<key>Modules/Reusable.swiftmodule/Project/i386.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			GDMqMf8eof/EnptAFif+M43hVlA=
+			BrhMAstnIiHCt0/ii4zTvDSErMA=
 			</data>
 			<key>hash2</key>
 			<data>
-			5I/TWdIhyYdww945qK/lozj6IaVFHzE6a5MnmgZ+Y4c=
+			W3yldJyqB9eRyU4+bdupjqPkjIYny2mTFQRxf7Ul92g=
 			</data>
 		</dict>
 		<key>Modules/Reusable.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			7cKYJXoUPOZmOZvewpBV4P9OsbU=
+			eVxBVnfsDOMXDsgWASiymk4cktE=
 			</data>
 			<key>hash2</key>
 			<data>
-			MjSFI4dLtYU78zKZpTFKHS7+q3fkAPROr0vVEVU04Fw=
+			WiBYUPXKWtkY/H5OJ+k5PSQmht3e2c14cRGez3XisBE=
 			</data>
 		</dict>
 		<key>Modules/Reusable.swiftmodule/Project/x86_64.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			7cKYJXoUPOZmOZvewpBV4P9OsbU=
+			eVxBVnfsDOMXDsgWASiymk4cktE=
 			</data>
 			<key>hash2</key>
 			<data>
-			MjSFI4dLtYU78zKZpTFKHS7+q3fkAPROr0vVEVU04Fw=
+			WiBYUPXKWtkY/H5OJ+k5PSQmht3e2c14cRGez3XisBE=
 			</data>
 		</dict>
 		<key>Modules/Reusable.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
