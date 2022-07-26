@@ -1,5 +1,6 @@
 binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAnalyticsBinary.json" "9.1.0"
 binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseCrashlyticsBinary.json" "9.1.0"
+binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseMessagingBinary.json" "9.1.0"
 github "Alamofire/Alamofire" "5.6.1"
 github "AliSoftware/Reusable" "4.1.2"
 github "CoderMJLee/MJRefresh" "3.7.5"
