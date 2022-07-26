@@ -22,27 +22,27 @@
 		</data>
 		<key>Modules/PKHUD.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		km7V02Wi7tDLUQDUhuQ1tKVuF2g=
+		5szrSQamw/B4NA7Cmgbla/g1QL0=
 		</data>
 		<key>Modules/PKHUD.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<data>
-		km7V02Wi7tDLUQDUhuQ1tKVuF2g=
+		5szrSQamw/B4NA7Cmgbla/g1QL0=
 		</data>
 		<key>Modules/PKHUD.swiftmodule/Project/i386-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		cdWcopWZsKbjlEuFlyDelJSVf4U=
+		r3orLKl63jN1h6Vsq4ibhGQ6WzM=
 		</data>
 		<key>Modules/PKHUD.swiftmodule/Project/i386.swiftsourceinfo</key>
 		<data>
-		cdWcopWZsKbjlEuFlyDelJSVf4U=
+		r3orLKl63jN1h6Vsq4ibhGQ6WzM=
 		</data>
 		<key>Modules/PKHUD.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		WyiD8Zh00KaV1EASQntRl1Wl0Dw=
+		rpDtwJMflqrBIbulsqnz+3bbxsk=
 		</data>
 		<key>Modules/PKHUD.swiftmodule/Project/x86_64.swiftsourceinfo</key>
 		<data>
-		WyiD8Zh00KaV1EASQntRl1Wl0Dw=
+		rpDtwJMflqrBIbulsqnz+3bbxsk=
 		</data>
 		<key>Modules/PKHUD.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -136,66 +136,66 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			km7V02Wi7tDLUQDUhuQ1tKVuF2g=
+			5szrSQamw/B4NA7Cmgbla/g1QL0=
 			</data>
 			<key>hash2</key>
 			<data>
-			JA2R3SMkU3VjZudxBZXM5r05lkz2UcELLvKdl+XCz5o=
+			xZYAK+UnVG/iNGj9rjgW15Od43fR1hs/md4ETBGvBnk=
 			</data>
 		</dict>
 		<key>Modules/PKHUD.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			km7V02Wi7tDLUQDUhuQ1tKVuF2g=
+			5szrSQamw/B4NA7Cmgbla/g1QL0=
 			</data>
 			<key>hash2</key>
 			<data>
-			JA2R3SMkU3VjZudxBZXM5r05lkz2UcELLvKdl+XCz5o=
+			xZYAK+UnVG/iNGj9rjgW15Od43fR1hs/md4ETBGvBnk=
 			</data>
 		</dict>
 		<key>Modules/PKHUD.swiftmodule/Project/i386-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			cdWcopWZsKbjlEuFlyDelJSVf4U=
+			r3orLKl63jN1h6Vsq4ibhGQ6WzM=
 			</data>
 			<key>hash2</key>
 			<data>
-			v7tWqW8Xv5TCg0anowazcX2rktN3MGOGK1IoUs+SNjM=
+			0Z85BsOxOg0vmSE0MQlTitpa4OCnuUgasuebAgkgmLo=
 			</data>
 		</dict>
 		<key>Modules/PKHUD.swiftmodule/Project/i386.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			cdWcopWZsKbjlEuFlyDelJSVf4U=
+			r3orLKl63jN1h6Vsq4ibhGQ6WzM=
 			</data>
 			<key>hash2</key>
 			<data>
-			v7tWqW8Xv5TCg0anowazcX2rktN3MGOGK1IoUs+SNjM=
+			0Z85BsOxOg0vmSE0MQlTitpa4OCnuUgasuebAgkgmLo=
 			</data>
 		</dict>
 		<key>Modules/PKHUD.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			WyiD8Zh00KaV1EASQntRl1Wl0Dw=
+			rpDtwJMflqrBIbulsqnz+3bbxsk=
 			</data>
 			<key>hash2</key>
 			<data>
-			nMWSA3FO9WXzTETwoBBTQye5yJUXS1+c0qKPwya2q7E=
+			X8rGytprQ6s/3Da6oK23vZM8C8yUgx/2bmDjMEv762c=
 			</data>
 		</dict>
 		<key>Modules/PKHUD.swiftmodule/Project/x86_64.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			WyiD8Zh00KaV1EASQntRl1Wl0Dw=
+			rpDtwJMflqrBIbulsqnz+3bbxsk=
 			</data>
 			<key>hash2</key>
 			<data>
-			nMWSA3FO9WXzTETwoBBTQye5yJUXS1+c0qKPwya2q7E=
+			X8rGytprQ6s/3Da6oK23vZM8C8yUgx/2bmDjMEv762c=
 			</data>
 		</dict>
 		<key>Modules/PKHUD.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
