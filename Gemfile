@@ -1,5 +1,6 @@
 
 source "https://rubygems.org"
 
-gem "slather"
-gem "xcpretty"
+gem 'slather'
+gem 'xcpretty'
+gem 'cocoapods'
