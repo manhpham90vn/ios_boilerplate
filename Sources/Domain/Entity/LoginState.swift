@@ -2,12 +2,12 @@
 //  LoginState.swift
 //  MyApp
 //
-//  Created by Manh Pham on 6/13/22.
+//  Created by Manh Pham on 7/30/22.
 //
 
 import Foundation
 
-enum LoginState: String, Codable {
-    case notLogin
+enum LoginState {
     case logined
+    case notLogin
 }

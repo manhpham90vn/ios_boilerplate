@@ -14,12 +14,11 @@ import NSObject_Rx
 final class LoadingHelper: HasDisposeBag {
     
     static let shared = LoadingHelper()
+    private init() {}
 
-    private let isLoading = PublishRelay<Bool>()
-    init() {}
+    let isLoading = PublishRelay<Bool>()
     
     func perform() {
-        ActivityIndicator.shared.asSignalOnErrorJustComplete().emit(to: isLoading).disposed(by: disposeBag)
         isLoading.bind(to: PKHUD.rx.isAnimating).disposed(by: disposeBag)
     }
     

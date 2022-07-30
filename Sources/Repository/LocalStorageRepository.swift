@@ -7,84 +7,67 @@
 
 import Foundation
 import RxSwift
-import SwiftyUserDefaults
+import Resolver
 
 protocol LocalStorageRepository {
     func getAccessToken() -> String?
-    func setAccessToken(newValue: String?)
+    func setAccessToken(newValue: String)
     func clearAccessToken()
     
     func getRefreshToken() -> String?
-    func setRefreshToken(newValue: String?)
+    func setRefreshToken(newValue: String)
     func clearRefreshToken()
     
-    func getLoginState() -> LoginState?
-    func setLoginState(newValue: LoginState?)
-    func clearLoginState()
+    func getLoginState() -> LoginState
     
-    func getUserInfo() -> User?
-    func setUserInfo(newValue: User?)
+    func getUserInfo() -> UserResponse?
+    func setUserInfo(newValue: UserResponse)
     func clearUserInfo()
 }
 
 final class LocalStorage: LocalStorageRepository {
-    @SwiftyUserDefault(keyPath: \.token, options: .cached)
-    private var token: String?
-
-    @SwiftyUserDefault(keyPath: \.refreshToken, options: .cached)
-    private var refreshToken: String?
-
-    @SwiftyUserDefault(keyPath: \.loginState, options: .cached)
-    private var state: LoginState?
     
-    @SwiftyUserDefault(keyPath: \.user, options: .cached)
-    private var user: User?
+    @Injected var storage: Storage
     
     func getAccessToken() -> String? {
-        token
+        storage.getString(key: StorageConstants.token)
     }
     
-    func setAccessToken(newValue: String?) {
-        token = newValue
+    func setAccessToken(newValue: String) {
+        storage.setString(key: StorageConstants.token, value: newValue)
     }
     
     func clearAccessToken() {
-        token = nil
+        storage.clear(key: StorageConstants.token)
     }
     
     func getRefreshToken() -> String? {
-        refreshToken
+        storage.getString(key: StorageConstants.refreshToken)
     }
     
-    func setRefreshToken(newValue: String?) {
-        refreshToken = newValue
+    func setRefreshToken(newValue: String) {
+        storage.setString(key: StorageConstants.refreshToken, value: newValue)
     }
     
     func clearRefreshToken() {
-        refreshToken = nil
+        storage.clear(key: StorageConstants.refreshToken)
     }
     
-    func getLoginState() -> LoginState? {
-        state
+    func getLoginState() -> LoginState {
+        (storage.getString(key: StorageConstants.token) != nil &&
+         storage.getString(key: StorageConstants.refreshToken) != nil)
+        ? LoginState.logined : LoginState.notLogin
+    }
+
+    func getUserInfo() -> UserResponse? {
+        try? storage.getObject(key: StorageConstants.user)
     }
     
-    func setLoginState(newValue: LoginState?) {
-        state = newValue
-    }
-    
-    func clearLoginState() {
-        state = nil
-    }
-    
-    func getUserInfo() -> User? {
-        user
-    }
-    
-    func setUserInfo(newValue: User?) {
-        user = newValue
+    func setUserInfo(newValue: UserResponse) {
+        try? storage.setObject(key: StorageConstants.user, value: newValue)
     }
     
     func clearUserInfo() {
-        user = nil
+        storage.clear(key: StorageConstants.user)
     }
 }

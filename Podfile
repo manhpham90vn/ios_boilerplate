@@ -16,7 +16,6 @@ target 'MyApp' do
   pod 'NSObject+Rx'
   pod 'Resolver'
   pod 'Reusable'
-  pod 'SwiftyUserDefaults'
   pod 'MJRefresh'
   pod 'PKHUD'
   pod 'FirebaseMessaging'

@@ -18,13 +18,12 @@ protocol DetailPresenterInterface {
     func inject(view: DetailViewInterface)
 }
 
-final class DetailPresenter: DetailPresenterInterface, HasActivityIndicator, HasDisposeBag {
+final class DetailPresenter: DetailPresenterInterface, HasTrigger, HasDisposeBag {
 
     weak var view: DetailViewInterface?
     @Injected var router: DetailRouterInterface
     @Injected var interactor: DetailInteractorInterface
 
-    let activityIndicator = ActivityIndicator.shared
     let trigger = PublishRelay<Void>()
 
     func inject(view: DetailViewInterface) {

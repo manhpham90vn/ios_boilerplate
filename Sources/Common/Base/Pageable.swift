@@ -18,7 +18,7 @@ typealias ViewControllerPageable = HasViewControllerPagging
 typealias PresenterPageable = HasPresenterPagging
     & HasHeaderFooterTrigger
     & HasDisposeBag
-    & HasActivityIndicator
+    & HasTrigger
 
 protocol HasHeaderFooterTrigger {
     // trigger when pull to refresh and loadmore
@@ -30,8 +30,8 @@ protocol HasPresenterPagging {
     associatedtype Element
     var currentPage: Int { get set }
     var elements: BehaviorRelay<[Element]> { get }
-    var headerActivityIndicator: ActivityIndicator { get }
-    var footerActivityIndicator: ActivityIndicator { get }
+    var headerActivityIndicator: PublishSubject<Bool> { get }
+    var footerActivityIndicator: PublishSubject<Bool> { get }
     var isEnableLoadMore: BehaviorRelay<Bool> { get }
     
     // optional override if you want in presenter
@@ -49,7 +49,7 @@ protocol HasViewControllerPagging {
     var isFooterLoading: PublishRelay<Bool> { get }
 }
 
-extension HasPresenterPagging where Self: HasHeaderFooterTrigger & HasDisposeBag & HasActivityIndicator {
+extension HasPresenterPagging where Self: HasHeaderFooterTrigger & HasDisposeBag & HasTrigger {
     func bind(paggingable: ViewControllerPageable) {
 
         // viewcontroller trigger to presenter

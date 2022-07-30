@@ -10,23 +10,21 @@ import RxSwift
 import RxCocoa
 import Resolver
 
-protocol LoginUseCaseInterface {
-    func login(email: String, password: String) -> Single<Token>
+struct LoginUseCaseParams {
+    let email: String
+    let password: String
 }
 
-final class LoginUseCase {
+final class LoginUseCase: SingleUseCase<LoginUseCaseParams, LoginResponse> {
     @Injected var repo: UserRepositoryInterface
     @Injected var local: LocalStorageRepository
-}
-
-extension LoginUseCase: LoginUseCaseInterface {
-    func login(email: String, password: String) -> Single<Token> {
-        repo.login(email: email, password: password)
+    
+    override func buildUseCase(params: LoginUseCaseParams) -> Single<LoginResponse> {
+        repo.login(email: params.email, password: params.password)
             .do(onSuccess: { [weak self] data in
                 if let token = data.token, let refreshToken = data.refreshToken {
                     self?.local.setAccessToken(newValue: token)
                     self?.local.setRefreshToken(newValue: refreshToken)
-                    self?.local.setLoginState(newValue: .logined)
                 }
             })
     }

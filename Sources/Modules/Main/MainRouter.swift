@@ -12,7 +12,7 @@ protocol MainRouterInterface {
     var view: MainViewInterface? { get }
     func inject(view: MainViewInterface)
     
-    func navigationToDetailScreen(item: Paging)
+    func navigationToDetailScreen(user: PagingUserResponse)
     func navigationToLoginScreen()
 }
 
@@ -30,9 +30,9 @@ final class MainRouter: MainRouterInterface {
         }
     }
 
-    func navigationToDetailScreen(item: Paging) {
+    func navigationToDetailScreen(user: PagingUserResponse) {
         guard let viewController = view as? MainViewController else { return }
-        let vc = AppScenes.detail(params: .init(event: item)).viewController
+        let vc = AppScenes.detail(params: .init(user: user)).viewController
         viewController.navigationController?.pushViewController(vc, animated: true)
     }
     

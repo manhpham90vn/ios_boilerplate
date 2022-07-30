@@ -9,7 +9,7 @@ import UIKit
 import Resolver
 
 struct DetailViewControllerParams {
-    var event: Paging
+    var user: PagingUserResponse
 }
 
 final class DetailViewController: BaseViewController {
@@ -36,7 +36,7 @@ final class DetailViewController: BaseViewController {
     override func setupUI() {
         super.setupUI()
         
-        navigationItem.title = params?.event.name
+        navigationItem.title = params?.user.name
     }
 
     override func bindDatas() {

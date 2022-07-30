@@ -10,9 +10,9 @@ import RxSwift
 import Resolver
 
 protocol UserRepositoryInterface {
-    func login(email: String, password: String) -> Single<Token>
-    func userInfo() -> Single<User>
-    func refreshToken(token: String) -> Single<RefreshToken>
+    func login(email: String, password: String) -> Single<LoginResponse>
+    func userInfo() -> Single<UserResponse>
+    func refreshToken(token: String) -> Single<RefreshTokenResponse>
 }
 
 final class UserRepository {
@@ -20,15 +20,15 @@ final class UserRepository {
 }
 
 extension UserRepository: UserRepositoryInterface {
-    func login(email: String, password: String) -> Single<Token> {
+    func login(email: String, password: String) -> Single<LoginResponse> {
         return api.login(email: email, password: password)
     }
 
-    func userInfo() -> Single<User> {
+    func userInfo() -> Single<UserResponse> {
         return api.userInfo()
     }
 
-    func refreshToken(token: String) -> Single<RefreshToken> {
+    func refreshToken(token: String) -> Single<RefreshTokenResponse> {
         return api.refreshToken(token: token)
     }
 }

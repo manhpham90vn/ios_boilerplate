@@ -9,10 +9,19 @@ import Foundation
 import Alamofire
 import RxSwift
 
-final class AppNetwork {
-    static let `default` = AppNetwork()
+protocol AppNetworkInterface {
+    func request<T: Decodable>(route: AppRequestConvertible,
+                               type: T.Type) -> Single<T>
+    func requestRefreshable<T: Decodable>(route: AppRequestConvertible,
+                                          type: T.Type) -> Single<T>
+}
+
+final class AppNetwork: AppNetworkInterface {
+
+    private let session: Session!
+    private let sessionRefreshable: Session!
     
-    private init() {
+    init() {
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 3
         config.timeoutIntervalForResource = 3
@@ -37,21 +46,19 @@ final class AppNetwork {
         // Interceptor
         let compositeInterceptor = Interceptor(adapters: [xTypeAdapter, authenAdapter],
                                                interceptors: [refreshTokenInterceptor, retryPolicy])
-        let session = Session(interceptor: compositeInterceptor, eventMonitors: eventMonitors)
-        self.session = session
+        
+        // create session
+        self.sessionRefreshable = Session(interceptor: compositeInterceptor, eventMonitors: eventMonitors)
+        self.session = Session(eventMonitors: eventMonitors)
     }
     
-    private let session: Session!
-    
-    func cancelAllRequests() {
-        session.cancelAllRequests()
-    }
-    
-    func request<T: Decodable>(route: AppRequestConvertible,
-                               type: T.Type,
-                               completion: @escaping (Result<T, Error>) -> Void) -> DataRequest {
+    private func request<T: Decodable>(session: Session,
+                                       route: AppRequestConvertible,
+                                       type: T.Type,
+                                       completion: @escaping (Result<T, Error>) -> Void) -> DataRequest {
         let request = session
             .request(route)
+            .validate(statusCode: 200...300)
             .cURLDescription(calling: { curl in
                 if Configs.shared.loggingcURLEnabled {
                     LogInfo(curl)
@@ -70,8 +77,30 @@ final class AppNetwork {
     
     func request<T: Decodable>(route: AppRequestConvertible,
                                type: T.Type) -> Single<T> {
-        Single<T>.create { single in
-            let request = self.request(route: route, type: T.self) { result in
+        Single<T>.create { [weak self] single in
+            guard let self = self else {
+                return Disposables.create()
+            }
+            let request = self.request(session: self.session, route: route, type: T.self) { result in
+                switch result {
+                case let .success(data):
+                    single(.success(data))
+                case let .failure(error):
+                    single(.failure(error))
+                }
+            }
+            return Disposables.create {
+                request.cancel()
+            }
+        }
+    }
+    
+    func requestRefreshable<T>(route: AppRequestConvertible, type: T.Type) -> Single<T> where T : Decodable {
+        Single<T>.create { [weak self] single in
+            guard let self = self else {
+                return Disposables.create()
+            }
+            let request = self.request(session: self.sessionRefreshable, route: route, type: T.self) { result in
                 switch result {
                 case let .success(data):
                     single(.success(data))

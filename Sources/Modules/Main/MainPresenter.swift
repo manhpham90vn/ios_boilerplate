@@ -18,7 +18,7 @@ protocol MainPresenterInterface {
     func inject(view: MainViewInterface)
     
     func didTapLogout()
-    func navigationToDetailScreen(item: Paging)
+    func navigationToDetailScreen(user: PagingUserResponse)
     func reload()
 }
 
@@ -28,82 +28,72 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
     @Injected var router: MainRouterInterface
     @Injected var interactor: MainInteractorInterface
 
-    let elements = BehaviorRelay<[Paging]>(value: [])
-    let activityIndicator = ActivityIndicator.shared
+    let elements = BehaviorRelay<[PagingUserResponse]>(value: [])
     let trigger = PublishRelay<Void>()
     let headerRefreshTrigger = PublishRelay<Void>()
     let footerLoadMoreTrigger = PublishRelay<Void>()
     let isEnableLoadMore = BehaviorRelay<Bool>(value: true)
     let isEmptyData = BehaviorRelay<Bool>(value: true)
-    let headerActivityIndicator = ActivityIndicator()
-    let footerActivityIndicator = ActivityIndicator()
+    let headerActivityIndicator = PublishSubject<Bool>()
+    let footerActivityIndicator = PublishSubject<Bool>()
     var currentPage = 1
     let triggerGetUserInfo = PublishRelay<Void>()
 
     init() {
-        trigger
-            .flatMapLatest { [weak self] () -> Driver<[Paging]> in
-                guard let self = self else { return .never() }
+        Driver.combineLatest(interactor.getEventUseCaseInterface.processing,
+                             interactor.getUserInfoUseCase.processing) {
+            $0 || $1
+        }
+        .drive(onNext: { isLoading in
+            LoadingHelper.shared.isLoading.accept(isLoading)
+        })
+        .disposed(by: disposeBag)
+    
+        Observable.merge(trigger.asObservable(), headerRefreshTrigger.asObservable())
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
                 self.currentPage = 1
                 self.isEnableLoadMore.accept(true)
-                return self.interactor
-                    .getDataPaging(page: self.currentPage)
-                    .trackActivity(self.activityIndicator)
-                    .debugToFile()
-                    .asDriver(onErrorJustReturn: [])
-            }
-            .do(onNext: { [weak self] elements in
-                if !elements.isEmpty {
-                    self?.triggerGetUserInfo.accept(())
-                }
+                self.interactor.getEventUseCaseInterface.execute(params: .init(page: self.currentPage,
+                                                                               sort: .ascending,
+                                                                               type: .refreshOrFirstLoad))
+                self.interactor.getUserInfoUseCase.execute(params: ())
             })
-            .bind(to: elements)
-            .disposed(by: disposeBag)
-
-        Observable.merge(trigger.asObservable(), triggerGetUserInfo.asObservable())
-            .flatMapLatest { [weak self] _ -> Driver<User> in
-                guard let self = self else { return .never() }
-                return self.interactor.getUserInfo()
-                    .trackActivity(self.activityIndicator)
-                    .asDriverOnErrorJustComplete()
-            }
-            .asDriverOnErrorJustComplete()
-            .drive()
             .disposed(by: disposeBag)
         
-        headerRefreshTrigger
-            .flatMapLatest { [weak self] () -> Driver<[Paging]> in
-                guard let self = self else { return .never() }
-                self.currentPage = 1
-                self.isEnableLoadMore.accept(true)
-                return self.interactor
-                    .getDataPaging(page: self.currentPage)
-                    .trackActivity(self.headerActivityIndicator)
-                    .asDriver(onErrorJustReturn: [])
-            }
-            .bind(to: elements)
-            .disposed(by: disposeBag)
-
         footerLoadMoreTrigger
-            .flatMapLatest { [weak self] () -> Driver<[Paging]> in
-                guard let self = self else { return .never() }
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
                 self.currentPage += 1
-                return self.interactor
-                    .getDataPaging(page: self.currentPage)
-                    .trackActivity(self.footerActivityIndicator)
-                    .asDriver(onErrorJustReturn: [])
-            }
-            .asDriver(onErrorJustReturn: [])
+                self.interactor.getEventUseCaseInterface.execute(params: .init(page: self.currentPage,
+                                                                               sort: .ascending,
+                                                                               type: .loadMore))
+            })
+            .disposed(by: disposeBag)
+        
+        interactor
+            .getUserInfoUseCase
+            .succeeded
+            .drive(onNext: { result in
+                LogInfo("\(result.email ?? "")")
+            })
+            .disposed(by: disposeBag)
+        
+        interactor
+            .getEventUseCaseInterface
+            .succeeded
             .drive(onNext: { [weak self] result in
                 guard let self = self else { return }
-                var current = self.elements.value
-                current += result
-                if current.count > 1000 {
-                    self.isEnableLoadMore.accept(false)
-                } else {
-                    self.isEnableLoadMore.accept(true)
+                switch result.1 {
+                case .refreshOrFirstLoad:
+                    self.elements.accept(result.0)
+                    self.headerActivityIndicator.onNext(false)
+                case .loadMore:
+                    var current = self.elements.value
+                    current += result.0
+                    self.elements.accept(current)
+                    self.footerActivityIndicator.onNext(false)
                 }
-                self.elements.accept(current)
             })
             .disposed(by: disposeBag)
     }
@@ -122,12 +112,12 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
     }
     
     func didTapLogout() {
-        interactor.cleanData()
+        interactor.cleanUserInfoUseCaseInterface.execute(params: ())
         router.navigationToLoginScreen()
     }
     
-    func navigationToDetailScreen(item: Paging) {
-        router.navigationToDetailScreen(item: item)
+    func navigationToDetailScreen(user: PagingUserResponse) {
+        router.navigationToDetailScreen(user: user)
     }
     
     func reload() {
