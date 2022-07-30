@@ -8,5 +8,9 @@
 import Foundation
 
 enum AppError: Error {
+    case noInternetConnection
+    case actionAlreadyPerforming
+    case networkError(error: Error)
     case refreshTokenErrorNoToken
 }
+

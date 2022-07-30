@@ -10,15 +10,15 @@ import RxSwift
 import Resolver
 
 protocol MainInteractorInterface {
-    func cleanData()
-    func getDataPaging(page: Int) -> Single<[Paging]>
-    func getUserInfo() -> Single<User>
+    var getEventUseCaseInterface: GETEventUseCase { get }
+    var cleanUserInfoUseCaseInterface: CleanUserInfoUseCase { get }
+    var getUserInfoUseCase: GETUserInfoUseCase { get }
 }
 
 final class MainInteractor: MainInteractorInterface {
 
-    @Injected var getEventUseCaseInterface: GETEventUseCaseInterface
-    @Injected var cleanUserInfoUseCaseInterface: CleanUserInfoUseCaseInterface
+    @Injected var getEventUseCaseInterface: GETEventUseCase
+    @Injected var cleanUserInfoUseCaseInterface: CleanUserInfoUseCase
     @Injected var getUserInfoUseCase: GETUserInfoUseCase
 
     deinit {
@@ -26,17 +26,4 @@ final class MainInteractor: MainInteractorInterface {
             LogInfo("\(Swift.type(of: self)) Deinit")
         }
     }
-
-    func cleanData() {
-        cleanUserInfoUseCaseInterface.clean()
-    }
-
-    func getDataPaging(page: Int) -> Single<[Paging]> {
-        getEventUseCaseInterface.paging(page: page)
-    }
-    
-    func getUserInfo() -> Single<User> {
-        getUserInfoUseCase.getInfo()
-    }
-
 }

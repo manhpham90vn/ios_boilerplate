@@ -9,14 +9,43 @@ import Foundation
 import Alamofire
 import Resolver
 import UIKit
+import RxSwift
 
 final class RefreshTokenInterceptor: RequestInterceptor {
     typealias RequestRetryCompletion = (RetryResult) -> Void
     private var lock = NSLock()
     private var isRefreshing = false
     private var requestsToRetry: [RequestRetryCompletion] = []
+    private let bag = DisposeBag()
     
-    @Injected var local: LocalStorageRepository
+    @Injected var refreshUseCase: RefreshTokenUseCase
+    
+    init() {
+        refreshUseCase
+            .succeeded
+            .drive(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.lock.lock {
+                    self.isRefreshing = false
+                    self.requestsToRetry.forEach { $0(.retry) }
+                    self.requestsToRetry.removeAll()
+                }
+            })
+            .disposed(by: bag)
+        
+        refreshUseCase
+            .failed
+            .drive(onNext: { [weak self] error in
+                guard let self = self else { return }
+                self.lock.lock {
+                    self.isRefreshing = false
+                    self.requestsToRetry.forEach { $0(.doNotRetryWithError(error)) }
+                    self.requestsToRetry.removeAll()
+                    self.toLogin()
+                }
+            })
+            .disposed(by: bag)
+    }
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         completion(.success(urlRequest))
@@ -33,23 +62,7 @@ final class RefreshTokenInterceptor: RequestInterceptor {
             
             if !isRefreshing {
                 isRefreshing = true
-                                
-                refreshToken { [weak self] result in
-                    guard let self = self else { return }
-                    self.lock.lock {
-                        switch result {
-                        case let .success(token):
-                            self.local.setAccessToken(newValue: token)
-                            self.requestsToRetry.forEach { $0(.retry) }
-                            self.requestsToRetry.removeAll()
-                        case let .failure(error):
-                            self.requestsToRetry.forEach { $0(.doNotRetryWithError(error)) }
-                            self.requestsToRetry.removeAll()
-                            self.toLogin()
-                        }
-                        self.isRefreshing = false
-                    }
-                }
+                refreshToken()
             }
         }
     }
@@ -58,23 +71,7 @@ final class RefreshTokenInterceptor: RequestInterceptor {
         UIWindow.shared?.rootViewController = UINavigationController(rootViewController: AppScenes.login.viewController)
     }
     
-    func refreshToken(completion: @escaping (Result<String, Error>) -> Void) {
-        AF.request("\(Configs.shared.env.baseURL)refreshToken",
-                   method: .post,
-                   parameters: ["token": local.getRefreshToken() ?? ""],
-                   encoding: URLEncoding.httpBody)
-            .validate(statusCode: 200...300)
-            .responseDecodable(of: RefreshTokenResponse.self) { response in
-                switch response.result {
-                case .success(let data):
-                    if let token = data.token {
-                        completion(.success(token))
-                    } else {
-                        completion(.failure(AppError.refreshTokenErrorNoToken))
-                    }
-                case .failure(let error):
-                    completion(.failure(error))
-                }
-            }
+    func refreshToken() {
+        refreshUseCase.execute(params: ())
     }
 }

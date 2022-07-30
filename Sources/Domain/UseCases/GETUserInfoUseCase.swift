@@ -9,18 +9,12 @@ import Foundation
 import RxSwift
 import Resolver
 
-protocol GETUserInfoUseCase {
-    func getInfo() -> Single<User>
-}
-
-final class GETUserInfoUseCaseImp {
+final class GETUserInfoUseCase: SingleUseCase<Void, UserResponse> {
     @Injected var repo: UserRepositoryInterface
     @Injected var local: LocalStorageRepository
-}
-
-extension GETUserInfoUseCaseImp: GETUserInfoUseCase {
-    func getInfo() -> Single<User> {
-        repo.userInfo()
+    
+    override func buildUseCase(params: Void) -> Single<UserResponse> {
+        return repo.userInfo()
             .do(onSuccess: { [weak self] user in
                 self?.local.setUserInfo(newValue: user)
             })

@@ -11,22 +11,16 @@ import RxCocoa
 import Resolver
 
 protocol LoginInteractorInterface {
-    func login(email: String, password: String) -> Single<Token>
+    var loginUseCase: LoginUseCase { get }
 }
 
-final class LoginInteractor {
+final class LoginInteractor: LoginInteractorInterface {
 
-    @Injected var loginUseCase: LoginUseCaseInterface
+    @Injected var loginUseCase: LoginUseCase
 
     deinit {
         if Configs.shared.loggingDeinitEnabled {
             LogInfo("\(Swift.type(of: self)) Deinit")
         }
-    }
-}
-
-extension LoginInteractor: LoginInteractorInterface {
-    func login(email: String, password: String) -> Single<Token> {
-        loginUseCase.login(email: email, password: password)
     }
 }

@@ -11,9 +11,3 @@ struct RefreshTokenResponse: Codable {
     var status: String?
     var token: String?
 }
-
-extension RefreshTokenResponse: EntityConvertibleType {
-    func asEntity() -> RefreshToken {
-        RefreshToken(token: token)
-    }
-}

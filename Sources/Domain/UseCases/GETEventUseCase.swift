@@ -10,16 +10,27 @@ import RxSwift
 import RxCocoa
 import Resolver
 
-protocol GETEventUseCaseInterface {
-    func paging(page: Int) -> Single<[Paging]>
+enum PagingSortType: String {
+    case ascending
+    case descending
 }
 
-final class GETEventUseCase {
+enum PagingType {
+    case refreshOrFirstLoad
+    case loadMore
+}
+
+struct GETEventUseCaseParams {
+    let page: Int
+    let sort: PagingSortType
+    let type: PagingType
+}
+
+final class GETEventUseCase: SingleUseCase<GETEventUseCaseParams, ([PagingUserResponse], PagingType)> {
+    
     @Injected var repo: HomeRepositoryInterface
-}
-
-extension GETEventUseCase: GETEventUseCaseInterface {
-    func paging(page: Int) -> Single<[Paging]> {
-        repo.pagging(page: page)
+    
+    override func buildUseCase(params: GETEventUseCaseParams) -> Single<([PagingUserResponse], PagingType)> {
+        return repo.pagging(page: params.page, sort: params.sort).map { ($0, params.type) }
     }
 }

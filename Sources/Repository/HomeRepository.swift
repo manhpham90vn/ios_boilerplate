@@ -11,7 +11,7 @@ import RxCocoa
 import Resolver
 
 protocol HomeRepositoryInterface {
-    func pagging(page: Int) -> Single<[Paging]>
+    func pagging(page: Int, sort: PagingSortType) -> Single<[PagingUserResponse]>
 }
 
 final class HomeRepository {
@@ -19,7 +19,7 @@ final class HomeRepository {
 }
 
 extension HomeRepository: HomeRepositoryInterface {
-    func pagging(page: Int) -> Single<[Paging]> {
-        api.paging(page: page)
+    func pagging(page: Int, sort: PagingSortType) -> Single<[PagingUserResponse]> {
+        api.paging(page: page, sort: sort)
     }
 }

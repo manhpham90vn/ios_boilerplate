@@ -21,18 +21,43 @@ protocol LoginPresenterInterface {
     var password: BehaviorRelay<String> { get }
 }
 
-final class LoginPresenter: LoginPresenterInterface, HasDisposeBag, HasActivityIndicator {
+final class LoginPresenter: LoginPresenterInterface, HasDisposeBag, HasTrigger {
 
     weak var view: LoginViewInterface?
     @Injected var router: LoginRouterInterface
     @Injected var interactor: LoginInteractorInterface
 
-    let activityIndicator = ActivityIndicator.shared
     let trigger = PublishRelay<Void>()
     
     let login = BehaviorRelay<String>(value: "")
     let password = BehaviorRelay<String>(value: "")
 
+    init() {
+        interactor
+            .loginUseCase
+            .processing
+            .drive(onNext: { result in LoadingHelper.shared.isLoading.accept(result) })
+            .disposed(by: disposeBag)
+        
+        interactor
+            .loginUseCase
+            .succeeded
+            .drive(onNext: { [weak self] result in
+                if result.token != nil {
+                    self?.router.navigationToHomeScreen()
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        interactor
+            .loginUseCase
+            .failed
+            .drive(onNext: { error in
+                AppHelper.shared.showAlert(title: "Error", message: "Login Error: \(error.localizedDescription)", completion: nil)
+            })
+            .disposed(by: disposeBag)
+    }
+    
     deinit {
         if Configs.shared.loggingDeinitEnabled {
             LogInfo("\(Swift.type(of: self)) Deinit")
@@ -48,20 +73,8 @@ final class LoginPresenter: LoginPresenterInterface, HasDisposeBag, HasActivityI
     
     func didTapLoginButton() {
         interactor
-            .login(email: login.value, password: password.value)
-            .trackActivity(activityIndicator)
-            .do(onError: { error in
-                AppHelper.shared.showAlert(title: "Error", message: error.localizedDescription)
-            })
-            .asDriverOnErrorJustComplete()
-            .drive(onNext: { [weak self] result in
-                if result.token != nil {
-                    self?.router.navigationToHomeScreen()
-                } else {
-                    AppHelper.shared.showAlert(title: "Error", message: result.message ?? "")
-                }
-            })
-            .disposed(by: disposeBag)
+            .loginUseCase
+            .execute(params: .init(email: login.value, password: password.value))
     }
     
     func didTapSkipButton() {

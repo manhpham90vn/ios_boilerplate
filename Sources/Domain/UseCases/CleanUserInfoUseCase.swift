@@ -9,19 +9,14 @@ import Foundation
 import Resolver
 import RxSwift
 
-protocol CleanUserInfoUseCaseInterface {
-    func clean()
-}
-
-final class CleanUserInfoUseCase {
+final class CleanUserInfoUseCase: UseCase {
     @Injected var repo: LocalStorageRepository
 }
 
-extension CleanUserInfoUseCase: CleanUserInfoUseCaseInterface {
-    func clean() {
+extension CleanUserInfoUseCase {
+    func buildUseCase(params: Void) {
         repo.clearAccessToken()
         repo.clearRefreshToken()
         repo.clearUserInfo()
-        repo.clearLoginState()
     }
 }
