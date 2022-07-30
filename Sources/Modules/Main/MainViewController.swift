@@ -77,7 +77,7 @@ extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let presenter = presenter as? MainPresenter else { return }
-        presenter.navigationToDetailScreen(item: presenter.elements.value[indexPath.row])
+        presenter.navigationToDetailScreen(user: presenter.elements.value[indexPath.row])
     }
     
 }

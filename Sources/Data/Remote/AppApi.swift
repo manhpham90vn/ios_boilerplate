@@ -8,32 +8,39 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import Resolver
 
 protocol AppApi {
-    func login(email: String, password: String) -> Single<Token>
-    func userInfo() -> Single<User>
-    func paging(page: Int) -> Single<[Paging]>
-    func refreshToken(token: String) -> Single<RefreshToken>
+    func login(email: String, password: String) -> Single<LoginResponse>
+    func userInfo() -> Single<UserResponse>
+    func paging(page: Int, sort: PagingSortType) -> Single<[PagingUserResponse]>
+    func refreshToken(token: String) -> Single<RefreshTokenResponse>
 }
 
 final class AppApiComponent: AppApi {
-    func login(email: String, password: String) -> Single<Token> {
-        return AppNetwork.default.request(route: AppRoute.login(username: email, password: password), type: LoginResponse.self)
-            .map { $0.asEntity() }
+    
+    @Injected var appNetwork: AppNetworkInterface
+    
+    func login(email: String, password: String) -> Single<LoginResponse> {
+        return appNetwork.request(route: AppRoute.login(username: email,
+                                                        password: password),
+                                          type: LoginResponse.self)
     }
     
-    func userInfo() -> Single<User> {
-        return AppNetwork.default.request(route: AppRoute.getUserInfo, type: UserResponse.self)
-            .map { $0.asEntity() }
+    func userInfo() -> Single<UserResponse> {
+        return appNetwork.requestRefreshable(route: AppRoute.getUserInfo,
+                                             type: UserResponse.self)
     }
     
-    func paging(page: Int) -> Single<[Paging]> {
-        return AppNetwork.default.request(route: AppRoute.getList(page: page), type: PagingResponse.self)
-            .map { $0.asEntity() }
+    func paging(page: Int, sort: PagingSortType) -> Single<[PagingUserResponse]> {
+        return appNetwork.requestRefreshable(route: AppRoute.getList(page: page,
+                                                                     sort: sort),
+                                          type: PagingResponse.self)
+            .map { $0.array ?? [] }
     }
     
-    func refreshToken(token: String) -> Single<RefreshToken> {
-        return AppNetwork.default.request(route: AppRoute.refreshToken(token: token), type: RefreshTokenResponse.self)
-            .map { $0.asEntity() }
+    func refreshToken(token: String) -> Single<RefreshTokenResponse> {
+        return appNetwork.request(route: AppRoute.refreshToken(token: token),
+                                  type: RefreshTokenResponse.self)
     }
 }

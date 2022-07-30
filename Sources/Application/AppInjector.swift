@@ -9,8 +9,15 @@ import Resolver
 
 extension Resolver: ResolverRegistering {
     public static func registerAllServices() {
-        // MARK: Service
-        register { AppApiComponent() as AppApi }
+
+        // data local
+        register { UserDefaults.standard as UserDefaults }.scope(.application)
+        register { UserDefaultsStorage() as Storage }.scope(.application)
+        
+        // data remote
+        register { ConnectivityServiceImpl() as ConnectivityService }.scope(.application)
+        register { AppApiComponent() as AppApi }.scope(.application)
+        register { AppNetwork() as AppNetworkInterface }.scope(.application)
 
         // MARK: Repository
         register { UserRepository() as UserRepositoryInterface }
@@ -18,11 +25,11 @@ extension Resolver: ResolverRegistering {
         register { LocalStorage() as LocalStorageRepository }
         
         // MARK: UseCase
-        register { LoginUseCase() as LoginUseCaseInterface }
-        register { GETEventUseCase() as GETEventUseCaseInterface }
-        register { CleanUserInfoUseCase() as CleanUserInfoUseCaseInterface }
-        register { GETUserInfoUseCaseImp() as GETUserInfoUseCase }
-        register { RefreshTokenImp() as RefreshTokenUseCase }
+        register { LoginUseCase() }
+        register { GETEventUseCase() }
+        register { CleanUserInfoUseCase() }
+        register { GETUserInfoUseCase() }
+        register { RefreshTokenUseCase() }
         
         // MARK: Register All
         MainRouter.registerAllServices()

@@ -127,7 +127,6 @@ PODS:
   - RxSwiftExt/RxCocoa (6.0.1):
     - RxCocoa (~> 6.0)
     - RxSwiftExt/Core
-  - SwiftyUserDefaults (5.3.0)
   - XCGLogger (7.0.1):
     - XCGLogger/Core (= 7.0.1)
   - XCGLogger/Core (7.0.1):
@@ -146,7 +145,6 @@ DEPENDENCIES:
   - RxCocoa
   - RxSwift
   - RxSwiftExt
-  - SwiftyUserDefaults
   - XCGLogger
 
 SPEC REPOS:
@@ -174,7 +172,6 @@ SPEC REPOS:
     - RxRelay
     - RxSwift
     - RxSwiftExt
-    - SwiftyUserDefaults
     - XCGLogger
 
 SPEC CHECKSUMS:
@@ -201,9 +198,8 @@ SPEC CHECKSUMS:
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   RxSwiftExt: d61c4b9b06e0a448041b1c659e0f1b5c5a035afc
-  SwiftyUserDefaults: 63f80248cf5bfb3458825d9a78f2eb7e1293a040
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: 8555527d448cb31ee915055660f5665f566f2047
+PODFILE CHECKSUM: 151f1dd19157d8d8d068e22acb17b4cad8d1bff9
 
 COCOAPODS: 1.11.3

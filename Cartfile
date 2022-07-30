@@ -6,7 +6,6 @@ github "ashleymills/Reachability.swift" ~> 5.1
 github "pkluz/PKHUD"
 github "DaveWoodCom/XCGLogger"
 github "AliSoftware/Reusable"
-github "sunshinejr/SwiftyUserDefaults"
 github "hmlongco/Resolver"
 github "CoderMJLee/MJRefresh"
 binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseCrashlyticsBinary.json"

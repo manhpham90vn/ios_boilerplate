@@ -11,7 +11,7 @@ import Alamofire
 enum AppRoute {
     case login(username: String, password: String)
     case getUserInfo
-    case getList(page: Int)
+    case getList(page: Int, sort: PagingSortType)
     case refreshToken(token: String)
 }
 
@@ -60,8 +60,8 @@ extension AppRoute: AppRequestConvertible {
             return ["email": username, "password": password]
         case .getUserInfo:
             return [:]
-        case let .getList(page):
-            return ["page": page]
+        case let .getList(page, sort):
+            return ["page": page, "sort": sort.rawValue]
         case let .refreshToken(token):
             return ["token": token]
         }

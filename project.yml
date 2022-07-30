@@ -29,7 +29,6 @@ targets:
       CODE_SIGN_STYLE: "Manual"
       UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
       UILaunchStoryboardName: LaunchScreen
-      EXCLUDED_ARCHS[sdk=iphonesimulator*]: "arm64"
       VALIDATE_WORKSPACE: YES
     preBuildScripts:
       - name: SwiftGen

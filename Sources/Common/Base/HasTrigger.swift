@@ -1,5 +1,5 @@
 //
-//  HasActivityIndicator.swift
+//  HasTrigger.swift
 //  StoryApp
 //
 //  Created by Manh Pham on 14/06/2021.
@@ -9,7 +9,6 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-protocol HasActivityIndicator {
+protocol HasTrigger {
     var trigger: PublishRelay<Void> { get }
-    var activityIndicator: ActivityIndicator { get }
 }
