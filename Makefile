@@ -33,7 +33,7 @@ copyFrameworks:
 .PHONY: xcodetest
 xcodetest:
 	xcodebuild \
-	-project "My Project.xcodeproj" \
+	-workspace "My Project.xcworkspace" \
 	-scheme "My Project" \
 	-destination 'platform=iOS Simulator,name=iPhone 13 Pro Max' \
 	-derivedDataPath "build" \
