@@ -26,6 +26,8 @@ final class LoginPresenter: LoginPresenterInterface, HasDisposeBag, HasTrigger {
     weak var view: LoginViewInterface?
     @Injected var router: LoginRouterInterface
     @Injected var interactor: LoginInteractorInterface
+    @Injected var loading: LoadingHelper
+    @Injected var errorHandle: ApiErrorHandler
 
     let trigger = PublishRelay<Void>()
     
@@ -36,14 +38,16 @@ final class LoginPresenter: LoginPresenterInterface, HasDisposeBag, HasTrigger {
         interactor
             .loginUseCase
             .processing
-            .drive(onNext: { result in LoadingHelper.shared.isLoading.accept(result) })
+            .drive(onNext: { [weak self] result in
+                self?.loading.isLoading.accept(result)
+            })
             .disposed(by: disposeBag)
         
         interactor
             .loginUseCase
             .succeeded
             .drive(onNext: { [weak self] result in
-                if result.token != nil {
+                if result {
                     self?.router.navigationToHomeScreen()
                 }
             })
@@ -52,8 +56,8 @@ final class LoginPresenter: LoginPresenterInterface, HasDisposeBag, HasTrigger {
         interactor
             .loginUseCase
             .failed
-            .drive(onNext: { error in
-                AppHelper.shared.showAlert(title: "Error", message: "Login Error: \(error.localizedDescription)", completion: nil)
+            .drive(onNext: { [weak self] error in
+                self?.errorHandle.handle(error: error)
             })
             .disposed(by: disposeBag)
     }

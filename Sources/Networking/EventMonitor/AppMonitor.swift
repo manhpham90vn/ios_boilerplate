@@ -45,7 +45,7 @@ final class AppMonitor: EventMonitor {
     func request<Value>(_ request: DataRequest, didParseResponse response: DataResponse<Value, AFError>) {
         if Configs.shared.loggingAPIEnabled {
             if let value = response.value {
-                LogInfo("didParseResponse \(Date()) \(request.id) \(value)")
+                LogInfo("didParseResponse \(Date()) \(request.id) \(response.metrics?.taskInterval.duration ?? 0) \(value)")
             }
         }
     }

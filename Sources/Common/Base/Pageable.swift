@@ -30,9 +30,9 @@ protocol HasPresenterPagging {
     associatedtype Element
     var currentPage: Int { get set }
     var elements: BehaviorRelay<[Element]> { get }
-    var headerActivityIndicator: PublishSubject<Bool> { get }
-    var footerActivityIndicator: PublishSubject<Bool> { get }
-    var isEnableLoadMore: BehaviorRelay<Bool> { get }
+    var isHeaderLoading: PublishSubject<Bool> { get }
+    var isFooterLoading: PublishSubject<Bool> { get }
+    var isEnableLoadMore: PublishSubject<Bool> { get }
     
     // optional override if you want in presenter
     func bind(paggingable: ViewControllerPageable)
@@ -85,12 +85,12 @@ extension HasPresenterPagging where Self: HasHeaderFooterTrigger & HasDisposeBag
     }
 
     func bindActivityIndicator(paggingable: ViewControllerPageable) {
-        headerActivityIndicator
+        isHeaderLoading
             .asSignalOnErrorJustComplete()
             .emit(to: paggingable.isHeaderLoading)
             .disposed(by: disposeBag)
 
-        footerActivityIndicator
+        isFooterLoading
             .asSignalOnErrorJustComplete()
             .emit(to: paggingable.isFooterLoading)
             .disposed(by: disposeBag)

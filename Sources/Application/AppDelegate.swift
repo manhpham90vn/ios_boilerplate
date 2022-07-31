@@ -16,7 +16,9 @@ import FirebaseMessaging
 final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    @LazyInjected var local: LocalStorageRepository
+    @Injected var local: LocalStorageRepository
+    @Injected var loading: LoadingHelper
+    @Injected var log: Logger
     
     static var keyWindow: UIWindow? {
         return UIApplication.shared.windows.first(where: { $0.isKeyWindow })
@@ -31,8 +33,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = UINavigationController(rootViewController: vc)
         window?.makeKeyAndVisible()
 
-        LoggerSetup()
-        LoadingHelper.shared.perform()
+        log.setUpLog()
+        loading.perform()
         
         Messaging.messaging().delegate = self
         configApplePush(application)

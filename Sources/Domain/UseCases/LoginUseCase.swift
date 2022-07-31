@@ -15,11 +15,11 @@ struct LoginUseCaseParams {
     let password: String
 }
 
-final class LoginUseCase: SingleUseCase<LoginUseCaseParams, LoginResponse> {
+final class LoginUseCase: SingleUseCase<LoginUseCaseParams, Bool> {
     @Injected var repo: UserRepositoryInterface
     @Injected var local: LocalStorageRepository
     
-    override func buildUseCase(params: LoginUseCaseParams) -> Single<LoginResponse> {
+    override func buildUseCase(params: LoginUseCaseParams) -> Single<Bool> {
         repo.login(email: params.email, password: params.password)
             .do(onSuccess: { [weak self] data in
                 if let token = data.token, let refreshToken = data.refreshToken {
@@ -27,5 +27,6 @@ final class LoginUseCase: SingleUseCase<LoginUseCaseParams, LoginResponse> {
                     self?.local.setRefreshToken(newValue: refreshToken)
                 }
             })
+            .map { $0.token != nil && $0.refreshToken != nil }
     }
 }

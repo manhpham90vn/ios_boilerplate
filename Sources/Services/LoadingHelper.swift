@@ -13,9 +13,6 @@ import NSObject_Rx
 
 final class LoadingHelper: HasDisposeBag {
     
-    static let shared = LoadingHelper()
-    private init() {}
-
     let isLoading = PublishRelay<Bool>()
     
     func perform() {
