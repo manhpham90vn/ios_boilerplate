@@ -22,20 +22,21 @@ final class AppApiComponent: AppApi {
     @Injected var appNetwork: AppNetworkInterface
     
     func login(email: String, password: String) -> Single<LoginResponse> {
-        return appNetwork.request(route: AppRoute.login(username: email,
-                                                        password: password),
-                                          type: LoginResponse.self)
+        let route = AppRoute.login(username: email, password: password)
+        return appNetwork.request(route: route,
+                                  type: LoginResponse.self)
     }
     
     func userInfo() -> Single<UserResponse> {
-        return appNetwork.requestRefreshable(route: AppRoute.getUserInfo,
+        let route = AppRoute.getUserInfo
+        return appNetwork.requestRefreshable(route: route,
                                              type: UserResponse.self)
     }
     
     func paging(page: Int, sort: PagingSortType) -> Single<[PagingUserResponse]> {
-        return appNetwork.requestRefreshable(route: AppRoute.getList(page: page,
-                                                                     sort: sort),
-                                          type: PagingResponse.self)
+        let route = AppRoute.getList(page: page, sort: sort)
+        return appNetwork.requestRefreshable(route: route,
+                                             type: PagingResponse.self)
             .map { $0.array ?? [] }
     }
     

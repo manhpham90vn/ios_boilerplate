@@ -13,6 +13,7 @@ import Resolver
 final class MainViewController: BaseTableViewViewController {
 
     @Injected var presenter: MainPresenterInterface
+    @Injected var log: Logger
 
     deinit {
         if Configs.shared.loggingDeinitEnabled {
@@ -48,7 +49,7 @@ final class MainViewController: BaseTableViewViewController {
     
     @objc
     func showLog() {
-        let data = getLogFile()
+        let data = log.getFile()
         let content = try? String(contentsOf: data)
         let pasteBoard = UIPasteboard.general
         pasteBoard.string = content

@@ -15,4 +15,5 @@ protocol AppRequestConvertible: URLRequestConvertible {
     var path: String { get }
     var parameters: Parameters { get }
     var encoding: ParameterEncoding { get }
+    var api: Api { get }
 }

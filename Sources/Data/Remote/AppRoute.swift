@@ -80,6 +80,19 @@ extension AppRoute: AppRequestConvertible {
         }
     }
         
+    var api: Api {
+        switch self {
+        case .login:
+            return .login
+        case .getUserInfo:
+            return .getUserInfo
+        case .getList:
+            return .paging
+        case .refreshToken:
+            return .none
+        }
+    }
+    
     func asURLRequest() throws -> URLRequest {
         let url = baseURL.appendingPathComponent(path)
         var request = URLRequest(url: url)

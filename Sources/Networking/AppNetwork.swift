@@ -22,9 +22,10 @@ final class AppNetwork: AppNetworkInterface {
     private let sessionRefreshable: Session!
     
     init() {
-        let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 3
-        config.timeoutIntervalForResource = 3
+        let config = URLSessionConfiguration.af.default
+        config.timeoutIntervalForRequest = 30
+        config.timeoutIntervalForResource = 30
+        config.allowsCellularAccess = true
         
         // Adapter
         let xTypeAdapter = XTypeAdapter()
@@ -48,8 +49,8 @@ final class AppNetwork: AppNetworkInterface {
                                                interceptors: [refreshTokenInterceptor, retryPolicy])
         
         // create session
-        self.sessionRefreshable = Session(interceptor: compositeInterceptor, eventMonitors: eventMonitors)
-        self.session = Session(eventMonitors: eventMonitors)
+        self.sessionRefreshable = Session(configuration: config, interceptor: compositeInterceptor, eventMonitors: eventMonitors)
+        self.session = Session(configuration: config, eventMonitors: eventMonitors)
     }
     
     private func request<T: Decodable>(session: Session,
@@ -69,19 +70,20 @@ final class AppNetwork: AppNetworkInterface {
                 case let .success(data):
                     completion(.success(data))
                 case let .failure(error):
-                    completion(.failure(error))
+                    completion(.failure(AppError.networkError(error: error, api: route.api, data: response.data)))
                 }
             }
         return request
     }
     
-    func request<T: Decodable>(route: AppRequestConvertible,
-                               type: T.Type) -> Single<T> {
+    private func request<T: Decodable>(session: Session,
+                                       route: AppRequestConvertible,
+                                       type: T.Type) -> Single<T> {
         Single<T>.create { [weak self] single in
             guard let self = self else {
                 return Disposables.create()
             }
-            let request = self.request(session: self.session, route: route, type: T.self) { result in
+            let request = self.request(session: session, route: route, type: T.self) { result in
                 switch result {
                 case let .success(data):
                     single(.success(data))
@@ -95,22 +97,13 @@ final class AppNetwork: AppNetworkInterface {
         }
     }
     
-    func requestRefreshable<T>(route: AppRequestConvertible, type: T.Type) -> Single<T> where T : Decodable {
-        Single<T>.create { [weak self] single in
-            guard let self = self else {
-                return Disposables.create()
-            }
-            let request = self.request(session: self.sessionRefreshable, route: route, type: T.self) { result in
-                switch result {
-                case let .success(data):
-                    single(.success(data))
-                case let .failure(error):
-                    single(.failure(error))
-                }
-            }
-            return Disposables.create {
-                request.cancel()
-            }
-        }
+    func request<T: Decodable>(route: AppRequestConvertible,
+                               type: T.Type) -> Single<T> {
+        return request(session: session, route: route, type: type)
+    }
+    
+    func requestRefreshable<T: Decodable>(route: AppRequestConvertible,
+                                          type: T.Type) -> Single<T> {
+        return request(session: sessionRefreshable, route: route, type: type)
     }
 }
