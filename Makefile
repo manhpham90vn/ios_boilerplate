@@ -23,7 +23,7 @@ generateXcodegen:
 installCarthage:
 	carthage bootstrap --use-xcframeworks --platform iOS --no-use-binaries --cache-builds
 installPod:
-	pod install
+	pod install --repo-update
 copyFrameworks:
 	rm -rf Frameworks/*
 	mkdir -p Frameworks
