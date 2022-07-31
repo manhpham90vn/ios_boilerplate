@@ -52,8 +52,9 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
     
         Driver.merge(interactor.getEventUseCaseInterface.failed,
                      interactor.getUserInfoUseCase.failed)
-            .throttle(.seconds(1))
+            .throttle(.seconds(1), latest: false)
             .drive(onNext: { [weak self] error in
+                self?.isEnableLoadMore.onNext(true)
                 self?.isHeaderLoading.onNext(false)
                 self?.isFooterLoading.onNext(false)
                 self?.errorHandler.handle(error: error)
@@ -97,15 +98,22 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
                 guard let self = self else { return }
                 switch result.1 {
                 case .refreshOrFirstLoad:
+                    // update element
                     self.elements.accept(result.0)
+                    // update animation
                     self.isHeaderLoading.onNext(false)
                 case .loadMore:
+                    // config isEnable load more
                     if result.0.isEmpty {
                         self.isEnableLoadMore.onNext(false)
+                    } else {
+                        self.isEnableLoadMore.onNext(true)
                     }
+                    // update elements
                     var current = self.elements.value
                     current += result.0
                     self.elements.accept(current)
+                    // update loading animation
                     self.isFooterLoading.onNext(false)
                 }
             })
