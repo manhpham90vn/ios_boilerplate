@@ -68,7 +68,9 @@ final class RefreshTokenInterceptor: RequestInterceptor {
     }
     
     func toLogin() {
-        UIWindow.shared?.rootViewController = UINavigationController(rootViewController: AppScenes.login.viewController)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            UIWindow.shared?.rootViewController = UINavigationController(rootViewController: AppScenes.login.viewController)
+        }
     }
     
     func refreshToken() {
