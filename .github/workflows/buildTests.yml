@@ -3,6 +3,8 @@ name: Build and run unit test
 on:
   pull_request:
     branches: [ master ]
+    
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.ref }}
