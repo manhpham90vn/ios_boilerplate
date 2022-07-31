@@ -19,6 +19,11 @@ extension Resolver: ResolverRegistering {
         register { AppApiComponent() as AppApi }.scope(.application)
         register { AppNetwork() as AppNetworkInterface }.scope(.application)
 
+        // utils
+        register { LoadingHelper() }.scope(.application)
+        register { ApiErrorHandler() }.scope(.application)
+        register { Logger() }.scope(.application)
+        
         // MARK: Repository
         register { UserRepository() as UserRepositoryInterface }
         register { HomeRepository() as HomeRepositoryInterface }

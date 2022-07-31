@@ -27,15 +27,16 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
     weak var view: MainViewInterface?
     @Injected var router: MainRouterInterface
     @Injected var interactor: MainInteractorInterface
+    @Injected var loading: LoadingHelper
+    @Injected var errorHandler: ApiErrorHandler
 
     let elements = BehaviorRelay<[PagingUserResponse]>(value: [])
     let trigger = PublishRelay<Void>()
     let headerRefreshTrigger = PublishRelay<Void>()
     let footerLoadMoreTrigger = PublishRelay<Void>()
-    let isEnableLoadMore = BehaviorRelay<Bool>(value: true)
-    let isEmptyData = BehaviorRelay<Bool>(value: true)
-    let headerActivityIndicator = PublishSubject<Bool>()
-    let footerActivityIndicator = PublishSubject<Bool>()
+    let isEnableLoadMore = PublishSubject<Bool>()
+    let isHeaderLoading = PublishSubject<Bool>()
+    let isFooterLoading = PublishSubject<Bool>()
     var currentPage = 1
     let triggerGetUserInfo = PublishRelay<Void>()
 
@@ -44,16 +45,26 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
                              interactor.getUserInfoUseCase.processing) {
             $0 || $1
         }
-        .drive(onNext: { isLoading in
-            LoadingHelper.shared.isLoading.accept(isLoading)
+        .drive(onNext: { [weak self] isLoading in
+            self?.loading.isLoading.accept(isLoading)
         })
         .disposed(by: disposeBag)
     
+        Driver.merge(interactor.getEventUseCaseInterface.failed,
+                     interactor.getUserInfoUseCase.failed)
+            .throttle(.seconds(1))
+            .drive(onNext: { [weak self] error in
+                self?.isHeaderLoading.onNext(false)
+                self?.isFooterLoading.onNext(false)
+                self?.errorHandler.handle(error: error)
+            })
+            .disposed(by: disposeBag)
+        
         Observable.merge(trigger.asObservable(), headerRefreshTrigger.asObservable())
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 self.currentPage = 1
-                self.isEnableLoadMore.accept(true)
+                self.isEnableLoadMore.onNext(true)
                 self.interactor.getEventUseCaseInterface.execute(params: .init(page: self.currentPage,
                                                                                sort: .ascending,
                                                                                type: .refreshOrFirstLoad))
@@ -87,12 +98,15 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
                 switch result.1 {
                 case .refreshOrFirstLoad:
                     self.elements.accept(result.0)
-                    self.headerActivityIndicator.onNext(false)
+                    self.isHeaderLoading.onNext(false)
                 case .loadMore:
+                    if result.0.isEmpty {
+                        self.isEnableLoadMore.onNext(false)
+                    }
                     var current = self.elements.value
                     current += result.0
                     self.elements.accept(current)
-                    self.footerActivityIndicator.onNext(false)
+                    self.isFooterLoading.onNext(false)
                 }
             })
             .disposed(by: disposeBag)

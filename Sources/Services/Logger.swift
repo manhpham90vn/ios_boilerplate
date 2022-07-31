@@ -9,13 +9,8 @@ import Foundation
 import XCGLogger
 
 private let log = XCGLogger.default // swiftlint:disable:this prefixed_toplevel_constant
-private let file = getCacheDirectoryPath().appendingPathComponent(UUID().uuidString) // swiftlint:disable:this prefixed_toplevel_constant
 
-func getLogFile() -> URL {
-    file
-}
-
-func LoggerSetup() {
+final class Logger {
     
     #if DEBUG
     let logLevel = XCGLogger.Level.debug
@@ -23,29 +18,42 @@ func LoggerSetup() {
     let logLevel = XCGLogger.Level.none
     #endif
     
-    let fileDestination = FileDestination(writeToFile: file, identifier: "advancedLogger.fileDestination")
-    log.add(destination: fileDestination)
-    log.logAppDetails()
+    private let logURL: URL
     
-    log.setup(level: logLevel,
-              showLogIdentifier: false,
-              showFunctionName: true,
-              showThreadName: false,
-              showLevel: true,
-              showFileNames: true,
-              showLineNumbers: true,
-              showDate: true,
-              writeToFile: nil,
-              fileLevel: nil)
+    init() {
+        let arrayPaths = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
+        let cacheDirectoryPath = arrayPaths[0]
+        logURL = cacheDirectoryPath.appendingPathComponent(UUID().uuidString)
+    }
     
-    let emojiLogFormatter = PrePostFixLogFormatter()
-    emojiLogFormatter.apply(prefix: "🗯🗯🗯 ", postfix: " 🗯🗯🗯", to: .verbose)
-    emojiLogFormatter.apply(prefix: "🔹🔹🔹 ", postfix: " 🔹🔹🔹", to: .debug)
-    emojiLogFormatter.apply(prefix: "ℹ️ℹ️ℹ️ ", postfix: " ℹ️ℹ️ℹ️", to: .info)
-    emojiLogFormatter.apply(prefix: "⚠️⚠️⚠️ ", postfix: " ⚠️⚠️⚠️", to: .warning)
-    emojiLogFormatter.apply(prefix: "‼️‼️‼️ ", postfix: " ‼️‼️‼️", to: .error)
-    log.formatters = [emojiLogFormatter]
-    
+    func getFile() -> URL {
+        return logURL
+    }
+
+    func setUpLog() {
+        let fileDestination = FileDestination(writeToFile: getFile(), identifier: "advancedLogger.fileDestination")
+        log.add(destination: fileDestination)
+        log.logAppDetails()
+        
+        log.setup(level: logLevel,
+                  showLogIdentifier: false,
+                  showFunctionName: true,
+                  showThreadName: false,
+                  showLevel: true,
+                  showFileNames: true,
+                  showLineNumbers: true,
+                  showDate: true,
+                  writeToFile: nil,
+                  fileLevel: nil)
+        
+        let emojiLogFormatter = PrePostFixLogFormatter()
+        emojiLogFormatter.apply(prefix: "🗯🗯🗯 ", postfix: " 🗯🗯🗯", to: .verbose)
+        emojiLogFormatter.apply(prefix: "🔹🔹🔹 ", postfix: " 🔹🔹🔹", to: .debug)
+        emojiLogFormatter.apply(prefix: "ℹ️ℹ️ℹ️ ", postfix: " ℹ️ℹ️ℹ️", to: .info)
+        emojiLogFormatter.apply(prefix: "⚠️⚠️⚠️ ", postfix: " ⚠️⚠️⚠️", to: .warning)
+        emojiLogFormatter.apply(prefix: "‼️‼️‼️ ", postfix: " ‼️‼️‼️", to: .error)
+        log.formatters = [emojiLogFormatter]
+    }
 }
 
 func LogVerbose(_ closure: @autoclosure @escaping () -> Any?,
@@ -60,6 +68,7 @@ func LogVerbose(_ closure: @autoclosure @escaping () -> Any?,
               userInfo: userInfo,
               closure: closure)
 }
+
 func LogDebug(_ closure: @autoclosure @escaping () -> Any?,
               functionName: StaticString = #function,
               fileName: StaticString = #file,
@@ -72,6 +81,7 @@ func LogDebug(_ closure: @autoclosure @escaping () -> Any?,
               userInfo: userInfo,
               closure: closure)
 }
+
 func LogInfo(_ closure: @autoclosure @escaping () -> Any?,
              functionName: StaticString = #function,
              fileName: StaticString = #file,
@@ -84,6 +94,7 @@ func LogInfo(_ closure: @autoclosure @escaping () -> Any?,
               userInfo: userInfo,
               closure: closure)
 }
+
 func LogWarn(_ closure: @autoclosure @escaping () -> Any?,
              functionName: StaticString = #function,
              fileName: StaticString = #file,
@@ -96,6 +107,7 @@ func LogWarn(_ closure: @autoclosure @escaping () -> Any?,
               userInfo: userInfo,
               closure: closure)
 }
+
 func LogError(_ closure: @autoclosure @escaping () -> Any?,
               functionName: StaticString = #function,
               fileName: StaticString = #file,
@@ -107,10 +119,4 @@ func LogError(_ closure: @autoclosure @escaping () -> Any?,
               lineNumber: lineNumber,
               userInfo: userInfo,
               closure: closure)
-}
-
-private func getCacheDirectoryPath() -> URL {
-  let arrayPaths = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
-  let cacheDirectoryPath = arrayPaths[0]
-  return cacheDirectoryPath
 }

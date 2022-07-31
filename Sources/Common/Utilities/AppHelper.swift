@@ -26,7 +26,7 @@ final class AppHelper {
             completion?()
         }
         vc.addAction(action)
-        UIWindow.shared?.rootViewController?.present(vc, animated: true)
+        topViewController()?.present(vc, animated: true, completion: nil)
     }
     
     func showAlertRx(title: String?, message: String?, cancel: String? = "Huỷ", ok: String? = "Chấp Nhận") -> Single<Void> {
