@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import MPInjector
+import LocalDataViewer
 
 final class MainViewController: BaseTableViewViewController {
 
@@ -36,12 +37,19 @@ final class MainViewController: BaseTableViewViewController {
 
         navigationItem.title = "Events"
         let logOut = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
-        navigationItem.rightBarButtonItem = logOut
+        let showLocalData = UIBarButtonItem(title: "Show Local Data", style: .plain, target: self, action: #selector(handleShowLocalData))
+        navigationItem.rightBarButtonItems = [logOut, showLocalData]
         let log = UIBarButtonItem(title: "Log", style: .plain, target: self, action: #selector(showLog))
         let reload = UIBarButtonItem(title: "Reload", style: .plain, target: self, action: #selector(self.reload))
         navigationItem.leftBarButtonItems = [log, reload]
     }
 
+    @objc
+    func handleShowLocalData() {
+        let vc = LocalDataViewer.getMenuVC()
+        present(vc, animated: true, completion: nil)
+    }
+                                              
     @objc
     func reload() {
         presenter.reload()
