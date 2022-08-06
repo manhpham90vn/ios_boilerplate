@@ -22,6 +22,7 @@ target 'MyApp' do
   pod 'FirebaseCrashlytics'
   pod 'XCGLogger'
   pod 'MPInjector'
+  pod 'LocalDataViewer'
 
   target 'MyAppTests' do
     inherit! :search_paths
