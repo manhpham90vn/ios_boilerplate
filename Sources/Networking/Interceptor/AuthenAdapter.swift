@@ -7,11 +7,11 @@
 
 import Foundation
 import Alamofire
-import Resolver
+import MPInjector
 
 final class AuthenAdapter: RequestAdapter {
     
-    @Injected var local: LocalStorageRepository
+    @Inject var local: LocalStorageRepository
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         var urlRequest = urlRequest

@@ -189,16 +189,3 @@ custom_rules:
     regex: "(^[ ]*class [A-Z]+)"
     message: "Class should be marked as final."
     severity: warning
-  drive_one_line:
-    excluded: ".*Test(s)?\\.swift"
-    name: "Drive One Line"
-    regex: "(\\.drive\\([^\\)]*\\)\\.)"
-    message: "Break line."
-    severity: warning
-  subscribe_one_line:
-    excluded: ".*Test(s)?\\.swift"
-    name: "Subscribe One Line"
-    regex: "(\\.subscribe\\([^\\)]*\\)\\.)"
-    message: "Break line."
-    severity: warning
-

@@ -8,14 +8,14 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import Resolver
+import MPInjector
 
 protocol HomeRepositoryInterface {
     func pagging(page: Int, sort: PagingSortType) -> Single<[PagingUserResponse]>
 }
 
 final class HomeRepository {
-    @Injected var api: AppApi
+    @Inject var api: AppApi
 }
 
 extension HomeRepository: HomeRepositoryInterface {

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Resolver
+import MPInjector
 
 struct DetailViewControllerParams {
     var user: PagingUserResponse
@@ -14,7 +14,7 @@ struct DetailViewControllerParams {
 
 final class DetailViewController: BaseViewController {
 
-    @Injected var presenter: DetailPresenterInterface
+    @Inject var presenter: DetailPresenterInterface
     private var params: DetailViewControllerParams?
 
     deinit {

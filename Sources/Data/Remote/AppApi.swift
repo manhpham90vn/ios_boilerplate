@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import Resolver
+import MPInjector
 
 protocol AppApi {
     func login(email: String, password: String) -> Single<LoginResponse>
@@ -19,7 +19,7 @@ protocol AppApi {
 
 final class AppApiComponent: AppApi {
     
-    @Injected var appNetwork: AppNetworkInterface
+    @Inject var appNetwork: AppNetworkInterface
     
     func login(email: String, password: String) -> Single<LoginResponse> {
         let route = AppRoute.login(username: email, password: password)
