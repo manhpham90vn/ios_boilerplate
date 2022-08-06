@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import Resolver
+import MPInjector
 
 struct LoginUseCaseParams {
     let email: String
@@ -16,8 +16,8 @@ struct LoginUseCaseParams {
 }
 
 final class LoginUseCase: SingleUseCase<LoginUseCaseParams, Bool> {
-    @Injected var repo: UserRepositoryInterface
-    @Injected var local: LocalStorageRepository
+    @Inject var repo: UserRepositoryInterface
+    @Inject var local: LocalStorageRepository
     
     override func buildUseCase(params: LoginUseCaseParams) -> Single<Bool> {
         repo.login(email: params.email, password: params.password)

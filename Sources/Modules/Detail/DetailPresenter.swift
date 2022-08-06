@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Resolver
+import MPInjector
 import NSObject_Rx
 import RxSwift
 import RxCocoa
@@ -21,8 +21,8 @@ protocol DetailPresenterInterface {
 final class DetailPresenter: DetailPresenterInterface, HasTrigger, HasDisposeBag {
 
     weak var view: DetailViewInterface?
-    @Injected var router: DetailRouterInterface
-    @Injected var interactor: DetailInteractorInterface
+    @Inject var router: DetailRouterInterface
+    @Inject var interactor: DetailInteractorInterface
 
     let trigger = PublishRelay<Void>()
 

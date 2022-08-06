@@ -7,11 +7,11 @@
 
 import Foundation
 import RxSwift
-import Resolver
+import MPInjector
 
 final class GETUserInfoUseCase: SingleUseCase<Void, UserResponse> {
-    @Injected var repo: UserRepositoryInterface
-    @Injected var local: LocalStorageRepository
+    @Inject var repo: UserRepositoryInterface
+    @Inject var local: LocalStorageRepository
     
     override func buildUseCase(params: Void) -> Single<UserResponse> {
         return repo.userInfo()

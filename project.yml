@@ -30,6 +30,7 @@ targets:
       UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
       UILaunchStoryboardName: LaunchScreen
       VALIDATE_WORKSPACE: YES
+      CODE_SIGN_ENTITLEMENTS: Sources/Common/Resources/MyApp.entitlements
     preBuildScripts:
       - name: SwiftGen
         script: |

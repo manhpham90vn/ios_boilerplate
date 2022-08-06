@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
-import Resolver
+import MPInjector
 
 protocol DetailRouterInterface {
     var view: DetailViewInterface? { get }
@@ -32,10 +32,10 @@ final class DetailRouter: DetailRouterInterface {
 
 }
 
-extension DetailRouter: ResolverRegistering {
+extension DetailRouter {
     static func registerAllServices() {
-        Resolver.register { DetailInteractor() as DetailInteractorInterface }
-        Resolver.register { DetailRouter() as DetailRouterInterface }
-        Resolver.register { DetailPresenter() as DetailPresenterInterface }
+        MPInjector.registerFactory { DetailInteractor() as DetailInteractorInterface }
+        MPInjector.registerFactory { DetailRouter() as DetailRouterInterface }
+        MPInjector.registerFactory { DetailPresenter() as DetailPresenterInterface }
     }
 }

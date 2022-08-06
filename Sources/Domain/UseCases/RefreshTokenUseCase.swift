@@ -7,11 +7,11 @@
 
 import Foundation
 import RxSwift
-import Resolver
+import MPInjector
 
 final class RefreshTokenUseCase: SingleUseCase<Void, RefreshTokenResponse> {
-    @LazyInjected var userRepo: UserRepositoryInterface
-    @Injected var local: LocalStorageRepository
+    @LazyInject var userRepo: UserRepositoryInterface // prevent Circular Dependency use @LazyInject
+    @Inject var local: LocalStorageRepository
     
     override func buildUseCase(params: Void) -> Single<RefreshTokenResponse> {
         let token = local.getRefreshToken() ?? ""

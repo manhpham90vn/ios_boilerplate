@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Resolver
+import MPInjector
 
 protocol MainRouterInterface {
     var view: MainViewInterface? { get }
@@ -42,10 +42,10 @@ final class MainRouter: MainRouterInterface {
 
 }
 
-extension MainRouter: ResolverRegistering {
+extension MainRouter {
     static func registerAllServices() {
-        Resolver.register { MainInteractor() as MainInteractorInterface }
-        Resolver.register { MainRouter() as MainRouterInterface }
-        Resolver.register { MainPresenter() as MainPresenterInterface }
+        MPInjector.registerFactory { MainInteractor() as MainInteractorInterface }
+        MPInjector.registerFactory { MainRouter() as MainRouterInterface }
+        MPInjector.registerFactory { MainPresenter() as MainPresenterInterface }
     }
 }

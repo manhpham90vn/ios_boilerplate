@@ -6,11 +6,11 @@
 //
 
 import Foundation
-import Resolver
+import MPInjector
 
 final class UserDefaultsStorage: Storage {
 
-    @Injected var userDefault: UserDefaults
+    @Inject var userDefault: UserDefaults
 
     func setString(key: String, value: String) {
         userDefault.set(value, forKey: key)

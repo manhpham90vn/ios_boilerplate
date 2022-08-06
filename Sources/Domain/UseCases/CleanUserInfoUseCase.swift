@@ -6,11 +6,11 @@
 //
 
 import Foundation
-import Resolver
 import RxSwift
+import MPInjector
 
 final class CleanUserInfoUseCase: UseCase {
-    @Injected var repo: LocalStorageRepository
+    @Inject var repo: LocalStorageRepository
 }
 
 extension CleanUserInfoUseCase {
@@ -18,5 +18,6 @@ extension CleanUserInfoUseCase {
         repo.clearAccessToken()
         repo.clearRefreshToken()
         repo.clearUserInfo()
+        RefreshTokenInterceptor.lastFailedDate = nil
     }
 }

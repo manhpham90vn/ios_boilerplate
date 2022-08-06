@@ -11,7 +11,7 @@ make
 ## Features
 - [x] VIPER Architecture
 - [x] RxSwift
-- [x] Dependency Injection with Resolver
+- [x] Dependency Injection with [MPInjector](https://github.com/manhpham90vn/MPInjector)
 - [x] Automatic Detect Leak Memory
 - [x] Has base pagination
 - [x] Handle refresh token (When multiple requests hit 401 (HTTP_UNAUTHORIZED), only single Refresh token request will be executed)

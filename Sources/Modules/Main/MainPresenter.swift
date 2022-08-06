@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import Resolver
+import MPInjector
 
 protocol MainPresenterInterface {
     
@@ -25,10 +25,10 @@ protocol MainPresenterInterface {
 final class MainPresenter: MainPresenterInterface, PresenterPageable {
 
     weak var view: MainViewInterface?
-    @Injected var router: MainRouterInterface
-    @Injected var interactor: MainInteractorInterface
-    @Injected var loading: LoadingHelper
-    @Injected var errorHandler: ApiErrorHandler
+    @Inject var router: MainRouterInterface
+    @Inject var interactor: MainInteractorInterface
+    @Inject var loading: LoadingHelper
+    @Inject var errorHandler: ApiErrorHandler
 
     let elements = BehaviorRelay<[PagingUserResponse]>(value: [])
     let trigger = PublishRelay<Void>()
