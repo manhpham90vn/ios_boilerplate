@@ -7,7 +7,7 @@
 
 import Foundation
 import RxSwift
-import Resolver
+import MPInjector
 
 protocol MainInteractorInterface {
     var getEventUseCaseInterface: GETEventUseCase { get }
@@ -17,9 +17,9 @@ protocol MainInteractorInterface {
 
 final class MainInteractor: MainInteractorInterface {
 
-    @Injected var getEventUseCaseInterface: GETEventUseCase
-    @Injected var cleanUserInfoUseCaseInterface: CleanUserInfoUseCase
-    @Injected var getUserInfoUseCase: GETUserInfoUseCase
+    @Inject var getEventUseCaseInterface: GETEventUseCase
+    @Inject var cleanUserInfoUseCaseInterface: CleanUserInfoUseCase
+    @Inject var getUserInfoUseCase: GETUserInfoUseCase
 
     deinit {
         if Configs.shared.loggingDeinitEnabled {

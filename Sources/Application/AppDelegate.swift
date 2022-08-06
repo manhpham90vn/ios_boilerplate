@@ -6,19 +6,19 @@
 //
 
 import UIKit
-import Resolver
 import FirebaseCrashlytics
 import FirebaseAnalytics
 import FirebaseCore
 import FirebaseMessaging
+import MPInjector
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    @Injected var local: LocalStorageRepository
-    @Injected var loading: LoadingHelper
-    @Injected var log: Logger
+    @LazyInject var local: LocalStorageRepository
+    @LazyInject var loading: LoadingHelper
+    @LazyInject var log: Logger
     
     static var keyWindow: UIWindow? {
         return UIApplication.shared.windows.first(where: { $0.isKeyWindow })
@@ -27,6 +27,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
+        AppInjector.shared.perform()
         
         window = UIWindow(frame: UIScreen.main.bounds)
         let vc = local.getLoginState() == .logined ? AppScenes.main.viewController : AppScenes.login.viewController

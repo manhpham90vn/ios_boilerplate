@@ -7,7 +7,7 @@
 
 import Foundation
 import RxSwift
-import Resolver
+import MPInjector
 
 protocol UserRepositoryInterface {
     func login(email: String, password: String) -> Single<LoginResponse>
@@ -16,7 +16,7 @@ protocol UserRepositoryInterface {
 }
 
 final class UserRepository {
-    @Injected var api: AppApi
+    @Inject var api: AppApi
 }
 
 extension UserRepository: UserRepositoryInterface {

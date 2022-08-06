@@ -9,11 +9,11 @@ import Foundation
 import RxSwift
 import RxRelay
 import RxCocoa
-import Resolver
+import MPInjector
 
 class SingleUseCase<P, R>: UseCase { // swiftlint:disable:this final_class
     
-    @Injected var connectivityService: ConnectivityService
+    @Inject var connectivityService: ConnectivityService
     
     private let _processing = BehaviorRelay(value: false)
     var processing: Driver<Bool> {

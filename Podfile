@@ -14,7 +14,6 @@ target 'MyApp' do
   pod 'RxCocoa'
   pod 'RxSwiftExt'
   pod 'NSObject+Rx'
-  pod 'Resolver'
   pod 'Reusable'
   pod 'MJRefresh'
   pod 'PKHUD'
@@ -22,6 +21,7 @@ target 'MyApp' do
   pod 'FirebaseAnalytics'
   pod 'FirebaseCrashlytics'
   pod 'XCGLogger'
+  pod 'MPInjector'
 
   target 'MyAppTests' do
     inherit! :search_paths
