@@ -7,29 +7,28 @@
 
 import Foundation
 import Alamofire
-import Resolver
+import MPInjector
 import UIKit
 import RxSwift
 
 final class RefreshTokenInterceptor: RequestInterceptor {
     typealias RequestRetryCompletion = (RetryResult) -> Void
-    private var lock = NSLock()
-    private var isRefreshing = false
+    @Atomic private var isRefreshing = false
+    @Inject private var refreshUseCase: RefreshTokenUseCase
     private var requestsToRetry: [RequestRetryCompletion] = []
     private let bag = DisposeBag()
     
-    @Injected var refreshUseCase: RefreshTokenUseCase
+    static var lastFailedDate: Int64?
     
     init() {
         refreshUseCase
             .succeeded
             .drive(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                self.lock.lock {
-                    self.isRefreshing = false
-                    self.requestsToRetry.forEach { $0(.retry) }
-                    self.requestsToRetry.removeAll()
-                }
+                RefreshTokenInterceptor.lastFailedDate = nil
+                self.isRefreshing = false
+                self.requestsToRetry.forEach { $0(.retry) }
+                self.requestsToRetry.removeAll()
             })
             .disposed(by: bag)
         
@@ -37,12 +36,11 @@ final class RefreshTokenInterceptor: RequestInterceptor {
             .failed
             .drive(onNext: { [weak self] error in
                 guard let self = self else { return }
-                self.lock.lock {
-                    self.isRefreshing = false
-                    self.requestsToRetry.forEach { $0(.doNotRetryWithError(error)) }
-                    self.requestsToRetry.removeAll()
-                    self.toLogin()
-                }
+                RefreshTokenInterceptor.lastFailedDate = Date().millisecondsSince1970
+                self.isRefreshing = false
+                self.requestsToRetry.forEach { $0(.doNotRetryWithError(error)) }
+                self.requestsToRetry.removeAll()
+                self.toLogin()
             })
             .disposed(by: bag)
     }
@@ -52,28 +50,42 @@ final class RefreshTokenInterceptor: RequestInterceptor {
     }
 
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
-        lock.lock {
-            guard let response = request.response, response.statusCode == 401 else {
-                completion(.doNotRetry)
-                return
-            }
-                                    
-            requestsToRetry.append(completion)
-            
-            if !isRefreshing {
-                isRefreshing = true
-                refreshToken()
-            }
+        guard let response = request.response,
+              response.statusCode == 401 else {
+            completion(.doNotRetry)
+            return
+        }
+                                
+        requestsToRetry.append(completion)
+        
+        if !isRefreshing, checkRepeatRefreshToken() {
+            isRefreshing = true
+            refreshToken()
         }
     }
     
-    func toLogin() {
+    private func checkRepeatRefreshToken() -> Bool {
+        let timeDiff = Date().millisecondsSince1970 - (RefreshTokenInterceptor.lastFailedDate ?? Date().millisecondsSince1970)
+        if RefreshTokenInterceptor.lastFailedDate != nil {
+            return timeDiff > 30_000
+        } else {
+            return true
+        }
+    }
+    
+    private func toLogin() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             UIWindow.shared?.rootViewController = UINavigationController(rootViewController: AppScenes.login.viewController)
         }
     }
     
-    func refreshToken() {
+    private func refreshToken() {
         refreshUseCase.execute(params: ())
+    }
+}
+
+private extension Date {
+    var millisecondsSince1970: Int64 {
+        Int64((timeIntervalSince1970 * 1000.0).rounded())
     }
 }

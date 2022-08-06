@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import Resolver
+import MPInjector
 
 enum PagingSortType: String {
     case ascending
@@ -28,7 +28,7 @@ struct GETEventUseCaseParams {
 
 final class GETEventUseCase: SingleUseCase<GETEventUseCaseParams, ([PagingUserResponse], PagingType)> {
     
-    @Injected var repo: HomeRepositoryInterface
+    @Inject var repo: HomeRepositoryInterface
     
     override func buildUseCase(params: GETEventUseCaseParams) -> Single<([PagingUserResponse], PagingType)> {
         return repo.pagging(page: params.page, sort: params.sort).map { ($0, params.type) }

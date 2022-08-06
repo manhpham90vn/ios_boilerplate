@@ -5,38 +5,39 @@
 //  Created by Manh Pham on 09/06/2021.
 //
 
-import Resolver
+import MPInjector
 
-extension Resolver: ResolverRegistering {
-    public static func registerAllServices() {
+final class AppInjector {
+    static let shared = AppInjector()
 
-        // data local
-        register { UserDefaults.standard as UserDefaults }.scope(.application)
-        register { UserDefaultsStorage() as Storage }.scope(.application)
-        
+    func perform() {
+        MPInjector.registerSingleton { UserDefaults.standard as UserDefaults }
+        MPInjector.registerSingleton { UserDefaultsStorage() as Storage }
+
         // data remote
-        register { ConnectivityServiceImpl() as ConnectivityService }.scope(.application)
-        register { AppApiComponent() as AppApi }.scope(.application)
-        register { AppNetwork() as AppNetworkInterface }.scope(.application)
+        MPInjector.registerSingleton { ConnectivityServiceImpl() as ConnectivityService }
+        MPInjector.registerSingleton { AppApiComponent() as AppApi }
+        MPInjector.registerSingleton { AppNetwork() as AppNetworkInterface }
 
         // utils
-        register { LoadingHelper() }.scope(.application)
-        register { ApiErrorHandler() }.scope(.application)
-        register { Logger() }.scope(.application)
-        
+        MPInjector.registerSingleton { LoadingHelper() }
+        MPInjector.registerSingleton { ApiErrorHandler() }
+        MPInjector.registerSingleton { Logger() }
+
         // MARK: Repository
-        register { UserRepository() as UserRepositoryInterface }
-        register { HomeRepository() as HomeRepositoryInterface }
-        register { LocalStorage() as LocalStorageRepository }
-        
+        MPInjector.registerSingleton { UserRepository() as UserRepositoryInterface }
+        MPInjector.registerSingleton { HomeRepository() as HomeRepositoryInterface }
+        MPInjector.registerSingleton { LocalStorage() as LocalStorageRepository }
+
         // MARK: UseCase
-        register { LoginUseCase() }
-        register { GETEventUseCase() }
-        register { CleanUserInfoUseCase() }
-        register { GETUserInfoUseCase() }
-        register { RefreshTokenUseCase() }
-        
-        // MARK: Register All
+        // note: for use case should use factory life time
+        MPInjector.registerFactory { LoginUseCase() }
+        MPInjector.registerFactory { GETEventUseCase() }
+        MPInjector.registerFactory { CleanUserInfoUseCase() }
+        MPInjector.registerFactory { GETUserInfoUseCase() }
+        MPInjector.registerFactory { RefreshTokenUseCase() }
+
+        // MARK: Register for Modules
         MainRouter.registerAllServices()
         LoginRouter.registerAllServices()
         DetailRouter.registerAllServices()

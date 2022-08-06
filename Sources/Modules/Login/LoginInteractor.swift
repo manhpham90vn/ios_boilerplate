@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import Resolver
+import MPInjector
 
 protocol LoginInteractorInterface {
     var loginUseCase: LoginUseCase { get }
@@ -16,7 +16,7 @@ protocol LoginInteractorInterface {
 
 final class LoginInteractor: LoginInteractorInterface {
 
-    @Injected var loginUseCase: LoginUseCase
+    @Inject var loginUseCase: LoginUseCase
 
     deinit {
         if Configs.shared.loggingDeinitEnabled {

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Resolver
+import MPInjector
 import RxSwift
 import RxCocoa
 import RxRelay
@@ -14,7 +14,7 @@ import NSObject_Rx
 
 final class LoginViewController: BaseViewController {
     
-    @Injected var presenter: LoginPresenterInterface
+    @Inject var presenter: LoginPresenterInterface
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!

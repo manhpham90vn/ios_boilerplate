@@ -8,7 +8,7 @@
 import RxSwift
 import RxCocoa
 import NSObject_Rx
-import Resolver
+import MPInjector
 
 protocol LoginPresenterInterface {
     var view: LoginViewInterface? { get }
@@ -24,10 +24,10 @@ protocol LoginPresenterInterface {
 final class LoginPresenter: LoginPresenterInterface, HasDisposeBag, HasTrigger {
 
     weak var view: LoginViewInterface?
-    @Injected var router: LoginRouterInterface
-    @Injected var interactor: LoginInteractorInterface
-    @Injected var loading: LoadingHelper
-    @Injected var errorHandle: ApiErrorHandler
+    @Inject var router: LoginRouterInterface
+    @Inject var interactor: LoginInteractorInterface
+    @Inject var loading: LoadingHelper
+    @Inject var errorHandle: ApiErrorHandler
 
     let trigger = PublishRelay<Void>()
     

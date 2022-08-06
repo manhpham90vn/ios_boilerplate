@@ -95,6 +95,7 @@ PODS:
   - GoogleUtilities/UserDefaults (7.7.0):
     - GoogleUtilities/Logger
   - MJRefresh (3.7.5)
+  - MPInjector (1.0.1)
   - nanopb (2.30909.0):
     - nanopb/decode (= 2.30909.0)
     - nanopb/encode (= 2.30909.0)
@@ -107,7 +108,6 @@ PODS:
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - PKHUD (5.3.0)
   - PromisesObjC (2.1.1)
-  - Resolver (1.5.0)
   - Reusable (4.1.2):
     - Reusable/Storyboard (= 4.1.2)
     - Reusable/View (= 4.1.2)
@@ -138,9 +138,9 @@ DEPENDENCIES:
   - FirebaseCrashlytics
   - FirebaseMessaging
   - MJRefresh
+  - MPInjector
   - "NSObject+Rx"
   - PKHUD
-  - Resolver
   - Reusable
   - RxCocoa
   - RxSwift
@@ -148,6 +148,8 @@ DEPENDENCIES:
   - XCGLogger
 
 SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - MPInjector
   trunk:
     - Alamofire
     - FirebaseAnalytics
@@ -166,7 +168,6 @@ SPEC REPOS:
     - ObjcExceptionBridging
     - PKHUD
     - PromisesObjC
-    - Resolver
     - Reusable
     - RxCocoa
     - RxRelay
@@ -187,12 +188,12 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 5fffe35792f8b96ec8d6775f5eccd83c998d5a3b
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
+  MPInjector: 306dccd83202478b979a1d8ed1d41bfcf20937a5
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   "NSObject+Rx": 61cf1f7306a73dcef8b36649198af0813ec18dfd
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PKHUD: 98f3e4bc904b9c916f1c5bb6d765365b5357291b
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
-  Resolver: 68984624572763018fd8ec7b8e3e8df0e3b6bba5
   Reusable: 6bae6a5e8aa793c9c441db0213c863a64bce9136
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
@@ -200,6 +201,6 @@ SPEC CHECKSUMS:
   RxSwiftExt: d61c4b9b06e0a448041b1c659e0f1b5c5a035afc
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: 151f1dd19157d8d8d068e22acb17b4cad8d1bff9
+PODFILE CHECKSUM: 84b7597ae4756254560ee74927eb8f7455aa3454
 
 COCOAPODS: 1.11.3

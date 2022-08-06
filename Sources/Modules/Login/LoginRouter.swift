@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Resolver
+import MPInjector
 
 protocol LoginRouterInterface {
     var view: LoginViewInterface? { get }
@@ -35,10 +35,10 @@ final class LoginRouter: LoginRouterInterface {
 
 }
 
-extension LoginRouter: ResolverRegistering {
+extension LoginRouter {
     static func registerAllServices() {
-        Resolver.register { LoginInteractor() as LoginInteractorInterface }
-        Resolver.register { LoginRouter() as LoginRouterInterface }
-        Resolver.register { LoginPresenter() as LoginPresenterInterface }
+        MPInjector.registerFactory { LoginInteractor() as LoginInteractorInterface }
+        MPInjector.registerFactory { LoginRouter() as LoginRouterInterface }
+        MPInjector.registerFactory { LoginPresenter() as LoginPresenterInterface }
     }
 }

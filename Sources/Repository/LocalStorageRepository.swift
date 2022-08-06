@@ -7,7 +7,7 @@
 
 import Foundation
 import RxSwift
-import Resolver
+import MPInjector
 
 protocol LocalStorageRepository {
     func getAccessToken() -> String?
@@ -27,7 +27,7 @@ protocol LocalStorageRepository {
 
 final class LocalStorage: LocalStorageRepository {
     
-    @Injected var storage: Storage
+    @Inject var storage: Storage
     
     func getAccessToken() -> String? {
         storage.getString(key: StorageConstants.token)

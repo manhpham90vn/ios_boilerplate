@@ -8,12 +8,12 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import Resolver
+import MPInjector
 
 final class MainViewController: BaseTableViewViewController {
 
-    @Injected var presenter: MainPresenterInterface
-    @Injected var log: Logger
+    @Inject var presenter: MainPresenterInterface
+    @Inject var log: Logger
 
     deinit {
         if Configs.shared.loggingDeinitEnabled {
