@@ -7,39 +7,45 @@
 
 import MPInjector
 
-final class AppInjector {
-    static let shared = AppInjector()
-
-    func perform() {
-        MPInjector.registerSingleton { UserDefaults.standard as UserDefaults }
-        MPInjector.registerSingleton { UserDefaultsStorage() as Storage }
-
+extension MPInjector: Registering {
+    public func registerService() {        
+        registerSingleton { UserDefaults.standard as UserDefaults }
+        registerSingleton { UserDefaultsStorage() as Storage }
+        
         // data remote
-        MPInjector.registerSingleton { ConnectivityServiceImpl() as ConnectivityService }
-        MPInjector.registerSingleton { AppApiComponent() as AppApi }
-        MPInjector.registerSingleton { AppNetwork() as AppNetworkInterface }
-
+        registerSingleton { ConnectivityServiceImpl() as ConnectivityService }
+        registerSingleton { AppApiComponent() as AppApi }
+        registerSingleton { AppNetwork() as AppNetworkInterface }
+        
         // utils
-        MPInjector.registerSingleton { LoadingHelper() }
-        MPInjector.registerSingleton { ApiErrorHandler() }
-        MPInjector.registerSingleton { Logger() }
-
+        registerSingleton { LoadingHelper() }
+        registerSingleton { ApiErrorHandler() }
+        registerSingleton { Logger() }
+        
         // MARK: Repository
-        MPInjector.registerSingleton { UserRepository() as UserRepositoryInterface }
-        MPInjector.registerSingleton { HomeRepository() as HomeRepositoryInterface }
-        MPInjector.registerSingleton { LocalStorage() as LocalStorageRepository }
-
+        registerSingleton { UserRepository() as UserRepositoryInterface }
+        registerSingleton { HomeRepository() as HomeRepositoryInterface }
+        registerSingleton { LocalStorage() as LocalStorageRepository }
+        
         // MARK: UseCase
         // note: for use case should use factory life time
-        MPInjector.registerFactory { LoginUseCase() }
-        MPInjector.registerFactory { GETEventUseCase() }
-        MPInjector.registerFactory { CleanUserInfoUseCase() }
-        MPInjector.registerFactory { GETUserInfoUseCase() }
-        MPInjector.registerFactory { RefreshTokenUseCase() }
-
+        registerFactory { LoginUseCase() }
+        registerFactory { GETEventUseCase() }
+        registerFactory { CleanUserInfoUseCase() }
+        registerFactory { GETUserInfoUseCase() }
+        registerFactory { RefreshTokenUseCase() }
+        
         // MARK: Register for Modules
-        MainRouter.registerAllServices()
-        LoginRouter.registerAllServices()
-        DetailRouter.registerAllServices()
+        registerFactory { MainInteractor() as MainInteractorInterface }
+        registerFactory { MainRouter() as MainRouterInterface }
+        registerFactory { MainPresenter() as MainPresenterInterface }
+        
+        registerFactory { LoginInteractor() as LoginInteractorInterface }
+        registerFactory { LoginRouter() as LoginRouterInterface }
+        registerFactory { LoginPresenter() as LoginPresenterInterface }
+        
+        registerFactory { DetailInteractor() as DetailInteractorInterface }
+        registerFactory { DetailRouter() as DetailRouterInterface }
+        registerFactory { DetailPresenter() as DetailPresenterInterface }
     }
 }
