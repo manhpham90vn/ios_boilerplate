@@ -41,11 +41,3 @@ final class MainRouter: MainRouterInterface {
     }
 
 }
-
-extension MainRouter {
-    static func registerAllServices() {
-        MPInjector.registerFactory { MainInteractor() as MainInteractorInterface }
-        MPInjector.registerFactory { MainRouter() as MainRouterInterface }
-        MPInjector.registerFactory { MainPresenter() as MainPresenterInterface }
-    }
-}
