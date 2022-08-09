@@ -1,0 +1,10 @@
+{
+    "Simulator Target Bundle": "com.manhpham.myapp.debug",
+    "aps": {
+        "alert": {
+            "title": "Rich Push Notification Test",
+            "body": "This contains an image"
+        },
+        "mutable-content": 1
+    }
+}

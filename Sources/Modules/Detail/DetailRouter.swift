@@ -31,11 +31,3 @@ final class DetailRouter: DetailRouterInterface {
     }
 
 }
-
-extension DetailRouter {
-    static func registerAllServices() {
-        MPInjector.registerFactory { DetailInteractor() as DetailInteractorInterface }
-        MPInjector.registerFactory { DetailRouter() as DetailRouterInterface }
-        MPInjector.registerFactory { DetailPresenter() as DetailPresenterInterface }
-    }
-}

@@ -1,0 +1,12 @@
+{
+    "Simulator Target Bundle": "com.manhpham.myapp.debug",
+    "aps": {
+        "badge": 10,
+        "alert": {
+            "title": "Push Notification Test",
+            "subtitle": "Testing Push Notifications on Simulator",
+            "body": "This is 🆒"
+        },
+        "sound": "default"
+    }
+}

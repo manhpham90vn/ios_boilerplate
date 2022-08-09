@@ -1,0 +1,1 @@
+xcrun simctl push booted com.manhpham.myapp.debug silent.apns

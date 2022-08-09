@@ -34,11 +34,3 @@ final class LoginRouter: LoginRouterInterface {
     }
 
 }
-
-extension LoginRouter {
-    static func registerAllServices() {
-        MPInjector.registerFactory { LoginInteractor() as LoginInteractorInterface }
-        MPInjector.registerFactory { LoginRouter() as LoginRouterInterface }
-        MPInjector.registerFactory { LoginPresenter() as LoginPresenterInterface }
-    }
-}
