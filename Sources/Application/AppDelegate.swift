@@ -43,6 +43,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // silent push
+    // real device
     func application(_ application: UIApplication,
                      didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -51,6 +52,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // silent push
+    // simulator
     func application(_ application: UIApplication,
                      performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         // perfrom api call here
