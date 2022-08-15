@@ -95,7 +95,7 @@ PODS:
   - GoogleUtilities/UserDefaults (7.7.0):
     - GoogleUtilities/Logger
   - KeychainAccess (4.2.2)
-  - LocalDataViewer (1.0.2):
+  - LocalDataViewer (1.0.3):
     - KeychainAccess
   - MJRefresh (3.7.5)
   - MPInjector (1.0.3)
@@ -194,7 +194,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 5fffe35792f8b96ec8d6775f5eccd83c998d5a3b
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
-  LocalDataViewer: 2869ed87e41e4f94965fdaaf0247b48e8ec1ac86
+  LocalDataViewer: d1ad06bfc194e33b394d2150bf924fc062281cf8
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   MPInjector: 0021638155fe5310ed74fd3bca7bf0d11d24f08e
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
