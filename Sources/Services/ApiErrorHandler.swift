@@ -17,7 +17,9 @@ final class ApiErrorHandler {
                 AppHelper.shared.showAlert(title: "Error", message: "No Internet Connection", completion: nil)
             case .actionAlreadyPerforming:
                 AppHelper.shared.showAlert(title: "Error", message: "Action Already Performing", completion: nil)
-            case let .networkError(error, api, data):
+            case .noToken:
+                AppHelper.shared.showAlert(title: "Error", message: "No Token", completion: nil)
+            case let .networkError(api, error, data):
                 if let message = try? JSONDecoder().decode(ErrorResponse.self, from: data ?? Data()).message {
                     AppHelper.shared.showAlert(title: "Error api: \(api.rawValue)", message: message, completion: nil)
                 } else {
