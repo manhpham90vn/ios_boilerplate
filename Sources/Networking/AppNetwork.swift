@@ -70,7 +70,7 @@ final class AppNetwork: AppNetworkInterface {
                 case let .success(data):
                     completion(.success(data))
                 case let .failure(error):
-                    completion(.failure(AppError.networkError(error: error, api: route.api, data: response.data)))
+                    completion(.failure(AppError.networkError(api: route.api, error: error, data: response.data)))
                 }
             }
         return request
