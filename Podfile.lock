@@ -153,10 +153,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - KeychainAccess
-    - LocalDataViewer
-    - MPInjector
-  trunk:
     - Alamofire
     - FirebaseAnalytics
     - FirebaseCore
@@ -168,7 +164,10 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
+    - KeychainAccess
+    - LocalDataViewer
     - MJRefresh
+    - MPInjector
     - nanopb
     - "NSObject+Rx"
     - ObjcExceptionBridging

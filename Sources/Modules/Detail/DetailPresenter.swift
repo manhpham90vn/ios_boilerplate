@@ -11,19 +11,23 @@ import NSObject_Rx
 import RxSwift
 import RxCocoa
 
-protocol DetailPresenterInterface {
+protocol DetailPresenterInterface: HasTrigger {
     var view: DetailViewInterface? { get }
     var router: DetailRouterInterface { get }
     var interactor: DetailInteractorInterface { get }
     func inject(view: DetailViewInterface)
+    
+    var trigger: PublishRelay<Void> { get }
 }
 
-final class DetailPresenter: DetailPresenterInterface, HasTrigger, HasDisposeBag {
+final class DetailPresenter: DetailPresenterInterface, HasDisposeBag {
 
+    // dependency
     weak var view: DetailViewInterface?
     @Inject var router: DetailRouterInterface
     @Inject var interactor: DetailInteractorInterface
-
+    
+    // input
     let trigger = PublishRelay<Void>()
 
     func inject(view: DetailViewInterface) {
