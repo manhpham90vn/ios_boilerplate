@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import MPInjector
 
-protocol MainPresenterInterface {
+protocol MainPresenterInterface: HasTrigger {
     
     var view: MainViewInterface? { get }
     var router: MainRouterInterface { get }
@@ -20,26 +20,31 @@ protocol MainPresenterInterface {
     func didTapLogout()
     func navigationToDetailScreen(user: PagingUserResponse)
     func reload()
+    var trigger: PublishRelay<Void> { get }
 }
 
 final class MainPresenter: MainPresenterInterface, PresenterPageable {
 
+    // dependency
     weak var view: MainViewInterface?
     @Inject var router: MainRouterInterface
     @Inject var interactor: MainInteractorInterface
     @Inject var loading: LoadingHelper
     @Inject var errorHandler: ApiErrorHandler
 
-    let elements = BehaviorRelay<[PagingUserResponse]>(value: [])
+    // input
     let trigger = PublishRelay<Void>()
     let headerRefreshTrigger = PublishRelay<Void>()
     let footerLoadMoreTrigger = PublishRelay<Void>()
     let isEnableLoadMore = PublishSubject<Bool>()
     let isHeaderLoading = PublishSubject<Bool>()
     let isFooterLoading = PublishSubject<Bool>()
-    var currentPage = 1
     let triggerGetUserInfo = PublishRelay<Void>()
-
+    var currentPage = 1
+    
+    // output
+    let elements = BehaviorRelay<[PagingUserResponse]>(value: [])
+    
     init() {
         Driver.combineLatest(interactor.getEventUseCaseInterface.processing,
                              interactor.getUserInfoUseCase.processing) {
