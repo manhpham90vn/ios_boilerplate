@@ -10,7 +10,7 @@ import RxCocoa
 import NSObject_Rx
 import MPInjector
 
-protocol LoginPresenterInterface {
+protocol LoginPresenterInterface: HasTrigger {
     var view: LoginViewInterface? { get }
     var router: LoginRouterInterface { get }
     var interactor: LoginInteractorInterface { get }
@@ -19,18 +19,20 @@ protocol LoginPresenterInterface {
     func didTapLoginButton()
     var login: BehaviorRelay<String> { get }
     var password: BehaviorRelay<String> { get }
+    var trigger: PublishRelay<Void> { get }
 }
 
-final class LoginPresenter: LoginPresenterInterface, HasDisposeBag, HasTrigger {
+final class LoginPresenter: LoginPresenterInterface, HasDisposeBag {
 
+    // dependency
     weak var view: LoginViewInterface?
     @Inject var router: LoginRouterInterface
     @Inject var interactor: LoginInteractorInterface
     @Inject var loading: LoadingHelper
     @Inject var errorHandle: ApiErrorHandler
 
+    // input
     let trigger = PublishRelay<Void>()
-    
     let login = BehaviorRelay<String>(value: "")
     let password = BehaviorRelay<String>(value: "")
 
