@@ -11,7 +11,7 @@ import RxRelay
 import RxCocoa
 import MPInjector
 
-class SingleUseCase<P, R>: UseCase { // swiftlint:disable:this final_class
+class SingleUseCase<P, R>: UseCase {
     
     @Inject var connectivityService: ConnectivityService
     
