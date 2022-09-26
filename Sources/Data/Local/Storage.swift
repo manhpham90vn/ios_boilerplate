@@ -23,7 +23,7 @@ protocol Storage {
     func getString(key: String) -> String?
     
     func setObject<T: Codable>(key: String, value: T) throws
-    func getObject<T: Codable>(key: String) throws -> T?
+    func getObject<T: Codable>(key: String) throws -> T
     
     func clear(key: String)
 }
