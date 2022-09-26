@@ -10,7 +10,7 @@ import MJRefresh
 import RxSwift
 import RxCocoa
 
-class BaseCollectionViewViewController: BaseViewController, ViewControllerPageable { // swiftlint:disable:this final_class
+class BaseCollectionViewViewController: BaseViewController, ViewControllerPageable {
 
     let headerRefreshTrigger = PublishRelay<Void>()
     let footerLoadMoreTrigger = PublishRelay<Void>()

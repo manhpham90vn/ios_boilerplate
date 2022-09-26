@@ -24,20 +24,16 @@ final class UserDefaultsStorage: Storage {
         guard let data = userDefault.value(forKey: key) as? Data else {
             throw StorageError.downCastError
         }
-        do {
-            let object = try PropertyListEncoder().encode(data)
-            userDefault.set(object, forKey: key)
-        }
+        let object = try PropertyListEncoder().encode(data)
+        userDefault.set(object, forKey: key)
     }
     
-    func getObject<T: Codable>(key: String) throws -> T? {
+    func getObject<T: Codable>(key: String) throws -> T {
         guard let data = userDefault.value(forKey: key) as? Data else {
-            return nil
+            throw StorageError.downCastError
         }
-        do {
-            let object = try PropertyListDecoder().decode(T.self, from: data)
-            return object
-        }
+        let object = try PropertyListDecoder().decode(T.self, from: data)
+        return object
     }
     
     func clear(key: String) {
