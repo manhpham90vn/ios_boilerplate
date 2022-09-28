@@ -8,7 +8,7 @@
 #include "./Pods/Target Support Files/Pods-MyApp/Pods-MyApp.staging.xcconfig"
 
 PRODUCT_NAME = My App Staging
-PRODUCT_BUNDLE_IDENTIFIER = com.manhpham.myapp.staging
+PRODUCT_BUNDLE_IDENTIFIER = com.manhpham.myapp.debug
 BUNDLE_SHORT_VERSION_STRING = 1.0
 BUNDLE_VERSION = 1
 OTHER_SWIFT_FLAGS = -D STAGING
