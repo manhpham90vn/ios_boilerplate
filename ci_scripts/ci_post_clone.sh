@@ -22,12 +22,12 @@ fi
 
 if ! pod --version &> /dev/null
 then
-    brew install carthage
+    brew install pod
 fi
 
 mkdir -p Sources/Common/Resources/Generated/SwiftGen
 
-swiftgen
+swiftgen config run --config swiftgen.yml
 
 xcodegen generate --spec project.yml
 
