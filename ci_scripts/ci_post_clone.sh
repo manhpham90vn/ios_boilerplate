@@ -22,7 +22,7 @@ fi
 
 if ! pod --version &> /dev/null
 then
-    brew install pod
+    brew install cocoapods
 fi
 
 mkdir -p Sources/Common/Resources/Generated/SwiftGen
