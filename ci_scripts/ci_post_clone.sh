@@ -1,36 +1,38 @@
 #!/bin/sh
 
-# if ! rbenv -v &> /dev/null
-# then
-#     brew install rbenv
-# fi
+if ! rbenv -v &> /dev/null
+then
+    brew install rbenv
+fi
 
-# if ! xcodegen --version &> /dev/null
-# then
-#     brew install xcodegen
-# fi
+if ! xcodegen --version &> /dev/null
+then
+    brew install xcodegen
+fi
 
-# if ! swiftgen --version &> /dev/null
-# then
-#     brew install swiftgen
-# fi
+if ! swiftgen --version &> /dev/null
+then
+    brew install swiftgen
+fi
 
-# if ! swiftlint --version &> /dev/null
-# then
-#     brew install swiftlint
-# fi
+if ! swiftlint --version &> /dev/null
+then
+    brew install swiftlint
+fi
 
-# if ! pod --version &> /dev/null
-# then
-#     brew install cocoapods
-# fi
+if ! pod --version &> /dev/null
+then
+    brew install cocoapods
+fi
 
-# mkdir -p Sources/Common/Resources/Generated/SwiftGen
+cd ..
 
-# swiftgen config run --config swiftgen.yml
+mkdir -p Sources/Common/Resources/Generated/SwiftGen
 
-# xcodegen generate --spec project.yml
+swiftgen config run --config swiftgen.yml
 
-# pod install --repo-update
+xcodegen generate --spec project.yml
+
+pod install --repo-update
 
 pwd
