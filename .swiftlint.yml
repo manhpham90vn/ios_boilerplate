@@ -181,11 +181,4 @@ cyclomatic_complexity:
   warning: 15
   error: 25
 
-reporter: "xcode" # reporter type (xcode, jsm
-
-custom_rules:
-  final_class:
-    name: "Final Class"
-    regex: "(^[ ]*class [A-Z]+)"
-    message: "Class should be marked as final."
-    severity: warning
+reporter: "xcode"

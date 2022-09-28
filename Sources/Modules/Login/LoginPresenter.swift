@@ -59,7 +59,10 @@ final class LoginPresenter: LoginPresenterInterface, HasDisposeBag {
             .loginUseCase
             .failed
             .drive(onNext: { [weak self] error in
-                self?.errorHandle.handle(error: error)
+                guard let self = self else { return }
+                self.errorHandle.handle(error: error) { [weak self] in
+                    self?.interactor.loginUseCase.retry()
+                }
             })
             .disposed(by: disposeBag)
     }
