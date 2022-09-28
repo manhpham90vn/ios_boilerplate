@@ -20,7 +20,7 @@ then
     brew install swiftlint
 fi
 
-if ! carthage version &> /dev/null
+if ! pod --version &> /dev/null
 then
     brew install carthage
 fi
