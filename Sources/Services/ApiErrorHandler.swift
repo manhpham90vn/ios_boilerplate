@@ -10,11 +10,16 @@ import Alamofire
 
 final class ApiErrorHandler {
     
-    func handle(error: Error) {
+    func handle(error: Error, callback: @escaping () -> Void = {}) {
         if let error = error as? AppError {
             switch error {
             case .noInternetConnection:
-                AppHelper.shared.showAlert(title: "Error", message: "No Internet Connection", completion: nil)
+                let alert = UIAlertController(title: "Error", message: "No Internet Connection", preferredStyle: .alert)
+                alert.addAction(.init(title: "Cancel", style: .cancel))
+                alert.addAction(.init(title: "Retry", style: .default) { _ in
+                    callback()
+                })
+                AppHelper.shared.topViewController()?.present(alert, animated: true, completion: nil)
             case .actionAlreadyPerforming:
                 AppHelper.shared.showAlert(title: "Error", message: "Action Already Performing", completion: nil)
             case .noToken:
