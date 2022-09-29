@@ -18,8 +18,6 @@ final class AuthenAdapter: RequestAdapter {
         if let token = local.getAccessToken() {
             urlRequest.headers.add(.authorization(bearerToken: token))
             completion(.success(urlRequest))
-        } else {
-            completion(.failure(AppError.noToken))
         }
     }
 }

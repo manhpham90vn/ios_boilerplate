@@ -17,18 +17,13 @@ final class RefreshTokenInterceptor: RequestInterceptor {
     @Inject private var refreshUseCase: RefreshTokenUseCase
     private var requestsToRetry: [RequestRetryCompletion] = []
     private let bag = DisposeBag()
-    
-    static var lastFailedDate: Int64?
-    
+        
     init() {
         refreshUseCase
             .succeeded
             .drive(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                RefreshTokenInterceptor.lastFailedDate = nil
-                self.isRefreshing = false
-                self.requestsToRetry.forEach { $0(.retry) }
-                self.requestsToRetry.removeAll()
+                self.handleRefreshSuccess()
             })
             .disposed(by: bag)
         
@@ -36,11 +31,7 @@ final class RefreshTokenInterceptor: RequestInterceptor {
             .failed
             .drive(onNext: { [weak self] error in
                 guard let self = self else { return }
-                RefreshTokenInterceptor.lastFailedDate = Date().millisecondsSince1970
-                self.isRefreshing = false
-                self.requestsToRetry.forEach { $0(.doNotRetryWithError(error)) }
-                self.requestsToRetry.removeAll()
-                self.toLogin()
+                self.handleRefreshError(error: error)
             })
             .disposed(by: bag)
     }
@@ -58,21 +49,25 @@ final class RefreshTokenInterceptor: RequestInterceptor {
                                 
         requestsToRetry.append(completion)
         
-        if !isRefreshing, checkRepeatRefreshToken() {
+        if !isRefreshing {
             isRefreshing = true
             refreshToken()
         }
     }
     
-    private func checkRepeatRefreshToken() -> Bool {
-        let timeDiff = Date().millisecondsSince1970 - (RefreshTokenInterceptor.lastFailedDate ?? Date().millisecondsSince1970)
-        if RefreshTokenInterceptor.lastFailedDate != nil {
-            return timeDiff > 30_000
-        } else {
-            return true
-        }
+    private func handleRefreshSuccess() {
+        isRefreshing = false
+        requestsToRetry.forEach { $0(.retry) }
+        requestsToRetry.removeAll()
     }
     
+    private func handleRefreshError(error: Error) {
+        isRefreshing = false
+        requestsToRetry.forEach { $0(.doNotRetryWithError(error)) }
+        requestsToRetry.removeAll()
+        toLogin()
+    }
+        
     private func toLogin() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             UIWindow.shared?.rootViewController = UINavigationController(rootViewController: AppScenes.login.viewController)
