@@ -1,9 +1,7 @@
 #!/bin/sh
 
-if ! rbenv -v &> /dev/null
-then
-    brew install rbenv
-fi
+cd $CI_WORKSPACE
+HOMEBREW_NO_AUTO_UPDATE=1
 
 if ! xcodegen --version &> /dev/null
 then
@@ -25,14 +23,10 @@ then
     brew install cocoapods
 fi
 
-cd ..
-
 mkdir -p Sources/Common/Resources/Generated/SwiftGen
 
 swiftgen config run --config swiftgen.yml
 
 xcodegen generate --spec project.yml
 
-pod install --repo-update
-
-pwd
+pod install
