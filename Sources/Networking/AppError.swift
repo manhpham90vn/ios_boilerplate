@@ -10,6 +10,5 @@ import Foundation
 enum AppError: Error {
     case noInternetConnection
     case actionAlreadyPerforming
-    case noToken
     case networkError(api: Api, error: Error, data: Data?)
 }
