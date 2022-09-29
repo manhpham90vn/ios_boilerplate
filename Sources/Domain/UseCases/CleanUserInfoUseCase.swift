@@ -21,6 +21,5 @@ extension CleanUserInfoUseCase {
         repo.clearAccessToken()
         repo.clearRefreshToken()
         repo.clearUserInfo()
-        RefreshTokenInterceptor.lastFailedDate = nil
     }
 }
