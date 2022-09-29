@@ -10,6 +10,9 @@ import RxSwift
 import MPInjector
 
 final class CleanUserInfoUseCase: UseCase {
+    
+    var cacheParams: Void?
+    
     @Inject var repo: LocalStorageRepository
 }
 
