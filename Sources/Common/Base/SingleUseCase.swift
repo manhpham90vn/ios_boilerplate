@@ -13,6 +13,8 @@ import MPInjector
 
 class SingleUseCase<P, R>: UseCase {
     
+    var cacheParams: P?
+    
     @Inject var connectivityService: ConnectivityService
     
     private let _processing = BehaviorRelay(value: false)
@@ -40,6 +42,7 @@ class SingleUseCase<P, R>: UseCase {
     }
     
     final func execute(params: P) {
+        cacheParams = params
         performedIfNeeded(params: params)
     }
     
