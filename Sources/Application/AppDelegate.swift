@@ -42,6 +42,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let deviceTokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
+        LogInfo("DeviceToken \(deviceTokenString)")
+        Messaging.messaging().apnsToken = deviceToken
+    }
+    
     // silent push
     // real device
     func application(_ application: UIApplication,
