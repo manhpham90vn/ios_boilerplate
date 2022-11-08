@@ -6,24 +6,9 @@ then
     brew install rbenv
 fi
 
-if ! xcodegen --version &> /dev/null
+if ! mint version &> /dev/null
 then
-    brew install xcodegen
-fi
-
-if ! swiftgen --version &> /dev/null
-then
-    brew install swiftgen
-fi
-
-if ! swiftlint --version &> /dev/null
-then
-    brew install swiftlint
-fi
-
-if ! carthage version &> /dev/null
-then
-    brew install carthage
+    brew install mint
 fi
 
 echo "Done"
