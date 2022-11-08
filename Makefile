@@ -5,25 +5,28 @@ all: install generate
 
 # install
 .PHONY: install
-install: installBrew installBundle
-installBrew:
+install: installDependencies installBundle installMint
+installDependencies:
 	scripts/installDependencies.sh
 installBundle:
 	bundle config path vendor/bundle
 	bundle install --without=documentation --jobs 4 --retry 3
+installMint:
+	mint bootstrap --link
 
 # generate
 .PHONY: generate
 generate: generateSwiftgen generateXcodegen installPod
 generateSwiftgen:
+	rm -rf Sources/Common/Resources/Generated/*
 	mkdir -p Sources/Common/Resources/Generated/SwiftGen
-	swiftgen
+	mint run SwiftGen/SwiftGen@6.5.1 swiftgen
 generateXcodegen:
-	xcodegen generate --spec project.yml
+	mint run yonaskolb/xcodegen@2.32.0 xcodegen generate --spec project.yml
 installCarthage:
-	carthage bootstrap --use-xcframeworks --platform iOS --no-use-binaries --cache-builds
+	mint run Carthage/Carthage@0.38.0 carthage bootstrap --use-xcframeworks --platform iOS --no-use-binaries --cache-builds
 installPod:
-	pod install --repo-update
+	bundle exec pod install
 copyFrameworks:
 	rm -rf Frameworks/*
 	mkdir -p Frameworks
