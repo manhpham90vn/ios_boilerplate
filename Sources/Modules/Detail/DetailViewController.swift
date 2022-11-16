@@ -17,6 +17,10 @@ final class DetailViewController: BaseViewController {
     @Inject var presenter: DetailPresenterInterface
     private var params: DetailViewControllerParams?
 
+    override var screenType: ScreenType {
+        .detail
+    }
+        
     deinit {
         if Configs.shared.loggingDeinitEnabled {
             LogInfo("\(Swift.type(of: self)) Deinit")
@@ -26,7 +30,7 @@ final class DetailViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.inject(view: self)
+        presenter.inject(view: self, screenType: screenType)
     }
 
     func inject(params: DetailViewControllerParams) {

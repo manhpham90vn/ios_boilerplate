@@ -16,6 +16,10 @@ final class LoginViewController: BaseViewController {
     
     @Inject var presenter: LoginPresenterInterface
     
+    override var screenType: ScreenType {
+        .login
+    }
+    
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
@@ -29,7 +33,7 @@ final class LoginViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.inject(view: self)
+        presenter.inject(view: self, screenType: screenType)
     }
     
     override func setupUI() {
@@ -37,7 +41,7 @@ final class LoginViewController: BaseViewController {
 
         navigationItem.title = "Login"
         emailTextField.text = "admin@admin.com"
-        passwordTextField.text = "pwd12345"
+        passwordTextField.text = "pwd123451"
     }
 
     override func bindDatas() {

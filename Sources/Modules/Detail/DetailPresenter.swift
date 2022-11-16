@@ -15,7 +15,8 @@ protocol DetailPresenterInterface: HasTrigger {
     var view: DetailViewInterface? { get }
     var router: DetailRouterInterface { get }
     var interactor: DetailInteractorInterface { get }
-    func inject(view: DetailViewInterface)
+    var screenType: ScreenType! { get }
+    func inject(view: DetailViewInterface, screenType: ScreenType)
     
     var trigger: PublishRelay<Void> { get }
 }
@@ -27,11 +28,15 @@ final class DetailPresenter: DetailPresenterInterface, HasDisposeBag {
     @Inject var router: DetailRouterInterface
     @Inject var interactor: DetailInteractorInterface
     
+    // local variable
+    var screenType: ScreenType!
+    
     // input
     let trigger = PublishRelay<Void>()
 
-    func inject(view: DetailViewInterface) {
+    func inject(view: DetailViewInterface, screenType: ScreenType) {
         self.view = view
+        self.screenType = screenType
         self.router.inject(view: view)
     }
     
