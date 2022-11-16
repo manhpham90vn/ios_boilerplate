@@ -15,7 +15,8 @@ protocol MainPresenterInterface: HasTrigger {
     var view: MainViewInterface? { get }
     var router: MainRouterInterface { get }
     var interactor: MainInteractorInterface { get }
-    func inject(view: MainViewInterface)
+    var screenType: ScreenType! { get }
+    func inject(view: MainViewInterface, screenType: ScreenType)
     
     func didTapLogout()
     func navigationToDetailScreen(user: PagingUserResponse)
@@ -42,6 +43,9 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
     let triggerGetUserInfo = PublishRelay<Void>()
     var currentPage = 1
     
+    // local variable
+    var screenType: ScreenType!
+    
     // output
     let elements = BehaviorRelay<[PagingUserResponse]>(value: [])
     
@@ -59,10 +63,11 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
                      interactor.getUserInfoUseCase.failed)
             .throttle(.seconds(1), latest: false)
             .drive(onNext: { [weak self] error in
-                self?.isEnableLoadMore.onNext(true)
-                self?.isHeaderLoading.onNext(false)
-                self?.isFooterLoading.onNext(false)
-                self?.errorHandler.handle(error: error)
+                guard let self = self else { return }
+                self.isEnableLoadMore.onNext(true)
+                self.isHeaderLoading.onNext(false)
+                self.isFooterLoading.onNext(false)
+                self.errorHandler.handle(error: error, screenType: self.screenType)
             })
             .disposed(by: disposeBag)
         
@@ -125,8 +130,9 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
             .disposed(by: disposeBag)
     }
 
-    func inject(view: MainViewInterface) {
+    func inject(view: MainViewInterface, screenType: ScreenType) {
         self.view = view
+        self.screenType = screenType
         self.router.inject(view: view)
     }
     

@@ -21,6 +21,8 @@ extension MPInjector: Registering {
         registerSingleton { LoadingHelper() }
         registerSingleton { ApiErrorHandler() }
         registerSingleton { Logger() }
+        registerSingleton { AppHelper() }
+        registerSingleton { DialogManager() }
         
         // MARK: Repository
         registerSingleton { UserRepository() as UserRepositoryInterface }
