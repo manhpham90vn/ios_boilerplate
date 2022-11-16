@@ -16,6 +16,10 @@ final class MainViewController: BaseTableViewViewController {
     @Inject var presenter: MainPresenterInterface
     @Inject var log: Logger
 
+    override var screenType: ScreenType {
+        .main
+    }
+    
     deinit {
         if Configs.shared.loggingDeinitEnabled {
             LogInfo("\(Swift.type(of: self)) Deinit")
@@ -25,7 +29,7 @@ final class MainViewController: BaseTableViewViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.inject(view: self)
+        presenter.inject(view: self, screenType: screenType)
     }
     
     override func setupUI() {

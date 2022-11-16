@@ -8,7 +8,11 @@
 import UIKit
 import NSObject_Rx
 
-class BaseViewController: UIViewController, HasDisposeBag {
+class BaseViewController: UIViewController, HasDisposeBag, HasScreenType {
+    
+    var screenType: ScreenType {
+        .none
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -7,26 +7,26 @@
 
 import Foundation
 import Alamofire
+import MPInjector
 
 final class ApiErrorHandler {
     
-    func handle(error: Error, callback: @escaping () -> Void = {}) {
+    @Inject var dialog: DialogManager
+    
+    func handle(error: Error, screenType: ScreenType, callback: @escaping () -> Void = {}) {
         if let error = error as? AppError {
             switch error {
             case .noInternetConnection:
-                let alert = UIAlertController(title: "Error", message: "No Internet Connection", preferredStyle: .alert)
-                alert.addAction(.init(title: "Cancel", style: .cancel))
-                alert.addAction(.init(title: "Retry", style: .default) { _ in
+                dialog.showDialog(typeDialog: .retryDialog, title: "Error", message: "No Internet Connection", callbackRetry: {
                     callback()
                 })
-                AppHelper.shared.topViewController()?.present(alert, animated: true, completion: nil)
             case .actionAlreadyPerforming:
-                AppHelper.shared.showAlert(title: "Error", message: "Action Already Performing", completion: nil)
+                dialog.showDialog(typeDialog: .closeDialog, title: "Error", message: "Action Already Performing")
             case let .networkError(api, error, data):
                 if let message = try? JSONDecoder().decode(ErrorResponse.self, from: data ?? Data()).message {
-                    AppHelper.shared.showAlert(title: "Error api: \(api.rawValue)", message: message, completion: nil)
+                    dialog.showDialog(typeDialog: .closeDialog, title: "Error api: \(api.rawValue) screen: \(screenType)", message: message)
                 } else {
-                    AppHelper.shared.showAlert(title: "Error api: \(api.rawValue)", message: error.localizedDescription, completion: nil)
+                    dialog.showDialog(typeDialog: .closeDialog, title: "Error api: \(api.rawValue) screen: \(screenType)", message: error.localizedDescription)
                 }
             }
         }

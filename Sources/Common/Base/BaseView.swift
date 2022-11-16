@@ -7,16 +7,6 @@
 
 import RxSwift
 
-protocol BaseView: AnyObject {
-    func showAlert(title: String, message: String, completion: (() -> Void)?)
-    func showAlertRx(title: String, message: String) -> Single<Void>
-}
+protocol BaseView: AnyObject {}
 
-extension BaseView {
-    func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
-        AppHelper.shared.showAlert(title: title, message: message, completion: completion)
-    }
-    func showAlertRx(title: String, message: String) -> Single<Void> {
-        AppHelper.shared.showAlertRx(title: title, message: message)
-    }
-}
+extension BaseView {}

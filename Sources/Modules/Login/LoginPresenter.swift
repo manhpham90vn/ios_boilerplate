@@ -14,7 +14,8 @@ protocol LoginPresenterInterface: HasTrigger {
     var view: LoginViewInterface? { get }
     var router: LoginRouterInterface { get }
     var interactor: LoginInteractorInterface { get }
-    func inject(view: LoginViewInterface)
+    var screenType: ScreenType! { get }
+    func inject(view: LoginViewInterface, screenType: ScreenType)
     
     func didTapLoginButton()
     var login: BehaviorRelay<String> { get }
@@ -31,6 +32,9 @@ final class LoginPresenter: LoginPresenterInterface, HasDisposeBag {
     @Inject var loading: LoadingHelper
     @Inject var errorHandle: ApiErrorHandler
 
+    // local variable
+    var screenType: ScreenType!
+    
     // input
     let trigger = PublishRelay<Void>()
     let login = BehaviorRelay<String>(value: "")
@@ -60,7 +64,7 @@ final class LoginPresenter: LoginPresenterInterface, HasDisposeBag {
             .failed
             .drive(onNext: { [weak self] error in
                 guard let self = self else { return }
-                self.errorHandle.handle(error: error) { [weak self] in
+                self.errorHandle.handle(error: error, screenType: self.screenType) { [weak self] in
                     self?.interactor.loginUseCase.retry()
                 }
             })
@@ -75,8 +79,9 @@ final class LoginPresenter: LoginPresenterInterface, HasDisposeBag {
         LeakDetector.instance.expectDeallocate(object: interactor as AnyObject)
     }
 
-    func inject(view: LoginViewInterface) {
+    func inject(view: LoginViewInterface, screenType: ScreenType) {
         self.view = view
+        self.screenType = screenType
         self.router.inject(view: view)
     }
     
