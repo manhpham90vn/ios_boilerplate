@@ -7,6 +7,8 @@
 
 import UIKit
 import MPInjector
+import LeakDetector
+import Pagination
 
 struct DetailViewControllerParams {
     var user: PagingUserResponse
@@ -17,7 +19,7 @@ final class DetailViewController: BaseViewController {
     @Inject var presenter: DetailPresenterInterface
     private var params: DetailViewControllerParams?
 
-    override var screenType: ScreenType {
+    override var screenType: ScreenType! {
         .detail
     }
         

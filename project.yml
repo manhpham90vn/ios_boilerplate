@@ -17,7 +17,7 @@ targets:
     type: application
     platform: iOS
     deploymentTarget: "12.0"
-    sources: [Sources, Library]
+    sources: Sources
     configFiles:
       Debug: Sources/Common/Configs/BuildConfigurations/Debug.xcconfig
       Staging: Sources/Common/Configs/BuildConfigurations/Staging.xcconfig

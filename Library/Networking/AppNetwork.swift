@@ -9,51 +9,32 @@ import Foundation
 import Alamofire
 import RxSwift
 
-protocol AppNetworkInterface {
+public protocol AppNetworkInterface {
     func request<T: Decodable>(route: AppRequestConvertible,
                                type: T.Type) -> Single<T>
     func requestRefreshable<T: Decodable>(route: AppRequestConvertible,
                                           type: T.Type) -> Single<T>
+    
+    func setup(config: URLSessionConfiguration, adapters: [RequestAdapter], interceptors: [RequestInterceptor], eventMonitors: [EventMonitor] )
 }
 
-final class AppNetwork: AppNetworkInterface {
+public final class AppNetwork: AppNetworkInterface {
 
-    private let session: Session!
-    private let sessionRefreshable: Session!
+    private var session: Session!
+    private var sessionRefreshable: Session!
     
-    init() {
-        let config = URLSessionConfiguration.af.default
-        config.timeoutIntervalForRequest = 30
-        config.timeoutIntervalForResource = 30
-        config.allowsCellularAccess = true
-        
-        // Adapter
-        let xTypeAdapter = XTypeAdapter()
-        let authenAdapter = AuthenAdapter()
-        
-        // Interceptors
-        let refreshTokenInterceptor = RefreshTokenInterceptor()
-        let retryPolicy = RetryPolicy(retryLimit: 3, retryableHTTPMethods: [.get], retryableHTTPStatusCodes: [])
-        
-        // Event Monitors
-        var eventMonitors: [EventMonitor] = []
-        #if DEBUG
-        if Configs.shared.loggingAPIEnabled {
-            let logger = AppMonitor()
-            eventMonitors.append(logger)
-        }
-        #endif
-        
+    public init() {}
+    
+    public func setup(config: URLSessionConfiguration, adapters: [RequestAdapter], interceptors: [RequestInterceptor], eventMonitors: [EventMonitor] ) {
         // Interceptor
-        let compositeInterceptor = Interceptor(adapters: [xTypeAdapter, authenAdapter],
-                                               interceptors: [refreshTokenInterceptor, retryPolicy])
-        
+        let compositeInterceptor = Interceptor(adapters: adapters,
+                                               interceptors: interceptors)
         // create session
         self.sessionRefreshable = Session(configuration: config, interceptor: compositeInterceptor, eventMonitors: eventMonitors)
         self.session = Session(configuration: config, eventMonitors: eventMonitors)
     }
     
-    private func request<T: Decodable>(session: Session,
+    func request<T: Decodable>(session: Session,
                                        route: AppRequestConvertible,
                                        type: T.Type,
                                        completion: @escaping (Result<T, Error>) -> Void) -> DataRequest {
@@ -61,9 +42,9 @@ final class AppNetwork: AppNetworkInterface {
             .request(route)
             .validate(statusCode: 200...300)
             .cURLDescription(calling: { curl in
-                if Configs.shared.loggingcURLEnabled {
-                    LogInfo(curl)
-                }
+                #if DEBUG
+                print(curl)
+                #endif
             })
             .responseDecodable(of: T.self) { response in
                 switch response.result {
@@ -76,7 +57,7 @@ final class AppNetwork: AppNetworkInterface {
         return request
     }
     
-    private func request<T: Decodable>(session: Session,
+    func request<T: Decodable>(session: Session,
                                        route: AppRequestConvertible,
                                        type: T.Type) -> Single<T> {
         Single<T>.create { [weak self] single in
@@ -97,12 +78,12 @@ final class AppNetwork: AppNetworkInterface {
         }
     }
     
-    func request<T: Decodable>(route: AppRequestConvertible,
+    public func request<T: Decodable>(route: AppRequestConvertible,
                                type: T.Type) -> Single<T> {
         return request(session: session, route: route, type: type)
     }
     
-    func requestRefreshable<T: Decodable>(route: AppRequestConvertible,
+    public func requestRefreshable<T: Decodable>(route: AppRequestConvertible,
                                           type: T.Type) -> Single<T> {
         return request(session: sessionRefreshable, route: route, type: type)
     }

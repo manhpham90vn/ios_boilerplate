@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Api: String {
+public enum Api: String {
     case login
     case getUserInfo
     case paging

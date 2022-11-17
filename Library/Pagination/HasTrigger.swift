@@ -9,6 +9,6 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-protocol HasTrigger {
+public protocol HasTrigger {
     var trigger: PublishRelay<Void> { get }
 }
