@@ -9,8 +9,10 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 import MPInjector
+import LeakDetector
+import Pagination
 
-protocol LoginPresenterInterface: HasTrigger {
+protocol LoginPresenterInterface: HasTrigger, HasScreenType {
     var view: LoginViewInterface? { get }
     var router: LoginRouterInterface { get }
     var interactor: LoginInteractorInterface { get }

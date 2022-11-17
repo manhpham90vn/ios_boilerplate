@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-extension ObservableType {
+public extension ObservableType {
 
     func asDriverOnErrorJustComplete() -> Driver<Element> {
         return asDriver { _ in

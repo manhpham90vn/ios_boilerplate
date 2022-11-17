@@ -33,6 +33,11 @@ target 'MyApp' do
   pod 'XCGLogger'
   pod 'MPInjector'
   pod 'LocalDataViewer'
+  
+  # local pod
+  pod 'LeakDetector', :path => './'
+  pod 'Pagination', :path => './'
+  pod 'Networking', :path => './'
 
   target 'MyAppTests' do
     inherit! :search_paths

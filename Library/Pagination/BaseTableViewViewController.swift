@@ -10,28 +10,28 @@ import MJRefresh
 import RxSwift
 import RxCocoa
 
-class BaseTableViewViewController: BaseViewController, ViewControllerPageable {
+open class BaseTableViewViewController: BaseViewController, ViewControllerPageable {
 
-    let headerRefreshTrigger = PublishRelay<Void>()
-    let footerLoadMoreTrigger = PublishRelay<Void>()
-    let isEnableLoadMore = PublishRelay<Bool>()
-    let isHeaderLoading = PublishRelay<Bool>()
-    let isFooterLoading = PublishRelay<Bool>()
-    let isEmptyData = PublishRelay<Bool>()
+    public let headerRefreshTrigger = PublishRelay<Void>()
+    public let footerLoadMoreTrigger = PublishRelay<Void>()
+    public let isEnableLoadMore = PublishRelay<Bool>()
+    public let isHeaderLoading = PublishRelay<Bool>()
+    public let isFooterLoading = PublishRelay<Bool>()
+    public let isEmptyData = PublishRelay<Bool>()
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet public weak var tableView: UITableView!
     
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    override func setupUI() {
+    open override func setupUI() {
         super.setupUI()
         
         tableView.tableFooterView = UIView()
     }
         
-    override func bindDatas() {
+    open override func bindDatas() {
         super.bindDatas()
         
         // header
@@ -89,17 +89,17 @@ class BaseTableViewViewController: BaseViewController, ViewControllerPageable {
         return UIView()
     }
     
-    fileprivate func setNoDataView() {
+    func setNoDataView() {
         tableView.backgroundView = viewForEmptyDataOfTableView()
     }
     
-    fileprivate func removeNoDataView() {
+    func removeNoDataView() {
         tableView.backgroundView = nil
     }
     
 }
 
-fileprivate extension Reactive where Base: BaseTableViewViewController {
+extension Reactive where Base: BaseTableViewViewController {
     
     var isEnableLoadMoreBinder: Binder<Bool> {
         return Binder(base) { viewController, enable in
