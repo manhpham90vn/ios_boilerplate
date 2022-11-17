@@ -6,6 +6,7 @@
 //
 
 import MPInjector
+import Networking
 
 extension MPInjector: Registering {
     public func registerService() {        
@@ -14,8 +15,8 @@ extension MPInjector: Registering {
         
         // data remote
         registerSingleton { ConnectivityServiceImpl() as ConnectivityService }
-        registerSingleton { AppApiComponent() as AppApi }
         registerSingleton { AppNetwork() as AppNetworkInterface }
+        registerSingleton { AppApiComponent() as AppApi }
         
         // utils
         registerSingleton { LoadingHelper() }
@@ -23,6 +24,7 @@ extension MPInjector: Registering {
         registerSingleton { Logger() }
         registerSingleton { AppHelper() }
         registerSingleton { DialogManager() }
+        registerSingleton { PermissionManager() }
         
         // MARK: Repository
         registerSingleton { UserRepository() as UserRepositoryInterface }

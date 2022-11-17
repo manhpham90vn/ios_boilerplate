@@ -10,13 +10,15 @@ import RxSwift
 import RxCocoa
 import MPInjector
 import LocalDataViewer
+import LeakDetector
+import Pagination
 
 final class MainViewController: BaseTableViewViewController {
 
     @Inject var presenter: MainPresenterInterface
     @Inject var log: Logger
 
-    override var screenType: ScreenType {
+    override var screenType: ScreenType! {
         .main
     }
     

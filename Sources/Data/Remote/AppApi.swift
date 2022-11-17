@@ -9,6 +9,8 @@ import Foundation
 import RxSwift
 import RxCocoa
 import MPInjector
+import Alamofire
+import Networking
 
 protocol AppApi {
     func login(email: String, password: String) -> Single<LoginResponse>
@@ -20,6 +22,29 @@ protocol AppApi {
 final class AppApiComponent: AppApi {
     
     @Inject var appNetwork: AppNetworkInterface
+    
+    init() {
+        let config = URLSessionConfiguration.af.default
+        config.timeoutIntervalForRequest = 30
+        config.timeoutIntervalForResource = 30
+        config.allowsCellularAccess = true
+        
+        // Adapter
+        let xTypeAdapter = XTypeAdapter()
+        let authenAdapter = AuthenAdapter()
+        
+        // Interceptors
+        let refreshTokenInterceptor = RefreshTokenInterceptor()
+        let retryPolicy = RetryPolicy(retryLimit: 3, retryableHTTPMethods: [.get], retryableHTTPStatusCodes: [])
+        
+        // EventMonitor
+        var eventMonitors: [EventMonitor] = []
+        #if DEBUG
+        let logger = AppMonitor()
+        eventMonitors.append(logger)
+        #endif
+        appNetwork.setup(config: config, adapters: [xTypeAdapter, authenAdapter], interceptors: [refreshTokenInterceptor, retryPolicy], eventMonitors: eventMonitors)
+    }
     
     func login(email: String, password: String) -> Single<LoginResponse> {
         let route = AppRoute.login(username: email, password: password)

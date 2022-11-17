@@ -95,12 +95,12 @@ public class LeakDetector {
 
                 if self.disableLeakDetector {
                     if !didDeallocate {
-                        LogError("Leak detection is disabled. This should only be used for debugging purposes.")
-                        LogError(message)
+                        print("Leak detection is disabled. This should only be used for debugging purposes.")
+                        print(message)
                     }
                 } else {
                     if !didDeallocate {
-                        LogError(message)
+                        print(message)
                     }
 //                    assert(didDeallocate, message)
                 }
@@ -134,12 +134,12 @@ public class LeakDetector {
 
                 if self.disableLeakDetector {
                     if !viewDidDisappear {
-                        LogError("Leak detection is disabled. This should only be used for debugging purposes.")
-                        LogError(message)
+                        print("Leak detection is disabled. This should only be used for debugging purposes.")
+                        print(message)
                     }
                 } else {
                     if !viewDidDisappear {
-                        LogError(message)
+                        print(message)
                     }
 //                    assert(viewDidDisappear, message)
                 }

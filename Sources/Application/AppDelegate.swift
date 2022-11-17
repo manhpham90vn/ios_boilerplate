@@ -20,6 +20,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     @Inject var local: LocalStorageRepository
     @Inject var loading: LoadingHelper
     @Inject var log: Logger
+    @Inject var permission: PermissionManager
         
     static var keyWindow: UIWindow? {
         return UIApplication.shared.windows.first(where: { $0.isKeyWindow })
@@ -74,15 +75,7 @@ extension AppDelegate {
         Messaging.messaging().delegate = self
         
         // request push
-        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, _ in
-            if granted {
-                DispatchQueue.main.async {
-                    application.registerForRemoteNotifications()
-                }
-            }
-        }
-        
+        permission.request(type: .requestPush, application: application)
     }
 
 }
