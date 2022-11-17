@@ -9,8 +9,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 import MPInjector
+import LeakDetector
+import Pagination
 
-protocol MainPresenterInterface: HasTrigger {
+protocol MainPresenterInterface: HasTrigger, HasScreenType {
     
     var view: MainViewInterface? { get }
     var router: MainRouterInterface { get }

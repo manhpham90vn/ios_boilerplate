@@ -10,8 +10,10 @@ import MPInjector
 import NSObject_Rx
 import RxSwift
 import RxCocoa
+import LeakDetector
+import Pagination
 
-protocol DetailPresenterInterface: HasTrigger {
+protocol DetailPresenterInterface: HasTrigger, HasScreenType {
     var view: DetailViewInterface? { get }
     var router: DetailRouterInterface { get }
     var interactor: DetailInteractorInterface { get }

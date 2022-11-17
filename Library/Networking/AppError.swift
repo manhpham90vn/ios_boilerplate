@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum AppError: Error {
+public enum AppError: Error {
     case noInternetConnection
     case actionAlreadyPerforming
     case networkError(api: Api, error: Error, data: Data?)

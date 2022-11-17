@@ -11,12 +11,14 @@ import RxSwift
 import RxCocoa
 import RxRelay
 import NSObject_Rx
+import LeakDetector
+import Pagination
 
 final class LoginViewController: BaseViewController {
     
     @Inject var presenter: LoginPresenterInterface
     
-    override var screenType: ScreenType {
+    override var screenType: ScreenType! {
         .login
     }
     
@@ -41,7 +43,7 @@ final class LoginViewController: BaseViewController {
 
         navigationItem.title = "Login"
         emailTextField.text = "admin@admin.com"
-        passwordTextField.text = "pwd123451"
+        passwordTextField.text = "pwd12345"
     }
 
     override func bindDatas() {

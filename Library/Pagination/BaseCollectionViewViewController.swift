@@ -10,18 +10,18 @@ import MJRefresh
 import RxSwift
 import RxCocoa
 
-class BaseCollectionViewViewController: BaseViewController, ViewControllerPageable {
+open class BaseCollectionViewViewController: BaseViewController, ViewControllerPageable {
 
-    let headerRefreshTrigger = PublishRelay<Void>()
-    let footerLoadMoreTrigger = PublishRelay<Void>()
-    let isEnableLoadMore = PublishRelay<Bool>()
-    let isEmptyData = PublishRelay<Bool>()
-    let isHeaderLoading = PublishRelay<Bool>()
-    let isFooterLoading = PublishRelay<Bool>()
+    public let headerRefreshTrigger = PublishRelay<Void>()
+    public let footerLoadMoreTrigger = PublishRelay<Void>()
+    public let isEnableLoadMore = PublishRelay<Bool>()
+    public let isEmptyData = PublishRelay<Bool>()
+    public let isHeaderLoading = PublishRelay<Bool>()
+    public let isFooterLoading = PublishRelay<Bool>()
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet public weak var collectionView: UICollectionView!
     
-    override func bindDatas() {
+    open override func bindDatas() {
         super.bindDatas()
                 
         // header
@@ -80,17 +80,17 @@ class BaseCollectionViewViewController: BaseViewController, ViewControllerPageab
         return UIView()
     }
     
-    fileprivate func setNoDataView() {
+    func setNoDataView() {
         collectionView.backgroundView = viewForEmptyDataOfCollectionView()
     }
     
-    fileprivate func removeNoDataView() {
+    func removeNoDataView() {
         collectionView.backgroundView = nil
     }
     
 }
 
-fileprivate extension Reactive where Base: BaseCollectionViewViewController {
+extension Reactive where Base: BaseCollectionViewViewController {
     
     var isEnableLoadMoreBinder: Binder<Bool> {
         return Binder(base) { viewController, enable in
