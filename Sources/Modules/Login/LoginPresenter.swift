@@ -54,10 +54,8 @@ final class LoginPresenter: LoginPresenterInterface, HasDisposeBag {
         interactor
             .loginUseCase
             .succeeded
-            .drive(onNext: { [weak self] result in
-                if result {
-                    self?.router.navigationToHomeScreen()
-                }
+            .drive(onNext: { [weak self] in
+                self?.router.navigationToHomeScreen()
             })
             .disposed(by: disposeBag)
         
