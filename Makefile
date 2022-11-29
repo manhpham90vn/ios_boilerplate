@@ -9,7 +9,6 @@ install: installDependencies installBundle installMint
 installDependencies:
 	scripts/installDependencies.sh
 installBundle:
-	gem install bundler
 	bundle config path vendor/bundle
 	bundle install --without=documentation --jobs 4 --retry 3
 installMint:
