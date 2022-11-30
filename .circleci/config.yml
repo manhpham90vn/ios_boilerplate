@@ -51,6 +51,7 @@ workflows:
   build-and-test-workflow:
     jobs:
       - build-and-test
-  deploy-apple:
-    jobs:
-      - deploy-apple
+      - deploy-apple:
+          type: approval
+          requires:
+            - build-and-test
