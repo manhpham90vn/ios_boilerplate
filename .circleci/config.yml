@@ -38,6 +38,7 @@ jobs:
             echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
             source $BASH_ENV
             gem install bundler
+      - setup-certificate:
       - run:
           name: "Install"
           command: "make"
@@ -48,6 +49,18 @@ jobs:
           name: "Deploy Testflight"
           command: "make exportTestFlight"
 
+  setup-certificate:
+    macos:
+      xcode: 14.0.1
+
+    steps:
+      - checkout
+      - setup-certificate:
+      - run:
+          name: "Setup Certificate"
+          command: "make setupCertificate"
+
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -57,3 +70,6 @@ workflows:
   deploy-apple:
     jobs:
       - deploy-apple
+  setup-certificate:
+    jobs:
+      - setup-certificate
