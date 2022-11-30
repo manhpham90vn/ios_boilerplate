@@ -56,7 +56,7 @@ platform :ios do
                 workspace: ENV['WORKSPACE'].to_s,
                 configuration: ENV['CONFIGURATION'].to_s,
                 scheme: ENV['SCHEME'].to_s,
-                export_method: "appstore",
+                export_method: "app-store",
                 output_directory: "./fastlane/build",
                 output_name: file,
                 clean: true,
