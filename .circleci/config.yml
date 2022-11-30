@@ -63,6 +63,9 @@ jobs:
             echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
             source $BASH_ENV
             gem install bundler
+      - run:
+          name: "Fix bundle"
+          command: "scripts/installDependencies.sh"
       - add_ssh_keys:
           fingerprints:
             - "50:77:53:bf:3d:58:d4:8c:b7:a7:cb:9d:fb:ee:58:90"
