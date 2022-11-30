@@ -14,7 +14,7 @@ platform :ios do
 
     desc "Setup certificate and provisioning profile"
       lane :setup do
-        match(type: "development", readonly: is_ci)
+        match(type: "appstore", readonly: is_ci)
       end
 
     desc "Export to testflight"
