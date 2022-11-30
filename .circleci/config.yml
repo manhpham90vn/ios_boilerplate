@@ -40,7 +40,7 @@ jobs:
             gem install bundler
       - add_ssh_keys:
           fingerprints:
-            - "50:77:53:bf:3d:58:d4:8c:b7:a7:cb:9d:fb:ee:58:90"
+            - "69:2d:fa:ad:1f:44:31:bb:04:01:34:06:62:e3:8f:72"
       - run:
           name: "Install"
           command: "make"
@@ -68,7 +68,7 @@ jobs:
           command: "scripts/installDependencies.sh"
       - add_ssh_keys:
           fingerprints:
-            - "50:77:53:bf:3d:58:d4:8c:b7:a7:cb:9d:fb:ee:58:90"
+            - "69:2d:fa:ad:1f:44:31:bb:04:01:34:06:62:e3:8f:72"
       - run:
           name: "Install bundle"
           command: "make installBundle"
