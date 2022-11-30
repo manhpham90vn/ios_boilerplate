@@ -26,6 +26,24 @@ jobs:
       - run:
           name: "Run Unit test"
           command: "bundle exec fastlane unittest --env debug"
+  deploy-apple:
+    macos:
+      xcode: 14.0.1
+
+    steps:
+      - checkout
+      - run:
+          name: Force Bundler Version
+          command: |
+            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+            source $BASH_ENV
+            gem install bundler
+      - run:
+          name: "Install"
+          command: "make"
+      - run:
+          name: "Setup Certificate"
+          command: "make setupCertificate"
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows

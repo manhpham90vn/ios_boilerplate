@@ -12,6 +12,11 @@ platform :ios do
             scheme: ENV['SCHEME'].to_s)
       end
 
+    desc "Setup certificate and provisioning profile"
+      lane :setup do
+        match(type: "development", readonly: is_ci)
+      end
+
     desc "Export to testflight"
         lane :export do
             time = Time.new.strftime("%Y_%d_%m_%H_%M_%S")
@@ -51,7 +56,7 @@ platform :ios do
                 workspace: ENV['WORKSPACE'].to_s,
                 configuration: ENV['CONFIGURATION'].to_s,
                 scheme: ENV['SCHEME'].to_s,
-                export_method: "development",
+                export_method: "appstore",
                 output_directory: "./fastlane/build",
                 output_name: file,
                 clean: true,
