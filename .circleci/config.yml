@@ -57,9 +57,18 @@ jobs:
 
     steps:
       - checkout
+      - run:
+          name: Force Bundler Version
+          command: |
+            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+            source $BASH_ENV
+            gem install bundler
       - add_ssh_keys:
           fingerprints:
             - "50:77:53:bf:3d:58:d4:8c:b7:a7:cb:9d:fb:ee:58:90"
+      - run:
+          name: "Install bundle"
+          command: "make installBundle"
       - run:
           name: "Setup Certificate"
           command: "make setupCertificate"
