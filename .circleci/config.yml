@@ -44,6 +44,9 @@ jobs:
       - run:
           name: "Setup Certificate"
           command: "make setupCertificate"
+      - run:
+          name: "Deploy Testflight"
+          command: "make exportTestFlight"
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -51,7 +54,10 @@ workflows:
   build-and-test-workflow:
     jobs:
       - build-and-test
-      - deploy-apple:
+      - hold:
           type: approval
           requires:
             - build-and-test
+      - deploy-apple:
+          requires:
+            - hold
