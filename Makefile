@@ -49,11 +49,11 @@ delete:
 
 # fastlane
 .PHONY: setupCertificate
-exportIpa:
+setupCertificate:
 	bundle exec fastlane setup
 
 .PHONY: runUnitTest
-exportIpa:
+runUnitTest:
 	bundle exec fastlane unittest --env debug
 
 .PHONY: exportTestFlight

@@ -14,7 +14,7 @@ platform :ios do
 
     desc "Setup certificate and provisioning profile"
       lane :setup do
-        match(type: "development", readonly: is_ci)
+        match(type: "appstore", readonly: is_ci)
       end
 
     desc "Export to testflight"
@@ -56,7 +56,7 @@ platform :ios do
                 workspace: ENV['WORKSPACE'].to_s,
                 configuration: ENV['CONFIGURATION'].to_s,
                 scheme: ENV['SCHEME'].to_s,
-                export_method: "appstore",
+                export_method: "app-store",
                 output_directory: "./fastlane/build",
                 output_name: file,
                 clean: true,
