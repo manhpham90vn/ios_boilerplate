@@ -15,12 +15,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Force Bundler Version
-          command: |
-            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
-            source $BASH_ENV
-            gem install bundler
-      - run:
           name: "Install"
           command: "make"
       - run:
@@ -32,15 +26,6 @@ jobs:
 
     steps:
       - checkout
-      - run:
-          name: Force Bundler Version
-          command: |
-            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
-            source $BASH_ENV
-            gem install bundler
-      - add_ssh_keys:
-          fingerprints:
-            - "69:2d:fa:ad:1f:44:31:bb:04:01:34:06:62:e3:8f:72"
       - run:
           name: "Install"
           command: "make"
@@ -59,4 +44,8 @@ workflows:
       - build-and-test
   deploy-apple:
     jobs:
-      - deploy-apple
+      - deploy-apple:
+          filters:
+            branches:
+              only:
+                - master
