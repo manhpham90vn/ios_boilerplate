@@ -7,46 +7,48 @@
 
 import Foundation
 import Alamofire
+import Configs
+import Logs
 
 final class AppMonitor: EventMonitor {
     
     let queue = DispatchQueue(label: "com.manhpham.networklogger")
     
     func requestDidResume(_ request: Request) {
-    #if DEBUG
-        print("requestDidResume \(Date()) \(request.id)")
-    #endif
+        if Configs.shared.loggingAPIEnabled {
+            LogInfo("requestDidResume \(Date()) \(request.id)")
+        }
     }
     
     func requestDidFinish(_ request: Request) {
-    #if DEBUG
-        print("requestDidFinish \(Date()) \(request.id)")
-    #endif
+        if Configs.shared.loggingAPIEnabled {
+            LogInfo("requestDidFinish \(Date()) \(request.id)")
+        }
     }
     
     func requestDidCancel(_ request: Request) {
-    #if DEBUG
-        print("requestDidCancel \(Date()) \(request.id)")
-    #endif
+        if Configs.shared.loggingAPIEnabled {
+            LogInfo("requestDidCancel \(Date()) \(request.id)")
+        }
     }
     
     func requestDidSuspend(_ request: Request) {
-    #if DEBUG
-        print("requestDidSuspend \(Date()) \(request.id)")
-    #endif
+        if Configs.shared.loggingAPIEnabled {
+            LogInfo("requestDidSuspend \(Date()) \(request.id)")
+        }
     }
     
     func requestIsRetrying(_ request: Request) {
-    #if DEBUG
-        print("requestIsRetrying \(Date()) \(request.id)")
-    #endif
+        if Configs.shared.loggingAPIEnabled {
+            LogInfo("requestIsRetrying \(Date()) \(request.id)")
+        }
     }
     
     func request<Value>(_ request: DataRequest, didParseResponse response: DataResponse<Value, AFError>) {
-    #if DEBUG
-        if let value = response.value {
-            print("didParseResponse \(Date()) \(request.id) \(response.metrics?.taskInterval.duration ?? 0) \(value)")
+        if Configs.shared.loggingAPIEnabled {
+            if let value = response.value {
+                LogInfo("didParseResponse \(Date()) \(request.id) \(response.metrics?.taskInterval.duration ?? 0) \(value)")
+            }
         }
-    #endif
     }
 }

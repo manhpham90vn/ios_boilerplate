@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum Environment {
+public enum Environment {
     case develop
     case staging
     case product
 
-    var baseURL: String {
+    public var baseURL: String {
         "http://localhost.charlesproxy.com:3000/"
     }
 

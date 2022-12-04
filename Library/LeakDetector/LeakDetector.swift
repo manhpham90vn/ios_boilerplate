@@ -17,6 +17,8 @@
 import RxSwift
 import RxRelay
 import UIKit
+import Configs
+import Logs
 
 /// Leak detection status.
 public enum LeakDetectionStatus {
@@ -95,12 +97,12 @@ public class LeakDetector {
 
                 if self.disableLeakDetector {
                     if !didDeallocate {
-                        print("Leak detection is disabled. This should only be used for debugging purposes.")
-                        print(message)
+                        LogInfo("Leak detection is disabled. This should only be used for debugging purposes.")
+                        LogInfo(message)
                     }
                 } else {
                     if !didDeallocate {
-                        print(message)
+                        LogError(message)
                     }
 //                    assert(didDeallocate, message)
                 }

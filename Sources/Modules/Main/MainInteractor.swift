@@ -8,6 +8,8 @@
 import Foundation
 import RxSwift
 import MPInjector
+import Configs
+import Logs
 
 protocol MainInteractorInterface {
     var getEventUseCaseInterface: GETEventUseCase { get }

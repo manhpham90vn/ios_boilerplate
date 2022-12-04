@@ -10,6 +10,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 import MPInjector
+import Configs
+import Logs
 
 protocol DetailRouterInterface {
     var view: DetailViewInterface? { get }

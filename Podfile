@@ -30,7 +30,6 @@ target 'MyApp' do
   pod 'FirebaseMessaging'
   pod 'FirebaseAnalytics'
   pod 'FirebaseCrashlytics'
-  pod 'XCGLogger'
   pod 'MPInjector'
   pod 'LocalDataViewer'
   
@@ -38,6 +37,8 @@ target 'MyApp' do
   pod 'LeakDetector', :path => './'
   pod 'Pagination', :path => './'
   pod 'Networking', :path => './'
+  pod 'Configs', :path => './'
+  pod 'Logs', :path => './'
 
   target 'MyAppTests' do
     inherit! :search_paths

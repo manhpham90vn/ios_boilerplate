@@ -12,11 +12,12 @@ import MPInjector
 import LocalDataViewer
 import LeakDetector
 import Pagination
+import Configs
+import Logs
 
 final class MainViewController: BaseTableViewViewController {
 
     @Inject var presenter: MainPresenterInterface
-    @Inject var log: Logger
 
     override var screenType: ScreenType! {
         .main
@@ -63,7 +64,7 @@ final class MainViewController: BaseTableViewViewController {
     
     @objc
     func showLog() {
-        let data = log.getFile()
+        let data = Logger.shared.getFile()
         let content = try? String(contentsOf: data)
         let pasteBoard = UIPasteboard.general
         pasteBoard.string = content
