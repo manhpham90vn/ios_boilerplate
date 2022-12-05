@@ -12,4 +12,6 @@ Pod::Spec.new do |s|
   s.dependency 'RxCocoa', '~> 6.2'
   s.dependency 'Alamofire'
   s.dependency 'MPInjector'
+  s.dependency 'Configs'
+  s.dependency 'Logs'
 end

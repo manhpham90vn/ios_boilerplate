@@ -19,18 +19,18 @@ targets:
     deploymentTarget: "12.0"
     sources: Sources
     configFiles:
-      Debug: Sources/Common/Configs/BuildConfigurations/Debug.xcconfig
-      Staging: Sources/Common/Configs/BuildConfigurations/Staging.xcconfig
-      Release: Sources/Common/Configs/BuildConfigurations/Release.xcconfig
+      Debug: Sources/Configs/BuildConfigurations/Debug.xcconfig
+      Staging: Sources/Configs/BuildConfigurations/Staging.xcconfig
+      Release: Sources/Configs/BuildConfigurations/Release.xcconfig
     settings:
-      INFOPLIST_FILE: Sources/Common/Resources/Info.plist
+      INFOPLIST_FILE: Sources/Resources/Info.plist
       SWIFT_VERSION: "5.0"
-      SWIFT_OBJC_BRIDGING_HEADER: Sources/Common/Resources/MyApp-Bridging-Header.h
+      SWIFT_OBJC_BRIDGING_HEADER: Sources/Resources/MyApp-Bridging-Header.h
       CODE_SIGN_STYLE: "Manual"
       UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
       UILaunchStoryboardName: LaunchScreen
       VALIDATE_WORKSPACE: YES
-      CODE_SIGN_ENTITLEMENTS: Sources/Common/Resources/MyApp.entitlements
+      CODE_SIGN_ENTITLEMENTS: Sources/Resources/MyApp.entitlements
     preBuildScripts:
       - name: SwiftGen
         script: |
@@ -41,7 +41,7 @@ targets:
           mint run realm/SwiftLint@0.49.1 swiftlint
       - name: GoogleServiceInfo
         script: |
-          PATH_TO_GOOGLE_PLISTS="${PROJECT_DIR}/Sources/Common/Configs/GoogleServices"
+          PATH_TO_GOOGLE_PLISTS="${PROJECT_DIR}/Sources/Configs/GoogleServices"
           case "${CONFIGURATION}" in
           "Debug" )
           cp -r "$PATH_TO_GOOGLE_PLISTS/GoogleService-Info-Debug.plist" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist" ;;

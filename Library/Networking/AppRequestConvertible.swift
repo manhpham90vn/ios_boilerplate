@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import Configs
 
 public protocol AppRequestConvertible: URLRequestConvertible {
     var baseURL: URL { get }

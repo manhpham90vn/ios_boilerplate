@@ -10,7 +10,7 @@ import XCGLogger
 
 private let log = XCGLogger.default // swiftlint:disable:this prefixed_toplevel_constant
 
-final class Logger {
+public final class Logger {
     
     #if DEBUG
     let logLevel = XCGLogger.Level.debug
@@ -19,6 +19,7 @@ final class Logger {
     #endif
     
     private let logURL: URL
+    public static let shared = Logger()
     
     init() {
         let arrayPaths = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
@@ -26,11 +27,11 @@ final class Logger {
         logURL = cacheDirectoryPath.appendingPathComponent(UUID().uuidString)
     }
     
-    func getFile() -> URL {
+    public func getFile() -> URL {
         return logURL
     }
 
-    func setUpLog() {
+    public func setUpLog() {
         let fileDestination = FileDestination(writeToFile: getFile(), identifier: "advancedLogger.fileDestination")
         log.add(destination: fileDestination)
         log.logAppDetails()
@@ -56,7 +57,7 @@ final class Logger {
     }
 }
 
-func LogVerbose(_ closure: @autoclosure @escaping () -> Any?,
+public func LogVerbose(_ closure: @autoclosure @escaping () -> Any?,
                 functionName: StaticString = #function,
                 fileName: StaticString = #file,
                 lineNumber: Int = #line,
@@ -69,7 +70,7 @@ func LogVerbose(_ closure: @autoclosure @escaping () -> Any?,
               closure: closure)
 }
 
-func LogDebug(_ closure: @autoclosure @escaping () -> Any?,
+public func LogDebug(_ closure: @autoclosure @escaping () -> Any?,
               functionName: StaticString = #function,
               fileName: StaticString = #file,
               lineNumber: Int = #line,
@@ -82,7 +83,7 @@ func LogDebug(_ closure: @autoclosure @escaping () -> Any?,
               closure: closure)
 }
 
-func LogInfo(_ closure: @autoclosure @escaping () -> Any?,
+public func LogInfo(_ closure: @autoclosure @escaping () -> Any?,
              functionName: StaticString = #function,
              fileName: StaticString = #file,
              lineNumber: Int = #line,
@@ -95,7 +96,7 @@ func LogInfo(_ closure: @autoclosure @escaping () -> Any?,
               closure: closure)
 }
 
-func LogWarn(_ closure: @autoclosure @escaping () -> Any?,
+public func LogWarn(_ closure: @autoclosure @escaping () -> Any?,
              functionName: StaticString = #function,
              fileName: StaticString = #file,
              lineNumber: Int = #line,
@@ -108,7 +109,7 @@ func LogWarn(_ closure: @autoclosure @escaping () -> Any?,
               closure: closure)
 }
 
-func LogError(_ closure: @autoclosure @escaping () -> Any?,
+public func LogError(_ closure: @autoclosure @escaping () -> Any?,
               functionName: StaticString = #function,
               fileName: StaticString = #file,
               lineNumber: Int = #line,

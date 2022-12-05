@@ -21,7 +21,6 @@ extension MPInjector: Registering {
         // utils
         registerSingleton { LoadingHelper() }
         registerSingleton { ApiErrorHandler() }
-        registerSingleton { Logger() }
         registerSingleton { AppHelper() }
         registerSingleton { DialogManager() }
         registerSingleton { PermissionManager() }
