@@ -11,6 +11,7 @@ import FirebaseAnalytics
 import FirebaseCore
 import FirebaseMessaging
 import MPInjector
+import Logs
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,7 +20,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     @Inject var local: LocalStorageRepository
     @Inject var loading: LoadingHelper
-    @Inject var log: Logger
     @Inject var permission: PermissionManager
         
     static var keyWindow: UIWindow? {
@@ -34,7 +34,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
 
         // config service
-        log.setUpLog()
+        Logger.shared.setUpLog()
         loading.perform()
         FirebaseApp.configure()
 

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Configs
 
 public enum AppError: Error {
     case noInternetConnection

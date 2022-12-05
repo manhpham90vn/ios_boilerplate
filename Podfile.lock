@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.6.2)
+  - Configs (1.0)
   - FirebaseAnalytics (9.3.0):
     - FirebaseAnalytics/AdIdSupport (= 9.3.0)
     - FirebaseCore (~> 9.0)
@@ -96,10 +97,19 @@ PODS:
     - GoogleUtilities/Logger
   - KeychainAccess (4.2.2)
   - LeakDetector (1.0):
+    - Configs
+    - Logs
     - RxRelay (~> 6.2)
     - RxSwift (~> 6.2)
   - LocalDataViewer (1.0.3):
     - KeychainAccess
+  - Logs (1.0):
+    - Configs
+    - MJRefresh
+    - "NSObject+Rx"
+    - RxCocoa (~> 6.2)
+    - RxSwift (~> 6.2)
+    - XCGLogger
   - MJRefresh (3.7.5)
   - MPInjector (1.0.3)
   - nanopb (2.30909.0):
@@ -109,6 +119,8 @@ PODS:
   - nanopb/encode (2.30909.0)
   - Networking (1.0):
     - Alamofire
+    - Configs
+    - Logs
     - MPInjector
     - RxCocoa (~> 6.2)
     - RxSwift (~> 6.2)
@@ -118,6 +130,7 @@ PODS:
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - Pagination (1.0):
+    - Configs
     - MJRefresh
     - "NSObject+Rx"
     - RxCocoa (~> 6.2)
@@ -150,11 +163,13 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - Configs (from `./`)
   - FirebaseAnalytics
   - FirebaseCrashlytics
   - FirebaseMessaging
   - LeakDetector (from `./`)
   - LocalDataViewer
+  - Logs (from `./`)
   - MJRefresh
   - MPInjector
   - Networking (from `./`)
@@ -165,7 +180,6 @@ DEPENDENCIES:
   - RxCocoa
   - RxSwift
   - RxSwiftExt
-  - XCGLogger
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -197,7 +211,11 @@ SPEC REPOS:
     - XCGLogger
 
 EXTERNAL SOURCES:
+  Configs:
+    :path: "./"
   LeakDetector:
+    :path: "./"
+  Logs:
     :path: "./"
   Networking:
     :path: "./"
@@ -206,6 +224,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
+  Configs: 67d48726aac8ea518f14a8c0e8c10416108166db
   FirebaseAnalytics: bf46f5163f44097ce2c789de0b3e6f87f1da834a
   FirebaseCore: c088995ece701a021a48a1348ea0174877de2a6a
   FirebaseCoreDiagnostics: 060eb57cc56dfaf40b1b1b5874a5c17c41ce79f8
@@ -217,15 +236,16 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 5fffe35792f8b96ec8d6775f5eccd83c998d5a3b
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
-  LeakDetector: 1cf65cbb2ed174971a369c94cd26df2e10d52170
+  LeakDetector: 9f0be3e0b3f67bde9dacac93d5456ecb38a8feda
   LocalDataViewer: d1ad06bfc194e33b394d2150bf924fc062281cf8
+  Logs: d0d0380f61a79c66662f06eb6b383dbe094f1eea
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   MPInjector: 0021638155fe5310ed74fd3bca7bf0d11d24f08e
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
-  Networking: 3dca57f48667b5986b23c6c4c3ddcd0b60f0f9f8
+  Networking: 65abaf17db572a5741ebea7a3fe112601b671572
   "NSObject+Rx": 61cf1f7306a73dcef8b36649198af0813ec18dfd
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
-  Pagination: e0ba302490d44b56f0045ed42e8893e92506b8b9
+  Pagination: 901b9861fd4c00dc510a1f5851b3350943163785
   PKHUD: 98f3e4bc904b9c916f1c5bb6d765365b5357291b
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   Reusable: 6bae6a5e8aa793c9c441db0213c863a64bce9136
@@ -235,6 +255,6 @@ SPEC CHECKSUMS:
   RxSwiftExt: d61c4b9b06e0a448041b1c659e0f1b5c5a035afc
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: 41dd733a036e719a61c77157726b2b7b5ab255c9
+PODFILE CHECKSUM: c86d8ecdc528cd1f3284d840f3184aef7ef6b6c8
 
 COCOAPODS: 1.11.3

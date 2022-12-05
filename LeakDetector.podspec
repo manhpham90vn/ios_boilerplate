@@ -10,4 +10,6 @@ Pod::Spec.new do |s|
   s.source_files = 'Library/LeakDetector/*.swift'
   s.dependency 'RxSwift', '~> 6.2'
   s.dependency 'RxRelay', '~> 6.2'
+  s.dependency 'Configs'
+  s.dependency 'Logs'
 end

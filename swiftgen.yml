@@ -1,10 +1,10 @@
 xcassets:
   inputs:
-    - Sources/Common/Resources/Assets.xcassets
-    - Sources/Common/Resources/Colors.xcassets
+    - Sources/Resources/Assets.xcassets
+    - Sources/Resources/Colors.xcassets
   outputs:
     - templateName: swift5
-      output: Sources/Common/Resources/Generated/SwiftGen/Assets.swift
+      output: Sources/Resources/Generated/SwiftGen/Assets.swift
       params:
         forceProvidesNamespaces: true
 ib:
@@ -12,4 +12,4 @@ ib:
     - Sources/Modules
   outputs:
     - templateName: scenes-swift5
-      output: Sources/Common/Resources/Generated/SwiftGen/StoryboardScenes.swift
+      output: Sources/Resources/Generated/SwiftGen/StoryboardScenes.swift

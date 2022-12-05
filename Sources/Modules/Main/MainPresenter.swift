@@ -11,6 +11,8 @@ import RxCocoa
 import MPInjector
 import LeakDetector
 import Pagination
+import Configs
+import Logs
 
 protocol MainPresenterInterface: HasTrigger, HasScreenType {
     
@@ -52,15 +54,18 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
     let elements = BehaviorRelay<[PagingUserResponse]>(value: [])
     
     init() {
-        Driver.combineLatest(interactor.getEventUseCaseInterface.processing,
-                             interactor.getUserInfoUseCase.processing) {
+        Driver.combineLatest(
+            interactor.getEventUseCaseInterface.processing,
+            interactor.getUserInfoUseCase.processing
+        ) {
             $0 || $1
         }
+        .distinctUntilChanged()
         .drive(onNext: { [weak self] isLoading in
             self?.loading.isLoading.accept(isLoading)
         })
         .disposed(by: disposeBag)
-    
+        
         Driver.merge(interactor.getEventUseCaseInterface.failed,
                      interactor.getUserInfoUseCase.failed)
             .throttle(.seconds(1), latest: false)

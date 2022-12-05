@@ -8,6 +8,8 @@
 import Foundation
 import Alamofire
 import RxSwift
+import Configs
+import Logs
 
 public protocol AppNetworkInterface {
     func request<T: Decodable>(route: AppRequestConvertible,
@@ -42,9 +44,9 @@ public final class AppNetwork: AppNetworkInterface {
             .request(route)
             .validate(statusCode: 200...300)
             .cURLDescription(calling: { curl in
-                #if DEBUG
-                print(curl)
-                #endif
+                if Configs.shared.loggingAPIEnabled {
+                    LogInfo(curl)
+                }
             })
             .responseDecodable(of: T.self) { response in
                 switch response.result {
