@@ -10,6 +10,7 @@ import Alamofire
 import MPInjector
 import Networking
 import Pagination
+import Configs
 
 final class ApiErrorHandler {
     

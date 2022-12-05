@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: define screen type
 public enum ScreenType {
     case login
     case main

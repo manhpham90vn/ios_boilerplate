@@ -7,6 +7,8 @@
 
 import UIKit
 import MPInjector
+import Configs
+import Logs
 
 protocol LoginRouterInterface {
     var view: LoginViewInterface? { get }

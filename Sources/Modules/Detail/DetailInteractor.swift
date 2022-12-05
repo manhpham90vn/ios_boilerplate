@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Configs
+import Logs
 
 protocol DetailInteractorInterface {}
 
