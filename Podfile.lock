@@ -142,6 +142,8 @@ PODS:
     - Reusable/View (= 4.1.2)
   - Reusable/Storyboard (4.1.2)
   - Reusable/View (4.1.2)
+  - RxBlocking (6.5.0):
+    - RxSwift (= 6.5.0)
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
     - RxSwift (= 6.5.0)
@@ -156,6 +158,8 @@ PODS:
   - RxSwiftExt/RxCocoa (6.0.1):
     - RxCocoa (~> 6.0)
     - RxSwiftExt/Core
+  - RxTest (6.5.0):
+    - RxSwift (= 6.5.0)
   - XCGLogger (7.0.1):
     - XCGLogger/Core (= 7.0.1)
   - XCGLogger/Core (7.0.1):
@@ -177,9 +181,11 @@ DEPENDENCIES:
   - Pagination (from `./`)
   - PKHUD
   - Reusable
+  - RxBlocking
   - RxCocoa
   - RxSwift
   - RxSwiftExt
+  - RxTest
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -204,10 +210,12 @@ SPEC REPOS:
     - PKHUD
     - PromisesObjC
     - Reusable
+    - RxBlocking
     - RxCocoa
     - RxRelay
     - RxSwift
     - RxSwiftExt
+    - RxTest
     - XCGLogger
 
 EXTERNAL SOURCES:
@@ -249,12 +257,14 @@ SPEC CHECKSUMS:
   PKHUD: 98f3e4bc904b9c916f1c5bb6d765365b5357291b
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   Reusable: 6bae6a5e8aa793c9c441db0213c863a64bce9136
+  RxBlocking: 04b5fd28bb5ea49f7d64b80db8bbfe50d9cc1c7d
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   RxSwiftExt: d61c4b9b06e0a448041b1c659e0f1b5c5a035afc
+  RxTest: eb2d23adefc5a5ebf5779c7792fa3edfe6ebcc17
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: c86d8ecdc528cd1f3284d840f3184aef7ef6b6c8
+PODFILE CHECKSUM: 9b91871d7f9532e0fdfc3cb45f09cd1216d48593
 
 COCOAPODS: 1.11.3
