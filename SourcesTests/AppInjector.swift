@@ -13,5 +13,6 @@ extension MPInjector: RegisteringMock {
     public func registerServiceMock() {
         registerMock { UserRepositoryMock() as UserRepositoryInterface }
         registerMock { LoginRouterMock() as LoginRouterInterface }
+        registerMock { LoginViewMock() as LoginViewInterface }
     }
 }
