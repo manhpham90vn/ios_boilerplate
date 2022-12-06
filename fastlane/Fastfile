@@ -53,10 +53,12 @@ platform :ios do
             )
 
             file = time + "_" + app_name.gsub(' ', '') + "_" + version + "_" + build_number.to_s + ".ipa"
-
-            update_project_team(
+            
+            update_code_signing_settings(
+              use_automatic_signing: false,
               path: ENV['XCODEPROJ'],
-              teamid: ENV['TEAM_ID']
+              team_id: ENV['TEAM_ID'],
+              code_sign_identity: "iPhone Distribution",
             )
 
             gym(
