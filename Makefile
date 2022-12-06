@@ -58,7 +58,7 @@ runUnitTest:
 
 .PHONY: exportTestFlight
 exportTestFlight:
-	bundle exec fastlane export --env staging
+	bundle exec fastlane export --env prod
 
 .PHONY: open
 open:

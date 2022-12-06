@@ -16,7 +16,7 @@ platform :ios do
 
     desc "Setup certificate and provisioning profile"
       lane :setup do
-        match(type: "appstore", readonly: is_ci)
+        match(type: "appstore", readonly: true)
       end
 
     desc "Export to testflight"
@@ -53,6 +53,11 @@ platform :ios do
             )
 
             file = time + "_" + app_name.gsub(' ', '') + "_" + version + "_" + build_number.to_s + ".ipa"
+
+            update_project_team(
+              path: ENV['XCODEPROJ'],
+              teamid: ENV['TEAM_ID']
+            )
 
             gym(
                 workspace: ENV['WORKSPACE'],
