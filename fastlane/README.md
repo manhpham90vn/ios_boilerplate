@@ -23,21 +23,21 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 Run unit test
 
+### ios setup
+
+```sh
+[bundle exec] fastlane ios setup
+```
+
+Setup certificate and provisioning profile
+
 ### ios export
 
 ```sh
 [bundle exec] fastlane ios export
 ```
 
-Export ipa
-
-### ios gotestflight
-
-```sh
-[bundle exec] fastlane ios gotestflight
-```
-
-Upload testflight
+Export to testflight
 
 ----
 
