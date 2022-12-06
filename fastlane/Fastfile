@@ -5,6 +5,8 @@ platform :ios do
       setup_circle_ci
     end
 
+    xcversion(version: "14.0.1")
+
     desc "Run unit test"
       lane :unittest do
         run_tests(workspace: ENV['WORKSPACE'],
