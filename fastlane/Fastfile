@@ -7,9 +7,9 @@ platform :ios do
 
     desc "Run unit test"
       lane :unittest do
-        run_tests(workspace: ENV['WORKSPACE'].to_s,
+        run_tests(workspace: ENV['WORKSPACE'],
             devices: ["iPhone 13 Pro Max"],
-            scheme: ENV['SCHEME'].to_s)
+            scheme: ENV['SCHEME'])
       end
 
     desc "Setup certificate and provisioning profile"
@@ -53,9 +53,9 @@ platform :ios do
             file = time + "_" + app_name.gsub(' ', '') + "_" + version + "_" + build_number.to_s + ".ipa"
 
             gym(
-                workspace: ENV['WORKSPACE'].to_s,
-                configuration: ENV['CONFIGURATION'].to_s,
-                scheme: ENV['SCHEME'].to_s,
+                workspace: ENV['WORKSPACE'],
+                configuration: ENV['CONFIGURATION'],
+                scheme: ENV['SCHEME'],
                 export_method: "app-store",
                 output_directory: "./fastlane/build",
                 output_name: file,
@@ -64,7 +64,7 @@ platform :ios do
                     uploadBitcode: false,
                     uploadSymbols: false,
                     compileBitcode: false,
-                    provisioningProfiles: { identifider => ENV['PROVISION_NAME'].to_s, "signingStyle": "manual" }
+                    provisioningProfiles: { identifider => ENV['PROVISION_NAME'], "signingStyle": "manual" }
                 }
             )
             upload_to_testflight(
