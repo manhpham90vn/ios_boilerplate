@@ -74,6 +74,13 @@ platform :ios do
                     provisioningProfiles: { identifider => ENV['PROVISION_NAME'], "signingStyle": "manual" }
                 }
             )
+
+            app_store_connect_api_key(
+              key_id: $APP_STORE_KEY_ID,
+              issuer_id: $APP_STORE_ISSUER_ID,
+              key_filepath: $APP_STORE_P8_PATH
+            )
+
             upload_to_testflight(
               app_identifier: identifider,
               skip_submission: true,
