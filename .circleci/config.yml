@@ -34,6 +34,7 @@ jobs:
           command: "make setupCertificate"
       - run:
           name: "Deploy Testflight"
+          no_output_timeout: 30m
           command: "make exportTestFlight"
 
 # Invoke jobs via workflows
