@@ -78,7 +78,7 @@ platform :ios do
             app_store_connect_api_key(
               key_id: $APP_STORE_KEY_ID,
               issuer_id: $APP_STORE_ISSUER_ID,
-              key_filepath: $APP_STORE_P8_PATH
+              key_filepath: "./AuthKey_6TF3P5J5QY.p8"
             )
 
             upload_to_testflight(

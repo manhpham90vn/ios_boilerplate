@@ -34,7 +34,7 @@ jobs:
           command: "make setupCertificate"
       - run:
           name: "Create P8 API Key"
-          command: "cat $APP_STORE_P8"
+          command: "echo $APP_STORE_P8 | base64 --decode > AuthKey_6TF3P5J5QY.p8"
       - run:
           name: "Deploy Testflight"
           no_output_timeout: 30m
