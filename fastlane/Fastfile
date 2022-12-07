@@ -5,8 +5,6 @@ platform :ios do
       setup_circle_ci
     end
 
-    xcversion(version: "14.0.1")
-
     desc "Run unit test"
       lane :unittest do
         run_tests(workspace: ENV['WORKSPACE'],
@@ -53,11 +51,11 @@ platform :ios do
             )
 
             file = time + "_" + app_name.gsub(' ', '') + "_" + version + "_" + build_number.to_s + ".ipa"
-            
+
             update_code_signing_settings(
               use_automatic_signing: false,
               path: ENV['XCODEPROJ'],
-              team_id: ENV['TEAM_ID'],
+              team_id: ENV['FASTLANE_TEAM_ID'],
               code_sign_identity: "iPhone Distribution",
             )
 
@@ -78,7 +76,8 @@ platform :ios do
             )
             upload_to_testflight(
               app_identifier: identifider,
-              skip_submission: true
+              skip_submission: true,
+              skip_waiting_for_build_processing: true
             )
     end
 end
