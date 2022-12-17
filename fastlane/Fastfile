@@ -19,6 +19,13 @@ platform :ios do
 
     desc "Export to testflight"
         lane :export do
+
+            app_store_connect_api_key(
+              key_id: "6TF3P5J5QY",
+              issuer_id: "0e7278c3-3362-4257-8e94-c8f592216d8e",
+              key_filepath: "./AuthKey_6TF3P5J5QY.p8"
+            )
+
             time = Time.new.strftime("%Y_%d_%m_%H_%M_%S")
 
             app_name = get_xcconfig_value(
@@ -68,12 +75,6 @@ platform :ios do
                     compileBitcode: false,
                     provisioningProfiles: { identifider => ENV['PROVISION_NAME'], "signingStyle": "manual" }
                 }
-            )
-
-            app_store_connect_api_key(
-              key_id: "6TF3P5J5QY",
-              issuer_id: "0e7278c3-3362-4257-8e94-c8f592216d8e",
-              key_filepath: "./AuthKey_6TF3P5J5QY.p8"
             )
 
             upload_to_testflight(
