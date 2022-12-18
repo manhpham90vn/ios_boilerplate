@@ -14,9 +14,14 @@ platform :ios do
 
     desc "Setup certificate and provisioning profile"
       lane :setup do
-        match(type: "appstore", readonly: true)
-      end
+        identifider = get_xcconfig_value(
+              path: ENV['PATH_XCCONFIG'],
+              name: 'PRODUCT_BUNDLE_IDENTIFIER'
+            )
 
+        match(app_identifier: identifider, type: "appstore", readonly: true)
+      end
+      
     desc "Export to testflight"
         lane :export do
 
