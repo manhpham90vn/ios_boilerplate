@@ -8,22 +8,27 @@ platform :ios do
     desc "Run unit test"
       lane :unittest do
         run_tests(workspace: ENV['WORKSPACE'],
-            devices: ["iPhone 13 Pro Max"],
+            devices: [ENV['UNIT_TEST_DEVICE']],
             scheme: ENV['SCHEME'])
       end
 
     desc "Setup certificate and provisioning profile"
       lane :setup do
-        match(type: "appstore", readonly: true)
-      end
+        identifider = get_xcconfig_value(
+              path: ENV['PATH_XCCONFIG'],
+              name: 'PRODUCT_BUNDLE_IDENTIFIER'
+            )
 
+        match(app_identifier: identifider, type: "appstore", readonly: true)
+      end
+      
     desc "Export to testflight"
         lane :export do
 
             app_store_connect_api_key(
-              key_id: "6TF3P5J5QY",
-              issuer_id: "0e7278c3-3362-4257-8e94-c8f592216d8e",
-              key_filepath: "./AuthKey_6TF3P5J5QY.p8"
+              key_id: ENV['KEY_ID'],
+              issuer_id: ENV['ISSUER_ID'],
+              key_filepath: ENV['KEY_FILEPATH']
             )
 
             time = Time.new.strftime("%Y_%d_%m_%H_%M_%S")
@@ -43,7 +48,7 @@ platform :ios do
               name: 'BUNDLE_SHORT_VERSION_STRING'
             )
 
-            build_number_from_test_flight = latest_testflight_build_number(app_identifier: identifider, version: "1.0")
+            build_number_from_test_flight = latest_testflight_build_number(app_identifier: identifider, version: version)
             build_number_from_test_flight += 1
 
             update_xcconfig_value(
