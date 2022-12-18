@@ -1,5 +1,4 @@
-git_url("git@github.com:manhpham90vn/match_fastlane.git")
+git_url(ENV['GIT_URL'])
 storage_mode("git")
 type("appstore")
-app_identifier(["com.manhpham.myapp.debug"])
-username("manhpham90vn@icloud.com")
+username(ENV['APPLE_ID'])
