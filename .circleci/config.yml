@@ -29,8 +29,24 @@ jobs:
           key: *gem-cache
           paths:
             - vendor/bundle
-      - run: mint bootstrap --link     
-      - run: make generate
+
+      - run: HOMEBREW_NO_AUTO_UPDATE=1 brew install mint
+      - run: mint bootstrap --link
+
+      - restore_cache:
+          name: Restore CocoaPods
+          keys:
+            - pods-{{ checksum "Podfile.lock" }}
+            - pods-
+      - run: bundle exec pod install
+      - save_cache:
+          name: Save CocoaPods
+          key: pods-{{ checksum "Podfile.lock" }}
+          paths:
+            - ./Pods
+    
+      - run: make generateSwiftgen
+      - run: make generateXcodegen      
       - run:
           name: "Run Unit test"
           command: "bundle exec fastlane unittest --env debug"
