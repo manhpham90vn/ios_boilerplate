@@ -19,7 +19,12 @@ jobs:
             - &gem-cache gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
             - gem-cache-v1-{{ arch }}-{{ .Branch }}
             - gem-cache-v1
-      - run: bundle install --path vendor/bundle
+      - run: |
+          export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")
+          gem install bundler:$BUNDLER_VERSION      
+      - run: |
+          bundle config path vendor/bundle
+          bundle install --without=documentation --jobs 4 --retry 3
       - save_cache:
           key: *gem-cache
           paths:
