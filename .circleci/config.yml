@@ -14,13 +14,13 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
-      - restore_cache_gem:
+      - restore_cache:
           keys:
             - &gem-cache gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
             - gem-cache-v1-{{ arch }}-{{ .Branch }}
             - gem-cache-v1
       - run: bundle install --path vendor/bundle
-      - save_cache_gem:
+      - save_cache:
           key: *gem-cache
           paths:
             - vendor/bundle
