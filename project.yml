@@ -34,8 +34,11 @@ targets:
     preBuildScripts:
       - name: Generate
         script: |
-          scripts/mint/generate.sh
+          scripts/mint/generateResource.sh
     postCompileScripts:
+      - name: Swiftlint
+        script:
+          scripts/mint/runLinter.sh
       - name: GoogleServiceInfo
         script: |
           PATH_TO_GOOGLE_PLISTS="${PROJECT_DIR}/Sources/Configs/GoogleServices"
