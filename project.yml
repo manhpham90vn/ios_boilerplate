@@ -32,13 +32,10 @@ targets:
       VALIDATE_WORKSPACE: YES
       CODE_SIGN_ENTITLEMENTS: Sources/Resources/MyApp.entitlements
     preBuildScripts:
-      - name: SwiftGen
+      - name: Generate
         script: |
-          mint run SwiftGen/SwiftGen@6.5.1 swiftgen
+          scripts/mint/generate.sh
     postCompileScripts:
-      - name: Swiftlint
-        script: |
-          mint run realm/SwiftLint@0.49.1 swiftlint
       - name: GoogleServiceInfo
         script: |
           PATH_TO_GOOGLE_PLISTS="${PROJECT_DIR}/Sources/Configs/GoogleServices"
