@@ -46,6 +46,7 @@ jobs:
           key: *pod-cache
           paths:
             - ./Pods
+            - ../.cocoapods
       - run:
           name: "Run Unit test"
           command: "bundle exec fastlane unittest --env debug"

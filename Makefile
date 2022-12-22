@@ -1,8 +1,5 @@
 .DEFAULT_GOAL := all
 
-XCODEGEN_VERSION := 2.33.0
-SWIFTGEN_VERSION := 6.5.1
-
 .PHONY: all
 all: install generate
 

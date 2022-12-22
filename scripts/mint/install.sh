@@ -7,6 +7,7 @@ then
     brew install mint
 fi
 
-mint bootstrap -m Mintfile --link
-
-export PATH=$PATH:$(pwd)/Mints/bin
+if ! [ "$(ls -A Mints/bin)" ]
+then
+    mint bootstrap -m Mintfile --link
+fi
