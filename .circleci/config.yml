@@ -27,16 +27,13 @@ jobs:
             - &mint-cache mint-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Mintfile" }}
             - mint-cache-v1-{{ arch }}-{{ .Branch }}
             - mint-cache-v1
-      - run: |
-          mkdir -p Mints/{lib,bin}
-          MINT_PATH=Mints/lib MINT_LINK_PATH=Mints/bin mint bootstrap -m Mintfile --link
+      - run: make installMint
       - save_cache:
           name: Save Mint
           key: *mint-cache
           paths:
             - ./Mints
-      - run: make generateSwiftgen
-      - run: make generateXcodegen  
+      - run: make generateResource
       - restore_cache:
           name: Restore CocoaPods
           keys:
