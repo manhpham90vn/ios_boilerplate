@@ -24,27 +24,29 @@ jobs:
       - restore_cache:
           name: Restore Mint
           keys:
-            - mint-
+            - &mint-cache mint-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Mintfile" }}
+            - mint-cache-v1-{{ arch }}-{{ .Branch }}
+            - mint-cache-v1
       - run: |
           mkdir -p Mints/{lib,bin}
           MINT_PATH=Mints/lib MINT_LINK_PATH=Mints/bin mint bootstrap -m Mintfile --link
       - save_cache:
           name: Save Mint
-          key: mint-
+          key: *mint-cache
           paths:
             - ./Mints
-      - run: export PATH=$PATH:~/.mint/bin
       - run: make generateSwiftgen
       - run: make generateXcodegen  
       - restore_cache:
           name: Restore CocoaPods
           keys:
-            - pods-{{ checksum "Podfile.lock" }}
-            - pods-
+            - &pod-cache pod-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Podfile.lock" }}
+            - pod-cache-v1-{{ arch }}-{{ .Branch }}
+            - pod-cache-v1
       - run: bundle exec pod install
       - save_cache:
           name: Save CocoaPods
-          key: pods-{{ checksum "Podfile.lock" }}
+          key: *pod-cache
           paths:
             - ./Pods
       - run:
