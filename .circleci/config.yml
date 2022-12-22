@@ -1,17 +1,8 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
-
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
   build-and-test:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     macos:
       xcode: 14.0.1
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
       - restore_cache:
@@ -20,8 +11,7 @@ jobs:
             - gem-cache-v1-{{ arch }}-{{ .Branch }}
             - gem-cache-v1
       - run: |
-          export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")
-          gem install bundler:$BUNDLER_VERSION      
+          BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ") gem install bundler:$BUNDLER_VERSION      
       - run: |
           bundle config path vendor/bundle
           bundle install --without=documentation --jobs 4 --retry 3
@@ -30,7 +20,9 @@ jobs:
           paths:
             - vendor/bundle
       - run: HOMEBREW_NO_AUTO_UPDATE=1 brew install mint
-      - run: mint bootstrap --link
+      - run: |
+          mkdir -p Mints/{lib,bin}
+          MINT_PATH=Mints/lib MINT_LINK_PATH=Mints/bin mint bootstrap -m Mintfile --link
       - run: export PATH=$PATH:~/.mint/bin
       - run: make generateSwiftgen
       - run: make generateXcodegen  
@@ -67,9 +59,6 @@ jobs:
           name: "Deploy Testflight"
           no_output_timeout: 30m
           command: "make exportTestFlight"
-
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   build-and-test-workflow:
     jobs:
@@ -77,7 +66,3 @@ workflows:
   deploy-apple:
     jobs:
       - deploy-apple:
-          filters:
-            branches:
-              only:
-                - master
