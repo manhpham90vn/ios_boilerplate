@@ -65,4 +65,4 @@ workflows:
       - build-and-test
   deploy-apple:
     jobs:
-      - deploy-apple:
+      - deploy-apple
