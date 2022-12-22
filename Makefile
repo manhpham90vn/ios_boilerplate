@@ -5,24 +5,20 @@ all: install generate
 
 # install
 .PHONY: install
-install: installDependencies installBundle installMint
-installDependencies:
-	scripts/installDependencies.sh
+install: installRuby installBundle installMint
+installRuby:
+	@sh scripts/ruby/install.sh
 installBundle:
 	bundle config path vendor/bundle
 	bundle install --without=documentation --jobs 4 --retry 3
 installMint:
-	mint bootstrap --link
-
+	@sh scripts/mint/install.sh
 # generate
 .PHONY: generate
-generate: generateSwiftgen generateXcodegen installPod
-generateSwiftgen:
-	rm -rf Sources/Common/Resources/Generated/*
-	mkdir -p Sources/Common/Resources/Generated/SwiftGen
-	mint run SwiftGen/SwiftGen@6.5.1 swiftgen
-generateXcodegen:
-	mint run yonaskolb/xcodegen@2.32.0 xcodegen generate --spec project.yml
+generate: generateResource installPod
+generateResource:
+	@sh scripts/mint/generate.sh
+	@sh scripts/mint/generateProject.sh
 installPod:
 	bundle exec pod install
 
@@ -32,7 +28,7 @@ xcodetest:
 	xcodebuild \
 	-workspace "My Project.xcworkspace" \
 	-scheme "My Project" \
-	-destination 'platform=iOS Simulator,name=iPhone 13 Pro Max' \
+	-destination 'platform=iOS Simulator,name=iPhone 14 Pro' \
 	-derivedDataPath "build" \
 	-enableCodeCoverage YES \
 	test \
