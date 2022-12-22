@@ -1,5 +1,8 @@
 .DEFAULT_GOAL := all
 
+XCODEGEN_VERSION := 2.33.0
+SWIFTGEN_VERSION := 6.5.1
+
 .PHONY: all
 all: install generate
 
@@ -12,17 +15,17 @@ installBundle:
 	bundle config path vendor/bundle
 	bundle install --without=documentation --jobs 4 --retry 3
 installMint:
-	mint bootstrap --link
-
+	mkdir -p Mints/{lib,bin}
+	MINT_PATH=Mints/lib MINT_LINK_PATH=Mints/bin mint bootstrap -m Mintfile --link
 # generate
 .PHONY: generate
 generate: generateSwiftgen generateXcodegen installPod
 generateSwiftgen:
 	rm -rf Sources/Common/Resources/Generated/*
 	mkdir -p Sources/Common/Resources/Generated/SwiftGen
-	mint run SwiftGen/SwiftGen@6.5.1 swiftgen
+	mint run SwiftGen/SwiftGen@${SWIFTGEN_VERSION} swiftgen
 generateXcodegen:
-	mint run yonaskolb/xcodegen@2.32.0 xcodegen generate --spec project.yml
+	mint run yonaskolb/xcodegen@${XCODEGEN_VERSION} xcodegen generate --spec project.yml
 installPod:
 	bundle exec pod install
 
