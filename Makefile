@@ -20,8 +20,8 @@ installMint:
 .PHONY: generate
 generate: generateResource installPod
 generateResource:
-	@sh scripts/mint/generateProject.sh
 	@sh scripts/mint/generate.sh
+	@sh scripts/mint/generateProject.sh
 installPod:
 	bundle exec pod install
 
