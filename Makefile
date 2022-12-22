@@ -47,7 +47,7 @@ delete:
 # fastlane
 .PHONY: setupCertificate
 setupCertificate:
-	bundle exec fastlane setup
+	bundle exec fastlane setup --env debug
 
 .PHONY: runUnitTest
 runUnitTest:
