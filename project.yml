@@ -1,6 +1,3 @@
-SWIFTGEN_VERSION: 6.5.1
-SWIFTLINT_VERSION: 0.49.1
-
 name: My Project
 configs:
   Debug: debug
@@ -37,11 +34,11 @@ targets:
     preBuildScripts:
       - name: SwiftGen
         script: |
-          mint run SwiftGen/SwiftGen@${SWIFTGEN_VERSION} swiftgen
+          mint run SwiftGen/SwiftGen@6.5.1 swiftgen
     postCompileScripts:
       - name: Swiftlint
         script: |
-          mint run realm/SwiftLint@${SWIFTLINT_VERSION} swiftlint
+          mint run realm/SwiftLint@0.49.1 swiftlint
       - name: GoogleServiceInfo
         script: |
           PATH_TO_GOOGLE_PLISTS="${PROJECT_DIR}/Sources/Configs/GoogleServices"
