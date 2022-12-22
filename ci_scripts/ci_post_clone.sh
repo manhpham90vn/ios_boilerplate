@@ -2,22 +2,13 @@
 
 cd $CI_WORKSPACE
 
-if ! mint version &> /dev/null
-then
-    brew install mint
-fi
+source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../scripts/ruby/install.sh
 
-if ! pod --version &> /dev/null
-then
-    brew install cocoapods
-fi
+bundle config path vendor/bundle
+bundle install --without=documentation --jobs 4 --retry 3
 
-mint bootstrap --link
+source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../scripts/mint/install.sh
+source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../scripts/mint/generateResource.sh
+source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../scripts/mint/generateProject.sh
 
-rm -rf Sources/Common/Resources/Generated/*
-mkdir -p Sources/Common/Resources/Generated/SwiftGen
-
-mint run SwiftGen/SwiftGen@6.5.1 swiftgen
-mint run yonaskolb/xcodegen@2.32.0 xcodegen generate --spec project.yml
-
-pod install
+bundle exec pod install
