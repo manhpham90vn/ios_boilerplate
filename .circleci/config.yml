@@ -7,9 +7,9 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - &gem-cache gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-            - gem-cache-v1-{{ arch }}-{{ .Branch }}
-            - gem-cache-v1
+            - &gem-cache gem-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - gem-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
+            - gem-cache-{{ .Environment.CACHE_VERSION }}
       - run: |
           export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ") 
           gem install bundler:$BUNDLER_VERSION      
@@ -24,9 +24,9 @@ jobs:
       - restore_cache:
           name: Restore Mint
           keys:
-            - &mint-cache mint-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Mintfile" }}
-            - mint-cache-v1-{{ arch }}-{{ .Branch }}
-            - mint-cache-v1
+            - &mint-cache mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Mintfile" }}
+            - mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
+            - mint-cache-{{ .Environment.CACHE_VERSION }}
       - run: make installMint
       - save_cache:
           name: Save Mint
@@ -37,9 +37,9 @@ jobs:
       - restore_cache:
           name: Restore CocoaPods
           keys:
-            - &pod-cache pod-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Podfile.lock" }}
-            - pod-cache-v1-{{ arch }}-{{ .Branch }}
-            - pod-cache-v1
+            - &pod-cache pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Podfile.lock" }}
+            - pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
+            - pod-cache-{{ .Environment.CACHE_VERSION }}
       - run: bundle exec pod install
       - save_cache:
           name: Save CocoaPods
@@ -57,9 +57,9 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - &gem-cache gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-            - gem-cache-v1-{{ arch }}-{{ .Branch }}
-            - gem-cache-v1
+            - &gem-cache gem-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - gem-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
+            - gem-cache-{{ .Environment.CACHE_VERSION }}
       - run: |
           export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ") 
           gem install bundler:$BUNDLER_VERSION      
@@ -74,9 +74,9 @@ jobs:
       - restore_cache:
           name: Restore Mint
           keys:
-            - &mint-cache mint-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Mintfile" }}
-            - mint-cache-v1-{{ arch }}-{{ .Branch }}
-            - mint-cache-v1
+            - &mint-cache mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Mintfile" }}
+            - mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
+            - mint-cache-{{ .Environment.CACHE_VERSION }}
       - run: make installMint
       - save_cache:
           name: Save Mint
@@ -87,9 +87,9 @@ jobs:
       - restore_cache:
           name: Restore CocoaPods
           keys:
-            - &pod-cache pod-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Podfile.lock" }}
-            - pod-cache-v1-{{ arch }}-{{ .Branch }}
-            - pod-cache-v1
+            - &pod-cache pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Podfile.lock" }}
+            - pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
+            - pod-cache-{{ .Environment.CACHE_VERSION }}
       - run: bundle exec pod install
       - save_cache:
           name: Save CocoaPods
