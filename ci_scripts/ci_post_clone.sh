@@ -9,6 +9,9 @@ then
     rbenv global 2.6.9
 fi
 
+echo 'eval "$(rbenv init -)"' >> ~/.zshrc
+source ~/.zshrc
+
 source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../scripts/ruby/install.sh
 
 bundle config path vendor/bundle
