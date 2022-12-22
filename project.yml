@@ -1,3 +1,6 @@
+SWIFTGEN_VERSION: 6.5.1
+SWIFTLINT_VERSION: 0.49.1
+
 name: My Project
 configs:
   Debug: debug
@@ -34,11 +37,11 @@ targets:
     preBuildScripts:
       - name: SwiftGen
         script: |
-          mint run SwiftGen/SwiftGen@6.5.1 swiftgen
+          mint run SwiftGen/SwiftGen@${SWIFTGEN_VERSION} swiftgen
     postCompileScripts:
       - name: Swiftlint
         script: |
-          mint run realm/SwiftLint@0.49.1 swiftlint
+          mint run realm/SwiftLint@${SWIFTLINT_VERSION} swiftlint
       - name: GoogleServiceInfo
         script: |
           PATH_TO_GOOGLE_PLISTS="${PROJECT_DIR}/Sources/Configs/GoogleServices"
@@ -55,7 +58,7 @@ targets:
     postBuildScripts:
       - name: Crashlytics
         script: |
-          "${PROJECT_DIR}/scripts/run"
+          "${PODS_ROOT}/FirebaseCrashlytics/run"
         inputFiles:
           - $(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)
           - ${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}
