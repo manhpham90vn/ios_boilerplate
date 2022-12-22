@@ -13,6 +13,7 @@ installBundle:
 	bundle install --without=documentation --jobs 4 --retry 3
 installMint:
 	@sh scripts/mint/install.sh
+
 # generate
 .PHONY: generate
 generate: generateResource installPod

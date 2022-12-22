@@ -56,9 +56,48 @@ jobs:
 
     steps:
       - checkout
-      - run:
-          name: "Install"
-          command: "make"
+      - restore_cache:
+          keys:
+            - &gem-cache gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - gem-cache-v1-{{ arch }}-{{ .Branch }}
+            - gem-cache-v1
+      - run: |
+          export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ") 
+          gem install bundler:$BUNDLER_VERSION      
+      - run: |
+          bundle config path vendor/bundle
+          bundle install --without=documentation --jobs 4 --retry 3
+      - save_cache:
+          key: *gem-cache
+          paths:
+            - vendor/bundle
+      - run: HOMEBREW_NO_AUTO_UPDATE=1 brew install mint
+      - restore_cache:
+          name: Restore Mint
+          keys:
+            - &mint-cache mint-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Mintfile" }}
+            - mint-cache-v1-{{ arch }}-{{ .Branch }}
+            - mint-cache-v1
+      - run: make installMint
+      - save_cache:
+          name: Save Mint
+          key: *mint-cache
+          paths:
+            - ./Mints
+      - run: make generateResource
+      - restore_cache:
+          name: Restore CocoaPods
+          keys:
+            - &pod-cache pod-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Podfile.lock" }}
+            - pod-cache-v1-{{ arch }}-{{ .Branch }}
+            - pod-cache-v1
+      - run: bundle exec pod install
+      - save_cache:
+          name: Save CocoaPods
+          key: *pod-cache
+          paths:
+            - ./Pods
+            - ../.cocoapods
       - run:
           name: "Setup Certificate"
           command: "make setupCertificate"
