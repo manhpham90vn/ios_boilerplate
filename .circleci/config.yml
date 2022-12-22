@@ -1,22 +1,52 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
-
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
   build-and-test:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     macos:
       xcode: 14.0.1
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
-      - run:
-          name: "Install"
-          command: "make"
+      - restore_cache:
+          keys:
+            - &gem-cache gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - gem-cache-v1-{{ arch }}-{{ .Branch }}
+            - gem-cache-v1
+      - run: |
+          export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ") 
+          gem install bundler:$BUNDLER_VERSION      
+      - run: |
+          bundle config path vendor/bundle
+          bundle install --without=documentation --jobs 4 --retry 3
+      - save_cache:
+          key: *gem-cache
+          paths:
+            - vendor/bundle
+      - run: HOMEBREW_NO_AUTO_UPDATE=1 brew install mint
+      - restore_cache:
+          name: Restore Mint
+          keys:
+            - &mint-cache mint-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Mintfile" }}
+            - mint-cache-v1-{{ arch }}-{{ .Branch }}
+            - mint-cache-v1
+      - run: make installMint
+      - save_cache:
+          name: Save Mint
+          key: *mint-cache
+          paths:
+            - ./Mints
+      - run: make generateResource
+      - restore_cache:
+          name: Restore CocoaPods
+          keys:
+            - &pod-cache pod-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Podfile.lock" }}
+            - pod-cache-v1-{{ arch }}-{{ .Branch }}
+            - pod-cache-v1
+      - run: bundle exec pod install
+      - save_cache:
+          name: Save CocoaPods
+          key: *pod-cache
+          paths:
+            - ./Pods
+            - ../.cocoapods
       - run:
           name: "Run Unit test"
           command: "bundle exec fastlane unittest --env debug"
@@ -39,17 +69,10 @@ jobs:
           name: "Deploy Testflight"
           no_output_timeout: 30m
           command: "make exportTestFlight"
-
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   build-and-test-workflow:
     jobs:
       - build-and-test
   deploy-apple:
     jobs:
-      - deploy-apple:
-          filters:
-            branches:
-              only:
-                - master
+      - deploy-apple
