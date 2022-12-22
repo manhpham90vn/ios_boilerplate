@@ -6,3 +6,4 @@ mkdir -p Mints/{lib,bin}
 
 export MINT_PATH=Mints/lib 
 export MINT_LINK_PATH=Mints/bin
+export PATH=$PATH:$(pwd)/Mints/bin
