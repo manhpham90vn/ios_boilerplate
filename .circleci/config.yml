@@ -9,7 +9,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - &gem-cache gem-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - gem-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
             - gem-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
             - gem-cache-{{ .Environment.CACHE_VERSION }}
       - run: |
@@ -19,47 +19,48 @@ jobs:
           bundle config path vendor/bundle
           bundle install --without=documentation --jobs 4 --retry 3
       - save_cache:
-          key: *gem-cache
+          key: gem-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
       - run: HOMEBREW_NO_AUTO_UPDATE=1 brew install mint
       - restore_cache:
           name: Restore Mint
           keys:
-            - &mint-cache mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Mintfile" }}
+            - mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Mintfile" }}
             - mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
             - mint-cache-{{ .Environment.CACHE_VERSION }}
       - run: make installMint
       - save_cache:
           name: Save Mint
-          key: *mint-cache
+          key: mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{
+            checksum "Mintfile" }}
           paths:
             - ./Mints
       - run: make generateResource
       - restore_cache:
           name: Restore CocoaPods
           keys:
-            - &pod-cache pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Podfile.lock" }}
+            - pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Podfile.lock" }}
             - pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
             - pod-cache-{{ .Environment.CACHE_VERSION }}
       - run: bundle exec pod install
       - save_cache:
           name: Save CocoaPods
-          key: *pod-cache
+          key: pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{
+            checksum "Podfile.lock" }}
           paths:
             - ./Pods
       - run:
-          name: "Run Unit test"
-          command: "bundle exec fastlane unittest --env debug"
+          name: Run Unit test
+          command: bundle exec fastlane unittest --env debug
   deploy-apple:
     macos:
       xcode: 14.0.1
-
     steps:
       - checkout
       - restore_cache:
           keys:
-            - &gem-cache gem-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - gem-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
             - gem-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
             - gem-cache-{{ .Environment.CACHE_VERSION }}
       - run: |
@@ -69,45 +70,48 @@ jobs:
           bundle config path vendor/bundle
           bundle install --without=documentation --jobs 4 --retry 3
       - save_cache:
-          key: *gem-cache
+          key: gem-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{
+            checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
       - run: HOMEBREW_NO_AUTO_UPDATE=1 brew install mint
       - restore_cache:
           name: Restore Mint
           keys:
-            - &mint-cache mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Mintfile" }}
+            - mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Mintfile" }}
             - mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
             - mint-cache-{{ .Environment.CACHE_VERSION }}
       - run: make installMint
       - save_cache:
           name: Save Mint
-          key: *mint-cache
+          key: mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{
+            checksum "Mintfile" }}
           paths:
             - ./Mints
       - run: make generateResource
       - restore_cache:
           name: Restore CocoaPods
           keys:
-            - &pod-cache pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Podfile.lock" }}
+            - pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Podfile.lock" }}
             - pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
             - pod-cache-{{ .Environment.CACHE_VERSION }}
       - run: bundle exec pod install
       - save_cache:
           name: Save CocoaPods
-          key: *pod-cache
+          key: pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{
+            checksum "Podfile.lock" }}
           paths:
             - ./Pods
       - run:
-          name: "Setup Certificate"
-          command: "make setupCertificate"
+          name: Setup Certificate
+          command: make setupCertificate
       - run:
-          name: "Create P8 API Key"
-          command: "echo $APP_STORE_P8 | base64 --decode > AuthKey_6TF3P5J5QY.p8"
+          name: Create P8 API Key
+          command: echo $APP_STORE_P8 | base64 --decode > AuthKey_6TF3P5J5QY.p8
       - run:
-          name: "Deploy Testflight"
+          name: Deploy Testflight
           no_output_timeout: 30m
-          command: "make exportTestFlight"
+          command: make exportTestFlight
 workflows:
   build-and-test-workflow:
     jobs:
