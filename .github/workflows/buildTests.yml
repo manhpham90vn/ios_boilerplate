@@ -1,48 +1,38 @@
 name: Build and run unit test
-
 on:
   pull_request:
-    branches: [ master, develop ]
-    
-  workflow_dispatch:
-
+    branches:
+      - develop
+  workflow_dispatch: null
 concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: true
-
 jobs:
   build:
     runs-on: macos-12
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: List available Xcode versions
-      run: |
-        ls /Applications | grep Xcode
-
-    - name: Select Xcode
-      run: |
+      - uses: actions/checkout@v3
+      - name: List available Xcode versions
+        run: |
+          ls /Applications | grep Xcode
+      - name: Select Xcode
+        run: >
           sudo xcode-select -switch /Applications/Xcode_14.0.1.app && /usr/bin/xcodebuild -version
-
-    - name: Install 
-      run: |
-        make install
-  
-    - name: Generate
-      run: |
-        make generate
-  
-    - name: Run build tests
-      run: |
-        set -o pipefail && make xcodetest
-  
-    - name: Generate Coverage
-      run: |
-        make generateCoverage
-      
-    - name: Upload Coverage
-      uses: codecov/codecov-action@v3
-      with:
-        files: ./xml_report/cobertura.xml
-        fail_ci_if_error: true
-        verbose: true
+      - name: Install
+        run: |
+          make install
+      - name: Generate
+        run: |
+          make generate
+      - name: Run build tests
+        run: |
+          set -o pipefail && make xcodetest
+      - name: Generate Coverage
+        run: |
+          make generateCoverage
+      - name: Upload Coverage
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./xml_report/cobertura.xml
+          fail_ci_if_error: true
+          verbose: true
