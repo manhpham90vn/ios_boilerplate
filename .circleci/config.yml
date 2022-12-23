@@ -5,12 +5,12 @@ aliases:
   - &restore_gem_cache
       name: Restore gem cache
       keys:
-        - gem-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        - &gem-cache gem-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
         - gem-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
         - gem-cache-{{ .Environment.CACHE_VERSION }}
   - &save_gem_cache
       name: Save gem cache
-      key: gem-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+      key: *gem-cache
       paths:
         - vendor/bundle
   - &bundle_install
@@ -18,35 +18,35 @@ aliases:
       command: |
         export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")
         gem install bundler:$BUNDLER_VERSION
-  - &brew-install-mint
+  - &brew_install_mint
       name: Install Mint view Homebrew
       command: HOMEBREW_NO_AUTO_UPDATE=1 brew install mint
   - &restore_mint_cache
       name: Restore Mint cache
       keys:
-        - mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Mintfile" }}
+        - &mint-cache mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Mintfile" }}
         - mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
         - mint-cache-{{ .Environment.CACHE_VERSION }}
   - &save_mint_cache
       name: Save Mint cache
-      key: mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Mintfile" }}
+      key: *mint-cache
       paths:
         - ./Mints
-  - &mint-install-dependency
+  - &mint_install_dependency
       name: Install dependency view Mint
       command: make installMint
-  - &generate-resource
+  - &generate_resource
       name: Generate SwiftGen
       command: make generateResource
   - &restore_pod_cache
       name: Restore CocoaPods
       keys:
-        - pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Podfile.lock" }}
+        - &pod-cache pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Podfile.lock" }}
         - pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
         - pod-cache-{{ .Environment.CACHE_VERSION }}
   - &save_pod_cache:
       name: Save CocoaPods
-      key: pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Podfile.lock" }}
+      key: *pod-cache
       paths:
         - ./Pods
   - &install_pod
@@ -61,13 +61,14 @@ jobs:
       - restore_cache: *restore_gem_cache
       - run: *bundle_install
       - save_cache: *save_gem_cache
-      - run: *brew-install-mint
+      - run: *brew_install_mint
       - restore_cache: *restore_mint_cache
-      - run: *mint-install-dependency
+      - run: *mint_install_dependency
       - save_cache: *save_mint_cache
-      - run: *generate-resource
+      - run: *generate_resource
       - restore_cache: *restore_pod_cache
       - run: *install_pod
+      - save_cache: *save_pod_cache
       - run:
           name: Run Unit test
           command: bundle exec fastlane unittest --env debug
@@ -79,13 +80,14 @@ jobs:
       - restore_cache: *restore_gem_cache
       - run: *bundle_install
       - save_cache: *save_gem_cache
-      - run: *brew-install-mint
+      - run: *brew_install_mint
       - restore_cache: *restore_mint_cache
-      - run: *mint-install-dependency
+      - run: *mint_install_dependency
       - save_cache: *save_mint_cache
-      - run: *generate-resource
+      - run: *generate_resource
       - restore_cache: *restore_pod_cache
       - run: *install_pod
+      - save_cache: *save_pod_cache
       - run:
           name: Setup Certificate
           command: make setupCertificate
