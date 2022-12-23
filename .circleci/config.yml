@@ -5,12 +5,12 @@ aliases:
   - &restore_gem_cache
       name: Restore gem cache
       keys:
-        - &gem_cache gem-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        - gem-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
         - gem-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
         - gem-cache-{{ .Environment.CACHE_VERSION }}
   - &save_gem_cache
       name: Save gem cache
-      key: *gem_cache
+      key: gem-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
       paths:
         - vendor/bundle
   - &bundle_install
@@ -24,12 +24,12 @@ aliases:
   - &restore_mint_cache
       name: Restore Mint cache
       keys:
-        - &mint_cache mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Mintfile" }}
+        - mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Mintfile" }}
         - mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
         - mint-cache-{{ .Environment.CACHE_VERSION }}
   - &save_mint_cache
       name: Save Mint cache
-      key: *mint_cache
+      key: mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Mintfile" }}
       paths:
         - ./Mints
   - &mint-install-dependency
@@ -41,12 +41,12 @@ aliases:
   - &restore_pod_cache
       name: Restore CocoaPods
       keys:
-        - &pod_cache pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Podfile.lock" }}
+        - pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Podfile.lock" }}
         - pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
         - pod-cache-{{ .Environment.CACHE_VERSION }}
   - &save_pod_cache:
       name: Save CocoaPods
-      key: *pod_cache
+      key: pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Podfile.lock" }}
       paths:
         - ./Pods
   - &install_pod
