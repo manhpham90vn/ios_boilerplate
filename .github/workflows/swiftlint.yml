@@ -1,18 +1,16 @@
 name: Run SwiftLint
-
 on:
   pull_request:
     paths:
-      - '.swiftlint.yml'
-      - 'Sources/**.swift'
-      - 'SourcesTests/**.swift'
-
+      - .swiftlint.yml
+      - Sources/**.swift
+      - SourcesTests/**.swift
 jobs:
   Danger-Swift-with-SwiftLint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: "Run Danger"
+      - name: Run Danger
         uses: docker://ghcr.io/danger/danger-swift-with-swiftlint:3.14.0
         with:
           args: --failOnErrors --no-publish-check
