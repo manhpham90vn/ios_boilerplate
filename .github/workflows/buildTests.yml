@@ -17,8 +17,7 @@ jobs:
           ls /Applications | grep Xcode
       - name: Select Xcode
         run: >
-          sudo xcode-select -switch /Applications/Xcode_14.0.1.app &&
-          /usr/bin/xcodebuild -version
+          sudo xcode-select -switch /Applications/Xcode_14.0.1.app && /usr/bin/xcodebuild -version
       - name: Install
         run: |
           make install
