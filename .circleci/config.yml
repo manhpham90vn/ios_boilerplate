@@ -46,7 +46,7 @@ aliases:
         - pod-cache-{{ .Environment.CACHE_VERSION }}
   - &save_pod_cache:
       name: Save CocoaPods
-      key: &pod-cache
+      key: *pod-cache
       paths:
         - ./Pods
   - &install_pod
