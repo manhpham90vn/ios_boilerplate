@@ -44,7 +44,7 @@ aliases:
         - &pod-cache pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Podfile.lock" }}
         - pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
         - pod-cache-{{ .Environment.CACHE_VERSION }}
-  - &save_pod_cache:
+  - &save_pod_cache
       name: Save CocoaPods
       key: *pod-cache
       paths:
