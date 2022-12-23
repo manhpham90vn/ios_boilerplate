@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  slack: circleci/slack@4.12.0
 jobs:
   build-and-test:
     macos:
@@ -110,6 +112,15 @@ workflows:
   build-and-test-workflow:
     jobs:
       - build-and-test
-  deploy-apple:
-    jobs:
-      - deploy-apple
+      - slack/on-hold:
+          content: slack-secrets
+          requires:
+            - build-and-test
+      - pause_workflow:
+          requires:
+            - build-and-test
+            - slack/on-hold
+          type: approval
+      - deploy-apple:
+          requires:
+            - pause_workflow
