@@ -24,7 +24,7 @@ aliases:
         bundle config path vendor/bundle
         bundle install --without=documentation --jobs 4 --retry 3
   - &brew_install_mint
-      name: Install Mint view Homebrew
+      name: Install Mint via Homebrew
       command: HOMEBREW_NO_AUTO_UPDATE=1 brew install mint
   - &restore_mint_cache
       name: Restore Mint cache
@@ -38,19 +38,19 @@ aliases:
       paths:
         - ./Mints
   - &mint_install_dependency
-      name: Install dependency view Mint
+      name: Install dependency via Mint
       command: make installMint
   - &generate_resource
-      name: Generate SwiftGen
+      name: Generate Resource
       command: make generateResource
   - &restore_pod_cache
-      name: Restore CocoaPods
+      name: Restore CocoaPods cache
       keys:
         - &pod-cache pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Podfile.lock" }}
         - pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
         - pod-cache-{{ .Environment.CACHE_VERSION }}
   - &save_pod_cache
-      name: Save CocoaPods
+      name: Save CocoaPods cache
       key: *pod-cache
       paths:
         - ./Pods
@@ -78,6 +78,8 @@ jobs:
       - run:
           name: Run Unit test
           command: bundle exec fastlane unittest --env debug
+      - store_artifacts:
+          path: fastlane/test_output
   deploy-apple:
     macos:
       xcode: 14.0.1
@@ -105,6 +107,8 @@ jobs:
           name: Deploy Testflight
           no_output_timeout: 15m
           command: make exportTestFlight
+      - store_artifacts:
+          path: fastlane/build
 workflows:
   build-and-test-workflow:
     jobs:
