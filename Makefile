@@ -39,7 +39,7 @@ generateCoverage:
 # delete
 .PHONY: delete
 delete: 
-	rm -rf *.xcodeproj *.xcworkspace Pods/ Carthage/ Build/ Mints/ vendor/
+	rm -rf *.xcodeproj *.xcworkspace Pods/ Carthage/ Build/ Mints/ vendor/ .bundle Mintfile
 
 # fastlane
 .PHONY: setupCertificate
