@@ -71,6 +71,7 @@ jobs:
       - run: *bundle_install
       - save_cache: *save_gem_cache
       - run: *brew_install_mint
+      - run: *config_mint
       - restore_cache: *restore_mint_cache
       - run: *mint_install_dependency
       - save_cache: *save_mint_cache
@@ -93,6 +94,7 @@ jobs:
       - run: *bundle_install
       - save_cache: *save_gem_cache
       - run: *brew_install_mint
+      - run: *config_mint
       - restore_cache: *restore_mint_cache
       - run: *mint_install_dependency
       - save_cache: *save_mint_cache
