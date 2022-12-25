@@ -15,15 +15,15 @@ $RBENV_CMD global $PROJECT_RUBY_VERSION
 
 case $SHELL in
 */bash)
-    SHELL_RUN_CMD_PATH="${HOME}/.bashrc"
+    SHELL_RUN_CMD_PATH="$HOME/.bashrc"
     break
 ;;
 */zsh)
-  	SHELL_RUN_CMD_PATH="${HOME}/.zshrc"
+  	SHELL_RUN_CMD_PATH="$HOME/.zshrc"
   	break
 ;;
 */fish)
-  	SHELL_RUN_CMD_PATH="${HOME}/.config/fish/config.fish"
+  	SHELL_RUN_CMD_PATH="$HOME/.config/fish/config.fish"
   	break
 ;;
 esac
@@ -38,7 +38,9 @@ if ! ( grep -q "${RBENV_CONFIG_INIT}" "${SHELL_RUN_CMD_PATH}" ); then
     echo $RBENV_CONFIG_INIT >> $SHELL_RUN_CMD_PATH
 fi
 
-source $SHELL_RUN_CMD_PATH
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
 source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/ruby-setup.sh
 
 if ! $BUNDLER_CMD --version &> /dev/null
