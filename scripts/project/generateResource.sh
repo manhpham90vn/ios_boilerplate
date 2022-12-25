@@ -5,7 +5,7 @@ source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../mint/mint-run.sh
 
 cd $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../../
 
-rm -rf Sources/Common/Resources/Generated/*
-mkdir -p Sources/Common/Resources/Generated/SwiftGen
+rm -rf Sources/Resources/Generated/*
+mkdir -p Sources/Resources/Generated/SwiftGen
 
 $MINT_CMD run SwiftGen/SwiftGen@$SWIFTGEN_VERSION swiftgen
