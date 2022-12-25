@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/install-install.sh
+source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/brew-install.sh
 
 PACKAGE_NAME=$1
 
