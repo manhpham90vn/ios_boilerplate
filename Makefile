@@ -5,21 +5,18 @@ all: install generate
 
 # install
 .PHONY: install
-install: installRuby installBundle installMint
+install: installRuby installMint
 installRuby:
-	@sh scripts/ruby/install.sh
-installBundle:
-	bundle config path vendor/bundle
-	bundle install --without=documentation --jobs 4 --retry 3
+	@sh scripts/ruby/ruby-install.sh
 installMint:
-	@sh scripts/mint/install.sh
+	@sh scripts/mint/mint-run.sh
 
 # generate
 .PHONY: generate
 generate: generateResource installPod
 generateResource:
-	@sh scripts/mint/generateResource.sh
-	@sh scripts/mint/generateProject.sh
+	@sh scripts/project/generateResource.sh
+	@sh scripts/project/generateProject.sh
 installPod:
 	bundle exec pod install
 
