@@ -42,4 +42,4 @@ then
 fi
 
 $BUNDLER_CMD config path $BUNDLER_PATH
-$BUNDLER_CMD install --without=documentation --jobs 4 --retry 3
+$BUNDLER_CMD install
