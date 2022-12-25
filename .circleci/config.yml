@@ -26,6 +26,9 @@ aliases:
   - &brew_install_mint
       name: Install Mint via Homebrew
       command: HOMEBREW_NO_AUTO_UPDATE=1 brew install mint
+  - &config_mint
+      name: Config Mint
+      command: scripts/mints/mint-setup.sh
   - &restore_mint_cache
       name: Restore Mint cache
       keys:
