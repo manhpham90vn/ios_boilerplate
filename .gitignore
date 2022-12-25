@@ -4,7 +4,7 @@
 
 ## User settings
 xcuserdata/
-Sources/Resources/Generated/
+Sources/Resources/Generated/*
 vendor/bundle
 .bundle
 Mints
