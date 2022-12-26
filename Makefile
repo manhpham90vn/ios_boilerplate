@@ -18,7 +18,7 @@ generateResource:
 	@sh scripts/project/generateResource.sh
 	@sh scripts/project/generateProject.sh
 installPod:
-	bundle exec pod install
+	@sh scripts/pod/pod-run.sh
 
 # test
 .PHONY: xcodetest
