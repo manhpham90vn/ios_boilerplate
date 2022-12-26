@@ -14,15 +14,12 @@ $RBENV_CMD global $PROJECT_RUBY_VERSION
 case $SHELL in
 */bash)
     SHELL_RUN_CMD_PATH="$HOME/.bashrc"
-    break
 ;;
 */zsh)
   	SHELL_RUN_CMD_PATH="$HOME/.zshrc"
-  	break
 ;;
 */fish)
   	SHELL_RUN_CMD_PATH="$HOME/.config/fish/config.fish"
-  	break
 ;;
 esac
 
@@ -42,4 +39,4 @@ then
 fi
 
 $BUNDLER_CMD config path $BUNDLER_PATH
-$BUNDLER_CMD install
+$BUNDLER_CMD install --without=documentation --jobs 4 --retry 3
