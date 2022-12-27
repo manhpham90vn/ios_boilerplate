@@ -18,6 +18,9 @@ jobs:
       - name: Select Xcode
         run: >
           sudo xcode-select -switch /Applications/Xcode_14.0.1.app && /usr/bin/xcodebuild -version
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
       - name: Install
         run: |
           HOMEBREW_NO_AUTO_UPDATE=1
