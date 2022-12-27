@@ -35,10 +35,8 @@ then
     sh $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../logs/info.sh "Install $RUBY_CMD $PROJECT_RUBY_VERSION"
 
     $RBENV_CMD install -s $PROJECT_RUBY_VERSION
-    $RBENV_CMD global $PROJECT_RUBY_VERSION
-
-    export PATH="$HOME/.rbenv/bin:$PATH"
-    eval "$(rbenv init -)"
+    $RBENV_CMD local $PROJECT_RUBY_VERSION
+    $RBENV_CMD rehash
 fi
 
 if [ "$PROJECT_BUNDLER_VERSION" != "$CURRENT_BUNDLER_VERSION" ]
