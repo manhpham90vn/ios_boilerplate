@@ -26,8 +26,7 @@ then
         echo $RBENV_CONFIG_INIT >> $SHELL_RUN_CMD_PATH
     fi
 
-    export PATH="$HOME/.rbenv/bin:$PATH"
-    eval "$(rbenv init -)"
+    $SHELL -c "source $SHELL_RUN_CMD_PATH"
 fi
 
 if [ "$PROJECT_RUBY_VERSION" != "$CURRENT_RUBY_VERSION" ]
