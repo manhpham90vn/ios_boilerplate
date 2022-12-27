@@ -1,4 +1,4 @@
 #!/bin/sh
 
-echo "\033[91mERROR\033[0m: ${@}" 1>&2
+printf "\033[91mERROR\033[0m: $*\n" 1>&2
 exit 1
