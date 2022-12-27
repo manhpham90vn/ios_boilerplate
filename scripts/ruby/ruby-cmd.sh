@@ -11,3 +11,7 @@ fi
 if [ -z "$RBENV_CMD" ]; then
     RBENV_CMD=rbenv
 fi
+
+if [ -z "$RUBY_CMD" ]; then
+    RUBY_CMD=ruby
+fi
