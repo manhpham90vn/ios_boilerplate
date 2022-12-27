@@ -37,9 +37,9 @@ then
     $RBENV_CMD global $PROJECT_RUBY_VERSION
 fi
 
-if ! $BUNDLER_CMD --version &> /dev/null
+if ! $BUNDLER_CMD --version &> /dev/null || test PROJECT_BUNDLER_VERSION != CURRENT_BUNDLER_VERSION
 then
-    $GEM_CMD install bundler:$BUNDLER_VERSION
+    $GEM_CMD install bundler:$PROJECT_BUNDLER_VERSION
 fi
 
 sh $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../logs/info.sh "Install gem use $BUNDLER_CMD"
@@ -48,5 +48,6 @@ $BUNDLER_CMD config --local path $BUNDLER_PATH
 $BUNDLER_CMD config --local without 'documentation'
 $BUNDLER_CMD config --local jobs 4
 $BUNDLER_CMD config --local retry 3
+$BUNDLER_CMD install
 
 sh $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../logs/info.sh "Done install gem use $BUNDLER_CMD"
