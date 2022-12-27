@@ -15,7 +15,7 @@ aliases:
         - vendor/bundle
   - &gem_install
       name: Install Bundler and Gem
-      command: make installRuby
+      command: HOMEBREW_NO_AUTO_UPDATE=1 make installRuby
   - &config_mint
       name: Config Mint
       command: scripts/mint/mint-setup.sh
@@ -32,7 +32,7 @@ aliases:
         - ./Mints
   - &mint_install_dependency
       name: Install dependency via Mint
-      command: make installMint
+      command: HOMEBREW_NO_AUTO_UPDATE=1 make installMint
   - &generate_resource
       name: Generate Resource
       command: make generateResource
@@ -49,14 +49,13 @@ aliases:
         - ./Pods
   - &install_pod
       name: Install cocoapods
-      command: make installPod
+      command: HOMEBREW_NO_AUTO_UPDATE=1 make installPod
 jobs:
   build-and-test:
     macos:
       xcode: 14.0.1
     steps:
       - checkout
-      - run: HOMEBREW_NO_AUTO_UPDATE=1
       - restore_cache: *restore_gem_cache
       - run: *gem_install
       - save_cache: *save_gem_cache
@@ -78,7 +77,6 @@ jobs:
       xcode: 14.0.1
     steps:
       - checkout
-      - run: HOMEBREW_NO_AUTO_UPDATE=1
       - restore_cache: *restore_gem_cache
       - run: *gem_install
       - save_cache: *save_gem_cache
