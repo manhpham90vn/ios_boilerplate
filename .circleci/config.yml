@@ -14,18 +14,8 @@ aliases:
       paths:
         - vendor/bundle
   - &gem_install
-      name: Install Bundler via Gem
-      command: |
-        export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")
-        gem install bundler:$BUNDLER_VERSION
-  - &bundle_install
-      name: Install Gems via Bundler
-      command: |
-        bundle config path vendor/bundle
-        bundle install --without=documentation --jobs 4 --retry 3
-  - &brew_install_mint
-      name: Install Mint via Homebrew
-      command: HOMEBREW_NO_AUTO_UPDATE=1 brew install mint
+      name: Install Bundler and Gem
+      command: make installRuby
   - &config_mint
       name: Config Mint
       command: scripts/mint/mint-setup.sh
@@ -68,9 +58,7 @@ jobs:
       - checkout
       - restore_cache: *restore_gem_cache
       - run: *gem_install
-      - run: *bundle_install
       - save_cache: *save_gem_cache
-      - run: *brew_install_mint
       - run: *config_mint
       - restore_cache: *restore_mint_cache
       - run: *mint_install_dependency
@@ -91,9 +79,7 @@ jobs:
       - checkout
       - restore_cache: *restore_gem_cache
       - run: *gem_install
-      - run: *bundle_install
       - save_cache: *save_gem_cache
-      - run: *brew_install_mint
       - run: *config_mint
       - restore_cache: *restore_mint_cache
       - run: *mint_install_dependency
