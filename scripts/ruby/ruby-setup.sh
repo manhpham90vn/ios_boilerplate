@@ -4,7 +4,8 @@ source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/ruby-cmd.sh
 
 cd $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../../
 
-BUNDLER_VERSION=$(cat < Gemfile.lock | tail -1 | tr -d " ")
+PROJECT_BUNDLER_VERSION=$(cat < Gemfile.lock | tail -1 | tr -d " ")
+CURRENT_BUNDLER_VERSION=`$BUNDLER_CMD --version | grep -o -E "[0-9]+\\.[0-9]+\\.[0-9]+" | cut -d' ' -f2`
 BUNDLER_PATH=vendor/bundle
 PROJECT_RUBY_VERSION=$(cat $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../../.ruby-version)
 CURRENT_RUBY_VERSION=`$RUBY_CMD --version | grep -o -E "ruby [0-9]+\\.[0-9]+\\.[0-9]+" | cut -d' ' -f2`
