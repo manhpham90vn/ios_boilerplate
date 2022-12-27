@@ -59,7 +59,7 @@ aliases:
         - ./Pods
   - &install_pod
       name: Install cocoapods
-      command: bundle exec pod install
+      command: make installPod
 jobs:
   build-and-test:
     macos:
