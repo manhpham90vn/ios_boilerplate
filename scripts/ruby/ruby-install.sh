@@ -30,7 +30,7 @@ then
     eval "$(rbenv init -)"
 fi
 
-if test $PROJECT_RUBY_VERSION != $CURRENT_RUBY_VERSION
+if [ "$PROJECT_RUBY_VERSION" != "$CURRENT_RUBY_VERSION" ]
 then
     sh $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../logs/info.sh "Install $RUBY_CMD $PROJECT_RUBY_VERSION"
 
@@ -38,7 +38,7 @@ then
     $RBENV_CMD global $PROJECT_RUBY_VERSION
 fi
 
-if test $PROJECT_BUNDLER_VERSION != $CURRENT_BUNDLER_VERSION
+if [ "$PROJECT_BUNDLER_VERSION" != "$CURRENT_BUNDLER_VERSION" ]
 then
     sh $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../logs/info.sh "Install $BUNDLER_CMD $PROJECT_BUNDLER_VERSION"
 
