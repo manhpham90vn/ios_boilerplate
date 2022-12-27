@@ -6,6 +6,7 @@ if ! $RBENV_CMD --version &> /dev/null
 then
     source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../brew/brew-install-package.sh $RBENV_CMD
 
+    sh $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../logs/info.sh "Config $RBENV_CMD"
     case $SHELL in
     */bash)
         SHELL_RUN_CMD_PATH="$HOME/.bashrc"
@@ -29,7 +30,7 @@ then
     eval "$(rbenv init -)"
 fi
 
-if ! $RUBY_CMD --version &> /dev/null || test $PROJECT_RUBY_VERSION != $CURRENT_RUBY_VERSION
+if test $PROJECT_RUBY_VERSION != $CURRENT_RUBY_VERSION
 then
     sh $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../logs/info.sh "Install $RUBY_CMD $PROJECT_RUBY_VERSION"
 
@@ -37,8 +38,10 @@ then
     $RBENV_CMD global $PROJECT_RUBY_VERSION
 fi
 
-if ! $BUNDLER_CMD --version &> /dev/null || test PROJECT_BUNDLER_VERSION != CURRENT_BUNDLER_VERSION
+if test PROJECT_BUNDLER_VERSION != CURRENT_BUNDLER_VERSION
 then
+    sh $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../logs/info.sh "Install $BUNDLER_CMD $CURRENT_BUNDLER_VERSION"
+
     $GEM_CMD install bundler:$PROJECT_BUNDLER_VERSION
 fi
 
