@@ -36,6 +36,9 @@ then
 
     $RBENV_CMD install -s $PROJECT_RUBY_VERSION
     $RBENV_CMD global $PROJECT_RUBY_VERSION
+
+    export PATH="$HOME/.rbenv/bin:$PATH"
+    eval "$(rbenv init -)"
 fi
 
 if [ "$PROJECT_BUNDLER_VERSION" != "$CURRENT_BUNDLER_VERSION" ]
