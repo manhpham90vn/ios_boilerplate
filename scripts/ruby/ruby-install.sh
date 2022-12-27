@@ -38,9 +38,9 @@ then
     $RBENV_CMD global $PROJECT_RUBY_VERSION
 fi
 
-if test PROJECT_BUNDLER_VERSION != CURRENT_BUNDLER_VERSION
+if test $PROJECT_BUNDLER_VERSION != $CURRENT_BUNDLER_VERSION
 then
-    sh $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../logs/info.sh "Install $BUNDLER_CMD $CURRENT_BUNDLER_VERSION"
+    sh $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../logs/info.sh "Install $BUNDLER_CMD $PROJECT_BUNDLER_VERSION"
 
     $GEM_CMD install bundler:$PROJECT_BUNDLER_VERSION
 fi
