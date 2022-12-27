@@ -1,6 +1,5 @@
 #!/bin/sh
 
-source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/ruby-cmd.sh
 source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/ruby-setup.sh
 
 if ! $RBENV_CMD --version &> /dev/null
@@ -30,7 +29,7 @@ then
     eval "$(rbenv init -)"
 fi
 
-if ! $RUBY_CMD --version &> /dev/null
+if ! $RUBY_CMD --version &> /dev/null || test $PROJECT_RUBY_VERSION != $CURRENT_RUBY_VERSION
 then
     sh $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../logs/info.sh "Install $RUBY_CMD $PROJECT_RUBY_VERSION"
 
