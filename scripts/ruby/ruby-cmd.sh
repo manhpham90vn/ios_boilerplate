@@ -1,11 +1,11 @@
 #!/bin/sh
 
 if [ -z "$GEM_CMD" ]; then
-    GEM_CMD=gem
+    GEM_CMD=~/.rbenv/shims/gem
 fi
 
 if [ -z "$BUNDLER_CMD" ]; then
-    BUNDLER_CMD=bundle
+    BUNDLER_CMD=~/.rbenv/shims/bundler
 fi
 
 if [ -z "$RBENV_CMD" ]; then
@@ -13,5 +13,5 @@ if [ -z "$RBENV_CMD" ]; then
 fi
 
 if [ -z "$RUBY_CMD" ]; then
-    RUBY_CMD=ruby
+    RUBY_CMD=~/.rbenv/shims/ruby
 fi
