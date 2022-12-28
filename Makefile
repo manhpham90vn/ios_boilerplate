@@ -43,7 +43,7 @@ delete:
 
 .PHONY: runUnitTest
 runUnitTest:
-	bundle exec fastlane unittest --env debug
+	bundle exec fastlane unittest --env sample
 
 .PHONY: exportTestFlight
 exportTestFlight:
