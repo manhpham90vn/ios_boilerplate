@@ -20,6 +20,7 @@ jobs:
           sudo xcode-select -switch /Applications/Xcode_14.0.1.app && /usr/bin/xcodebuild -version
       - uses: ruby/setup-ruby@v1
         with:
+          ruby-version: '3.1'
           bundler-cache: true
       - name: Install
         run: |
