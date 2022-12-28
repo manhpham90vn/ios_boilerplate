@@ -69,7 +69,7 @@ jobs:
       - save_cache: *save_pod_cache
       - run:
           name: Run Unit test
-          command: bundle exec fastlane unittest --env debug
+          command: make runUnitTest
       - store_artifacts:
           path: fastlane/test_output
   deploy-apple:
