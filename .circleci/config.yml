@@ -16,13 +16,10 @@ aliases:
   - &gem_install
       name: Install Bundler and Gem
       command: |
-        PROJECT_BUNDLER_VERSION=$(cat < Gemfile.lock | tail -1 | tr -d " ")
-        gem install bundler:$PROJECT_BUNDLER_VERSION
-        bundle config --local path vendor/bundle
-        bundle config --local without 'documentation'
-        bundle config --local jobs 4
-        bundle config --local retry 3
-        bundle install
+        export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")
+        gem install bundler:$BUNDLER_VERSION
+        bundle config path vendor/bundle
+        bundle install --without=documentation --jobs 4 --retry 3
   - &config_mint
       name: Config Mint
       command: scripts/mint/mint-setup.sh
@@ -56,7 +53,7 @@ aliases:
         - ./Pods
   - &install_pod
       name: Install cocoapods
-      command: HOMEBREW_NO_AUTO_UPDATE=1 make installPod
+      command: bundle exec pod install
 jobs:
   build-and-test:
     macos:
