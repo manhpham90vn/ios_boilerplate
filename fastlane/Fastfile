@@ -13,7 +13,7 @@ platform :ios do
       end
 
     desc "Setup certificate and provisioning profile"
-      lane :setup do
+      lane :setup_certificate_and_provisioning do
         identifider = get_xcconfig_value(
               path: ENV['PATH_XCCONFIG'],
               name: 'PRODUCT_BUNDLE_IDENTIFIER'
@@ -21,43 +21,58 @@ platform :ios do
 
         match(app_identifier: identifider, type: "appstore", readonly: true)
       end
-      
-    desc "Export to testflight"
-        lane :export do
+    
+    desc "Setup API Key"
+      lane :setup_api_key do
+        app_store_connect_api_key(
+          key_id: ENV['KEY_ID'],
+          issuer_id: ENV['ISSUER_ID'],
+          key_filepath: ENV['KEY_FILEPATH']
+        )
+    end
 
-            app_store_connect_api_key(
-              key_id: ENV['KEY_ID'],
-              issuer_id: ENV['ISSUER_ID'],
-              key_filepath: ENV['KEY_FILEPATH']
-            )
+    desc "Get app info"
+      lane :get_app_info do
+        app_name = get_xcconfig_value(
+          path: ENV['PATH_XCCONFIG'],
+          name: 'PRODUCT_NAME'
+        )
+
+        identifider = get_xcconfig_value(
+          path: ENV['PATH_XCCONFIG'],
+          name: 'PRODUCT_BUNDLE_IDENTIFIER'
+        )
+
+        version = get_xcconfig_value(
+          path: ENV['PATH_XCCONFIG'],
+          name: 'BUNDLE_SHORT_VERSION_STRING'
+        )
+
+        build_number_from_test_flight = latest_testflight_build_number(app_identifier: identifider, version: version)
+        build_number_from_test_flight += 1
+
+        ENV['PRODUCT_NAME'] = app_name
+        ENV['PRODUCT_BUNDLE_IDENTIFIER'] = identifider
+        ENV['BUNDLE_SHORT_VERSION_STRING'] = version
+        ENV['BUNDLE_VERSION'] = build_number_from_test_flight.to_s
+    end
+
+    desc "Set app info"
+      lane :set_app_info do
+          update_xcconfig_value(
+            path: ENV['PATH_XCCONFIG'],
+            name: 'BUNDLE_VERSION',
+            value: ENV['BUNDLE_VERSION']
+          )
+    end
+
+
+    desc "Export file ipa distribution"
+        lane :export do
 
             time = Time.new.strftime("%Y_%d_%m_%H_%M_%S")
 
-            app_name = get_xcconfig_value(
-              path: ENV['PATH_XCCONFIG'],
-              name: 'PRODUCT_NAME'
-            )
-
-            identifider = get_xcconfig_value(
-              path: ENV['PATH_XCCONFIG'],
-              name: 'PRODUCT_BUNDLE_IDENTIFIER'
-            )
-
-            version = get_xcconfig_value(
-              path: ENV['PATH_XCCONFIG'],
-              name: 'BUNDLE_SHORT_VERSION_STRING'
-            )
-
-            build_number_from_test_flight = latest_testflight_build_number(app_identifier: identifider, version: version)
-            build_number_from_test_flight += 1
-
-            update_xcconfig_value(
-              path: ENV['PATH_XCCONFIG'],
-              name: 'BUNDLE_VERSION',
-              value: build_number_from_test_flight.to_s
-            )
-
-            file = time + "_" + app_name.gsub(' ', '') + "_" + version + "_" + build_number_from_test_flight.to_s + ".ipa"
+            file = time + "_" + ENV['PRODUCT_NAME'].gsub(' ', '') + "_" + ENV['BUNDLE_SHORT_VERSION_STRING'] + "_" + ENV['BUNDLE_VERSION'] + ".ipa"
 
             update_code_signing_settings(
               use_automatic_signing: false,
@@ -78,14 +93,45 @@ platform :ios do
                     uploadBitcode: false,
                     uploadSymbols: false,
                     compileBitcode: false,
-                    provisioningProfiles: { identifider => ENV['PROVISION_NAME'], "signingStyle": "manual" }
+                    provisioningProfiles: { ENV['PRODUCT_BUNDLE_IDENTIFIER'] => ENV['PROVISION_NAME'], "signingStyle": "manual" }
                 }
             )
 
+            ENV['IPA_PATH'] = "fastlane/build/" + file
+
+    end
+    
+    desc "Upload testflight"
+        lane :upload_testflight_api_or_session do
             upload_to_testflight(
-              app_identifier: identifider,
+              app_identifier: ENV['PRODUCT_BUNDLE_IDENTIFIER'],
               skip_submission: true,
               skip_waiting_for_build_processing: true
             )
     end
+
+    desc "Upload testflight use altool"
+        lane :upload_testflight_altool do
+        sh("xcrun", "altool", "--upload-app", "--type", "ios", "--verbose", "-f", ENV['IPA_PATH'], "-u", ENV['FASTLANE_USER'], "-p", ENV['FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD'])
+    end
+
+    desc "Upload testflight method 1"
+      lane :upload_testflight_method_1 do
+        setup_certificate_and_provisioning
+        setup_api_key
+        get_app_info
+        get_app_info
+        export
+        upload_testflight_api_or_session
+      end
+
+    desc "Upload testflight method 2"
+      lane :upload_testflight_method_2 do
+        setup_certificate_and_provisioning
+        get_app_info
+        get_app_info
+        export
+        upload_testflight_altool
+      end
+
 end
