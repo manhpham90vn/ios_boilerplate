@@ -1,7 +1,6 @@
 version: 2.1
 orbs:
   slack: circleci/slack@4.12.0
-  ruby: circleci/ruby@2.0.0
 aliases:
   - &restore_gem_cache
       name: Restore gem cache
@@ -17,6 +16,8 @@ aliases:
   - &gem_install
       name: Install Bundler and Gem
       command: |
+        PROJECT_BUNDLER_VERSION=$(cat < Gemfile.lock | tail -1 | tr -d " ")
+        gem install bundler:$PROJECT_BUNDLER_VERSION
         bundle config --local path vendor/bundle
         bundle config --local without 'documentation'
         bundle config --local jobs 4
@@ -63,9 +64,6 @@ jobs:
     steps:
       - checkout
       - restore_cache: *restore_gem_cache
-      - ruby/install:
-          version: $(cat .ruby-version)
-      - ruby/install-deps
       - run: *gem_install
       - save_cache: *save_gem_cache
       - run: *config_mint
@@ -87,9 +85,6 @@ jobs:
     steps:
       - checkout
       - restore_cache: *restore_gem_cache
-      - ruby/install:
-          version: $(cat .ruby-version)
-      - ruby/install-deps
       - run: *gem_install
       - save_cache: *save_gem_cache
       - run: *config_mint
