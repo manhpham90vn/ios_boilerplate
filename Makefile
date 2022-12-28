@@ -41,11 +41,6 @@ generateCoverage:
 delete: 
 	rm -rf *.xcodeproj *.xcworkspace Pods/ Carthage/ Build/ Mints/ vendor/ .bundle Mintfile
 
-# fastlane
-.PHONY: setupCertificate
-setupCertificate:
-	bundle exec fastlane setup --env debug
-
 .PHONY: runUnitTest
 runUnitTest:
 	bundle exec fastlane unittest --env debug
