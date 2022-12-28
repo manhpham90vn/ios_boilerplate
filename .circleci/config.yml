@@ -15,11 +15,7 @@ aliases:
         - vendor/bundle
   - &gem_install
       name: Install Bundler and Gem
-      command: |
-        export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")
-        gem install bundler:$BUNDLER_VERSION
-        bundle config path vendor/bundle
-        bundle install --without=documentation --jobs 4 --retry 3
+      command: scripts/circleci/ci-setup.sh
   - &config_mint
       name: Config Mint
       command: scripts/mint/mint-setup.sh
