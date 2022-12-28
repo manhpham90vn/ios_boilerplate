@@ -93,15 +93,12 @@ jobs:
       - run: *install_pod
       - save_cache: *save_pod_cache
       - run:
-          name: Setup Certificate
-          command: make setupCertificate
-      - run:
           name: Create P8 API Key
           command: echo $APP_STORE_P8 | base64 --decode > AuthKey_6TF3P5J5QY.p8
       - run:
           name: Deploy Testflight
           no_output_timeout: 15m
-          command: make exportTestFlight
+          command: make upload_testflight_method_1
       - store_artifacts:
           path: fastlane/build
 workflows:
