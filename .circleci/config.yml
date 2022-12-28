@@ -64,7 +64,7 @@ jobs:
       - checkout
       - restore_cache: *restore_gem_cache
       - ruby/install:
-          version: `$(cat .ruby-version)`
+          version: $(cat .ruby-version)
       - ruby/install-deps
       - run: *gem_install
       - save_cache: *save_gem_cache
