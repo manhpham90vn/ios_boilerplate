@@ -23,18 +23,22 @@ jobs:
           bundler-cache: true
       - name: Install
         run: |
-          HOMEBREW_NO_AUTO_UPDATE=1
-          make install
+          scripts/github/ci-setup.sh
+      - uses: actions/cache@v3
+        with:
+          path: Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-    
       - name: Generate
         run: |
-          HOMEBREW_NO_AUTO_UPDATE=1
-          make generate
+          scripts/github/ci-generate.sh
       - name: Run build tests
         run: |
-          set -o pipefail && make xcodetest
+          make xcodetest
       - name: Generate Coverage
         run: |
-          make generateCoverage
+          bundle exec slather coverage
       - name: Upload Coverage
         uses: codecov/codecov-action@v3
         with:
