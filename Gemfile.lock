@@ -72,7 +72,6 @@ GEM
       nap (>= 0.8, < 2.0)
       netrc (~> 0.11)
     cocoapods-try (1.2.0)
-    coderay (1.1.3)
     colored (1.2)
     colored2 (3.1.2)
     commander (4.6.0)
@@ -157,7 +156,6 @@ GEM
       xcodeproj (>= 1.13.0, < 2.0.0)
       xcpretty (~> 0.3.0)
       xcpretty-travis-formatter (>= 0.0.3)
-    fastlane-plugin-altool (1.1.0)
     fastlane-plugin-xcconfig (2.0.0)
     ffi (1.15.5)
     fourflusher (2.3.1)
@@ -211,7 +209,6 @@ GEM
     json (2.6.3)
     jwt (2.6.0)
     memoist (0.16.2)
-    method_source (1.0.0)
     mini_magick (4.12.0)
     mini_mime (1.1.2)
     mini_portile2 (2.8.1)
@@ -229,9 +226,6 @@ GEM
     optparse (0.1.1)
     os (1.1.4)
     plist (3.6.0)
-    pry (0.14.1)
-      coderay (~> 1.1)
-      method_source (~> 1.0)
     public_suffix (4.0.7)
     racc (1.6.2)
     rake (13.0.6)
@@ -301,9 +295,7 @@ PLATFORMS
 DEPENDENCIES
   cocoapods
   fastlane
-  fastlane-plugin-altool
   fastlane-plugin-xcconfig
-  pry
   slather
   xcode-install
   xcpretty
