@@ -47,6 +47,14 @@ Setup API Key
 
 Get app info
 
+### ios get_app_info_current_test_flight_version
+
+```sh
+[bundle exec] fastlane ios get_app_info_current_test_flight_version
+```
+
+Get current testflight version
+
 ### ios set_app_info
 
 ```sh

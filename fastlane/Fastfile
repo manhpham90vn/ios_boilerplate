@@ -21,7 +21,7 @@ platform :ios do
 
         match(app_identifier: identifider, type: "appstore", readonly: true)
       end
-    
+
     desc "Setup API Key"
       lane :setup_api_key do
         app_store_connect_api_key(
@@ -48,14 +48,19 @@ platform :ios do
           name: 'BUNDLE_SHORT_VERSION_STRING'
         )
 
-        build_number_from_test_flight = latest_testflight_build_number(app_identifier: identifider, version: version)
-        build_number_from_test_flight += 1
-
         ENV['PRODUCT_NAME'] = app_name
         ENV['PRODUCT_BUNDLE_IDENTIFIER'] = identifider
         ENV['BUNDLE_SHORT_VERSION_STRING'] = version
-        ENV['BUNDLE_VERSION'] = build_number_from_test_flight.to_s
     end
+
+    desc "Get current testflight version"
+      lane :get_app_info_current_test_flight_version do
+
+        build_number_from_test_flight = latest_testflight_build_number(app_identifier: ENV['PRODUCT_BUNDLE_IDENTIFIER'], version: ENV['BUNDLE_SHORT_VERSION_STRING'])
+        build_number_from_test_flight += 1
+
+        ENV['BUNDLE_VERSION'] = build_number_from_test_flight.to_s
+      end
 
     desc "Set app info"
       lane :set_app_info do
@@ -65,7 +70,6 @@ platform :ios do
             value: ENV['BUNDLE_VERSION']
           )
     end
-
 
     desc "Export file ipa distribution"
         lane :export do
@@ -97,8 +101,7 @@ platform :ios do
                 }
             )
 
-            ENV['IPA_PATH'] = "fastlane/build/" + file
-
+            ENV['IPA_PATH'] = Dir.pwd + "/build/" + file
     end
     
     desc "Upload testflight"
@@ -120,18 +123,19 @@ platform :ios do
         setup_certificate_and_provisioning
         setup_api_key
         get_app_info
-        get_app_info
+        get_app_info_current_test_flight_version
+        set_app_info
         export
         upload_testflight_api_or_session
       end
 
+    # need set ENV['BUNDLE_VERSION'] here
     desc "Upload testflight method 2"
       lane :upload_testflight_method_2 do
         setup_certificate_and_provisioning
         get_app_info
-        get_app_info
+        set_app_info
         export
         upload_testflight_altool
       end
-
 end
