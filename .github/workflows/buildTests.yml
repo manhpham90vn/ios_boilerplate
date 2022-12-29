@@ -12,18 +12,13 @@ jobs:
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v3
-      - name: List available Xcode versions
-        run: |
-          ls /Applications | grep Xcode
       - name: Select Xcode
-        run: >
-          sudo xcode-select -switch /Applications/Xcode_14.0.1.app && /usr/bin/xcodebuild -version
+        run: scripts/github/ci-select-xcode.sh
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
       - name: Install
-        run: |
-          scripts/github/ci-setup.sh
+        run: scripts/github/ci-setup.sh
       - uses: actions/cache@v3
         with:
           path: Pods
@@ -31,14 +26,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pods-    
       - name: Generate
-        run: |
-          scripts/github/ci-generate.sh
+        run: scripts/github/ci-generate.sh
       - name: Run build tests
-        run: |
-          make xcodetest
+        run: make unittest
       - name: Generate Coverage
-        run: |
-          bundle exec slather coverage
+        run: scripts/github/ci-code-coverage.sh
       - name: Upload Coverage
         uses: codecov/codecov-action@v3
         with:
