@@ -9,7 +9,9 @@ platform :ios do
       lane :unittest do
         run_tests(workspace: ENV['WORKSPACE'],
             devices: [ENV['UNIT_TEST_DEVICE']],
-            scheme: ENV['SCHEME'])
+            scheme: ENV['SCHEME'],
+            derived_data_path: "build"
+        )
       end
 
     desc "Setup certificate and provisioning profile"
