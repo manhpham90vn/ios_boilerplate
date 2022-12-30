@@ -34,7 +34,7 @@ targets:
     preBuildScripts:
       - name: Generate
         script: |
-          scripts/project/generate-resource.sh
+          scripts/project/generate-swiftgen.sh
     postCompileScripts:
       - name: Swiftlint
         script:
