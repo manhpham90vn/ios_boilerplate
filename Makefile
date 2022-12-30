@@ -15,7 +15,7 @@ installMint:
 .PHONY: generate
 generate: generateResource installPod
 generateResource:
-	@sh scripts/project/generate-resource.sh
+	@sh scripts/project/generate-swiftgen.sh
 	@sh scripts/project/generate-project.sh
 installPod:
 	@sh scripts/pod/pod-run.sh
