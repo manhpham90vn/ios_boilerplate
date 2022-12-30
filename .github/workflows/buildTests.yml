@@ -17,6 +17,14 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      - name: Setup mint
+        run: scripts/github/ci-setup-mint.sh
+      - uses: actions/cache@v3
+        with:
+          path: Mints
+          key: ${{ runner.os }}-mint-${{ hashFiles('**/Mintfile') }}
+          restore-keys: |
+            ${{ runner.os }}-mint- 
       - name: Install
         run: scripts/github/ci-setup.sh
       - uses: actions/cache@v3
