@@ -15,38 +15,22 @@ installMint:
 .PHONY: generate
 generate: generateResource installPod
 generateResource:
-	@sh scripts/project/generate-resource.sh
+	@sh scripts/project/generate-swiftgen.sh
 	@sh scripts/project/generate-project.sh
 installPod:
 	@sh scripts/pod/pod-run.sh
-
-# test
-.PHONY: xcodetest
-xcodetest:
-	xcodebuild \
-	-workspace "My Project.xcworkspace" \
-	-scheme "My Project" \
-	-destination 'platform=iOS Simulator,name=iPhone 14 Pro' \
-	-derivedDataPath "build" \
-	-enableCodeCoverage YES \
-	test \
-	| bundle exec xcpretty -s -c
-
-.PHONY: generateCoverage
-generateCoverage: 
-	bundle exec slather coverage
 
 # delete
 .PHONY: delete
 delete: 
 	rm -rf *.xcodeproj *.xcworkspace Pods/ Carthage/ Build/ Mints/ vendor/ .bundle Mintfile
 
-.PHONY: runUnitTest
-runUnitTest:
+.PHONY: unittest
+unittest:
 	bundle exec fastlane unittest --env sample
 
-.PHONY: exportTestFlight
-exportTestFlight:
+.PHONY: testflight
+testflight:
 	bundle exec fastlane upload_testflight_method_1 --env staging
 
 .PHONY: open
