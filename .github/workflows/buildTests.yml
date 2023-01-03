@@ -37,6 +37,8 @@ jobs:
         run: scripts/github/ci-generate.sh
       - name: Run build tests
         run: make unittest
+      - name: Create slather file
+        run : scripts/circleci/ci-setup-slather.sh
       - name: Generate Coverage
         run: scripts/github/ci-code-coverage.sh
       - name: Upload Coverage

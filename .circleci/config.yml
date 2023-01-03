@@ -70,8 +70,16 @@ jobs:
       - run:
           name: Run Unit test
           command: make unittest
+      - run:
+          name: Create slather file
+          command: scripts/circleci/ci-setup-slather.sh
+      - run:
+          name: Generate code coverage
+          command: scripts/circleci/ci-code-coverage.sh
       - store_artifacts:
           path: fastlane/test_output
+      - store_artifacts:
+          path: xml_report
   deploy-apple:
     macos:
       xcode: 14.0.1
