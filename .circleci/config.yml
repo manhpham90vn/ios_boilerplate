@@ -75,7 +75,7 @@ jobs:
       - save_cache: *save_pod_cache
       - run:
           name: Run Unit test
-          command: make unittest
+          command: make test
       - run:
           name: Create slather file
           command: scripts/slather/slather-setup.sh

@@ -30,8 +30,8 @@ delete:
 	rm -rf *.xcodeproj *.xcworkspace Pods/ Carthage/ Build/ Mints/ vendor/ .bundle Mintfile fastlane/build fastlane/test_output
 
 # run unit test
-.PHONY: unittest
-unittest:
+.PHONY: test
+test:
 	bundle exec fastlane unittest --env debug
 
 # run slather

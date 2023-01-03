@@ -6,7 +6,7 @@
 //
 
 import Foundation
-@testable import My_App_Debug
+@testable import MyProduct
 
 final class LoginRouterMock: LoginRouterInterface {
 

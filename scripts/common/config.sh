@@ -1,6 +1,7 @@
 #!/bin/sh
 
 PROJECT_NAME="MyProject"
+PRODUCT_NAME="MyProduct"
 PRODUCT_BUNDLE_IDENTIFIER="com.manhpham.myapp.debug"
 BUNDLE_SHORT_VERSION_STRING=1.0
 BUNDLE_VERSION="1"

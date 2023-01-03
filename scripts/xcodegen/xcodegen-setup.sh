@@ -57,7 +57,7 @@ targets:
     type: bundle.unit-test
     platform: iOS
     settings:
-      TEST_HOST: \$(BUILT_PRODUCTS_DIR)/$PROJECT_NAME.app/$PROJECT_NAME
+      TEST_HOST: \$(BUILT_PRODUCTS_DIR)/$PRODUCT_NAME.app/$PRODUCT_NAME
       LD_RUNPATH_SEARCH_PATHS: \$(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks' \$(FRAMEWORK_SEARCH_PATHS)
       IPHONEOS_DEPLOYMENT_TARGET: $DEPLOYMENT_TARGET
     sources: SourcesTests
