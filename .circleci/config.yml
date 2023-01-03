@@ -37,7 +37,7 @@ aliases:
       name: Generate Resource
       command: |
         scripts/project/generate-swiftgen.sh
-        scripts/project/generate-project.sh
+        scripts/xcodegen/xcodegen-run.sh
   - &restore_pod_cache
       name: Restore CocoaPods cache
       keys:
