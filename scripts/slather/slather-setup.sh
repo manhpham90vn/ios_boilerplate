@@ -1,12 +1,12 @@
 #!/bin/sh
 
-source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../common/project.sh
+source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../common/env.sh
+source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../common/config.sh
 
 cd $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../../
 
 SLATHER_FILE=.slather.yml
-SOURCE_DIRECTORY=Sources
-OUTPUT_DIRECTORY=xml_report
+OUTPUT_DIRECTORY=slather_report
 BUILD_DIRECTORY=build
 BINARY_BASENAME="My App Debug"
 

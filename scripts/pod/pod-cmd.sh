@@ -1,5 +1,3 @@
 #!/bin/sh
 
-if [ -z "$POD_CMD" ]; then
-    POD_CMD=pod
-fi
+POD_CMD=pod

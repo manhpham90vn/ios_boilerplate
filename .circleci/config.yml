@@ -18,7 +18,7 @@ aliases:
       command: scripts/circleci/ci-setup-ruby.sh
   - &config_mint
       name: Config Mint
-      command: scripts/circleci/ci-setup-mint.sh
+      command: scripts/mint/mint-setup.sh
   - &restore_mint_cache
       name: Restore Mint cache
       keys:
@@ -32,10 +32,12 @@ aliases:
         - ./Mints
   - &mint_install_dependency
       name: Install dependency via Mint
-      command: scripts/circleci/ci-install-mint.sh
+      command: scripts/circleci/mint-run.sh
   - &generate_resource
       name: Generate Resource
-      command: scripts/circleci/ci-generate.sh
+      command: |
+        scripts/project/generate-swiftgen.sh
+        scripts/project/generate-project.sh
   - &restore_pod_cache
       name: Restore CocoaPods cache
       keys:
@@ -49,7 +51,7 @@ aliases:
         - ./Pods
   - &install_pod
       name: Install cocoapods
-      command: scripts/circleci/ci-install-pod.sh
+      command: bundle exec pod install
 jobs:
   build-and-test:
     macos:
@@ -72,10 +74,10 @@ jobs:
           command: make unittest
       - run:
           name: Create slather file
-          command: scripts/circleci/ci-setup-slather.sh
+          command: scripts/slather/slather-setup.sh
       - run:
           name: Generate code coverage
-          command: scripts/circleci/ci-code-coverage.sh
+          command: bundle exec slather coverage
       - store_artifacts:
           path: fastlane/test_output
       - store_artifacts:

@@ -7,8 +7,13 @@ xcuserdata/
 Sources/Resources/Generated/*
 vendor/bundle
 .bundle
+.slather.yml
+project.yml
 Mints
 Mintfile
+slather_report
+.env.*
+*.xcconfig
 xml_report
 
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)

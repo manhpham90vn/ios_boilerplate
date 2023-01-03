@@ -1,7 +1,11 @@
 .DEFAULT_GOAL := all
 
 .PHONY: all
-all: install generate
+all: init install generate
+
+.PHONY: init
+init:
+	@sh scripts/common/init.sh
 
 # install
 .PHONY: install
@@ -16,14 +20,14 @@ installMint:
 generate: generateResource installPod
 generateResource:
 	@sh scripts/project/generate-swiftgen.sh
-	@sh scripts/project/generate-project.sh
+	@sh scripts/xcodegen/xcodegen-run.sh
 installPod:
 	@sh scripts/pod/pod-run.sh
 
 # delete
 .PHONY: delete
 delete: 
-	rm -rf *.xcodeproj *.xcworkspace Pods/ Carthage/ Build/ Mints/ vendor/ .bundle Mintfile
+	rm -rf *.xcodeproj *.xcworkspace Pods/ Carthage/ Build/ Mints/ vendor/ .bundle Mintfile fastlane/build fastlane/test_output
 
 # run unit test
 .PHONY: unittest
