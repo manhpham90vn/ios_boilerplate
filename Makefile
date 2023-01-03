@@ -25,10 +25,17 @@ installPod:
 delete: 
 	rm -rf *.xcodeproj *.xcworkspace Pods/ Carthage/ Build/ Mints/ vendor/ .bundle Mintfile
 
+# run unit test
 .PHONY: unittest
 unittest:
 	bundle exec fastlane unittest --env sample
 
+# run slather
+.PHONY: slather
+slather:
+	@sh scripts/slather/slather-run.sh
+
+# export to testflight
 .PHONY: testflight
 testflight:
 	bundle exec fastlane upload_testflight_method_1 --env staging
