@@ -49,7 +49,7 @@ EOF
 cd ../Sources/Configs
 mkdir -p BuildConfigurations
 cd BuildConfigurations
-rm -rf *
+rm -rf ./*
 
 XCCONFIG_FILE_DEBUG=$CONFIGURATION.xcconfig
 CONFIGURATION_LOWER=$(echo $CONFIGURATION | tr '[:upper:]' '[:lower:]')
