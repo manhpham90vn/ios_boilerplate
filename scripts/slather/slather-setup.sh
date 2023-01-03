@@ -12,7 +12,7 @@ rm -rf $SLATHER_FILE
 
 cat <<EOF >>$SLATHER_FILE
 coverage_service: "cobertura_xml"
-xcodeproj: "$XCODEPROJ"
+xcodeproj: "$PROJECT_NAME.xcodeproj"
 scheme: "$SCHEME"
 configuration: "$CONFIGURATION"
 source_directory: "$SOURCE_DIRECTORY"
