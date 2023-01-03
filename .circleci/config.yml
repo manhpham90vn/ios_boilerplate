@@ -56,7 +56,7 @@ aliases:
       command: bundle exec pod install
   - &init_project
       name: Init project
-      command: make init    
+      command: make init
 jobs:
   build-and-test:
     macos:
