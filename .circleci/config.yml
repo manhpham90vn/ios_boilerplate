@@ -87,7 +87,7 @@ jobs:
       - store_artifacts:
           path: fastlane/test_output
       - store_artifacts:
-          path: xml_report
+          path: slather_report
   deploy-apple:
     macos:
       xcode: 14.0.1
