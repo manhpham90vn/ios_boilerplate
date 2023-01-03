@@ -33,25 +33,12 @@ targets:
       CODE_SIGN_ENTITLEMENTS: Sources/Resources/MyApp.entitlements
     preBuildScripts:
       - name: Generate
-        script: |
-          scripts/project/generate-swiftgen.sh
+        script: scripts/project/generate-swiftgen.sh
     postCompileScripts:
       - name: Swiftlint
-        script:
-          scripts/project/run-linter.sh
+        script: scripts/project/run-linter.sh
       - name: GoogleServiceInfo
-        script: |
-          PATH_TO_GOOGLE_PLISTS="${PROJECT_DIR}/Sources/Configs/GoogleServices"
-          case "${CONFIGURATION}" in
-          "Debug" )
-          cp -r "$PATH_TO_GOOGLE_PLISTS/GoogleService-Info-Debug.plist" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist" ;;
-          "Staging" )
-          cp -r "$PATH_TO_GOOGLE_PLISTS/GoogleService-Info-Staging.plist" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist" ;;
-          "Release" )
-          cp -r "$PATH_TO_GOOGLE_PLISTS/GoogleService-Info-Release.plist" "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist" ;;
-          *)
-          ;;
-          esac
+        script: scripts/project/run-firebase.sh
     postBuildScripts:
       - name: Crashlytics
         script: |
