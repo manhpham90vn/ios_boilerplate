@@ -33,6 +33,8 @@ jobs:
           key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-pods-    
+      - name: Init
+        run: make init
       - name: Generate
         run: scripts/github/ci-generate.sh
       - name: Run build tests
