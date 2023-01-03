@@ -32,7 +32,7 @@ delete:
 # run unit test
 .PHONY: unittest
 unittest:
-	bundle exec fastlane unittest --env sample
+	bundle exec fastlane unittest --env debug
 
 # run slather
 .PHONY: slather
