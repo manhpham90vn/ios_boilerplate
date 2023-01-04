@@ -110,7 +110,7 @@ jobs:
           command: echo $APP_STORE_P8 | base64 --decode > AuthKey_6TF3P5J5QY.p8
       - run:
           name: Create ENV
-          command: echo $ENV_CONTENT | base64 --decode > fastlane/.env.staging
+          command: echo $ENV_CONTENT | base64 --decode > fastlane/.env.release
       - run:
           name: Deploy Testflight
           no_output_timeout: 15m
