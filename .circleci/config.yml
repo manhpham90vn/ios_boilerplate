@@ -114,7 +114,7 @@ jobs:
       - run:
           name: Deploy Testflight
           no_output_timeout: 15m
-          command: make testflight
+          command: make upload
       - store_artifacts:
           path: fastlane/build
 workflows:
