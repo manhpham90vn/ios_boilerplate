@@ -38,8 +38,8 @@ jobs:
       - name: Generate
         run: |
           scripts/swiftgen/swiftgen-run.sh
-          bundle exec pod install
           scripts/xcodegen/xcodegen-run.sh
+          bundle exec pod install
       - name: Run build tests
         run: make test
       - name: Create slather file
