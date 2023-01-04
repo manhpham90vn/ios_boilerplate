@@ -1,9 +1,9 @@
 #!/bin/sh
 
+source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/xcodegen-cmd.sh
+source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/xcodegen-config.sh
 source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../common/version.sh
 source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../mint/mint-run.sh
-source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/xcodegen-cmd.sh
-source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/xcodegen-setup.sh
 
 cd $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../../
 

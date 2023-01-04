@@ -1,18 +1,16 @@
 #!/bin/sh
 
+source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/xcodegen-config.sh
 source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../common/config.sh
 
 cd $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../../
-
-XCODE_GEN_FILE=project.yml
-DEPLOYMENT_TARGET=12.0
 
 rm -rf $XCODE_GEN_FILE
 
 cat <<EOF >>$XCODE_GEN_FILE
 name: $PROJECT_NAME
 configs:
-  $CONFIGURATION: debug
+  $CONFIGURATION: $CONFIGURATION_LOWER
 options:
   createIntermediateGroups: true
   groupSortPosition: top
@@ -40,7 +38,7 @@ targets:
       CODE_SIGN_ENTITLEMENTS: $SOURCE_DIRECTORY/Resources/MyApp.entitlements
     preBuildScripts:
       - name: Generate
-        script: scripts/project/generate-swiftgen.sh
+        script: scripts/swiftgen/swiftgen-run.sh
     postCompileScripts:
       - name: Swiftlint
         script: scripts/project/run-linter.sh

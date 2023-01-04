@@ -36,7 +36,10 @@ jobs:
       - name: Init
         run: make init
       - name: Generate
-        run: scripts/github/ci-generate.sh
+        run: |
+          scripts/swiftgen/swiftgen-run.sh
+          bundle exec pod install
+          scripts/xcodegen/xcodegen-run.sh
       - name: Run build tests
         run: make test
       - name: Create slather file

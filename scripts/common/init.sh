@@ -2,15 +2,18 @@
 
 source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/config.sh
 source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/version.sh
+source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../xcodegen/xcodegen-setup.sh
+source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../swiftgen/swiftgen-setup.sh
 
 cd $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../../
 cd fastlane
 
-ENV_FILE_DEBUG=.env.debug
+if ! [[ $IS_PRODUCTION ]]
+then
+ENV_FILE=.env.debug
+rm -rf $ENV_FILE
 
-rm -rf $ENV_FILE_DEBUG
-
-cat <<EOF >>$ENV_FILE_DEBUG
+cat <<EOF >>$ENV_FILE
 # Config Project
 PROJECT_NAME="$PROJECT_NAME"
 XCODEPROJ="\$PROJECT_NAME.xcodeproj"
@@ -45,6 +48,7 @@ UNIT_TEST_DEVICE=$UNIT_TEST_DEVICE
 # Config match
 GIT_URL=""
 EOF
+fi
 
 cd ../Sources/Configs
 mkdir -p BuildConfigurations

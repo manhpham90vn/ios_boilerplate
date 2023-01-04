@@ -7,6 +7,7 @@
 
 import Foundation
 import MPInjector
+
 @testable import MyProduct
 
 extension MPInjector: RegisteringMock {
