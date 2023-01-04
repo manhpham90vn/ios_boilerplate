@@ -4,17 +4,35 @@
 
 ## User settings
 xcuserdata/
+
+### Generated resour
 Sources/Resources/Generated/*
+
+### ruby
 vendor/bundle
 .bundle
+
+### slather
 .slather.yml
-project.yml
+slather_report
+xml_report
+
+### mint
 Mints
 Mintfile
-slather_report
+
+### xcodegen
+project.yml
+
+### env
 .env.*
+
+### xcconfig
 *.xcconfig
-xml_report
+
+### apple sign
+*.p8
+*.p12
 
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
 *.xcscmblueprint

@@ -18,7 +18,7 @@ jobs:
         with:
           bundler-cache: true
       - name: Setup mint
-        run: scripts/github/ci-setup-mint.sh
+        run: scripts/mint/mint-setup.sh
       - uses: actions/cache@v3
         with:
           path: Mints
