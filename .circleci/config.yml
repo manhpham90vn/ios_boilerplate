@@ -83,7 +83,7 @@ jobs:
           command: scripts/slather/slather-setup.sh
       - run:
           name: Generate code coverage
-          command: bundle exec slather coverage
+          command: scripts/github/ci-code-coverage.sh
       - store_artifacts:
           path: fastlane/test_output
       - store_artifacts:

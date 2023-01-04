@@ -26,7 +26,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-mint- 
       - name: Install
-        run: scripts/github/ci-run-mint.sh
+        run: scripts/mint/mint-run.sh
       - uses: actions/cache@v3
         with:
           path: Pods
