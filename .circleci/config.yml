@@ -33,7 +33,7 @@ aliases:
   - &mint_install_dependency
       name: Install dependency via Mint
       command: |
-        HOMEBREW_NO_AUTO_UPDATE=1
+        export HOMEBREW_NO_AUTO_UPDATE=1
         scripts/mint/mint-run.sh
   - &generate_resource
       name: Generate Resource
