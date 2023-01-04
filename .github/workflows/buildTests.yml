@@ -40,7 +40,7 @@ jobs:
       - name: Run build tests
         run: make test
       - name: Create slather file
-        run : scripts/circleci/ci-setup-slather.sh
+        run : scripts/slather/slather-setup.sh
       - name: Generate Coverage
         run: scripts/github/ci-code-coverage.sh
       - name: Upload Coverage
