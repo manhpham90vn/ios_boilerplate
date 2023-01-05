@@ -1,6 +1,6 @@
 platform :ios, '12.0'
 
-source 'https://github.com/CocoaPods/Specs.git'
+source 'https://cdn.cocoapods.org/'
 
 inhibit_all_warnings!
 
