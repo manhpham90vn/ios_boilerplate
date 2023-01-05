@@ -34,14 +34,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pods-    
       - name: Init
-        run: make init
+        run: scripts/common/init.sh
       - name: Generate
         run: |
           scripts/swiftgen/swiftgen-run.sh
           scripts/xcodegen/xcodegen-run.sh
-          bundle exec pod install
+          scripts/pod/pod-setup.sh
+          scripts/project/run-pod.sh
       - name: Run build tests
-        run: make test
+        run: scripts/project/run-unit-test.sh
       - name: Create slather file
         run : scripts/slather/slather-setup.sh
       - name: Generate Coverage

@@ -53,10 +53,12 @@ aliases:
         - ./Pods
   - &install_pod
       name: Install cocoapods
-      command: bundle exec pod install
+      command: |
+        scripts/pod/pod-setup.sh
+        scripts/project/run-pod.sh
   - &init_project
       name: Init project
-      command: make init
+      command: scripts/common/init.sh
 jobs:
   build-and-test:
     macos:
@@ -77,7 +79,7 @@ jobs:
       - save_cache: *save_pod_cache
       - run:
           name: Run Unit test
-          command: make test
+          command: scripts/project/run-unit-test.sh
       - run:
           name: Create slather file
           command: scripts/slather/slather-setup.sh
@@ -115,7 +117,7 @@ jobs:
       - run:
           name: Deploy Testflight
           no_output_timeout: 15m
-          command: make upload
+          command: scripts/project/run-upload-testflight.sh
       - store_artifacts:
           path: fastlane/build
 workflows:

@@ -30,12 +30,12 @@ install-pod:
 # delete
 .PHONY: delete
 delete: 
-	@sh scripts/project/delete.sh
+	@sh scripts/project/run-delete.sh
 
 # run unit test
 .PHONY: test
 test:
-	bundle exec fastlane unittest --env debug
+	@sh scripts/project/run-unit-test.sh
 
 # run slather
 .PHONY: slather
@@ -48,7 +48,7 @@ testflight: setup_env upload
 setup_env: export IS_PRODUCTION=1
 setup_env: all
 upload:
-	bundle exec fastlane upload_testflight_method_1 --env release
+	@sh scripts/project/run-upload-testflight.sh
 
 # open xcode
 .PHONY: open
