@@ -102,7 +102,7 @@ jobs:
       - restore_cache: *restore_mint_cache
       - run: *mint_install_dependency
       - save_cache: *save_mint_cache
-      - run: export IS_PRODUCTION=1
+      - run: echo 'export IS_PRODUCTION=1' >> "$BASH_ENV"
       - run: *init_project
       - run: *generate_resource
       - restore_cache: *restore_pod_cache
