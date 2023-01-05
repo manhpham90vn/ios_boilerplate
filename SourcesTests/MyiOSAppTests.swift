@@ -11,7 +11,7 @@ import RxBlocking
 import Networking
 import RxTest
 import RxSwift
-@testable import My_App_Debug
+@testable import MyProduct
 
 final class MyiOSAppTests: XCTestCase {
     

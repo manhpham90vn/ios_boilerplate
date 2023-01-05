@@ -188,7 +188,7 @@ DEPENDENCIES:
   - RxTest
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - Alamofire
     - FirebaseAnalytics
     - FirebaseCore
@@ -265,6 +265,6 @@ SPEC CHECKSUMS:
   RxTest: eb2d23adefc5a5ebf5779c7792fa3edfe6ebcc17
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: d8d0e4fe2de45eab58f5619adb3eb3058ca4ce52
+PODFILE CHECKSUM: 896eb830eb6c7e12de4da1f0de9072560481daf6
 
 COCOAPODS: 1.11.3

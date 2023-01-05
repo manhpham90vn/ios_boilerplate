@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 import Networking
-@testable import My_App_Debug
+@testable import MyProduct
 
 class UserRepositoryMock: UserRepositoryInterface {
     func login(email: String, password: String) -> Single<LoginResponse> {

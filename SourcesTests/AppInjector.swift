@@ -7,7 +7,8 @@
 
 import Foundation
 import MPInjector
-@testable import My_App_Debug
+
+@testable import MyProduct
 
 extension MPInjector: RegisteringMock {
     public func registerServiceMock() {

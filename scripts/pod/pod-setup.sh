@@ -1,6 +1,17 @@
-platform :ios, '12.0'
+#!/bin/sh
 
-source 'https://github.com/CocoaPods/Specs.git'
+source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../common/config.sh
+
+cd $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../../
+
+POD_FILE=Podfile
+
+rm -rf $POD_FILE
+
+cat <<EOF >>$POD_FILE
+platform :ios, '$DEPLOYMENT_TARGET'
+
+source 'https://cdn.cocoapods.org/'
 
 inhibit_all_warnings!
 
@@ -14,7 +25,7 @@ post_install do |installer|
     end
 end
 
-target 'MyApp' do
+target '$APPLICATION_TARGET_NAME' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
@@ -40,11 +51,11 @@ target 'MyApp' do
   pod 'Configs', :path => './'
   pod 'Logs', :path => './'
 
-  target 'MyAppTests' do
+  target '${APPLICATION_TARGET_NAME}Tests' do
     inherit! :search_paths
-    # Pods for testing
     pod 'RxBlocking'
     pod 'RxTest'
   end
 
 end
+EOF

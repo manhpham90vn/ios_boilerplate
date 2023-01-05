@@ -6,6 +6,6 @@
 //
 
 import Foundation
-@testable import My_App_Debug
+@testable import MyProduct
 
 class LoginViewMock: LoginViewInterface {}

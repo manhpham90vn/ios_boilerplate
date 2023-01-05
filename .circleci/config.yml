@@ -18,7 +18,7 @@ aliases:
       command: scripts/circleci/ci-setup-ruby.sh
   - &config_mint
       name: Config Mint
-      command: scripts/circleci/ci-setup-mint.sh
+      command: scripts/mint/mint-setup.sh
   - &restore_mint_cache
       name: Restore Mint cache
       keys:
@@ -32,10 +32,14 @@ aliases:
         - ./Mints
   - &mint_install_dependency
       name: Install dependency via Mint
-      command: scripts/circleci/ci-install-mint.sh
+      command: |
+        export HOMEBREW_NO_AUTO_UPDATE=1
+        scripts/mint/mint-run.sh
   - &generate_resource
       name: Generate Resource
-      command: scripts/circleci/ci-generate.sh
+      command: |
+        scripts/swiftgen/swiftgen-run.sh
+        scripts/xcodegen/xcodegen-run.sh
   - &restore_pod_cache
       name: Restore CocoaPods cache
       keys:
@@ -49,7 +53,12 @@ aliases:
         - ./Pods
   - &install_pod
       name: Install cocoapods
-      command: scripts/circleci/ci-install-pod.sh
+      command: |
+        scripts/pod/pod-setup.sh
+        scripts/project/run-pod.sh
+  - &init_project
+      name: Init project
+      command: scripts/common/init.sh
 jobs:
   build-and-test:
     macos:
@@ -63,23 +72,24 @@ jobs:
       - restore_cache: *restore_mint_cache
       - run: *mint_install_dependency
       - save_cache: *save_mint_cache
+      - run: *init_project
       - run: *generate_resource
       - restore_cache: *restore_pod_cache
       - run: *install_pod
       - save_cache: *save_pod_cache
       - run:
           name: Run Unit test
-          command: make unittest
+          command: scripts/project/run-unit-test.sh
       - run:
           name: Create slather file
-          command: scripts/circleci/ci-setup-slather.sh
+          command: scripts/slather/slather-setup.sh
       - run:
           name: Generate code coverage
-          command: scripts/circleci/ci-code-coverage.sh
+          command: scripts/github/ci-code-coverage.sh
       - store_artifacts:
           path: fastlane/test_output
       - store_artifacts:
-          path: xml_report
+          path: slather_report
   deploy-apple:
     macos:
       xcode: 14.0.1
@@ -92,6 +102,8 @@ jobs:
       - restore_cache: *restore_mint_cache
       - run: *mint_install_dependency
       - save_cache: *save_mint_cache
+      - run: echo 'export IS_PRODUCTION=1' >> "$BASH_ENV"
+      - run: *init_project
       - run: *generate_resource
       - restore_cache: *restore_pod_cache
       - run: *install_pod
@@ -101,11 +113,11 @@ jobs:
           command: echo $APP_STORE_P8 | base64 --decode > AuthKey_6TF3P5J5QY.p8
       - run:
           name: Create ENV
-          command: echo $ENV_CONTENT | base64 --decode > fastlane/.env.staging
+          command: echo $ENV_CONTENT | base64 --decode > fastlane/.env.release
       - run:
           name: Deploy Testflight
           no_output_timeout: 15m
-          command: make testflight
+          command: scripts/project/run-upload-testflight.sh
       - store_artifacts:
           path: fastlane/build
 workflows:
