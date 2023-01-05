@@ -11,7 +11,7 @@ rm -rf $POD_FILE
 cat <<EOF >>$POD_FILE
 platform :ios, '$DEPLOYMENT_TARGET'
 
-source 'https://github.com/CocoaPods/Specs.git'
+source 'https://cdn.cocoapods.org/'
 
 inhibit_all_warnings!
 
