@@ -2,7 +2,7 @@
 
 source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/ruby-setup.sh
 
-if ! $RBENV_CMD --version && ! $CI &> /dev/null
+if ! $RBENV_CMD --version && ! $SKIP_RUN &> /dev/null
 then
     source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../brew/brew-install-package.sh $RBENV_CMD
 
@@ -29,7 +29,7 @@ then
     $SHELL -c "source $SHELL_RUN_CMD_PATH"
 fi
 
-if [ "$PROJECT_RUBY_VERSION" != "$CURRENT_RUBY_VERSION" ] && ! $CI
+if [ "$PROJECT_RUBY_VERSION" != "$CURRENT_RUBY_VERSION" ] && ! $SKIP_RUN
 then
     sh $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../logs/info.sh "Install $RUBY_CMD $PROJECT_RUBY_VERSION"
 

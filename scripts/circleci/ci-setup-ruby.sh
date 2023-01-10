@@ -2,9 +2,9 @@
 
 export GEM_CMD=gem
 
-if ! [[ $CI ]];
+if ! [[ $SKIP_RUN ]];
 then
-    export CI=true
+    export SKIP_RUN=true
 fi
 
 source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../ruby/ruby-install.sh

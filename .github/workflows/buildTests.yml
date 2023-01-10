@@ -41,7 +41,8 @@ jobs:
           scripts/xcodegen/xcodegen-run.sh
           scripts/pod/pod-setup.sh
           scripts/project/run-pod.sh
-          scripts/mockingbirdswift/mockingbirdswift-run.sh
+          scripts/mockingbirdswift/mockingbird-generate.sh
+          scripts/xcodegen/xcodegen-run.sh
       - name: Run build tests
         run: scripts/project/run-unit-test.sh
       - name: Create slather file
