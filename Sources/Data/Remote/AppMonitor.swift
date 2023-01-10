@@ -7,8 +7,6 @@
 
 import Foundation
 import Alamofire
-import Configs
-import Logs
 
 final class AppMonitor: EventMonitor {
     

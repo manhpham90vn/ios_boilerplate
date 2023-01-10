@@ -9,11 +9,9 @@ import UIKit
 import RxSwift
 import RxCocoa
 import MPInjector
-import Configs
-import Logs
 
 protocol LoginInteractorInterface {
-    var loginUseCase: LoginUseCase { get }
+    var loginUseCase: LoginUseCase { get set }
 }
 
 final class LoginInteractor: LoginInteractorInterface {

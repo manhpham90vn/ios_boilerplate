@@ -9,10 +9,6 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 import MPInjector
-import LeakDetector
-import Pagination
-import Configs
-import Logs
 
 protocol LoginPresenterInterface: HasTrigger, HasScreenType {
     var view: LoginViewInterface? { get }

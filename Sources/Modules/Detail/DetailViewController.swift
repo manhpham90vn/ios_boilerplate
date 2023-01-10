@@ -7,10 +7,6 @@
 
 import UIKit
 import MPInjector
-import LeakDetector
-import Pagination
-import Configs
-import Logs
 
 struct DetailViewControllerParams {
     var user: PagingUserResponse

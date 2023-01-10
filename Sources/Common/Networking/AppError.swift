@@ -6,10 +6,10 @@
 //
 
 import Foundation
-import Configs
 
 public enum AppError: Error {
     case noInternetConnection
     case actionAlreadyPerforming
     case networkError(api: Api, error: Error, data: Data?)
+    case none
 }

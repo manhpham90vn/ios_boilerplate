@@ -10,7 +10,6 @@ import RxSwift
 import RxCocoa
 import MPInjector
 import Alamofire
-import Networking
 
 protocol AppApi {
     func login(email: String, password: String) -> Single<LoginResponse>

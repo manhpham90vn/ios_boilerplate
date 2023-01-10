@@ -40,6 +40,11 @@ swiftgen.yml
 ### pod
 Podfile
 
+### mockingbirdswift
+*.generated.swift
+MockingbirdMocks
+MockingbirdSupport
+
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
 *.xcscmblueprint
 *.xccheckout

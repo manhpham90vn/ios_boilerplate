@@ -77,6 +77,7 @@ jobs:
       - restore_cache: *restore_pod_cache
       - run: *install_pod
       - save_cache: *save_pod_cache
+      - run: scripts/mockingbirdswift/mockingbirdswift-run.sh
       - run:
           name: Run Unit test
           command: scripts/project/run-unit-test.sh
@@ -108,6 +109,7 @@ jobs:
       - restore_cache: *restore_pod_cache
       - run: *install_pod
       - save_cache: *save_pod_cache
+      - run: scripts/mockingbirdswift/mockingbirdswift-run.sh
       - run:
           name: Create P8 API Key
           command: echo $APP_STORE_P8 | base64 --decode > AuthKey_6TF3P5J5QY.p8

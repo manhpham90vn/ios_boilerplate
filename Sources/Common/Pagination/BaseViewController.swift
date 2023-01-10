@@ -7,7 +7,6 @@
 
 import UIKit
 import NSObject_Rx
-import Configs
 
 open class BaseViewController: UIViewController, HasDisposeBag, HasScreenType {
         

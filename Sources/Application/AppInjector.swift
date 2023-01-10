@@ -6,7 +6,6 @@
 //
 
 import MPInjector
-import Networking
 
 extension MPInjector: Registering {
     public func registerService() {        

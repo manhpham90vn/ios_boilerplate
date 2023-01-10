@@ -8,8 +8,6 @@
 import Foundation
 import Alamofire
 import RxSwift
-import Configs
-import Logs
 
 public protocol AppNetworkInterface {
     func request<T: Decodable>(route: AppRequestConvertible,

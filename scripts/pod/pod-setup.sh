@@ -25,7 +25,7 @@ post_install do |installer|
     end
 end
 
-target '$APPLICATION_TARGET_NAME' do
+target '$PRODUCT_NAME' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
@@ -43,18 +43,15 @@ target '$APPLICATION_TARGET_NAME' do
   pod 'FirebaseCrashlytics'
   pod 'MPInjector'
   pod 'LocalDataViewer'
-  
-  # local pod
-  pod 'LeakDetector', :path => './'
-  pod 'Pagination', :path => './'
-  pod 'Networking', :path => './'
-  pod 'Configs', :path => './'
-  pod 'Logs', :path => './'
+  pod 'XCGLogger'
 
-  target '${APPLICATION_TARGET_NAME}Tests' do
+  target '${PRODUCT_NAME}Tests' do
     inherit! :search_paths
     pod 'RxBlocking'
     pod 'RxTest'
+    pod 'Nimble'
+    pod 'Quick'
+    pod 'MockingbirdFramework', '~> 0.20'
   end
 
 end

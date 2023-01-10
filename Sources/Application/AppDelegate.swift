@@ -11,7 +11,6 @@ import FirebaseAnalytics
 import FirebaseCore
 import FirebaseMessaging
 import MPInjector
-import Logs
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {

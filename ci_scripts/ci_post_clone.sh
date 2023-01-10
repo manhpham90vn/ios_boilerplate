@@ -10,3 +10,4 @@ source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../scripts/common/init.sh
 source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../scripts/swiftgen/swiftgen-run.sh
 source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../scripts/xcodegen/xcodegen-run.sh
 source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../scripts/pod/pod-run.sh
+source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../scripts/mockingbirdswift/mockingbirdswift-run.sh

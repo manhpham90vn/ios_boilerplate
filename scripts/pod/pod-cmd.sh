@@ -1,3 +1,6 @@
 #!/bin/sh
 
-POD_CMD=pod
+if ! [[ $POD_CMD ]];
+then
+    POD_CMD=pod
+fi

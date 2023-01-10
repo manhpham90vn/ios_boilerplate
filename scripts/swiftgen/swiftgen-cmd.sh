@@ -1,3 +1,6 @@
 #!/bin/sh
 
-SWIFTGEN_CMD=swiftgen
+if ! [[ $SWIFTGEN_CMD ]];
+then
+    SWIFTGEN_CMD=swiftgen
+fi
