@@ -180,7 +180,7 @@ public class LeakDetector {
     private init() {}
 }
 
-fileprivate class LeakDetectionHandleImpl: LeakDetectionHandle {
+private class LeakDetectionHandleImpl: LeakDetectionHandle {
 
     var cancelled: Bool {
         return cancelledRelay.value
