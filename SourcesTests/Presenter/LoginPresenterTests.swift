@@ -11,6 +11,7 @@ import Nimble
 import Mockingbird
 import RxSwift
 import RxBlocking
+import RxTest
 
 @testable import MyProduct
 
@@ -23,8 +24,8 @@ final class LoginPresenterTests: QuickSpec {
         var view: LoginViewInterfaceMock!
         var route: LoginRouterInterfaceMock!
         var interactor: LoginInteractorInterfaceMock!
-        var bag: DisposeBag!
         var pr: LoginPresenter!
+        var disposeBag: DisposeBag!
         
         beforeSuite {
             repo = mock(UserRepositoryInterface.self)
@@ -45,7 +46,7 @@ final class LoginPresenterTests: QuickSpec {
             pr.router = route
             pr.interactor = interactor
             
-            bag = DisposeBag()
+            disposeBag = DisposeBag()
         }
         
         describe("Test Login Presenter Skip Button") {
@@ -76,14 +77,13 @@ final class LoginPresenterTests: QuickSpec {
             it("Test Tap Login") {
                 pr.login.accept("login")
                 pr.password.accept("pass")
-            
+                pr.didTapLoginButton()
+                
                 pr.interactor.loginUseCase.succeeded
                     .drive(onNext: { result in
                         expect(result).toEventuallyNot(beNil(), timeout: .seconds(1))
                     })
-                    .disposed(by: bag)
-                
-                pr.didTapLoginButton()
+                    .disposed(by: disposeBag)
             }
             afterEach {
                 reset(repo)

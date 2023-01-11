@@ -12,11 +12,14 @@ import RxCocoa
 import MPInjector
 
 class CompletableUseCase<P>: UseCase {
-    
+
     var cacheParams: P?
-    
+
+    let trigger = PublishSubject<Void>()
+    private let bag = DisposeBag()
+
     @Inject var connectivityService: ConnectivityService
-    
+
     private let _processing = BehaviorRelay(value: false)
     var processing: Driver<Bool> {
         _processing
@@ -34,37 +37,43 @@ class CompletableUseCase<P>: UseCase {
         _failed
             .asDriverOnErrorJustComplete()
     }
-    
-    private let bag = DisposeBag()
-    
-    func buildUseCase(params: P) -> Completable { // swiftlint:disable:this unavailable_function
-        fatalError("this is abstract")
-    }
-    
-    final func execute(params: P) {
-        cacheParams = params
-        performedIfNeeded(params: params)
-    }
-    
-    private func performedIfNeeded(params: P) {
-        if _processing.value == true {
-            _failed.onNext(AppError.actionAlreadyPerforming)
-            return
-        }
-        if !connectivityService.isNetworkConnection {
-            _failed.onNext(AppError.noInternetConnection)
-            return
-        }
-        _processing.accept(true)
-        buildUseCase(params: params)
-            .subscribe(onCompleted: { [weak self] in
-                self?._succeeded.onNext(())
-                self?._processing.accept(false)
-            }, onError: { [weak self] error in
+
+    init() {
+        trigger
+            .map { [weak self] _ in
+                guard let self = self else { return false }
+                if self._processing.value {
+                    self._failed.onNext(AppError.actionAlreadyPerforming)
+                    return false
+                }
+                if !self.connectivityService.isNetworkConnection {
+                    self._failed.onNext(AppError.noInternetConnection)
+                    return false
+                }
+                self._processing.accept(true)
+                return true
+            }
+            .filter { $0 }
+            .flatMap { [weak self] _ -> Completable in
+                guard let self = self, let cacheParams = self.cacheParams else { return .never()  }
+                return self.buildUseCase(params: cacheParams)
+            }
+            .subscribe(onError: { [weak self] error in
                 self?._failed.onNext(error)
+                self?._processing.accept(false)
+            }, onCompleted: { [weak self] in
+                self?._succeeded.onNext(())
                 self?._processing.accept(false)
             })
             .disposed(by: bag)
+    }
 
+    func buildUseCase(params: P) -> Completable { // swiftlint:disable:this unavailable_function
+        fatalError("this is abstract")
+    }
+
+    final func execute(params: P) {
+        cacheParams = params
+        trigger.onNext(())
     }
 }
