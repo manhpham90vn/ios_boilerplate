@@ -15,7 +15,8 @@ vendor/bundle
 ### slather
 .slather.yml
 slather_report
-xml_report
+fastlane/reports/code_coverage
+fastlane/reports/unit_test
 
 ### mint
 Mints

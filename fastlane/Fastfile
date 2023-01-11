@@ -10,7 +10,8 @@ platform :ios do
         run_tests(workspace: ENV['WORKSPACE'],
             devices: [ENV['UNIT_TEST_DEVICE']],
             scheme: ENV['SCHEME'],
-            derived_data_path: "build"
+            derived_data_path: "build",
+            output_directory: "fastlane/reports/unit_test"
         )
       end
 

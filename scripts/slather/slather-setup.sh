@@ -5,7 +5,7 @@ source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../common/config.sh
 cd $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../../
 
 SLATHER_FILE=.slather.yml
-OUTPUT_DIRECTORY=slather_report
+OUTPUT_DIRECTORY=fastlane/reports/code_coverage
 BUILD_DIRECTORY=build
 
 rm -rf $SLATHER_FILE

@@ -94,7 +94,7 @@ jobs:
       - run:
           name: Generate code coverage
           command: scripts/slather/slather-run.sh
-      - store_artifacts:
+      - store_test_results:
           path: fastlane/test_output
       - store_artifacts:
           path: slather_report
@@ -113,7 +113,6 @@ jobs:
       - restore_cache: *restore_mint_cache
       - run: *mint_install_dependency
       - save_cache: *save_mint_cache
-      - run: echo 'export IS_PRODUCTION=1' >> "$BASH_ENV"
       - run: *init_project
       - run: *generate_resource
       - restore_cache: *restore_pod_cache
