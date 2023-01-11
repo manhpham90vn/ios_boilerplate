@@ -64,7 +64,7 @@ jobs:
     macos:
       xcode: 14.0.1
     environment:
-      SKIP_RUN: 1
+      SKIP_RUN: true
     steps:
       - checkout
       - restore_cache: *restore_gem_cache
@@ -98,8 +98,8 @@ jobs:
     macos:
       xcode: 14.0.1
     environment:
-      IS_PRODUCTION: 1
-      SKIP_RUN: 1
+      IS_PRODUCTION: true
+      SKIP_RUN: true
     steps:
       - checkout
       - restore_cache: *restore_gem_cache
