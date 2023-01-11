@@ -55,7 +55,7 @@ class SingleUseCase<P, R>: UseCase {
             }
             .filter { $0 }
             .flatMap { [weak self] _ -> Single<R> in
-                guard let self = self, let cacheParams = self.cacheParams else { return .never()  }
+                guard let self = self, let cacheParams = self.cacheParams else { return .never() }
                 return self.buildUseCase(params: cacheParams)
             }
             .asSingle()

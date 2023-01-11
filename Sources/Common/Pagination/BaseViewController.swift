@@ -8,21 +8,21 @@
 import UIKit
 import NSObject_Rx
 
-open class BaseViewController: UIViewController, HasDisposeBag, HasScreenType {
+class BaseViewController: UIViewController, HasDisposeBag, HasScreenType {
         
-    open var screenType: ScreenType! {
-        return .none
+    var screenType: ScreenType! {
+        return ScreenType.none
     }
     
-    open override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         setupUI()
         bindDatas()
     }
 
-    open func setupUI() {}
+    func setupUI() {}
 
-    open func bindDatas() {}
+    func bindDatas() {}
 
 }

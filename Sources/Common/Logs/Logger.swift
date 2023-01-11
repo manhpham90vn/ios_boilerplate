@@ -58,10 +58,10 @@ public final class Logger {
 }
 
 public func LogVerbose(_ closure: @autoclosure @escaping () -> Any?,
-                functionName: StaticString = #function,
-                fileName: StaticString = #file,
-                lineNumber: Int = #line,
-                userInfo: [String: Any] = [:]) {
+                       functionName: StaticString = #function,
+                       fileName: StaticString = #file,
+                       lineNumber: Int = #line,
+                       userInfo: [String: Any] = [:]) {
     log.logln(.verbose,
               functionName: functionName,
               fileName: fileName,
@@ -71,10 +71,10 @@ public func LogVerbose(_ closure: @autoclosure @escaping () -> Any?,
 }
 
 public func LogDebug(_ closure: @autoclosure @escaping () -> Any?,
-              functionName: StaticString = #function,
-              fileName: StaticString = #file,
-              lineNumber: Int = #line,
-              userInfo: [String: Any] = [:]) {
+                     functionName: StaticString = #function,
+                     fileName: StaticString = #file,
+                     lineNumber: Int = #line,
+                     userInfo: [String: Any] = [:]) {
     log.logln(.debug,
               functionName: functionName,
               fileName: fileName,
@@ -84,10 +84,10 @@ public func LogDebug(_ closure: @autoclosure @escaping () -> Any?,
 }
 
 public func LogInfo(_ closure: @autoclosure @escaping () -> Any?,
-             functionName: StaticString = #function,
-             fileName: StaticString = #file,
-             lineNumber: Int = #line,
-             userInfo: [String: Any] = [:]) {
+                    functionName: StaticString = #function,
+                    fileName: StaticString = #file,
+                    lineNumber: Int = #line,
+                    userInfo: [String: Any] = [:]) {
     log.logln(.info,
               functionName: functionName,
               fileName: fileName,
@@ -97,10 +97,10 @@ public func LogInfo(_ closure: @autoclosure @escaping () -> Any?,
 }
 
 public func LogWarn(_ closure: @autoclosure @escaping () -> Any?,
-             functionName: StaticString = #function,
-             fileName: StaticString = #file,
-             lineNumber: Int = #line,
-             userInfo: [String: Any] = [:]) {
+                    functionName: StaticString = #function,
+                    fileName: StaticString = #file,
+                    lineNumber: Int = #line,
+                    userInfo: [String: Any] = [:]) {
     log.logln(.warning,
               functionName: functionName,
               fileName: fileName,
@@ -110,10 +110,10 @@ public func LogWarn(_ closure: @autoclosure @escaping () -> Any?,
 }
 
 public func LogError(_ closure: @autoclosure @escaping () -> Any?,
-              functionName: StaticString = #function,
-              fileName: StaticString = #file,
-              lineNumber: Int = #line,
-              userInfo: [String: Any] = [:]) {
+                     functionName: StaticString = #function,
+                     fileName: StaticString = #file,
+                     lineNumber: Int = #line,
+                     userInfo: [String: Any] = [:]) {
     log.logln(.error,
               functionName: functionName,
               fileName: fileName,

@@ -19,7 +19,7 @@ import RxRelay
 import UIKit
 
 /// Leak detection status.
-public enum LeakDetectionStatus {
+enum LeakDetectionStatus {
 
     /// Leak detection is in progress.
     case InProgress
@@ -29,17 +29,17 @@ public enum LeakDetectionStatus {
 }
 
 /// The default time values used for leak detection expectations.
-public struct LeakDefaultExpectationTime {
+enum LeakDefaultExpectationTime {
 
     /// The object deallocation time.
-    public static let deallocation = 1.0
+    static let deallocation = 1.0
 
     /// The view disappear time.
-    public static let viewDisappear = 5.0
+    static let viewDisappear = 5.0
 }
 
 /// The handle for a scheduled leak detection.
-public protocol LeakDetectionHandle {
+protocol LeakDetectionHandle {
 
     /// Cancel the scheduled detection.
     func cancel()
@@ -51,16 +51,16 @@ public protocol LeakDetectionHandle {
 /// A `Router` that owns an `Interactor` might for example expect its `Interactor` be deallocated when the `Router`
 /// itself is deallocated. If the interactor does not deallocate in time, a runtime assert is triggered, along with
 /// critical logging.
-public class LeakDetector {
+class LeakDetector {
 
     /// The singleton instance.
-    public static let instance = LeakDetector()
+    static let instance = LeakDetector()
 
     /// The status of leak detection.
     ///
     /// The status changes between InProgress and DidComplete as units register for new detections, cancel existing
     /// detections, and existing detections complete.
-    public var status: Observable<LeakDetectionStatus> {
+    var status: Observable<LeakDetectionStatus> {
         return expectationCount
             .asObservable()
             .map { expectationCount in
@@ -75,7 +75,7 @@ public class LeakDetector {
     /// - parameter inTime: The time the given object is expected to be deallocated within.
     /// - returns: The handle that can be used to cancel the expectation.
     @discardableResult
-    public func expectDeallocate(object: AnyObject, inTime time: TimeInterval = LeakDefaultExpectationTime.deallocation) -> LeakDetectionHandle {
+    func expectDeallocate(object: AnyObject, inTime time: TimeInterval = LeakDefaultExpectationTime.deallocation) -> LeakDetectionHandle {
         expectationCount.accept(expectationCount.value + 1)
 
         let objectDescription = String(describing: object)
@@ -118,7 +118,7 @@ public class LeakDetector {
     /// - parameter inTime: The time the given view controller is expected to disappear.
     /// - returns: The handle that can be used to cancel the expectation.
     @discardableResult
-    public func expectViewControllerDisappear(viewController: UIViewController, inTime time: TimeInterval = LeakDefaultExpectationTime.viewDisappear) -> LeakDetectionHandle {
+    func expectViewControllerDisappear(viewController: UIViewController, inTime time: TimeInterval = LeakDefaultExpectationTime.viewDisappear) -> LeakDetectionHandle {
         expectationCount.accept(expectationCount.value + 1)
 
         let handle = LeakDetectionHandleImpl {
@@ -154,7 +154,7 @@ public class LeakDetector {
     // MARK: - Internal Interface
 
     // Test override for leak detectors.
-    static var disableLeakDetectorOverride: Bool = false
+    static var disableLeakDetectorOverride = false
 
     #if DEBUG
         /// Reset the state of Leak Detector, internal for UI test only.
@@ -187,9 +187,9 @@ private class LeakDetectionHandleImpl: LeakDetectionHandle {
     }
 
     let cancelledRelay = BehaviorRelay<Bool>(value: false)
-    let cancelClosure: (() -> ())?
+    let cancelClosure: (() -> Void)?
 
-    init(cancelClosure: (() -> ())? = nil) {
+    init(cancelClosure: (() -> Void)? = nil) {
         self.cancelClosure = cancelClosure
     }
 

@@ -55,7 +55,7 @@ class CompletableUseCase<P>: UseCase {
             }
             .filter { $0 }
             .flatMap { [weak self] _ -> Completable in
-                guard let self = self, let cacheParams = self.cacheParams else { return .never()  }
+                guard let self = self, let cacheParams = self.cacheParams else { return .never() }
                 return self.buildUseCase(params: cacheParams)
             }
             .subscribe(onError: { [weak self] error in

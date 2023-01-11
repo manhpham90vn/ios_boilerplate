@@ -10,18 +10,18 @@ import MJRefresh
 import RxSwift
 import RxCocoa
 
-open class BaseCollectionViewViewController: BaseViewController, ViewControllerPageable {
+class BaseCollectionViewViewController: BaseViewController, ViewControllerPageable {
 
-    public let headerRefreshTrigger = PublishRelay<Void>()
-    public let footerLoadMoreTrigger = PublishRelay<Void>()
-    public let isEnableLoadMore = PublishRelay<Bool>()
-    public let isEmptyData = PublishRelay<Bool>()
-    public let isHeaderLoading = PublishRelay<Bool>()
-    public let isFooterLoading = PublishRelay<Bool>()
+    let headerRefreshTrigger = PublishRelay<Void>()
+    let footerLoadMoreTrigger = PublishRelay<Void>()
+    let isEnableLoadMore = PublishRelay<Bool>()
+    let isEmptyData = PublishRelay<Bool>()
+    let isHeaderLoading = PublishRelay<Bool>()
+    let isFooterLoading = PublishRelay<Bool>()
     
-    @IBOutlet public weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
-    open override func bindDatas() {
+    override func bindDatas() {
         super.bindDatas()
                 
         // header

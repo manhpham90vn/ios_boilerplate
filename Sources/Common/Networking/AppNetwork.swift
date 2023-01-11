@@ -35,9 +35,9 @@ public final class AppNetwork: AppNetworkInterface {
     }
     
     func request<T: Decodable>(session: Session,
-                                       route: AppRequestConvertible,
-                                       type: T.Type,
-                                       completion: @escaping (Result<T, Error>) -> Void) -> DataRequest {
+                               route: AppRequestConvertible,
+                               type: T.Type,
+                               completion: @escaping (Result<T, Error>) -> Void) -> DataRequest {
         let request = session
             .request(route)
             .validate(statusCode: 200...300)
@@ -58,8 +58,8 @@ public final class AppNetwork: AppNetworkInterface {
     }
     
     func request<T: Decodable>(session: Session,
-                                       route: AppRequestConvertible,
-                                       type: T.Type) -> Single<T> {
+                               route: AppRequestConvertible,
+                               type: T.Type) -> Single<T> {
         Single<T>.create { [weak self] single in
             guard let self = self else {
                 return Disposables.create()
@@ -79,12 +79,12 @@ public final class AppNetwork: AppNetworkInterface {
     }
     
     public func request<T: Decodable>(route: AppRequestConvertible,
-                               type: T.Type) -> Single<T> {
+                                      type: T.Type) -> Single<T> {
         return request(session: session, route: route, type: type)
     }
     
     public func requestRefreshable<T: Decodable>(route: AppRequestConvertible,
-                                          type: T.Type) -> Single<T> {
+                                                 type: T.Type) -> Single<T> {
         return request(session: sessionRefreshable, route: route, type: type)
     }
 }

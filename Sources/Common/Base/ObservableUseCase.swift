@@ -55,7 +55,7 @@ class ObservableUseCase<P, R>: UseCase {
             }
             .filter { $0 }
             .flatMap { [weak self] _ -> Observable<R> in
-                guard let self = self, let cacheParams = self.cacheParams else { return .never()  }
+                guard let self = self, let cacheParams = self.cacheParams else { return .never() }
                 return self.buildUseCase(params: cacheParams)
             }
             .subscribe(onNext: { [weak self] result in
