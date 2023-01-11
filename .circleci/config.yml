@@ -94,10 +94,14 @@ jobs:
       - run:
           name: Generate code coverage
           command: scripts/slather/slather-run.sh
+      - run:
+          name: "Zip folder code coverage"
+          command: |
+                zip -r test-result.zip fastlane/reports/
       - store_test_results:
-          path: fastlane/test_output
+          path: fastlane/reports/unit_test
       - store_artifacts:
-          path: slather_report
+          path: test-result.zip
   deploy-apple:
     macos:
       xcode: 14.0.1
