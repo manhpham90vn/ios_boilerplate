@@ -2,7 +2,7 @@
 
 source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/ruby-setup.sh
 
-if ! $RBENV_CMD --version && ! $SKIP_RUN &> /dev/null
+if ! $RBENV_CMD --version &> /dev/null && ! $SKIP_RUN 
 then
     source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../brew/brew-install-package.sh $RBENV_CMD
 
