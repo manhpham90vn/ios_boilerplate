@@ -55,10 +55,15 @@ aliases:
       name: Install cocoapods
       command: |
         scripts/pod/pod-setup.sh
-        scripts/project/run-pod.sh
+        scripts/pod/pod-run.sh
   - &init_project
       name: Init project
       command: scripts/common/init.sh
+  - &init_mock
+      name: Init Mock
+      command: |
+          scripts/mockingbirdswift/mockingbird-config.sh
+          scripts/mockingbirdswift/mockingbird-generate.sh
 jobs:
   build-and-test:
     macos:
@@ -79,8 +84,7 @@ jobs:
       - restore_cache: *restore_pod_cache
       - run: *install_pod
       - save_cache: *save_pod_cache
-      - run: scripts/mockingbirdswift/mockingbird-config.sh
-      - run: scripts/mockingbirdswift/mockingbird-generate.sh
+      - run: *init_mock
       - run:
           name: Run Unit test
           command: scripts/project/run-unit-test.sh
@@ -89,7 +93,7 @@ jobs:
           command: scripts/slather/slather-setup.sh
       - run:
           name: Generate code coverage
-          command: scripts/github/ci-code-coverage.sh
+          command: scripts/slather/slather-run.sh
       - store_artifacts:
           path: fastlane/test_output
       - store_artifacts:
@@ -115,8 +119,6 @@ jobs:
       - restore_cache: *restore_pod_cache
       - run: *install_pod
       - save_cache: *save_pod_cache
-      - run: scripts/mockingbirdswift/mockingbird-config.sh
-      - run: scripts/mockingbirdswift/mockingbird-generate.sh
       - run:
           name: Create P8 API Key
           command: echo $APP_STORE_P8 | base64 --decode > AuthKey_6TF3P5J5QY.p8
