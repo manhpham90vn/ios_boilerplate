@@ -11,7 +11,7 @@ BUILD_DIRECTORY=build
 rm -rf $SLATHER_FILE
 
 cat <<EOF >>$SLATHER_FILE
-coverage_service: "cobertura_xml"
+coverage_service: "html"
 xcodeproj: "$PROJECT_NAME.xcodeproj"
 scheme: "$SCHEME"
 configuration: "$CONFIGURATION"
