@@ -9,10 +9,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 import MPInjector
-import LeakDetector
-import Pagination
-import Configs
-import Logs
 
 protocol MainPresenterInterface: HasTrigger, HasScreenType {
     

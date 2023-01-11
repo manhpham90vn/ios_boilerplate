@@ -1,3 +1,6 @@
 #!/bin/sh
 
-SLATHER_CMD=slather
+if ! [[ $SLATHER_CMD ]];
+then
+    SLATHER_CMD=slather
+fi

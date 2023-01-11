@@ -18,7 +18,7 @@ import Dispatch
 import Foundation
 import RxSwift
 
-public class Executor {
+enum Executor {
 
     /// Execute the given logic after the given delay assuming the given maximum frame duration.
     ///
@@ -31,7 +31,7 @@ public class Executor {
     ///   pauses.
     /// - parameter maxFrameDuration: The maximum duration a single frame should take. Defaults to 33ms.
     /// - parameter logic: The closure logic to perform.
-    public static func execute(withDelay delay: TimeInterval, maxFrameDuration: Int = 33, logic: @escaping () -> ()) {
+    static func execute(withDelay delay: TimeInterval, maxFrameDuration: Int = 33, logic: @escaping () -> Void) {
         let period = DispatchTimeInterval.milliseconds(maxFrameDuration / 3)
         var lastRunLoopTime = Date().timeIntervalSinceReferenceDate
         var properFrameTime = 0.0

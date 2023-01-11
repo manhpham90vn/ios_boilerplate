@@ -10,10 +10,6 @@ import RxSwift
 import RxCocoa
 import MPInjector
 import LocalDataViewer
-import LeakDetector
-import Pagination
-import Configs
-import Logs
 
 final class MainViewController: BaseTableViewViewController {
 

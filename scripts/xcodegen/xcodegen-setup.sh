@@ -20,7 +20,7 @@ options:
 settings:
   PRODUCT_BUNDLE_IDENTIFIER: \$(PRODUCT_BUNDLE_IDENTIFIER)
 targets:
-  $APPLICATION_TARGET_NAME:
+  $PRODUCT_NAME:
     type: application
     platform: iOS
     deploymentTarget: $DEPLOYMENT_TARGET
@@ -51,7 +51,7 @@ targets:
         inputFiles:
           - \$(BUILT_PRODUCTS_DIR)/\$(INFOPLIST_PATH)
           - \$(DWARF_DSYM_FOLDER_PATH)/\$(DWARF_DSYM_FILE_NAME)/Contents/Resources/DWARF/\$(TARGET_NAME)
-  ${APPLICATION_TARGET_NAME}Tests:
+  ${PRODUCT_NAME}Tests:
     type: bundle.unit-test
     platform: iOS
     settings:
@@ -60,19 +60,19 @@ targets:
       IPHONEOS_DEPLOYMENT_TARGET: $DEPLOYMENT_TARGET
     sources: SourcesTests
     dependencies:
-      - target: MyApp
+      - target: ${PRODUCT_NAME}
 schemes:
   $SCHEME:
     build:
       targets:
-        $APPLICATION_TARGET_NAME: all
+        $PRODUCT_NAME: all
     run:
       config: $CONFIGURATION
     test:
       config: $CONFIGURATION
       gatherCoverageData: true
       targets:
-        - name: ${APPLICATION_TARGET_NAME}Tests
+        - name: ${PRODUCT_NAME}Tests
           parallelizable: false
           randomExecutionOrder: true
     profile:
@@ -81,4 +81,27 @@ schemes:
       config: $CONFIGURATION
     archive:
       config: $CONFIGURATION
+  ${SCHEME}Tests:
+    build:
+      targets:
+        ${PRODUCT_NAME}Tests: [test]
+    run:
+      config: $CONFIGURATION
+      environmentVariables:
+        SKIP_ANIMATIONS:
+    test:
+      config: $CONFIGURATION
+      gatherCoverageData: true
+      targets:
+        - name: ${PRODUCT_NAME}Tests
+          parallelizable: false
+          randomExecutionOrder: true
+    profile:
+      config: $CONFIGURATION
+    analyze:
+      config: $CONFIGURATION
+    archive:
+      config: $CONFIGURATION
+      customArchiveName: ${PRODUCT_NAME}Tests
+      revealArchiveInOrganizer: true    
 EOF

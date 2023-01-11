@@ -10,28 +10,28 @@ import MJRefresh
 import RxSwift
 import RxCocoa
 
-open class BaseTableViewViewController: BaseViewController, ViewControllerPageable {
+class BaseTableViewViewController: BaseViewController, ViewControllerPageable {
 
-    public let headerRefreshTrigger = PublishRelay<Void>()
-    public let footerLoadMoreTrigger = PublishRelay<Void>()
-    public let isEnableLoadMore = PublishRelay<Bool>()
-    public let isHeaderLoading = PublishRelay<Bool>()
-    public let isFooterLoading = PublishRelay<Bool>()
-    public let isEmptyData = PublishRelay<Bool>()
+    let headerRefreshTrigger = PublishRelay<Void>()
+    let footerLoadMoreTrigger = PublishRelay<Void>()
+    let isEnableLoadMore = PublishRelay<Bool>()
+    let isHeaderLoading = PublishRelay<Bool>()
+    let isFooterLoading = PublishRelay<Bool>()
+    let isEmptyData = PublishRelay<Bool>()
     
-    @IBOutlet public weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     
-    open override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    open override func setupUI() {
+    override func setupUI() {
         super.setupUI()
         
         tableView.tableFooterView = UIView()
     }
         
-    open override func bindDatas() {
+    override func bindDatas() {
         super.bindDatas()
         
         // header

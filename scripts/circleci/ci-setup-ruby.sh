@@ -1,7 +1,7 @@
 #!/bin/sh
 
-export BUNDLER_VERSION=$(cat < Gemfile.lock | tail -1 | tr -d " ")
-gem install bundler:$BUNDLER_VERSION
+echo 'export GEM_CMD=gem' >> "$BASH_ENV"
+echo 'export BUNDLER_CMD=bundler' >> "$BASH_ENV"
+source "$BASH_ENV"
 
-bundle config path vendor/bundle
-bundle install --without=documentation --jobs 4 --retry 3
+source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../ruby/ruby-install.sh

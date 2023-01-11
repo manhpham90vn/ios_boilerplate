@@ -15,7 +15,8 @@ vendor/bundle
 ### slather
 .slather.yml
 slather_report
-xml_report
+fastlane/reports/code_coverage
+fastlane/reports/unit_test
 
 ### mint
 Mints
@@ -39,6 +40,11 @@ swiftgen.yml
 
 ### pod
 Podfile
+
+### mockingbirdswift
+*.generated.swift
+MockingbirdMocks
+MockingbirdSupport
 
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
 *.xcscmblueprint

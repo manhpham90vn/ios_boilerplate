@@ -10,14 +10,16 @@ import RxSwift
 import RxRelay
 import RxCocoa
 import MPInjector
-import Networking
 
 class ObservableUseCase<P, R>: UseCase {
-    
+
     var cacheParams: P?
-    
+
+    let trigger = PublishSubject<Void>()
+    private let bag = DisposeBag()
+
     @Inject var connectivityService: ConnectivityService
-    
+
     private let _processing = BehaviorRelay(value: false)
     var processing: Driver<Bool> {
         _processing
@@ -35,29 +37,27 @@ class ObservableUseCase<P, R>: UseCase {
         _failed
             .asDriverOnErrorJustComplete()
     }
-    
-    private let bag = DisposeBag()
-    
-    func buildUseCase(params: P) -> Observable<R> { // swiftlint:disable:this unavailable_function
-        fatalError("this is abstract")
-    }
-    
-    final func execute(params: P) {
-        cacheParams = params
-        performedIfNeeded(params: params)
-    }
-    
-    private func performedIfNeeded(params: P) {
-        if _processing.value == true {
-            _failed.onNext(AppError.actionAlreadyPerforming)
-            return
-        }
-        if !connectivityService.isNetworkConnection {
-            _failed.onNext(AppError.noInternetConnection)
-            return
-        }
-        _processing.accept(true)
-        buildUseCase(params: params)
+
+    init() {
+        trigger
+            .map { [weak self] _ in
+                guard let self = self else { return false }
+                if self._processing.value {
+                    self._failed.onNext(AppError.actionAlreadyPerforming)
+                    return false
+                }
+                if !self.connectivityService.isNetworkConnection {
+                    self._failed.onNext(AppError.noInternetConnection)
+                    return false
+                }
+                self._processing.accept(true)
+                return true
+            }
+            .filter { $0 }
+            .flatMap { [weak self] _ -> Observable<R> in
+                guard let self = self, let cacheParams = self.cacheParams else { return .never() }
+                return self.buildUseCase(params: cacheParams)
+            }
             .subscribe(onNext: { [weak self] result in
                 self?._succeeded.onNext(result)
                 self?._processing.accept(false)
@@ -66,6 +66,15 @@ class ObservableUseCase<P, R>: UseCase {
                 self?._processing.accept(false)
             })
             .disposed(by: bag)
+    }
 
+    // do not call this function directly
+    func buildUseCase(params: P) -> Observable<R> { // swiftlint:disable:this unavailable_function
+        fatalError("this is abstract")
+    }
+
+    final func execute(params: P) {
+        cacheParams = params
+        trigger.onNext(())
     }
 }

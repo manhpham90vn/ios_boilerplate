@@ -19,13 +19,17 @@ installMint:
 
 # generate
 .PHONY: generate
-generate: generate-swiftgen generate-xcodegen install-pod
+generate: generate-swiftgen generate-xcodegen install-pod install-mockingbird generate-mockingbird
 generate-swiftgen:
 	@sh scripts/swiftgen/swiftgen-run.sh
 generate-xcodegen:
 	@sh scripts/xcodegen/xcodegen-run.sh
 install-pod:
 	@sh scripts/pod/pod-run.sh
+install-mockingbird:
+	@sh scripts/mockingbirdswift/mockingbird-config.sh
+generate-mockingbird:
+	@sh scripts/mockingbirdswift/mockingbird-generate.sh
 
 # delete
 .PHONY: delete
@@ -44,10 +48,7 @@ slather:
 
 # export to testflight
 .PHONY: testflight
-testflight: setup_env upload
-setup_env: export IS_PRODUCTION=1
-setup_env: all
-upload:
+testflight:
 	@sh scripts/project/run-upload-testflight.sh
 
 # open xcode

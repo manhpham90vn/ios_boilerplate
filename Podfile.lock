@@ -1,6 +1,5 @@
 PODS:
   - Alamofire (5.6.2)
-  - Configs (1.0)
   - FirebaseAnalytics (9.3.0):
     - FirebaseAnalytics/AdIdSupport (= 9.3.0)
     - FirebaseCore (~> 9.0)
@@ -96,47 +95,25 @@ PODS:
   - GoogleUtilities/UserDefaults (7.7.0):
     - GoogleUtilities/Logger
   - KeychainAccess (4.2.2)
-  - LeakDetector (1.0):
-    - Configs
-    - Logs
-    - RxRelay (~> 6.2)
-    - RxSwift (~> 6.2)
   - LocalDataViewer (1.0.3):
     - KeychainAccess
-  - Logs (1.0):
-    - Configs
-    - MJRefresh
-    - "NSObject+Rx"
-    - RxCocoa (~> 6.2)
-    - RxSwift (~> 6.2)
-    - XCGLogger
   - MJRefresh (3.7.5)
-  - MPInjector (1.0.4)
+  - MockingbirdFramework (0.20.0)
+  - MPInjector (1.0.5)
   - nanopb (2.30909.0):
     - nanopb/decode (= 2.30909.0)
     - nanopb/encode (= 2.30909.0)
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
-  - Networking (1.0):
-    - Alamofire
-    - Configs
-    - Logs
-    - MPInjector
-    - RxCocoa (~> 6.2)
-    - RxSwift (~> 6.2)
+  - Nimble (10.0.0)
   - "NSObject+Rx (5.2.2)":
     - RxSwift (~> 6.2)
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
-  - Pagination (1.0):
-    - Configs
-    - MJRefresh
-    - "NSObject+Rx"
-    - RxCocoa (~> 6.2)
-    - RxSwift (~> 6.2)
   - PKHUD (5.3.0)
   - PromisesObjC (2.1.1)
+  - Quick (5.0.1)
   - Reusable (4.1.2):
     - Reusable/Storyboard (= 4.1.2)
     - Reusable/View (= 4.1.2)
@@ -167,25 +144,24 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
-  - Configs (from `./`)
   - FirebaseAnalytics
   - FirebaseCrashlytics
   - FirebaseMessaging
-  - LeakDetector (from `./`)
   - LocalDataViewer
-  - Logs (from `./`)
   - MJRefresh
+  - MockingbirdFramework (~> 0.20)
   - MPInjector
-  - Networking (from `./`)
+  - Nimble
   - "NSObject+Rx"
-  - Pagination (from `./`)
   - PKHUD
+  - Quick
   - Reusable
   - RxBlocking
   - RxCocoa
   - RxSwift
   - RxSwiftExt
   - RxTest
+  - XCGLogger
 
 SPEC REPOS:
   trunk:
@@ -203,12 +179,15 @@ SPEC REPOS:
     - KeychainAccess
     - LocalDataViewer
     - MJRefresh
+    - MockingbirdFramework
     - MPInjector
     - nanopb
+    - Nimble
     - "NSObject+Rx"
     - ObjcExceptionBridging
     - PKHUD
     - PromisesObjC
+    - Quick
     - Reusable
     - RxBlocking
     - RxCocoa
@@ -218,21 +197,8 @@ SPEC REPOS:
     - RxTest
     - XCGLogger
 
-EXTERNAL SOURCES:
-  Configs:
-    :path: "./"
-  LeakDetector:
-    :path: "./"
-  Logs:
-    :path: "./"
-  Networking:
-    :path: "./"
-  Pagination:
-    :path: "./"
-
 SPEC CHECKSUMS:
   Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
-  Configs: 67d48726aac8ea518f14a8c0e8c10416108166db
   FirebaseAnalytics: bf46f5163f44097ce2c789de0b3e6f87f1da834a
   FirebaseCore: c088995ece701a021a48a1348ea0174877de2a6a
   FirebaseCoreDiagnostics: 060eb57cc56dfaf40b1b1b5874a5c17c41ce79f8
@@ -244,18 +210,17 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 5fffe35792f8b96ec8d6775f5eccd83c998d5a3b
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
-  LeakDetector: 9f0be3e0b3f67bde9dacac93d5456ecb38a8feda
   LocalDataViewer: d1ad06bfc194e33b394d2150bf924fc062281cf8
-  Logs: d0d0380f61a79c66662f06eb6b383dbe094f1eea
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
-  MPInjector: a56861409a30d780394b8be2b4ae0d903f45a526
+  MockingbirdFramework: 54e35fbbb47b806c1a1fae2cf3ef99f6eceb55e5
+  MPInjector: 8a32658ee07886e2077a7e7561f40b2fe8976564
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
-  Networking: 65abaf17db572a5741ebea7a3fe112601b671572
+  Nimble: 5316ef81a170ce87baf72dd961f22f89a602ff84
   "NSObject+Rx": 61cf1f7306a73dcef8b36649198af0813ec18dfd
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
-  Pagination: 901b9861fd4c00dc510a1f5851b3350943163785
   PKHUD: 98f3e4bc904b9c916f1c5bb6d765365b5357291b
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
+  Quick: 749aa754fd1e7d984f2000fe051e18a3a9809179
   Reusable: 6bae6a5e8aa793c9c441db0213c863a64bce9136
   RxBlocking: 04b5fd28bb5ea49f7d64b80db8bbfe50d9cc1c7d
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
@@ -265,6 +230,6 @@ SPEC CHECKSUMS:
   RxTest: eb2d23adefc5a5ebf5779c7792fa3edfe6ebcc17
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: 896eb830eb6c7e12de4da1f0de9072560481daf6
+PODFILE CHECKSUM: 1fbe0e5cf7b60b3a300765a8861b80f48d15f4cf
 
 COCOAPODS: 1.11.3

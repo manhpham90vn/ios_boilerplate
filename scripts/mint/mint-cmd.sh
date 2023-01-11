@@ -1,3 +1,6 @@
 #!/bin/sh
 
-MINT_CMD=mint
+if ! [[ $MINT_CMD ]];
+then
+    MINT_CMD=mint
+fi

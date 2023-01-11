@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Configs
 
 public protocol HasScreenType {
     var screenType: ScreenType! { get }

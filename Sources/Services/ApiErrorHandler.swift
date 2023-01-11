@@ -8,9 +8,6 @@
 import Foundation
 import Alamofire
 import MPInjector
-import Networking
-import Pagination
-import Configs
 
 final class ApiErrorHandler {
     
@@ -31,6 +28,8 @@ final class ApiErrorHandler {
                 } else {
                     dialog.showDialog(typeDialog: .closeDialog, title: "Error api: \(api.rawValue) screen: \(screenType)", message: error.localizedDescription)
                 }
+            case .none:
+                break
             }
         }
     }

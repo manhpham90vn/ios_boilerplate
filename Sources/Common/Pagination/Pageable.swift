@@ -11,22 +11,22 @@ import RxCocoa
 import NSObject_Rx
 
 // view controller
-public typealias ViewControllerPageable = HasViewControllerPagging
+typealias ViewControllerPageable = HasViewControllerPagging
     & HasHeaderFooterTrigger
 
 // presenter
-public typealias PresenterPageable = HasPresenterPagging
+typealias PresenterPageable = HasPresenterPagging
     & HasHeaderFooterTrigger
     & HasDisposeBag
     & HasTrigger
 
-public protocol HasHeaderFooterTrigger {
+protocol HasHeaderFooterTrigger {
     // trigger when pull to refresh and loadmore
     var headerRefreshTrigger: PublishRelay<Void> { get }
     var footerLoadMoreTrigger: PublishRelay<Void> { get }
 }
 
-public protocol HasPresenterPagging {
+protocol HasPresenterPagging {
     associatedtype Element
     var currentPage: Int { get set }
     var elements: BehaviorRelay<[Element]> { get }
@@ -42,15 +42,15 @@ public protocol HasPresenterPagging {
     func bindActivityIndicator(paggingable: ViewControllerPageable)
 }
 
-public protocol HasViewControllerPagging {
+protocol HasViewControllerPagging {
     var isEnableLoadMore: PublishRelay<Bool> { get }
     var isEmptyData: PublishRelay<Bool> { get }
     var isHeaderLoading: PublishRelay<Bool> { get }
     var isFooterLoading: PublishRelay<Bool> { get }
 }
 
-public extension HasPresenterPagging where Self: HasHeaderFooterTrigger & HasDisposeBag & HasTrigger {
-    public func bind(paggingable: ViewControllerPageable) {
+extension HasPresenterPagging where Self: HasHeaderFooterTrigger & HasDisposeBag & HasTrigger {
+    func bind(paggingable: ViewControllerPageable) {
 
         // viewcontroller trigger to presenter
         bindTrigger(paggingable: paggingable)
@@ -61,7 +61,7 @@ public extension HasPresenterPagging where Self: HasHeaderFooterTrigger & HasDis
         bindActivityIndicator(paggingable: paggingable)
     }
 
-    public func bindTrigger(paggingable: ViewControllerPageable) {
+    func bindTrigger(paggingable: ViewControllerPageable) {
         paggingable.headerRefreshTrigger
             .bind(to: headerRefreshTrigger)
             .disposed(by: disposeBag)
@@ -71,20 +71,20 @@ public extension HasPresenterPagging where Self: HasHeaderFooterTrigger & HasDis
             .disposed(by: disposeBag)
     }
 
-    public func mapEmptyData(paggingable: ViewControllerPageable) {
+    func mapEmptyData(paggingable: ViewControllerPageable) {
         elements
             .map { $0.isEmpty }
             .bind(to: paggingable.isEmptyData)
             .disposed(by: disposeBag)
     }
 
-    public func mapEnableLoadMore(paggingable: ViewControllerPageable) {
+    func mapEnableLoadMore(paggingable: ViewControllerPageable) {
         isEnableLoadMore
             .bind(to: paggingable.isEnableLoadMore)
             .disposed(by: disposeBag)
     }
 
-    public func bindActivityIndicator(paggingable: ViewControllerPageable) {
+    func bindActivityIndicator(paggingable: ViewControllerPageable) {
         isHeaderLoading
             .asSignalOnErrorJustComplete()
             .emit(to: paggingable.isHeaderLoading)

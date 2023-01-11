@@ -55,14 +55,21 @@ aliases:
       name: Install cocoapods
       command: |
         scripts/pod/pod-setup.sh
-        scripts/project/run-pod.sh
+        scripts/pod/pod-run.sh
   - &init_project
       name: Init project
       command: scripts/common/init.sh
+  - &init_mock
+      name: Init Mock
+      command: |
+          scripts/mockingbirdswift/mockingbird-config.sh
+          scripts/mockingbirdswift/mockingbird-generate.sh
 jobs:
   build-and-test:
     macos:
       xcode: 14.0.1
+    environment:
+      SKIP_RUN: true
     steps:
       - checkout
       - restore_cache: *restore_gem_cache
@@ -77,6 +84,7 @@ jobs:
       - restore_cache: *restore_pod_cache
       - run: *install_pod
       - save_cache: *save_pod_cache
+      - run: *init_mock
       - run:
           name: Run Unit test
           command: scripts/project/run-unit-test.sh
@@ -85,14 +93,21 @@ jobs:
           command: scripts/slather/slather-setup.sh
       - run:
           name: Generate code coverage
-          command: scripts/github/ci-code-coverage.sh
+          command: scripts/slather/slather-run.sh
+      - run:
+          name: "Zip folder code coverage"
+          command: |
+                zip -r test-result.zip fastlane/reports/
+      - store_test_results:
+          path: fastlane/reports/unit_test
       - store_artifacts:
-          path: fastlane/test_output
-      - store_artifacts:
-          path: slather_report
+          path: test-result.zip
   deploy-apple:
     macos:
       xcode: 14.0.1
+    environment:
+      IS_PRODUCTION: true
+      SKIP_RUN: true
     steps:
       - checkout
       - restore_cache: *restore_gem_cache
@@ -102,7 +117,6 @@ jobs:
       - restore_cache: *restore_mint_cache
       - run: *mint_install_dependency
       - save_cache: *save_mint_cache
-      - run: echo 'export IS_PRODUCTION=1' >> "$BASH_ENV"
       - run: *init_project
       - run: *generate_resource
       - restore_cache: *restore_pod_cache
