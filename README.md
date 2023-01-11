@@ -1,7 +1,6 @@
 # Base VIPER
 [![Run SwiftLint](https://github.com/manhpham90vn/iOS-VIPER-Architecture/actions/workflows/swiftlint.yml/badge.svg)](https://github.com/manhpham90vn/iOS-VIPER-Architecture/actions/workflows/swiftlint.yml)
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/manhpham90vn/iOS-VIPER-Architecture/tree/develop.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/manhpham90vn/iOS-VIPER-Architecture/tree/develop)
-[![Build Status](https://app.bitrise.io/app/bd94ba7e6efc667b/status.svg?token=bHwp_npyOFYUoI_xIwt-Wg&branch=master)](https://app.bitrise.io/app/bd94ba7e6efc667b)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=manhpham90vn_iOS-VIPER-Architecture&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=manhpham90vn_iOS-VIPER-Architecture)
 [![CodeFactor](https://www.codefactor.io/repository/github/manhpham90vn/ios-viper-architecture/badge)](https://www.codefactor.io/repository/github/manhpham90vn/ios-viper-architecture)
 ## Install
