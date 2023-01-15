@@ -65,25 +65,24 @@ final class LoginPresenterTests: QuickSpec {
         
         describe("Test Login Presenter Login Button") {
             beforeEach {
-                
                 given(repo.login(email: any(), password: any()))
                     .willReturn(.just(.init(token: "token", refreshToken: "refreshToken")))
-                
                 given(connect.isNetworkConnection)
                     .willReturn(true)
-                
-                given(interactor.loginUseCase).willReturn(loginUseCase)
+                given(interactor.loginUseCase)
+                    .willReturn(loginUseCase)
             }
             it("Test Tap Login") {
                 pr.login.accept("login")
                 pr.password.accept("pass")
-                pr.didTapLoginButton()
                 
                 pr.interactor.loginUseCase.succeeded
                     .drive(onNext: { result in
                         expect(result).toEventuallyNot(beNil(), timeout: .seconds(1))
                     })
                     .disposed(by: disposeBag)
+                
+                pr.didTapLoginButton()
             }
             afterEach {
                 reset(repo)
