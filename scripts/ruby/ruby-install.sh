@@ -2,9 +2,9 @@
 
 source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/ruby-setup.sh
 
-if ! $SKIP_RUN 
+if ! "$SKIP_RUN"
 then
-    source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/rbenv-install.sh
+    source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/rbenv-install.sh 
 fi
 
 if [ "$PROJECT_BUNDLER_VERSION" != "$CURRENT_BUNDLER_VERSION" ]
