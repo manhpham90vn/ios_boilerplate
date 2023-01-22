@@ -17,8 +17,6 @@ protocol DetailPresenterInterface: HasTrigger, HasScreenType {
     var interactor: DetailInteractorInterface { get }
     var screenType: ScreenType! { get }
     func inject(view: DetailViewInterface, screenType: ScreenType)
-    
-    var trigger: PublishRelay<Void> { get }
 }
 
 final class DetailPresenter: DetailPresenterInterface, HasDisposeBag {

@@ -48,21 +48,7 @@ final class LoginPresenterTests: QuickSpec {
             
             disposeBag = DisposeBag()
         }
-        
-        describe("Test Login Presenter Skip Button") {
-            it("Test Tap Skip") {
-                pr.didTapSkipButton()
-                verify(route.navigationToHomeScreen()).wasCalled(exactly(1))
-            }
-            afterEach {
-                reset(repo)
-                reset(local)
-                reset(view)
-                reset(route)
-                reset(interactor)
-            }
-        }
-        
+                
         describe("Test Login Presenter Login Button") {
             beforeEach {
                 given(repo.login(email: any(), password: any()))

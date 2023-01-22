@@ -20,8 +20,6 @@ protocol MainPresenterInterface: HasTrigger, HasScreenType {
     
     func didTapLogout()
     func navigationToDetailScreen(user: PagingUserResponse)
-    func reload()
-    var trigger: PublishRelay<Void> { get }
 }
 
 final class MainPresenter: MainPresenterInterface, PresenterPageable {
@@ -155,9 +153,4 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
     func navigationToDetailScreen(user: PagingUserResponse) {
         router.navigationToDetailScreen(user: user)
     }
-    
-    func reload() {
-        trigger.accept(())
-    }
-
 }

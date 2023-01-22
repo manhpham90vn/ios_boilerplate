@@ -17,10 +17,8 @@ protocol LoginPresenterInterface: HasTrigger, HasScreenType {
     var screenType: ScreenType! { get }
     func inject(view: LoginViewInterface, screenType: ScreenType)
     
-    func didTapLoginButton()
     var login: BehaviorRelay<String> { get }
     var password: BehaviorRelay<String> { get }
-    var trigger: PublishRelay<Void> { get }
 }
 
 final class LoginPresenter: LoginPresenterInterface, HasDisposeBag {
@@ -39,27 +37,29 @@ final class LoginPresenter: LoginPresenterInterface, HasDisposeBag {
     let trigger = PublishRelay<Void>()
     let login = BehaviorRelay<String>(value: "")
     let password = BehaviorRelay<String>(value: "")
-
-    init() {
-        interactor
-            .loginUseCase
-            .processing
+    
+    init() {        
+        trigger
+            .withUnretained(self)
+            .map {
+                LoginUseCaseParams(email: $0.0.login.value, password: $0.0.password.value)
+            }
+            .bind(to: interactor.loginUseCase.trigger)
+            .disposed(by: disposeBag)
+        
+        interactor.loginUseCase.processing
             .drive(onNext: { [weak self] result in
                 self?.loading.isLoading.accept(result)
             })
             .disposed(by: disposeBag)
         
-        interactor
-            .loginUseCase
-            .succeeded
+        interactor.loginUseCase.succeeded
             .drive(onNext: { [weak self] in
                 self?.router.navigationToHomeScreen()
             })
             .disposed(by: disposeBag)
         
-        interactor
-            .loginUseCase
-            .failed
+        interactor.loginUseCase.failed
             .drive(onNext: { [weak self] error in
                 guard let self = self else { return }
                 self.errorHandle.handle(error: error, screenType: self.screenType) { [weak self] in
@@ -84,13 +84,6 @@ final class LoginPresenter: LoginPresenterInterface, HasDisposeBag {
     }
     
     func didTapLoginButton() {
-        interactor
-            .loginUseCase
-            .execute(params: .init(email: login.value, password: password.value))
+        trigger.accept(())
     }
-    
-    func didTapSkipButton() {
-        router.navigationToHomeScreen()
-    }
-    
 }
