@@ -55,7 +55,8 @@ final class MainViewController: BaseTableViewViewController {
                                               
     @objc
     func reload() {
-        presenter.reload()
+        guard let presenter = presenter as? MainPresenter else { return }
+        presenter.trigger.accept(())
     }
     
     @objc
@@ -70,7 +71,7 @@ final class MainViewController: BaseTableViewViewController {
         super.bindDatas()
 
         guard let presenter = presenter as? MainPresenter else { return }
-        Observable.just(()).bind(to: presenter.trigger).disposed(by: disposeBag)
+        presenter.trigger.accept(())
         presenter.bind(paggingable: self)
         presenter.elements.bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: UITableViewCell.self)) { _, element, cell in
             cell.textLabel?.text = element.name

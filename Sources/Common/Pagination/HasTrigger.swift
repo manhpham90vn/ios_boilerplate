@@ -10,5 +10,5 @@ import RxSwift
 import RxCocoa
 
 public protocol HasTrigger {
-    var trigger: PublishRelay<Void>! { get }
+    var trigger: PublishRelay<Void> { get }
 }

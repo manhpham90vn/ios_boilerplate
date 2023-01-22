@@ -30,16 +30,12 @@ final class DetailPresenter: DetailPresenterInterface, HasDisposeBag {
     var screenType: ScreenType!
     
     // input
-    var trigger: PublishRelay<Void>!
+    let trigger = PublishRelay<Void>()
 
     func inject(view: DetailViewInterface, screenType: ScreenType) {
         self.view = view
         self.screenType = screenType
         self.router.inject(view: view)
-    }
-    
-    init() {
-        trigger = PublishRelay<Void>()
     }
     
     deinit {
