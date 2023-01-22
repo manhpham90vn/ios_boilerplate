@@ -17,10 +17,8 @@ protocol LoginPresenterInterface: HasTrigger, HasScreenType {
     var screenType: ScreenType! { get }
     func inject(view: LoginViewInterface, screenType: ScreenType)
     
-    func didTapLoginButton()
-    var login: BehaviorRelay<String> { get }
-    var password: BehaviorRelay<String> { get }
-    var trigger: PublishRelay<Void> { get }
+    var login: BehaviorRelay<String>! { get }
+    var password: BehaviorRelay<String>! { get }
 }
 
 final class LoginPresenter: LoginPresenterInterface, HasDisposeBag {
@@ -36,30 +34,45 @@ final class LoginPresenter: LoginPresenterInterface, HasDisposeBag {
     var screenType: ScreenType!
     
     // input
-    let trigger = PublishRelay<Void>()
-    let login = BehaviorRelay<String>(value: "")
-    let password = BehaviorRelay<String>(value: "")
+    var trigger: PublishRelay<Void>!
+    var login: BehaviorRelay<String>!
+    var password: BehaviorRelay<String>!
 
+    // output
+    var isProcessing: Driver<Bool>!
+    var loginSuccess: Driver<Void>!
+    var loginError: Driver<Error>!
+    
     init() {
-        interactor
-            .loginUseCase
-            .processing
+        trigger = PublishRelay()
+        login = BehaviorRelay<String>(value: "")
+        password = BehaviorRelay<String>(value: "")
+        
+        isProcessing = interactor.loginUseCase.processing
+        loginSuccess = interactor.loginUseCase.succeeded
+        loginError = interactor.loginUseCase.failed
+        
+        trigger
+            .withUnretained(self)
+            .map {
+                LoginUseCaseParams(email: $0.0.login.value, password: $0.0.password.value)
+            }
+            .bind(to: interactor.loginUseCase.trigger)
+            .disposed(by: disposeBag)
+        
+        isProcessing
             .drive(onNext: { [weak self] result in
                 self?.loading.isLoading.accept(result)
             })
             .disposed(by: disposeBag)
         
-        interactor
-            .loginUseCase
-            .succeeded
+        loginSuccess
             .drive(onNext: { [weak self] in
                 self?.router.navigationToHomeScreen()
             })
             .disposed(by: disposeBag)
         
-        interactor
-            .loginUseCase
-            .failed
+        loginError
             .drive(onNext: { [weak self] error in
                 guard let self = self else { return }
                 self.errorHandle.handle(error: error, screenType: self.screenType) { [weak self] in
@@ -84,13 +97,6 @@ final class LoginPresenter: LoginPresenterInterface, HasDisposeBag {
     }
     
     func didTapLoginButton() {
-        interactor
-            .loginUseCase
-            .execute(params: .init(email: login.value, password: password.value))
+        trigger.accept(())
     }
-    
-    func didTapSkipButton() {
-        router.navigationToHomeScreen()
-    }
-    
 }

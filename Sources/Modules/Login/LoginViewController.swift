@@ -49,12 +49,7 @@ final class LoginViewController: BaseViewController {
         
         emailTextField.rx.text.orEmpty.bind(to: presenter.login).disposed(by: disposeBag)
         passwordTextField.rx.text.orEmpty.bind(to: presenter.password).disposed(by: disposeBag)
-        
-        loginButton.rx.tap.asDriver()
-            .drive(onNext: { [weak self] in
-                self?.presenter.didTapLoginButton()
-            })
-            .disposed(by: rx.disposeBag)
+        loginButton.rx.tap.bind(to: presenter.trigger).disposed(by: disposeBag)
     }
 }
 

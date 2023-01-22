@@ -21,7 +21,6 @@ protocol MainPresenterInterface: HasTrigger, HasScreenType {
     func didTapLogout()
     func navigationToDetailScreen(user: PagingUserResponse)
     func reload()
-    var trigger: PublishRelay<Void> { get }
 }
 
 final class MainPresenter: MainPresenterInterface, PresenterPageable {
@@ -34,7 +33,7 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
     @Inject var errorHandler: ApiErrorHandler
 
     // input
-    let trigger = PublishRelay<Void>()
+    var trigger: PublishRelay<Void>!
     let headerRefreshTrigger = PublishRelay<Void>()
     let footerLoadMoreTrigger = PublishRelay<Void>()
     let isEnableLoadMore = PublishSubject<Bool>()
@@ -50,6 +49,8 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
     let elements = BehaviorRelay<[PagingUserResponse]>(value: [])
     
     init() {
+        trigger = PublishRelay()
+        
         Driver.combineLatest(
             interactor.getEventUseCaseInterface.processing,
             interactor.getUserInfoUseCase.processing

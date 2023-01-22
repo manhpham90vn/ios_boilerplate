@@ -14,7 +14,7 @@ public final class Configs {
     public let loggingAPIEnabled = false
     public let loggingcURLEnabled = false
     public let loggingToFileEnabled = false
-    public let loggingDeinitEnabled = false
+    public let loggingDeinitEnabled = true
     
     public var env: Environment {
         #if DEBUG
