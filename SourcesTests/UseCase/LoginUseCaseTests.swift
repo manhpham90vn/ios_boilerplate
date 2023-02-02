@@ -10,7 +10,7 @@ import RxSwift
 
 @testable import MyProduct
 
-final class LoginUseCaseTests: XCTest {
+final class LoginUseCaseTests: XCTestCase {
     
     var repo: UserRepositoryInterfaceMock!
     var local: LocalStorageRepositoryMock!

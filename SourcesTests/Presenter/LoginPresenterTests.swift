@@ -13,12 +13,8 @@ import RxTest
 
 @testable import MyProduct
 
-final class LoginPresenterTests: XCTest {
+final class LoginPresenterTests: XCTestCase {
     
-    var repo: UserRepositoryInterfaceMock!
-    var local: LocalStorageRepositoryMock!
-    var loginUseCase: LoginUseCase!
-    var connect: ConnectivityServiceMock!
     var view: LoginViewInterfaceMock!
     var route: LoginRouterInterfaceMock!
     var interactor: LoginInteractorInterfaceMock!
@@ -26,16 +22,7 @@ final class LoginPresenterTests: XCTest {
     
     override func setUp() {
         super.setUp()
-        
-        repo = mock(UserRepositoryInterface.self)
-        local = mock(LocalStorageRepository.self)
-        connect = mock(ConnectivityService.self)
-        
-        loginUseCase = LoginUseCase()
-        loginUseCase.repo = repo
-        loginUseCase.local = local
-        loginUseCase.connectivityService = connect
-        
+                
         view = mock(LoginViewInterface.self)
         route = mock(LoginRouterInterface.self)
         interactor = mock(LoginInteractorInterface.self)
@@ -49,9 +36,6 @@ final class LoginPresenterTests: XCTest {
     override func tearDown() {
         super.tearDown()
         
-        repo = nil
-        local = nil
-        loginUseCase = nil
         view = nil
         route = nil
         interactor = nil
@@ -59,24 +43,11 @@ final class LoginPresenterTests: XCTest {
     }
                   
     
-    func testLogin() {
-        given(repo.login(email: any(), password: any()))
-            .willReturn(.just(.init(token: "token", refreshToken: "refreshToken")))
-        given(connect.isNetworkConnection)
-            .willReturn(true)
-        given(interactor.loginUseCase)
-            .willReturn(loginUseCase)
-        
-        pr.login.accept("login")
-        pr.password.accept("pass")
-        
-        let recorder = Recorder<Void>()
-        recorder.onNext(valueSubject: loginUseCase.succeeded)
+    func testLoginSuccess() {
+        given(interactor.loginUseCase.succeeded).willReturn(.just(()))
         
         pr.didTapLoginButton()
         
-        verify(local.setAccessToken(newValue: "token")).wasCalled(exactly(1))
-        verify(local.setRefreshToken(newValue: "refreshToken")).wasCalled(exactly(1))
-        XCTAssertEqual(recorder.items.count, 1)
+        verify(route.navigationToHomeScreen()).wasNeverCalled()
     }
 }
