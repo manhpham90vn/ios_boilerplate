@@ -13,19 +13,17 @@ import XCTest
 final class LoginUseCaseTests: XCTestCase {
     
     var loginUseCase: LoginUseCase!
-    
+
     override func setUp() {
         super.setUp()
-        
         loginUseCase = LoginUseCase()
     }
-    
+
     override func tearDown() {
         super.tearDown()
-        
         loginUseCase = nil
     }
-    
+
     func testLoginSuccess() {
         loginUseCase.local = LocalStorageRepositoryMock()
         loginUseCase.repo = UserRepositoryInterfaceMock()

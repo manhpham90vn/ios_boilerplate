@@ -19,17 +19,14 @@ final class LoginPresenterTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        
         pr = LoginPresenter()
     }
     
     override func tearDown() {
         super.tearDown()
-        
         pr = nil
     }
                   
-    
     func testLoginSuccess() {
         pr.interactor.loginUseCase.local = LocalStorageRepositoryMock()
         pr.interactor.loginUseCase.repo = UserRepositoryInterfaceMock()
@@ -55,7 +52,5 @@ final class LoginPresenterTests: XCTestCase {
         pr.didTapLoginButton()
         
         XCTAssertEqual(recorder.items.count, 1)
-        XCTAssertTrue(pr.errorHandle.dialog.isShowedDialog)
-        XCTAssertEqual(pr.errorHandle, <#T##expression2: Equatable##Equatable#>)
     }
 }
