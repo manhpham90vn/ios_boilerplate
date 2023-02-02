@@ -6,48 +6,56 @@
 //
 
 import Foundation
-import Mockingbird
 import RxSwift
 import RxBlocking
 import RxTest
+import XCTest
 
 @testable import MyProduct
 
 final class LoginPresenterTests: XCTestCase {
     
-    var view: LoginViewInterfaceMock!
-    var route: LoginRouterInterfaceMock!
-    var interactor: LoginInteractorInterfaceMock!
     var pr: LoginPresenter!
     
     override func setUp() {
         super.setUp()
-                
-        view = mock(LoginViewInterface.self)
-        route = mock(LoginRouterInterface.self)
-        interactor = mock(LoginInteractorInterface.self)
         
         pr = LoginPresenter()
-        pr.view = view
-        pr.router = route
-        pr.interactor = interactor
     }
     
     override func tearDown() {
         super.tearDown()
         
-        view = nil
-        route = nil
-        interactor = nil
         pr = nil
     }
                   
     
     func testLoginSuccess() {
-        given(interactor.loginUseCase.succeeded).willReturn(.just(()))
+        pr.interactor.loginUseCase.local = LocalStorageRepositoryMock()
+        pr.interactor.loginUseCase.repo = UserRepositoryInterfaceMock()
+        pr.interactor.loginUseCase.connectivityService = ConnectivityServiceMock()
+        
+        let recorder = Recorder<Void>()
+        recorder.onNext(valueSubject: pr.interactor.loginUseCase.succeeded)
         
         pr.didTapLoginButton()
         
-        verify(route.navigationToHomeScreen()).wasNeverCalled()
+        XCTAssertEqual(recorder.items.count, 1)
+    }
+    
+    func testLoginFail() {
+        pr.interactor.loginUseCase.local = LocalStorageRepositoryMock()
+        pr.interactor.loginUseCase.repo = UserRepositoryInterfaceMock()
+        pr.interactor.loginUseCase.connectivityService = ConnectivityServiceMockError()
+        pr.screenType = .login
+        
+        let recorder = Recorder<Error>()
+        recorder.onNext(valueSubject: pr.interactor.loginUseCase.failed)
+        
+        pr.didTapLoginButton()
+        
+        XCTAssertEqual(recorder.items.count, 1)
+        XCTAssertTrue(pr.errorHandle.dialog.isShowedDialog)
+        XCTAssertEqual(pr.errorHandle, <#T##expression2: Equatable##Equatable#>)
     }
 }

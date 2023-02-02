@@ -2,7 +2,7 @@
 
 source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/ruby-setup.sh
 
-if ! "$SKIP_RUN"
+if ! [[ "$SKIP_RUN" ]]
 then
     source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/rbenv-install.sh 
 fi

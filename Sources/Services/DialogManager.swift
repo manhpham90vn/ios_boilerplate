@@ -17,7 +17,7 @@ enum TypeDialog {
 class DialogManager {
     @Inject var appHelper: AppHelper
     
-    @Atomic private var isShowedDialog = false
+    @Atomic var isShowedDialog = false
     
     func showDialog(typeDialog: TypeDialog,
                     title: String? = nil,
