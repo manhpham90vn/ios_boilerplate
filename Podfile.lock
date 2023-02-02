@@ -105,7 +105,6 @@ PODS:
     - nanopb/encode (= 2.30909.0)
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
-  - Nimble (10.0.0)
   - "NSObject+Rx (5.2.2)":
     - RxSwift (~> 6.2)
   - ObjcExceptionBridging (1.0.1):
@@ -113,7 +112,6 @@ PODS:
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - PKHUD (5.3.0)
   - PromisesObjC (2.1.1)
-  - Quick (5.0.1)
   - Reusable (4.1.2):
     - Reusable/Storyboard (= 4.1.2)
     - Reusable/View (= 4.1.2)
@@ -151,10 +149,8 @@ DEPENDENCIES:
   - MJRefresh
   - MockingbirdFramework (~> 0.20)
   - MPInjector
-  - Nimble
   - "NSObject+Rx"
   - PKHUD
-  - Quick
   - Reusable
   - RxBlocking
   - RxCocoa
@@ -182,12 +178,10 @@ SPEC REPOS:
     - MockingbirdFramework
     - MPInjector
     - nanopb
-    - Nimble
     - "NSObject+Rx"
     - ObjcExceptionBridging
     - PKHUD
     - PromisesObjC
-    - Quick
     - Reusable
     - RxBlocking
     - RxCocoa
@@ -215,12 +209,10 @@ SPEC CHECKSUMS:
   MockingbirdFramework: 54e35fbbb47b806c1a1fae2cf3ef99f6eceb55e5
   MPInjector: 8a32658ee07886e2077a7e7561f40b2fe8976564
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
-  Nimble: 5316ef81a170ce87baf72dd961f22f89a602ff84
   "NSObject+Rx": 61cf1f7306a73dcef8b36649198af0813ec18dfd
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PKHUD: 98f3e4bc904b9c916f1c5bb6d765365b5357291b
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
-  Quick: 749aa754fd1e7d984f2000fe051e18a3a9809179
   Reusable: 6bae6a5e8aa793c9c441db0213c863a64bce9136
   RxBlocking: 04b5fd28bb5ea49f7d64b80db8bbfe50d9cc1c7d
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
@@ -230,6 +222,6 @@ SPEC CHECKSUMS:
   RxTest: eb2d23adefc5a5ebf5779c7792fa3edfe6ebcc17
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
 
-PODFILE CHECKSUM: 1fbe0e5cf7b60b3a300765a8861b80f48d15f4cf
+PODFILE CHECKSUM: 7de79587e75bed5782b5fddfb3c1f64bbf31cb2f
 
 COCOAPODS: 1.11.3
