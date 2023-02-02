@@ -7,4 +7,5 @@
 
 import UIKit
 
+/// @mockable
 protocol LoginViewInterface: BaseView {}

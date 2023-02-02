@@ -38,6 +38,9 @@ swiftgen.yml
 *.p8
 *.p12
 
+### mockolo
+Mocks.swift
+
 ### pod
 Podfile
 

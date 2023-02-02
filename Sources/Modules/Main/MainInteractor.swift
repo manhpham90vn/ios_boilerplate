@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 import MPInjector
 
+/// @mockable
 protocol MainInteractorInterface {
     var getEventUseCaseInterface: GETEventUseCase { get }
     var cleanUserInfoUseCaseInterface: CleanUserInfoUseCase { get }

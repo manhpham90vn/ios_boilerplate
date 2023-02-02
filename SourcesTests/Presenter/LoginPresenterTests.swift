@@ -28,29 +28,49 @@ final class LoginPresenterTests: XCTestCase {
     }
                   
     func testLoginSuccess() {
-        pr.interactor.loginUseCase.local = LocalStorageRepositoryMock()
-        pr.interactor.loginUseCase.repo = UserRepositoryInterfaceMock()
-        pr.interactor.loginUseCase.connectivityService = ConnectivityServiceMock()
+        let local = LocalStorageRepositoryMock()
+        let repo = UserRepositoryInterfaceMock()
+        repo.loginHandler = { _, _ in
+            return .just(.init(token: "token", refreshToken: "refreshToken"))
+        }
+        let connectivityService = ConnectivityServiceMock(isNetworkConnection: true)
+        let route = LoginRouterInterfaceMock()
         
-        let recorder = Recorder<Void>()
-        recorder.onNext(valueSubject: pr.interactor.loginUseCase.succeeded)
-        
+        pr.interactor.loginUseCase.local = local
+        pr.interactor.loginUseCase.repo = repo
+        pr.interactor.loginUseCase.connectivityService = connectivityService
+        pr.router = route
+        pr.screenType = .login
+                
         pr.didTapLoginButton()
-        
-        XCTAssertEqual(recorder.items.count, 1)
+
+        XCTAssertEqual(route.navigationToHomeScreenCallCount, 1)
     }
     
     func testLoginFail() {
-        pr.interactor.loginUseCase.local = LocalStorageRepositoryMock()
-        pr.interactor.loginUseCase.repo = UserRepositoryInterfaceMock()
-        pr.interactor.loginUseCase.connectivityService = ConnectivityServiceMockError()
+        let local = LocalStorageRepositoryMock()
+        let repo = UserRepositoryInterfaceMock()
+        repo.loginHandler = { _, _ in
+            return .just(.init(token: "token", refreshToken: "refreshToken"))
+        }
+        let connectivityService = ConnectivityServiceMock(isNetworkConnection: false)
+        let route = LoginRouterInterfaceMock()
+        let error = ApiErrorHandlerMock()
+        
+        pr.interactor.loginUseCase.local = local
+        pr.interactor.loginUseCase.repo = repo
+        pr.interactor.loginUseCase.connectivityService = connectivityService
+        pr.router = route
+        pr.errorHandle = error
         pr.screenType = .login
-        
-        let recorder = Recorder<Error>()
-        recorder.onNext(valueSubject: pr.interactor.loginUseCase.failed)
-        
+                
         pr.didTapLoginButton()
         
-        XCTAssertEqual(recorder.items.count, 1)
+        XCTAssertEqual(error.handleCallCount, 1)
+        guard case AppError.noInternetConnection = error.handleArgValues[0].0 else {
+            XCTFail("Error")
+            return
+        }
+        XCTAssertEqual(error.handleArgValues[0].1, .login)
     }
 }

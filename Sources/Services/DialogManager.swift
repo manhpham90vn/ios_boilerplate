@@ -14,10 +14,21 @@ enum TypeDialog {
     case retryDialog
 }
 
-class DialogManager {
+/// @mockable
+protocol DialogManager {
+    func showDialog(typeDialog: TypeDialog,
+                    title: String?,
+                    message: String?,
+                    retryButtonLabel: String?,
+                    closeButtonLabel: String?,
+                    callbackRetry: (() -> Void)?,
+                    callbackClose: (() -> Void)?)
+}
+
+final class DialogManagerImp: DialogManager {
     @Inject var appHelper: AppHelper
     
-    @Atomic var isShowedDialog = false
+    var isShowedDialog = false
     
     func showDialog(typeDialog: TypeDialog,
                     title: String? = nil,
@@ -56,7 +67,7 @@ class DialogManager {
         let cancelAction = UIAlertAction(title: closeButtonLabel ?? "OK", style: .cancel, handler: { _ in callbackClose?() })
         alert.addAction(cancelAction)
         
-        appHelper.topViewController()?.present(alert, animated: true, completion: { [weak self] in
+        appHelper.topViewController(nil)?.present(alert, animated: true, completion: { [weak self] in
             self?.isShowedDialog = false
         })
     }
@@ -74,7 +85,7 @@ class DialogManager {
         let cancelAction = UIAlertAction(title: closeButtonLabel ?? "Close", style: .cancel, handler: { _ in callbackClose?() })
         alert.addAction(cancelAction)
         
-        appHelper.topViewController()?.present(alert, animated: true, completion: { [weak self] in
+        appHelper.topViewController(nil)?.present(alert, animated: true, completion: { [weak self] in
             self?.isShowedDialog = false
         })
     }

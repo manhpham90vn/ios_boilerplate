@@ -7,4 +7,5 @@
 
 import Foundation
 
+/// @mockable
 protocol DetailViewInterface: BaseView {}

@@ -20,5 +20,12 @@ output_directory: "$OUTPUT_DIRECTORY"
 build_directory: "$BUILD_DIRECTORY"
 binary_basename: "$PRODUCT_NAME"
 ignore:
-  - $SOURCE_DIRECTORY/Common/Resources/*
+  - $SOURCE_DIRECTORY/Application/*
+  - $SOURCE_DIRECTORY/Common/*
+  - $SOURCE_DIRECTORY/Configs/*
+  - $SOURCE_DIRECTORY/Data/*
+  - $SOURCE_DIRECTORY/Domain/Entity/*
+  - $SOURCE_DIRECTORY/Modules/*
+  - $SOURCE_DIRECTORY/Repository/*
+  - $SOURCE_DIRECTORY/Resources/*
 EOF

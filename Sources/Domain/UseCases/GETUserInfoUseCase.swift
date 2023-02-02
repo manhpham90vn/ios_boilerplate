@@ -9,7 +9,8 @@ import Foundation
 import RxSwift
 import MPInjector
 
-final class GETUserInfoUseCase: SingleUseCase<Void, UserResponse> {
+/// @mockable
+class GETUserInfoUseCase: SingleUseCase<Void, UserResponse> {
     @Inject var repo: UserRepositoryInterface
     @Inject var local: LocalStorageRepository
     

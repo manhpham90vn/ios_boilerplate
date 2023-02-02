@@ -68,7 +68,7 @@ final class MainPresenter: MainPresenterInterface, PresenterPageable {
                 self.isEnableLoadMore.onNext(true)
                 self.isHeaderLoading.onNext(false)
                 self.isFooterLoading.onNext(false)
-                self.errorHandler.handle(error: error, screenType: self.screenType)
+                self.errorHandler.handle(error: error, screenType: self.screenType, callback: nil)
             })
             .disposed(by: disposeBag)
         

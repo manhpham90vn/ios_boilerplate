@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import MPInjector
 
+/// @mockable
 protocol DetailRouterInterface {
     var view: DetailViewInterface? { get }
     func inject(view: DetailViewInterface)

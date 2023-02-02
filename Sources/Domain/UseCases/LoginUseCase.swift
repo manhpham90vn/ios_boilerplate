@@ -15,7 +15,8 @@ struct LoginUseCaseParams {
     let password: String
 }
 
-final class LoginUseCase: CompletableUseCase<LoginUseCaseParams> {
+/// @mockable
+class LoginUseCase: CompletableUseCase<LoginUseCaseParams> {
     @Inject var repo: UserRepositoryInterface
     @Inject var local: LocalStorageRepository
     

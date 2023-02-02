@@ -26,7 +26,8 @@ struct GETEventUseCaseParams {
     let type: PagingType
 }
 
-final class GETEventUseCase: SingleUseCase<GETEventUseCaseParams, ([PagingUserResponse], PagingType)> {
+/// @mockable
+class GETEventUseCase: SingleUseCase<GETEventUseCaseParams, ([PagingUserResponse], PagingType)> {
     
     @Inject var repo: HomeRepositoryInterface
     

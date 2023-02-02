@@ -59,6 +59,9 @@ aliases:
   - &init_project
       name: Init project
       command: scripts/common/init.sh
+  - &init_mock
+      name: Init Mock
+      command: scripts/mockolo/mockolo-run.sh
 
 jobs:
   build-and-test:
@@ -80,6 +83,7 @@ jobs:
       - restore_cache: *restore_pod_cache
       - run: *install_pod
       - save_cache: *save_pod_cache
+      - run: *init_mock
       - run:
           name: Run Unit test
           command: scripts/project/run-unit-test.sh

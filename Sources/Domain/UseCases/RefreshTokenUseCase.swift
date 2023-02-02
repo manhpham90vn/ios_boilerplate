@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import MPInjector
 
-final class RefreshTokenUseCase: SingleUseCase<Void, RefreshTokenResponse> {
+class RefreshTokenUseCase: SingleUseCase<Void, RefreshTokenResponse> {
     @LazyInject var userRepo: UserRepositoryInterface // prevent Circular Dependency use @LazyInject
     @Inject var local: LocalStorageRepository
     

@@ -9,24 +9,53 @@ import Foundation
 import Alamofire
 import MPInjector
 
-final class ApiErrorHandler {
+/// @mockable
+protocol ApiErrorHandler {
+    func handle(error: Error, screenType: ScreenType, callback: (() -> Void)?)
+}
+
+final class ApiErrorHandlerImp: ApiErrorHandler {
     
     @Inject var dialog: DialogManager
     
-    func handle(error: Error, screenType: ScreenType, callback: @escaping () -> Void = {}) {
+    func handle(error: Error, screenType: ScreenType, callback: (() -> Void)?) {
         if let error = error as? AppError {
             switch error {
             case .noInternetConnection:
-                dialog.showDialog(typeDialog: .retryDialog, title: "Error", message: "No Internet Connection", callbackRetry: {
-                    callback()
-                })
+                dialog.showDialog(typeDialog: .retryDialog,
+                                  title: "Error",
+                                  message: "No Internet Connection",
+                                  retryButtonLabel: nil,
+                                  closeButtonLabel: nil,
+                                  callbackRetry: {
+                                        callback?()
+                                    },
+                                  callbackClose: nil)
             case .actionAlreadyPerforming:
-                dialog.showDialog(typeDialog: .closeDialog, title: "Error", message: "Action Already Performing")
+                dialog.showDialog(typeDialog: .closeDialog,
+                                  title: "Error",
+                                  message: "Action Already Performing",
+                                  retryButtonLabel: nil,
+                                  closeButtonLabel: nil,
+                                  callbackRetry: nil,
+                                  callbackClose: nil)
             case let .networkError(api, error, data):
                 if let message = try? JSONDecoder().decode(ErrorResponse.self, from: data ?? Data()).message {
-                    dialog.showDialog(typeDialog: .closeDialog, title: "Error api: \(api.rawValue) screen: \(screenType)", message: message)
+                    dialog.showDialog(typeDialog: .closeDialog,
+                                      title: "Error api \(api.rawValue)",
+                                      message: message,
+                                      retryButtonLabel: nil,
+                                      closeButtonLabel: nil,
+                                      callbackRetry: nil,
+                                      callbackClose: nil)
                 } else {
-                    dialog.showDialog(typeDialog: .closeDialog, title: "Error api: \(api.rawValue) screen: \(screenType)", message: error.localizedDescription)
+                    dialog.showDialog(typeDialog: .closeDialog,
+                                      title: "Error api \(api.rawValue)",
+                                      message: error.localizedDescription,
+                                      retryButtonLabel: nil,
+                                      closeButtonLabel: nil,
+                                      callbackRetry: nil,
+                                      callbackClose: nil)
                 }
             case .none:
                 break
