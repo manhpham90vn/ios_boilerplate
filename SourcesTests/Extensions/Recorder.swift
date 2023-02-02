@@ -17,27 +17,31 @@ class Recorder<T> {
         arraySubject
             .subscribe(onNext: { value in
                 self.items = value
-            }).disposed(by: bag)
+            })
+            .disposed(by: bag)
     }
 
     func onNext(valueSubject: PublishSubject<T>) {
         valueSubject
             .subscribe(onNext: { value in
                 self.items.append(value)
-            }).disposed(by: bag)
+            })
+            .disposed(by: bag)
     }
     
     func onNext(arraySubject: Driver<[T]>) {
         arraySubject
             .drive(onNext: { value in
                 self.items = value
-            }).disposed(by: bag)
+            })
+            .disposed(by: bag)
     }
 
     func onNext(valueSubject: Driver<T>) {
         valueSubject
             .drive(onNext: { value in
                 self.items.append(value)
-            }).disposed(by: bag)
+            })
+            .disposed(by: bag)
     }
 }
