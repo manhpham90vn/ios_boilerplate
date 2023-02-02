@@ -16,7 +16,6 @@ class ConnectivityServiceMock: ConnectivityService {
     }
 }
 
-
 class ConnectivityServiceMockError: ConnectivityService {
     var isNetworkConnection: Bool {
         return false
