@@ -18,6 +18,7 @@ enum StorageError: Error {
     case downCastError
 }
 
+/// @mockable
 protocol Storage {
     func setString(key: String, value: String)
     func getString(key: String) -> String?

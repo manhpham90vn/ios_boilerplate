@@ -11,6 +11,7 @@ import RxCocoa
 import MPInjector
 import Alamofire
 
+/// @mockable
 protocol AppApi {
     func login(email: String, password: String) -> Single<LoginResponse>
     func userInfo() -> Single<UserResponse>

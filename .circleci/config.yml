@@ -59,14 +59,6 @@ aliases:
   - &init_project
       name: Init project
       command: scripts/common/init.sh
-  - &init_mock
-      name: Init Mock
-      command: scripts/mockolo/mockolo-run.sh
-  - &setup_xcode
-      name: Setup Xcode
-      command: |
-        ls /Applications | grep Xcode
-        sudo xcode-select -switch /Applications/Xcode-14.0.1.app && /usr/bin/xcodebuild -version    
 
 jobs:
   build-and-test:
@@ -76,7 +68,6 @@ jobs:
       SKIP_RUN: true
     steps:
       - checkout
-      - run: *setup_xcode
       - restore_cache: *restore_gem_cache
       - run: *gem_install
       - save_cache: *save_gem_cache
@@ -89,7 +80,6 @@ jobs:
       - restore_cache: *restore_pod_cache
       - run: *install_pod
       - save_cache: *save_pod_cache
-      - run: *init_mock
       - run:
           name: Run Unit test
           command: scripts/project/run-unit-test.sh
