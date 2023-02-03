@@ -62,6 +62,11 @@ aliases:
   - &init_mock
       name: Init Mock
       command: scripts/mockolo/mockolo-run.sh
+  - &setup_xcode
+      name: Setup Xcode
+      command: |
+        ls /Applications | grep Xcode
+        sudo xcode-select -switch /Applications/Xcode_14.0.1.app && /usr/bin/xcodebuild -version    
 
 jobs:
   build-and-test:
@@ -71,6 +76,7 @@ jobs:
       SKIP_RUN: true
     steps:
       - checkout
+      - run: *setup_xcode
       - restore_cache: *restore_gem_cache
       - run: *gem_install
       - save_cache: *save_gem_cache
