@@ -16,6 +16,7 @@ enum TypeDialog {
 
 /// @mockable
 protocol DialogManager {
+    // swiftlint:disable:next function_parameter_count
     func showDialog(typeDialog: TypeDialog,
                     title: String?,
                     message: String?,
