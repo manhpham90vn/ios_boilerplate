@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 import MPInjector
 
+/// @mockable
 protocol UserRepositoryInterface {
     func login(email: String, password: String) -> Single<LoginResponse>
     func userInfo() -> Single<UserResponse>

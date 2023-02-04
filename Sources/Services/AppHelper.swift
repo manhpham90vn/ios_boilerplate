@@ -7,9 +7,15 @@
 
 import UIKit
 
-final class AppHelper {
+/// @mockable
+protocol AppHelper {
+    func topViewController(_ viewController: UIViewController?) -> UIViewController?
+}
+
+final class AppHelperImp: AppHelper {
             
-    func topViewController(_ viewController: UIViewController? = UIWindow.shared?.rootViewController) -> UIViewController? {
+    func topViewController(_ viewController: UIViewController?) -> UIViewController? {
+        let viewController = viewController ?? UIWindow.shared?.rootViewController
         if let nav = viewController as? UINavigationController {
             return topViewController(nav.visibleViewController)
         }

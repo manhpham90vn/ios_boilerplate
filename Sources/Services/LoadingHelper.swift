@@ -11,7 +11,15 @@ import RxSwift
 import RxCocoa
 import NSObject_Rx
 
-final class LoadingHelper: HasDisposeBag {
+/// @mockable
+protocol LoadingHelper {
+    var isLoading : PublishRelay<Bool> { get }
+    func showLoading()
+    func hideLoading()
+    func perform()
+}
+
+final class LoadingHelperImp: LoadingHelper, HasDisposeBag {
     
     let isLoading = PublishRelay<Bool>()
     

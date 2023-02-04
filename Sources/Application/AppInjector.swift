@@ -18,11 +18,11 @@ extension MPInjector: Registering {
         registerSingleton { AppApiComponent() as AppApi }
         
         // utils
-        registerSingleton { LoadingHelper() }
-        registerSingleton { ApiErrorHandler() }
-        registerSingleton { AppHelper() }
-        registerSingleton { DialogManager() }
-        registerSingleton { PermissionManager() }
+        registerSingleton { LoadingHelperImp() as LoadingHelper }
+        registerSingleton { ApiErrorHandlerImp() as ApiErrorHandler }
+        registerSingleton { AppHelperImp() as AppHelper }
+        registerSingleton { DialogManagerImp() as DialogManager }
+        registerSingleton { PermissionManagerImp() as PermissionManager }
         
         // MARK: Repository
         registerSingleton { UserRepository() as UserRepositoryInterface }

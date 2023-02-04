@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// @mockable
 protocol DetailInteractorInterface {}
 
 final class DetailInteractor: DetailInteractorInterface {

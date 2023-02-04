@@ -19,17 +19,15 @@ installMint:
 
 # generate
 .PHONY: generate
-generate: generate-swiftgen generate-xcodegen install-pod install-mockingbird generate-mockingbird
+generate: generate-swiftgen generate-mockolo generate-xcodegen install-pod
 generate-swiftgen:
 	@sh scripts/swiftgen/swiftgen-run.sh
+generate-mockolo:
+	@sh scripts/mockolo/mockolo-run.sh	
 generate-xcodegen:
 	@sh scripts/xcodegen/xcodegen-run.sh
 install-pod:
 	@sh scripts/pod/pod-run.sh
-install-mockingbird:
-	@sh scripts/mockingbirdswift/mockingbird-config.sh
-generate-mockingbird:
-	@sh scripts/mockingbirdswift/mockingbird-generate.sh
 
 # delete
 .PHONY: delete

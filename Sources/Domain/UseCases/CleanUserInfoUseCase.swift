@@ -9,7 +9,8 @@ import Foundation
 import RxSwift
 import MPInjector
 
-final class CleanUserInfoUseCase: UseCase {
+/// @mockable
+class CleanUserInfoUseCase: UseCase {
     
     var cacheParams: Void?
     

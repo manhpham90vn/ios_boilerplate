@@ -6,87 +6,71 @@
 //
 
 import Foundation
-import Quick
-import Nimble
-import Mockingbird
 import RxSwift
 import RxBlocking
 import RxTest
+import XCTest
 
 @testable import MyProduct
 
-final class LoginPresenterTests: QuickSpec {
-    override func spec() {
-        var repo: UserRepositoryInterfaceMock!
-        var local: LocalStorageRepositoryMock!
-        var loginUseCase: LoginUseCase!
-        var connect: ConnectivityServiceMock!
-        var view: LoginViewInterfaceMock!
-        var route: LoginRouterInterfaceMock!
-        var interactor: LoginInteractorInterfaceMock!
-        var pr: LoginPresenter!
-        var disposeBag: DisposeBag!
+final class LoginPresenterTests: XCTestCase {
+    
+    var pr: LoginPresenter!
+    
+    override func setUp() {
+        super.setUp()
+        pr = LoginPresenter()
+    }
+    
+    override func tearDown() {
+        super.tearDown()
+        pr = nil
+    }
+                  
+    func testLoginSuccess() {
+        let local = LocalStorageRepositoryMock()
+        let repo = UserRepositoryInterfaceMock()
+        repo.loginHandler = { _, _ in
+            return .just(.init(token: "token", refreshToken: "refreshToken"))
+        }
+        let connectivityService = ConnectivityServiceMock(isNetworkConnection: true)
+        let route = LoginRouterInterfaceMock()
         
-        beforeSuite {
-            repo = mock(UserRepositoryInterface.self)
-            local = mock(LocalStorageRepository.self)
-            connect = mock(ConnectivityService.self)
-            
-            loginUseCase = LoginUseCase()
-            loginUseCase.repo = repo
-            loginUseCase.local = local
-            loginUseCase.connectivityService = connect
-            
-            view = mock(LoginViewInterface.self)
-            route = mock(LoginRouterInterface.self)
-            interactor = mock(LoginInteractorInterface.self)
-            
-            pr = LoginPresenter()
-            pr.view = view
-            pr.router = route
-            pr.interactor = interactor
-            
-            disposeBag = DisposeBag()
+        pr.interactor.loginUseCase.local = local
+        pr.interactor.loginUseCase.repo = repo
+        pr.interactor.loginUseCase.connectivityService = connectivityService
+        pr.router = route
+        pr.screenType = .login
+                
+        pr.didTapLoginButton()
+
+        XCTAssertEqual(route.navigationToHomeScreenCallCount, 1)
+    }
+    
+    func testLoginFail() {
+        let local = LocalStorageRepositoryMock()
+        let repo = UserRepositoryInterfaceMock()
+        repo.loginHandler = { _, _ in
+            return .just(.init(token: "token", refreshToken: "refreshToken"))
         }
-                
-        describe("Test Login Presenter Login Button") {
-            beforeEach {
-                given(repo.login(email: any(), password: any()))
-                    .willReturn(.just(.init(token: "token", refreshToken: "refreshToken")))
-                given(connect.isNetworkConnection)
-                    .willReturn(true)
-                given(interactor.loginUseCase)
-                    .willReturn(loginUseCase)
-            }
-            it("Test Tap Login") {
-                pr.login.accept("login")
-                pr.password.accept("pass")
-                
-                pr.interactor.loginUseCase.succeeded
-                    .drive(onNext: { result in
-                        expect(result).toEventuallyNot(beNil(), timeout: .seconds(1))
-                    })
-                    .disposed(by: disposeBag)
-                
-                pr.didTapLoginButton()
-            }
-            afterEach {
-                reset(repo)
-                reset(local)
-                reset(view)
-                reset(route)
-                reset(interactor)
-            }
-        }
+        let connectivityService = ConnectivityServiceMock(isNetworkConnection: false)
+        let route = LoginRouterInterfaceMock()
+        let error = ApiErrorHandlerMock()
         
-        afterSuite {
-            repo = nil
-            local = nil
-            loginUseCase = nil
-            view = nil
-            route = nil
-            interactor = nil
-            pr = nil
+        pr.interactor.loginUseCase.local = local
+        pr.interactor.loginUseCase.repo = repo
+        pr.interactor.loginUseCase.connectivityService = connectivityService
+        pr.router = route
+        pr.errorHandle = error
+        pr.screenType = .login
+                
+        pr.didTapLoginButton()
+        
+        XCTAssertEqual(error.handleCallCount, 1)
+        guard case AppError.noInternetConnection = error.handleArgValues[0].0 else {
+            XCTFail("Error")
+            return
         }
+        XCTAssertEqual(error.handleArgValues[0].1, .login)
     }
 }

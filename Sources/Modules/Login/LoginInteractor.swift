@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 import MPInjector
 
+/// @mockable
 protocol LoginInteractorInterface {
     var loginUseCase: LoginUseCase { get set }
 }

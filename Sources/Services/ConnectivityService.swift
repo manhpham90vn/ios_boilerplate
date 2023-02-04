@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 
+/// @mockable
 protocol ConnectivityService {
     var isNetworkConnection: Bool { get }
 }

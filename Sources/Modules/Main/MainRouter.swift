@@ -8,6 +8,7 @@
 import UIKit
 import MPInjector
 
+/// @mockable
 protocol MainRouterInterface {
     var view: MainViewInterface? { get }
     func inject(view: MainViewInterface)

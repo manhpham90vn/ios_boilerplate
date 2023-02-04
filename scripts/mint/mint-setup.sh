@@ -21,4 +21,5 @@ cat <<EOF >>$MINT_FILE
 yonaskolb/xcodegen@$XCODEGEN_VERSION
 SwiftGen/SwiftGen@$SWIFTGEN_VERSION
 realm/SwiftLint@$SWIFTLINT_VERSION
+uber/mockolo@$SMOCK_OLO_VERSION
 EOF

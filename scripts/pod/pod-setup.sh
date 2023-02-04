@@ -49,8 +49,6 @@ target '$PRODUCT_NAME' do
     inherit! :search_paths
     pod 'RxBlocking'
     pod 'RxTest'
-    pod 'Nimble'
-    pod 'Quick'
     pod 'MockingbirdFramework', '~> 0.20'
   end
 

@@ -14,3 +14,8 @@ if ! [[ $SWIFTLINT_VERSION ]];
 then
     SWIFTLINT_VERSION=0.49.1
 fi
+
+if ! [[ $SMOCK_OLO_VERSION ]];
+then
+    SMOCK_OLO_VERSION=1.8.0
+fi

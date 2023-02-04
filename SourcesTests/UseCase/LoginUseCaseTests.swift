@@ -5,120 +5,72 @@
 //  Created by Manh Pham on 12/30/21.
 //
 
-import Quick
-import Nimble
-import Mockingbird
 import RxSwift
+import XCTest
 
 @testable import MyProduct
 
-final class LoginUseCaseTests: QuickSpec {
-    override func spec() {
-        var repo: UserRepositoryInterfaceMock!
-        var local: LocalStorageRepositoryMock!
-        var connect: ConnectivityServiceMock!
-        var disposeBag: DisposeBag!
-        
-        var loginUseCase: LoginUseCase!
-        
-        beforeSuite {
-            repo = mock(UserRepositoryInterface.self)
-            local = mock(LocalStorageRepository.self)
-            connect = mock(ConnectivityService.self)
-            
-            disposeBag = DisposeBag()
-            loginUseCase = LoginUseCase()
-            
-            loginUseCase.repo = repo
-            loginUseCase.local = local
-            loginUseCase.connectivityService = connect
+final class LoginUseCaseTests: XCTestCase {
+    
+    var loginUseCase: LoginUseCase!
+
+    override func setUp() {
+        super.setUp()
+        loginUseCase = LoginUseCase()
+    }
+
+    override func tearDown() {
+        super.tearDown()
+        loginUseCase = nil
+    }
+
+    func testLoginSuccess() {
+        let local = LocalStorageRepositoryMock()
+        let repo = UserRepositoryInterfaceMock()
+        repo.loginHandler = { _, _ in
+            return .just(.init(token: "token", refreshToken: "refreshToken"))
         }
-        describe("Test LoginUseCase Success") {
-            beforeEach {
-                given(repo.login(email: any(), password: any()))
-                    .willReturn(.just(.init(token: "token", refreshToken: "refreshToken")))
-                given(connect.isNetworkConnection).willReturn(true)
-            }
-            it("Test Success") {
-                loginUseCase.execute(params: .init(email: "", password: ""))
-                verify(local.setAccessToken(newValue: "token")).wasCalled(exactly(1))
-                verify(local.setRefreshToken(newValue: "refreshToken")).wasCalled(exactly(1))
-            }
-            afterEach {
-                reset(repo)
-                reset(local)
-                reset(connect)
-            }
-        }
+        let connectivityService = ConnectivityServiceMock(isNetworkConnection: true)
         
-        describe("Test LoginUseCase Error") {
-            beforeEach {
-                given(connect.isNetworkConnection)
-                    .willReturn(true)
-                given(repo.login(email: any(), password: any()))
-                    .willReturn(.error(MyProduct.AppError.noInternetConnection))
-            }
-            it("Test Error") {
-                loginUseCase.execute(params: .init(email: "", password: ""))
-                verify(local.setAccessToken(newValue: "token")).wasNeverCalled()
-                verify(local.setRefreshToken(newValue: "refreshToken")).wasNeverCalled()
-            }
-            afterEach {
-                reset(repo)
-                reset(local)
-                reset(connect)
-            }
-        }
+        loginUseCase.local = local
+        loginUseCase.repo = repo
+        loginUseCase.connectivityService = connectivityService
         
-        describe("Test LoginUseCase Error 2") {
-            beforeEach {
-                given(connect.isNetworkConnection)
-                    .willReturn(false)
-            }
-            it("Test Error") {
-                loginUseCase.execute(params: .init(email: "", password: ""))
-                verify(local.setAccessToken(newValue: "token")).wasNeverCalled()
-                verify(local.setRefreshToken(newValue: "refreshToken")).wasNeverCalled()
-            }
-            afterEach {
-                reset(repo)
-                reset(local)
-                reset(connect)
-            }
+        let recorder = Recorder<Void>()
+        recorder.onNext(valueSubject: loginUseCase.succeeded)
+
+        loginUseCase.execute(params: .init(email: "email@email.com", password: "password"))
+
+        XCTAssertEqual(recorder.items.count, 1)
+        XCTAssertEqual(local.setAccessTokenCallCount, 1)
+        XCTAssertEqual(local.setAccessTokenArgValues[0], "token")
+        XCTAssertEqual(local.setRefreshTokenCallCount, 1)
+        XCTAssertEqual(local.setRefreshTokenArgValues[0], "refreshToken")
+    }
+    
+    func testLoginError() {
+        let local = LocalStorageRepositoryMock()
+        let repo = UserRepositoryInterfaceMock()
+        repo.loginHandler = { _, _ in
+            return .just(.init())
         }
+        let connectivityService = ConnectivityServiceMock(isNetworkConnection: false)
         
-        describe("Test LoginUseCase Error 3") {
-            beforeEach {
-                given(connect.isNetworkConnection)
-                    .willReturn(true)
-                given(repo.login(email: any(), password: any()))
-                    .willReturn(.just(.init(token: "token", refreshToken: "refreshToken")))
-            }
-            it("Test Error") {
-                loginUseCase.execute(params: .init(email: "", password: ""))
-                loginUseCase.execute(params: .init(email: "", password: ""))
-                
-                loginUseCase.failed
-                    .drive(onNext: { result in
-                        expect(result).toEventuallyNot(beNil(), timeout: .seconds(1))
-                    })
-                    .disposed(by: disposeBag)
-                
-                verify(local.setAccessToken(newValue: "token")).wasCalled(exactly(2))
-                verify(local.setRefreshToken(newValue: "refreshToken")).wasCalled(exactly(2))
-            }
-            afterEach {
-                reset(repo)
-                reset(local)
-                reset(connect)
-            }
-        }
+        loginUseCase.local = local
+        loginUseCase.repo = repo
+        loginUseCase.connectivityService = connectivityService
         
-        afterSuite {
-            repo = nil
-            local = nil
-            connect = nil
-            loginUseCase = nil
+        let recorder = Recorder<Error>()
+        recorder.onNext(valueSubject: loginUseCase.failed)
+
+        loginUseCase.execute(params: .init(email: "", password: ""))
+
+        XCTAssertEqual(recorder.items.count, 1)
+        guard case AppError.noInternetConnection = recorder.items[0] else {
+            XCTFail("Error")
+            return
         }
+        XCTAssertEqual(local.setAccessTokenCallCount, 0)
+        XCTAssertEqual(local.setRefreshTokenCallCount, 0)
     }
 }

@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 import MPInjector
 
+/// @mockable
 protocol HomeRepositoryInterface {
     func pagging(page: Int, sort: PagingSortType) -> Single<[PagingUserResponse]>
 }

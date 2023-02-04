@@ -16,7 +16,12 @@ enum PermissionResult {
     case success
 }
 
-class PermissionManager {
+/// @mockable
+protocol PermissionManager {
+    func request(type: PermissionType, application: UIApplication)
+}
+
+final class PermissionManagerImp: PermissionManager {
     func request(type: PermissionType, application: UIApplication) {
         switch type {
         case .requestPush:

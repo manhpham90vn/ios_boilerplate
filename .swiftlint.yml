@@ -166,6 +166,7 @@ excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Carthage
   - Pods
   - Library
+  - SourcesTests/Mocks.swift
 
 # line_length:
 #   error: 120

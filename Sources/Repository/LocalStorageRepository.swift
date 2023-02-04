@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 import MPInjector
 
+/// @mockable
 protocol LocalStorageRepository {
     func getAccessToken() -> String?
     func setAccessToken(newValue: String)
