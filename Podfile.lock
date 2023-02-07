@@ -176,6 +176,7 @@ SPEC REPOS:
     - LocalDataViewer
     - MJRefresh
     - MockingbirdFramework
+    - MPInjector
     - nanopb
     - "NSObject+Rx"
     - ObjcExceptionBridging
