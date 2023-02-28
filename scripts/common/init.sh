@@ -8,9 +8,8 @@ source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../swiftgen/swiftgen-setup.sh
 cd $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../../
 cd fastlane
 
-if ! [[ $IS_PRODUCTION ]]
-then
-ENV_FILE=.env.debug
+CURRENT_ENV=$(echo $CONFIGURATION | tr '[:upper:]' '[:lower:]')
+ENV_FILE=.env.$CURRENT_ENV
 rm -rf $ENV_FILE
 
 cat <<EOF >>$ENV_FILE
@@ -47,7 +46,6 @@ UNIT_TEST_DEVICE=$UNIT_TEST_DEVICE
 # Config match
 GIT_URL=""
 EOF
-fi
 
 cd ../Sources/Configs
 mkdir -p BuildConfigurations
