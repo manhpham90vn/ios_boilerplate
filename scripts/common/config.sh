@@ -32,7 +32,7 @@ fi
 
 if ! [[  $DEPLOYMENT_TARGET ]];
 then
-    DEPLOYMENT_TARGET=12.0
+    DEPLOYMENT_TARGET=13.0
 fi
 
 if ! [[  $SOURCE_DIRECTORY ]];

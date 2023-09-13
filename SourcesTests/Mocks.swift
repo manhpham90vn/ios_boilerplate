@@ -5,30 +5,14 @@
 
 
 import Alamofire
-import AuthenticationServices
-import FirebaseAnalytics
-import FirebaseCore
-import FirebaseCrashlytics
-import FirebaseMessaging
 import Foundation
-import LocalDataViewer
-import MJRefresh
 import MPInjector
 import NSObject_Rx
 import PKHUD
 import RxCocoa
-import RxRelay
 import RxSwift
-import SafariServices
 import UIKit
-import XCGLogger
 @testable import MyProduct
-#if os(iOS)
-import UIKit
-#endif
-#if os(macOS)
-
-#endif
 
 
 class AppHelperMock: AppHelper {
@@ -260,7 +244,11 @@ class GETUserInfoUseCaseMock: GETUserInfoUseCase {
 class RefreshTokenUseCaseMock: RefreshTokenUseCase {
 
     private(set) var userRepoSetCallCount = 0
-    override var userRepo: UserRepositoryInterface  { didSet { userRepoSetCallCount += 1 } }
+    private var _userRepo: UserRepositoryInterface // prevent Circular Dependency use @LazyInject!  { didSet { userRepoSetCallCount += 1 } }
+    override var userRepo: UserRepositoryInterface // prevent Circular Dependency use @LazyInject {
+        get { return _userRepo }
+        set { _userRepo = newValue }
+    }
 
     private(set) var localSetCallCount = 0
     override var local: LocalStorageRepository  { didSet { localSetCallCount += 1 } }
