@@ -81,9 +81,6 @@ jobs:
           name: Run Unit test
           command: scripts/project/run-unit-test.sh
       - run:
-          name: Create slather file
-          command: scripts/slather/slather-setup.sh
-      - run:
           name: Generate code coverage
           command: scripts/slather/slather-run.sh
       - run:
