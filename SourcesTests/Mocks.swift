@@ -241,31 +241,6 @@ class GETUserInfoUseCaseMock: GETUserInfoUseCase {
     }
 }
 
-class RefreshTokenUseCaseMock: RefreshTokenUseCase {
-
-    private(set) var userRepoSetCallCount = 0
-    private var _userRepo: UserRepositoryInterface // prevent Circular Dependency use @LazyInject!  { didSet { userRepoSetCallCount += 1 } }
-    override var userRepo: UserRepositoryInterface // prevent Circular Dependency use @LazyInject {
-        get { return _userRepo }
-        set { _userRepo = newValue }
-    }
-
-    private(set) var localSetCallCount = 0
-    override var local: LocalStorageRepository  { didSet { localSetCallCount += 1 } }
-
-    private(set) var buildUseCaseCallCount = 0
-    var buildUseCaseArgValues = [Void]()
-    var buildUseCaseHandler: ((Void) -> (Single<RefreshTokenResponse>))?
-    override func buildUseCase(params: Void) -> Single<RefreshTokenResponse> {
-        buildUseCaseCallCount += 1
-        buildUseCaseArgValues.append(params)
-        if let buildUseCaseHandler = buildUseCaseHandler {
-            return buildUseCaseHandler(params)
-        }
-        fatalError("buildUseCaseHandler returns can't have a default value thus its handler must be set")
-    }
-}
-
 class CleanUserInfoUseCaseMock: CleanUserInfoUseCase {
 
     private(set) var cacheParamsSetCallCount = 0

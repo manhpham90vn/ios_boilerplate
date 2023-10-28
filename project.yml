@@ -1,0 +1,96 @@
+name: MyProject
+configs:
+  Debug: debug
+options:
+  createIntermediateGroups: true
+  groupSortPosition: top
+  generateEmptyDirectories: true
+  indentWidth: 4
+  tabWidth: 4
+settings:
+  PRODUCT_BUNDLE_IDENTIFIER: $(PRODUCT_BUNDLE_IDENTIFIER)
+targets:
+  MyProduct:
+    type: application
+    platform: iOS
+    deploymentTarget: 13.0
+    sources: Sources
+    configFiles:
+      Debug: Sources/Configs/BuildConfigurations/Debug.xcconfig
+    settings:
+      INFOPLIST_FILE: Sources/Resources/Info.plist
+      SWIFT_VERSION: "5.0"
+      SWIFT_OBJC_BRIDGING_HEADER: Sources/Resources/MyApp-Bridging-Header.h
+      CODE_SIGN_STYLE: "Manual"
+      UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+      UILaunchStoryboardName: LaunchScreen
+      VALIDATE_WORKSPACE: YES
+      CODE_SIGN_ENTITLEMENTS: Sources/Resources/MyApp.entitlements
+    preBuildScripts:
+      - name: Generate
+        script: scripts/swiftgen/swiftgen-run.sh
+    postCompileScripts:
+      - name: Swiftlint
+        script: scripts/project/run-linter.sh
+      - name: GoogleServiceInfo
+        script: scripts/project/run-firebase.sh
+    postBuildScripts:
+      - name: Crashlytics
+        script: |
+          "${PODS_ROOT}/FirebaseCrashlytics/run"
+        inputFiles:
+          - $(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)
+          - $(DWARF_DSYM_FOLDER_PATH)/$(DWARF_DSYM_FILE_NAME)/Contents/Resources/DWARF/$(TARGET_NAME)
+  MyProductTests:
+    type: bundle.unit-test
+    platform: iOS
+    settings:
+      TEST_HOST: $(BUILT_PRODUCTS_DIR)/MyProduct.app/MyProduct
+      LD_RUNPATH_SEARCH_PATHS: $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks' $(FRAMEWORK_SEARCH_PATHS)
+      IPHONEOS_DEPLOYMENT_TARGET: 13.0
+    sources: SourcesTests
+    dependencies:
+      - target: MyProduct
+schemes:
+  MyScheme:
+    build:
+      targets:
+        MyProduct: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: true
+      targets:
+        - name: MyProductTests
+          parallelizable: false
+          randomExecutionOrder: true
+    profile:
+      config: Debug
+    analyze:
+      config: Debug
+    archive:
+      config: Debug
+  MySchemeTests:
+    build:
+      targets:
+        MyProductTests: [test]
+    run:
+      config: Debug
+      environmentVariables:
+        SKIP_ANIMATIONS:
+    test:
+      config: Debug
+      gatherCoverageData: true
+      targets:
+        - name: MyProductTests
+          parallelizable: false
+          randomExecutionOrder: true
+    profile:
+      config: Debug
+    analyze:
+      config: Debug
+    archive:
+      config: Debug
+      customArchiveName: MyProductTests
+      revealArchiveInOrganizer: true    

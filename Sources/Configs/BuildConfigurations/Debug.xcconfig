@@ -1,0 +1,8 @@
+#include "./Pods/Target Support Files/Pods-MyProduct/Pods-MyProduct.debug.xcconfig"
+
+PRODUCT_NAME = MyProduct
+PRODUCT_BUNDLE_IDENTIFIER = com.manhpham.myapp.debug
+BUNDLE_SHORT_VERSION_STRING = 1.0
+BUNDLE_VERSION = 1
+OTHER_SWIFT_FLAGS = -D DEBUG
+PROVISIONING_PROFILE_SPECIFIER = match Development com.manhpham.myapp.debug
