@@ -3,69 +3,66 @@ orbs:
   slack: circleci/slack@4.12.1
 aliases:
   - &restore_gem_cache
-      name: Restore gem cache
-      keys:
-        - &gem-cache gem-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-        - gem-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
-        - gem-cache-{{ .Environment.CACHE_VERSION }}
+    name: Restore gem cache
+    keys:
+      - &gem-cache gem-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+      - gem-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
+      - gem-cache-{{ .Environment.CACHE_VERSION }}
   - &save_gem_cache
-      name: Save gem cache
-      key: *gem-cache
-      paths:
-        - vendor/bundle
+    name: Save gem cache
+    key: *gem-cache
+    paths:
+      - vendor/bundle
   - &gem_install
-      name: Install Bundler and Gem
-      command: scripts/circleci/ci-setup-ruby.sh
+    name: Install Bundler and Gem
+    command: scripts/circleci/ci-setup-ruby.sh
   - &config_mint
-      name: Config Mint
-      command: scripts/mint/mint-setup.sh
+    name: Config Mint
+    command: scripts/mint/mint-setup.sh
   - &restore_mint_cache
-      name: Restore Mint cache
-      keys:
-        - &mint-cache mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Mintfile" }}
-        - mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
-        - mint-cache-{{ .Environment.CACHE_VERSION }}
+    name: Restore Mint cache
+    keys:
+      - &mint-cache mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Mintfile" }}
+      - mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
+      - mint-cache-{{ .Environment.CACHE_VERSION }}
   - &save_mint_cache
-      name: Save Mint cache
-      key: *mint-cache
-      paths:
-        - ./Mints
+    name: Save Mint cache
+    key: *mint-cache
+    paths:
+      - ./Mints
   - &mint_install_dependency
-      name: Install dependency via Mint
-      command: |
-        export HOMEBREW_NO_AUTO_UPDATE=1
-        scripts/mint/mint-run.sh
+    name: Install dependency via Mint
+    command: |
+      export HOMEBREW_NO_AUTO_UPDATE=1
+      scripts/mint/mint-run.sh
   - &generate_resource
-      name: Generate Resource
-      command: |
-        scripts/swiftgen/swiftgen-run.sh
-        scripts/xcodegen/xcodegen-run.sh
+    name: Generate Resource
+    command: |
+      scripts/swiftgen/swiftgen-run.sh
+      scripts/xcodegen/xcodegen-run.sh
   - &restore_pod_cache
-      name: Restore CocoaPods cache
-      keys:
-        - &pod-cache pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Podfile.lock" }}
-        - pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
-        - pod-cache-{{ .Environment.CACHE_VERSION }}
+    name: Restore CocoaPods cache
+    keys:
+      - &pod-cache pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Podfile.lock" }}
+      - pod-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
+      - pod-cache-{{ .Environment.CACHE_VERSION }}
   - &save_pod_cache
-      name: Save CocoaPods cache
-      key: *pod-cache
-      paths:
-        - ./Pods
+    name: Save CocoaPods cache
+    key: *pod-cache
+    paths:
+      - ./Pods
   - &install_pod
-      name: Install cocoapods
-      command: |
-        scripts/pod/pod-setup.sh
-        scripts/pod/pod-run.sh
+    name: Install cocoapods
+    command: |
+      scripts/pod/pod-run.sh
   - &init_project
-      name: Init project
-      command: scripts/common/init.sh
+    name: Init project
+    command: scripts/common/init.sh
 
 jobs:
   build-and-test:
     macos:
-      xcode: 14.0.1
-    environment:
-      SKIP_RUN: true
+      xcode: 15.0.1
     steps:
       - checkout
       - restore_cache: *restore_gem_cache
@@ -84,25 +81,19 @@ jobs:
           name: Run Unit test
           command: scripts/project/run-unit-test.sh
       - run:
-          name: Create slather file
-          command: scripts/slather/slather-setup.sh
-      - run:
           name: Generate code coverage
           command: scripts/slather/slather-run.sh
       - run:
           name: "Zip folder code coverage"
           command: |
-                zip -r test-result.zip fastlane/reports/
+            zip -r test-result.zip fastlane/reports/
       - store_test_results:
           path: fastlane/reports/unit_test
       - store_artifacts:
           path: test-result.zip
   deploy-apple:
     macos:
-      xcode: 14.0.1
-    environment:
-      IS_PRODUCTION: true
-      SKIP_RUN: true
+      xcode: 15.0.1
     steps:
       - checkout
       - restore_cache: *restore_gem_cache

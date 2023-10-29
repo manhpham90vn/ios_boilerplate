@@ -1,7 +1,6 @@
 #!/bin/sh
 
 source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/slather-cmd.sh
-source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/slather-setup.sh
 source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../ruby/ruby-cmd.sh
 
 if ! $BUNDLER_CMD exec $SLATHER_CMD version &> /dev/null

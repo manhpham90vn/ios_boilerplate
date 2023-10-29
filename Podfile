@@ -1,15 +1,4 @@
-#!/bin/sh
-
-source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../common/config.sh
-
-cd $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../../
-
-POD_FILE=Podfile
-
-rm -rf $POD_FILE
-
-cat <<EOF >>$POD_FILE
-platform :ios, '$DEPLOYMENT_TARGET'
+platform :ios, '13.0'
 
 source 'https://cdn.cocoapods.org/'
 
@@ -26,7 +15,7 @@ post_install do |installer|
    end
 end
 
-target '$PRODUCT_NAME' do
+target 'MyProduct' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
@@ -46,7 +35,7 @@ target '$PRODUCT_NAME' do
   pod 'LocalDataViewer'
   pod 'XCGLogger'
 
-  target '${PRODUCT_NAME}Tests' do
+  target 'MyProductTests' do
     inherit! :search_paths
     pod 'RxBlocking'
     pod 'RxTest'
@@ -54,4 +43,3 @@ target '$PRODUCT_NAME' do
   end
 
 end
-EOF

@@ -13,33 +13,12 @@ vendor/bundle
 .bundle
 
 ### slather
-.slather.yml
 slather_report
 fastlane/reports/code_coverage
 fastlane/reports/unit_test
 
 ### mint
 Mints
-Mintfile
-
-### xcodegen
-project.yml
-
-### swiftgen
-swiftgen.yml
-
-### env
-.env.*
-
-### xcconfig
-*.xcconfig
-
-### apple sign
-*.p8
-*.p12
-
-### pod
-Podfile
 
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
 *.xcscmblueprint

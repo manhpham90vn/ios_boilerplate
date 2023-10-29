@@ -1,7 +1,6 @@
 #!/bin/sh
 
 source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/pod-cmd.sh
-source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/pod-setup.sh
 source $(cd $(dirname ${BASH_SOURCE:-$0}); pwd)/../ruby/ruby-cmd.sh
 
 if ! $BUNDLER_CMD exec pod --version &> /dev/null
