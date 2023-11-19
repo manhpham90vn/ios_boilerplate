@@ -1,0 +1,17 @@
+coverage_service: "html"
+xcodeproj: "MyProject.xcodeproj"
+scheme: "MyScheme"
+configuration: "Debug"
+source_directory: "Sources"
+output_directory: "fastlane/reports/code_coverage"
+build_directory: "build"
+binary_basename: "MyProduct"
+ignore:
+  - Sources/Common/*
+  - Sources/Configs/*
+  - Sources/Application/*
+  - Sources/Data/*
+  - Sources/Domain/Entity/*
+  - Sources/Modules/*
+  - Sources/Repository/*
+  - Sources/Resources/*

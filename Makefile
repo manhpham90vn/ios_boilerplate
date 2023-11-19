@@ -12,12 +12,12 @@ generate:
 # delete
 .PHONY: delete
 delete: 
-	@sh scripts/project/run-delete.sh
+	@sh scripts/project/delete.sh
 
 # run unit test
 .PHONY: test
 test:
-	@sh scripts/project/run-unit-test.sh
+	@sh scripts/project/unit-test.sh
 
 # run slather
 .PHONY: slather
@@ -27,7 +27,7 @@ slather:
 # export to testflight
 .PHONY: testflight
 testflight:
-	@sh scripts/project/run-upload-testflight.sh
+	@sh scripts/project/upload-testflight.sh
 
 # open xcode
 .PHONY: open
