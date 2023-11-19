@@ -3,31 +3,11 @@ SHELL := /bin/bash
 .DEFAULT_GOAL := all
 
 .PHONY: all
-all: init install generate
-
-.PHONY: init
-init:
-	@sh scripts/common/init.sh
-
-# install
-.PHONY: install
-install: installRuby installMint
-installRuby:
-	@sh scripts/ruby/ruby-install.sh
-installMint:
-	@sh scripts/mint/mint-run.sh
-
-# generate
-.PHONY: generate
-generate: generate-swiftgen generate-mockolo generate-xcodegen install-pod
-generate-swiftgen:
-	@sh scripts/swiftgen/swiftgen-run.sh
-generate-mockolo:
-	@sh scripts/mockolo/mockolo-run.sh	
-generate-xcodegen:
-	@sh scripts/xcodegen/xcodegen-run.sh
-install-pod:
-	@sh scripts/pod/pod-run.sh
+all: install generate
+install:
+	@sh scripts/common/install.sh
+generate:
+	@sh scripts/common/generate.sh
 
 # delete
 .PHONY: delete

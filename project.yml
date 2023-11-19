@@ -28,12 +28,12 @@ targets:
       CODE_SIGN_ENTITLEMENTS: Sources/Resources/MyApp.entitlements
     preBuildScripts:
       - name: Generate
-        script: scripts/swiftgen/swiftgen-run.sh
+        script: scripts/project/swiftgen.sh
     postCompileScripts:
       - name: Swiftlint
-        script: scripts/project/run-linter.sh
+        script: scripts/project/linter.sh
       - name: GoogleServiceInfo
-        script: scripts/project/run-firebase.sh
+        script: scripts/project/firebase.sh
     postBuildScripts:
       - name: Crashlytics
         script: |
@@ -93,4 +93,4 @@ schemes:
     archive:
       config: Debug
       customArchiveName: MyProductTests
-      revealArchiveInOrganizer: true    
+      revealArchiveInOrganizer: true
