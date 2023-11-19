@@ -15,31 +15,7 @@ aliases:
       - vendor/bundle
   - &gem_install
     name: Install Bundler and Gem
-    command: scripts/circleci/ci-setup-ruby.sh
-  - &config_mint
-    name: Config Mint
-    command: scripts/mint/mint-setup.sh
-  - &restore_mint_cache
-    name: Restore Mint cache
-    keys:
-      - &mint-cache mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}-{{ checksum "Mintfile" }}
-      - mint-cache-{{ .Environment.CACHE_VERSION }}-{{ arch }}-{{ .Branch }}
-      - mint-cache-{{ .Environment.CACHE_VERSION }}
-  - &save_mint_cache
-    name: Save Mint cache
-    key: *mint-cache
-    paths:
-      - ./Mints
-  - &mint_install_dependency
-    name: Install dependency via Mint
-    command: |
-      export HOMEBREW_NO_AUTO_UPDATE=1
-      scripts/mint/mint-run.sh
-  - &generate_resource
-    name: Generate Resource
-    command: |
-      scripts/swiftgen/swiftgen-run.sh
-      scripts/xcodegen/xcodegen-run.sh
+    command: scripts/ci/ci-setup-ruby.sh
   - &restore_pod_cache
     name: Restore CocoaPods cache
     keys:
@@ -51,13 +27,11 @@ aliases:
     key: *pod-cache
     paths:
       - ./Pods
-  - &install_pod
-    name: Install cocoapods
+  - &generate_resource
+    name: Generate Resource
     command: |
-      scripts/pod/pod-run.sh
-  - &init_project
-    name: Init project
-    command: scripts/common/init.sh
+      scripts/common/install.sh
+      scripts/common/generate.sh
 
 jobs:
   build-and-test:
@@ -66,17 +40,11 @@ jobs:
     steps:
       - checkout
       - restore_cache: *restore_gem_cache
-      - run: *gem_install
-      - save_cache: *save_gem_cache
-      - run: *config_mint
-      - restore_cache: *restore_mint_cache
-      - run: *mint_install_dependency
-      - save_cache: *save_mint_cache
-      - run: *init_project
-      - run: *generate_resource
       - restore_cache: *restore_pod_cache
-      - run: *install_pod
+      - run: *gem_install
+      - run: *generate_resource
       - save_cache: *save_pod_cache
+      - save_cache: *save_gem_cache
       - run:
           name: Run Unit test
           command: scripts/project/run-unit-test.sh
@@ -97,17 +65,11 @@ jobs:
     steps:
       - checkout
       - restore_cache: *restore_gem_cache
-      - run: *gem_install
-      - save_cache: *save_gem_cache
-      - run: *config_mint
-      - restore_cache: *restore_mint_cache
-      - run: *mint_install_dependency
-      - save_cache: *save_mint_cache
-      - run: *init_project
-      - run: *generate_resource
       - restore_cache: *restore_pod_cache
-      - run: *install_pod
+      - run: *gem_install
+      - run: *generate_resource
       - save_cache: *save_pod_cache
+      - save_cache: *save_gem_cache
       - run:
           name: Create P8 API Key
           command: echo $APP_STORE_P8 | base64 --decode > AuthKey_6TF3P5J5QY.p8
