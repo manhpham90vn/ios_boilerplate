@@ -39,7 +39,6 @@ target 'MyProduct' do
     inherit! :search_paths
     pod 'RxBlocking'
     pod 'RxTest'
-    pod 'MockingbirdFramework', '~> 0.20'
   end
 
 end
