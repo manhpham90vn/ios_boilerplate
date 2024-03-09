@@ -1,10 +1,10 @@
 #!/bin/sh
 
-# install pod
-pod install
-
 # generate project
 xcodegen generate --spec project.yml
+
+# install pod
+pod install
 
 # generate swiftgen
 rm -rf Sources/Resources/Generated/*
