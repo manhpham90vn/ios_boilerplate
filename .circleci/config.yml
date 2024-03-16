@@ -15,7 +15,7 @@ aliases:
       - vendor/bundle
   - &gem_install
     name: Install Bundler and Gem
-    command: scripts/ci/ci-setup-ruby.sh
+    command: scripts/ci/circleci-setup-ruby.sh
   - &restore_pod_cache
     name: Restore CocoaPods cache
     keys:
@@ -36,7 +36,7 @@ aliases:
 jobs:
   build-and-test:
     macos:
-      xcode: 15.0.1
+      xcode: 15.3.0
     steps:
       - checkout
       - restore_cache: *restore_gem_cache
@@ -61,7 +61,7 @@ jobs:
           path: test-result.zip
   deploy-apple:
     macos:
-      xcode: 15.0.1
+      xcode: 15.3.0
     steps:
       - checkout
       - restore_cache: *restore_gem_cache
