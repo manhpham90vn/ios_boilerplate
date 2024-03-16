@@ -47,7 +47,7 @@ jobs:
       - save_cache: *save_gem_cache
       - run:
           name: Run Unit test
-          command: scripts/project/run-unit-test.sh
+          command: scripts/project/unit-test.sh
       - run:
           name: Generate code coverage
           command: scripts/slather/slather-run.sh
@@ -79,7 +79,7 @@ jobs:
       - run:
           name: Deploy Testflight
           no_output_timeout: 15m
-          command: scripts/project/run-upload-testflight.sh
+          command: scripts/project/upload-testflight.sh
       - store_artifacts:
           path: fastlane/build
 workflows:
